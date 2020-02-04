@@ -76,7 +76,7 @@ else
         echo "Generating build files..."
         if cmake CMakeLists.txt; then
             echo "Building project..."
-            if make; then
+            if cmake CMakeLists.txt; then
                 /bin/cp -Rf "bin/linux/x64/nautilus" "nautilus"
             else
                 echo "Failed to build the project!"
