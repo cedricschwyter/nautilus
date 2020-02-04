@@ -1,0 +1,29 @@
+language: cpp
+os: linux
+dist: bionic
+compiler:
+  - g++-7
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+      - gcc-7
+
+before_install:
+  - wget https://raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh
+
+install:
+  - sudo ./nautilus-install.sh --no-build
+
+script: 
+  - sudo ./nautilus-install.sh
+
+notifications:
+  email:
+    recipients:
+      - d3psigames@gmail.com
+    on_success: always
+    on_failure: always

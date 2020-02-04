@@ -1,0 +1,17 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: "debian:stretch"
+    steps:
+      - checkout
+      - run:
+          name: Download installer
+          command: apt-get -y update && apt-get -y install wget && wget https://raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh
+      - run:
+          name: Install dependencies
+          command: ./nautilus-install.sh --no-build
+      - run:
+          name: Build
+          command: ./nautilus-install.sh
