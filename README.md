@@ -27,14 +27,6 @@ The project comes with an install script for Linux systems. It offers support fo
 
 Generate the Visual Studio build files with CMake.
 
-### macOS
-
-Currently and in the near future, there will be no support for macOS.
-
-## Uninstallation
-
-Download and run the included uninstaller:
-
 ## Getting started
 
 Tutorial here.
