@@ -21,7 +21,7 @@ This repository includes a complete render engine with multiple graphics APIs, i
 
 The project comes with an install script for Linux systems. It offers support for Debian, Fedora and Arch/Manjaro. Download and run the installer:
 
-    wget https://raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh && sudo bash nautilus-install.sh
+    wget d3psi.net/nautilus-install.sh && sudo bash nautilus-install.sh
 
 ### Windows
 
