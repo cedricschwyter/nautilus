@@ -3,12 +3,10 @@
 
 #include "NautilusShell.hpp"
 
+#include <iostream>
+
 NautilusShell::NautilusShell() {
 
-}
-
-NautilusStatus NautilusShell::onAttach() {
-    return NAUTILUS_OK;
 }
 
 NautilusShell::~NautilusShell() {

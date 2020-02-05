@@ -14,9 +14,10 @@ public:
 
     /**
      * Attaches a shell to the core
+     * @param _shell A pointer to a derived shell object
      * @return Returns a NautilusCore status code
      */
-    NautilusStatus attachShell(NautilusShell _shell);
+    NautilusStatus attachShell(NautilusShell* _shell);
 
     /**
      * Default destructor

@@ -13,9 +13,10 @@ public:
 
     /**
      * Gets executed when the shell gets attached to the core
+     * Must be overridden by derived class
      * @return Returns a NautilusStatus status code
      */
-    NautilusStatus onAttach(void);
+    virtual NautilusStatus onAttach(void) = 0;
 
     /**
      * Default destructor

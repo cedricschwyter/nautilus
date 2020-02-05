@@ -7,7 +7,8 @@ NautilusCore::NautilusCore() {
 
 }
 
-NautilusStatus NautilusCore::attachShell(NautilusShell _shell) {
+NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
+    _shell->onAttach();
     return NAUTILUS_OK;
 }
 
