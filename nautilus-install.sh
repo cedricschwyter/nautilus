@@ -89,5 +89,6 @@ else
             exit 1
         fi
     fi
+	chown ${SUDO_USER:-${USER}} -R .
     exit 0
 fi
