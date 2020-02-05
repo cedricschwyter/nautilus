@@ -25,7 +25,7 @@ The project comes with an install script for Linux systems. It offers support fo
 
 ### Windows
 
-Generate the Visual Studio build files with CMake.
+Generate the Visual Studio build files with CMake according to the Wiki.
 
 ## Getting started
 
