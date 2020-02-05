@@ -77,14 +77,7 @@ else
         if cmake CMakeLists.txt; then
             echo "Building project..."
             if make; then
-                if mkdir -p /usr/bin/nautilus; then
-                    /bin/cp -Rf res/ nautilus Nautilus\ by\ D3PSI.desktop /usr/bin/nautilus/
-                    ln -s -f /usr/bin/nautilus/Nautilus\ by\ D3PSI.desktop /usr/share/applications/Nautilus\ by\ D3PSI.desktop
-                    echo "Successfully installed shortcuts"
-                else
-                    echo "Failed to install shortcuts!"
-                    exit
-                fi
+                echo "You can now run the examples which have been built. Enjoy!"
             else
                 echo "Failed to build the project!"
                 exit 1
