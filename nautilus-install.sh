@@ -72,7 +72,7 @@ else
     fi
     if [[ "$build" = true ]]; then
         git clone --recursive https://github.com/D3PSI/nautilus.git
-	    chown ${SUDO_USER:-${USER}} -R nautilus/
+        chown ${SUDO_USER:-${USER}} -R nautilus/
         rm nautilus-install.sh
         cd nautilus/
         echo "Generating build files..."
@@ -89,6 +89,6 @@ else
             exit 1
         fi
     fi
-	chown ${SUDO_USER:-${USER}} -R .
+    chown ${SUDO_USER:-${USER}} -R .
     exit 0
 fi
