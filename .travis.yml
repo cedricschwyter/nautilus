@@ -1,6 +1,5 @@
 language: cpp
 os: linux
-dist: bionic
 compiler:
   - g++-7
 
@@ -11,6 +10,13 @@ addons:
     packages:
       - g++-7
       - gcc-7
+
+jobs:
+  include:
+    - os: linux
+      dist: bionic
+    - os: linux
+      dist: xenial
 
 before_install:
   - wget https://raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh
