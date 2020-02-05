@@ -10,7 +10,7 @@ function(buildExample EXAMPLE_NAME)
 	ENDIF()
 	# imgui example requires additional source files
 	IF(${EXAMPLE_NAME} STREQUAL "imgui")
-		file(GLOB ADD_SOURCE "../external/imgui/*.cpp")
+		file(GLOB ADD_SOURCE "../ext/imgui/*.cpp")
 		SET(SOURCE ${SOURCE} ${ADD_SOURCE})
 	ENDIF()
 	# wayland requires additional source files
@@ -44,7 +44,7 @@ function(buildExamples)
 endfunction(buildExamples)
 
 set(EXAMPLES
-	testExample
+	dev
 )
 
 buildExamples()
