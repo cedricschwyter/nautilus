@@ -72,6 +72,7 @@ else
     fi
     if [[ "$build" = true ]]; then
         git clone --recursive https://github.com/D3PSI/nautilus.git
+	chown ${SUDO_USER:-${USER}} -R nautilus/
         cd nautilus/
         echo "Generating build files..."
         if cmake CMakeLists.txt; then
