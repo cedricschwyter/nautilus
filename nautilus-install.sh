@@ -71,25 +71,24 @@ else
         exit 1
     fi
     if [[ "$build" = true ]]; then
-        git clone https://github.com/D3PSI/nautilus.git
+        git clone --recursive https://github.com/D3PSI/nautilus.git
         cd nautilus/
         echo "Generating build files..."
         if cmake CMakeLists.txt; then
             echo "Building project..."
             if make; then
-                /bin/cp -Rf "bin/linux/x64/nautilus" "nautilus"
+                if mkdir -p /usr/bin/nautilus; then
+                    /bin/cp -Rf res/ nautilus Nautilus\ by\ D3PSI.desktop /usr/bin/nautilus/
+                    ln -s -f /usr/bin/nautilus/Nautilus\ by\ D3PSI.desktop /usr/share/applications/Nautilus\ by\ D3PSI.desktop
+                    echo "Successfully installed shortcuts"
+                else
+                    echo "Failed to install shortcuts!"
+                    exit
+                fi
             else
                 echo "Failed to build the project!"
                 exit 1
             echo "Creating shortcuts..."
-            if mkdir -p /usr/bin/nautilus; then
-                /bin/cp -Rf res/ nautilus Nautilus\ by\ D3PSI.desktop /usr/bin/nautilus/
-                ln -s -f /usr/bin/nautilus/Nautilus\ by\ D3PSI.desktop /usr/share/applications/Nautilus\ by\ D3PSI.desktop
-                echo "Successfully installed shortcuts"
-            else
-                echo "Failed to install shortcuts!"
-                exit
-            fi
             fi
         else
             echo "Failed to generate build files!"
