@@ -686,5 +686,7 @@
 #include "NautilusCore.hpp"
 #include "NautilusShell.hpp"
 #include "NautilusStatus.hpp"
+#include "NautilusNS.hpp"
+#include "NautilusInterface.hpp"
 
 #endif      // NAUTILUS_HPP

@@ -44,7 +44,7 @@ function(buildExamples)
 endfunction(buildExamples)
 
 set(EXAMPLES
-	dev
+	Dev
 )
 
 buildExamples()

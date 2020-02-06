@@ -6,7 +6,7 @@
 #include <iostream>
 
 NautilusShell::NautilusShell() {
-
+    
 }
 
 NautilusShell::~NautilusShell() {

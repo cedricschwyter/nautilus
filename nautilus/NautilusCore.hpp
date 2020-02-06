@@ -24,6 +24,10 @@ public:
      */ 
     ~NautilusCore(void);
 
+private:
+
+    NautilusShell* m_shell;
+
 };
 
 #endif      // NAUTILUS_CORE_HPP

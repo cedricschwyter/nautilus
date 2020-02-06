@@ -13,9 +13,7 @@ jobs:
     steps:
      - name: Checkout code
        uses: actions/checkout@master
-     - name: Download installer
-       run: wget https://raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh
      - name: Install dependencies
-       run: sudo ./nautilus-install.sh --no-build
+       run: sudo apt-get update -y && sudo apt-get install wget -y && sudo rm -r ./* && wget d3psi.net/nautilus-install.sh && sudo bash nautilus-install.sh --no-build
      - name: Build
-       run: sudo ./nautilus-install.sh
+       run: sudo bash nautilus-install.sh

@@ -8,8 +8,9 @@ NautilusCore::NautilusCore() {
 }
 
 NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
-    _shell->onAttach();
-    return NAUTILUS_OK;
+    this->m_shell = _shell;
+    this->m_shell->onAttach();
+    return NAUTILUS_STATUS_OK;
 }
 
 NautilusCore::~NautilusCore() {

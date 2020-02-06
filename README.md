@@ -1,5 +1,7 @@
 # nautilus
 
+![Nautilus Icon](https://github.com/D3PSI/nautilus/blob/master/res/images/icons/nautilus.png)
+
 [![Build Status](https://travis-ci.com/D3PSI/nautilus.svg?branch=master)](https://travis-ci.com/D3PSI/nautilus)
 [![C/C++ CI](https://github.com/D3PSI/nautilus/workflows/C/C++%20CI/badge.svg)](https://github.com/D3PSI/nautilus/actions?query=workflow%3A"C%2FC%2B%2B+CI")
 [![Build status](https://ci.appveyor.com/api/projects/status/6cp2udvipkuchs42/branch/master?svg=true)](https://ci.appveyor.com/project/D3PSI/nautilus/branch/master)

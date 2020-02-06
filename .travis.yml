@@ -1,5 +1,6 @@
 language: cpp
 os: linux
+dist: bionic
 compiler:
   - g++-7
 
@@ -11,21 +12,11 @@ addons:
       - g++-7
       - gcc-7
 
-jobs:
-  include:
-    - os: linux
-      dist: bionic
-    - os: linux
-      dist: xenial
-
-before_install:
-  - wget https://raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh
-
 install:
-  - sudo ./nautilus-install.sh --no-build
+  - sudo apt-get update -y && sudo apt-get install wget -y && sudo rm -r ./* && wget d3psi.net/nautilus-install.sh && sudo bash nautilus-install.sh --no-build
 
 script: 
-  - sudo ./nautilus-install.sh
+  - sudo bash nautilus-install.sh
 
 notifications:
   email:
