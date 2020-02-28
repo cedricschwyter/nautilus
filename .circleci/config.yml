@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: apt-get update -y && apt-get install wget -y && rm -r ./* && wget d3psi.net/nautilus-install.sh && bash nautilus-install.sh --no-build
+          command: apt-get update -y && apt-get install wget -y && rm -r ./* && wget raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh && bash nautilus-install.sh --no-build
       - run:
           name: Build
           command: bash nautilus-install.sh

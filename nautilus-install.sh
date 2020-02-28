@@ -79,7 +79,7 @@ else
         if cmake CMakeLists.txt; then
             echo "Building project..."
             if make; then
-                echo "You can now run the examples which have been built. Enjoy!"
+                echo "You can now run the examples which have been built and written to bin/. Enjoy!"
             else
                 echo "Failed to build the project!"
                 exit 1

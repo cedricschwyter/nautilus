@@ -25,6 +25,6 @@ for:
     project: nautilusExamples.sln
     parallel: true
 install:
-- sh: sudo apt-get update -y && sudo apt-get install wget -y && sudo rm -r ./* && wget d3psi.net/nautilus-install.sh && sudo bash nautilus-install.sh --no-build
+- sh: sudo apt-get update -y && sudo apt-get install wget -y && sudo rm -r ./* && wget raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh && sudo bash nautilus-install.sh --no-build
 build_script:
 - sh: sudo bash nautilus-install.sh

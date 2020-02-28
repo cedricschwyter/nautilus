@@ -685,6 +685,7 @@
 
 #include "NautilusCore.hpp"
 #include "NautilusShell.hpp"
+#include "NautilusOpenGLShell.hpp"
 #include "NautilusStatus.hpp"
 #include "NautilusNS.hpp"
 #include "NautilusInterface.hpp"
