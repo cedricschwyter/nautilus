@@ -2,7 +2,6 @@ version: 1.0.{build}
 image:
 - Ubuntu
 - Ubuntu1804
-- Ubuntu1604
 - Visual Studio 2019
 platform: x64
 configuration: Release
@@ -25,6 +24,6 @@ for:
     project: nautilusExamples.sln
     parallel: true
 install:
-- sh: sudo apt-get update -y && sudo apt-get install wget -y && sudo rm -r ./* && wget raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh && sudo bash nautilus-install.sh --no-build
+- sh: sudo bash nautilus-install.sh --no-build
 build_script:
 - sh: sudo bash nautilus-install.sh

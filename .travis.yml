@@ -13,9 +13,9 @@ addons:
       - gcc-7
 
 install:
-  - sudo apt-get update -y && sudo apt-get install wget -y && sudo rm -r ./* && wget raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh && sudo bash nautilus-install.sh --no-build
+  - sudo bash nautilus-install.sh --no-build
 
-script: 
+script:
   - sudo bash nautilus-install.sh
 
 notifications:

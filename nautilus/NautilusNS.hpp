@@ -4,34 +4,12 @@
 #include <GLFW/glfw3.h>
 
 #include "Nautilus.hpp"
-#include "NautilusInterface.hpp"
 
 #include <string>
 
 namespace nautilus {
 
-    /**
-     * Sets the nautilus graphics interface
-     * @param _interface The NautilusInterface to utilize
-     * @return Returns a NautilusStatus status code
-     */
-    NautilusStatus nautilusSetInterface(NautilusInterface _interface);
-
-    /**
-     * Initializes the GLFW library
-     * @return Returns a NautilusStatus status code
-     */
-    NautilusStatus initializeGLFW(void);
-
-    /**
-     * Creates a GLFW window and returns a pointer to the handle of it
-     * @param _w The integer width of the window
-     * @param _h The integer height of the window
-     * @param _title The title of the window
-     * @param _icon The icon of the window
-     * @return Returns a pointer to a GLFWwindow
-     */
-    GLFWwindow* createGLFWwindow(uint32_t _w, uint32_t _h, std::string _title, unsigned char* _icon);
+    extern uint32_t FPS;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 

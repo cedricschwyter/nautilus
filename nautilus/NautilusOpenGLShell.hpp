@@ -12,6 +12,11 @@ public:
      */
     NautilusOpenGLShell(void);
 
+    /**
+     * Default destructor
+     */ 
+    ~NautilusOpenGLShell(void);
+
 };
 
 #endif      // NAUTILUS_OPENGL_SHELL_HPP

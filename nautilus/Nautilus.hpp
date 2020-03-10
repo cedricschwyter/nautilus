@@ -688,6 +688,6 @@
 #include "NautilusOpenGLShell.hpp"
 #include "NautilusStatus.hpp"
 #include "NautilusNS.hpp"
-#include "NautilusInterface.hpp"
+#include "NautilusShellContext.hpp"
 
 #endif      // NAUTILUS_HPP

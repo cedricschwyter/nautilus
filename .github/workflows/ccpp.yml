@@ -14,6 +14,6 @@ jobs:
      - name: Checkout code
        uses: actions/checkout@master
      - name: Install dependencies
-       run: sudo apt-get update -y && sudo apt-get install wget -y && sudo rm -r ./* && wget raw.githubusercontent.com/D3PSI/nautilus/master/nautilus-install.sh && sudo bash nautilus-install.sh --no-build
+       run: sudo bash nautilus-install.sh --no-build
      - name: Build
        run: sudo bash nautilus-install.sh

@@ -71,10 +71,7 @@ else
         exit 1
     fi
     if [[ "$build" = true ]]; then
-        git clone --recursive https://github.com/D3PSI/nautilus.git
-        chown ${SUDO_USER:-${USER}} -R nautilus/
-        rm nautilus-install.sh
-        cd nautilus/
+        git submodule update --init --recursive
         echo "Generating build files..."
         if cmake CMakeLists.txt; then
             echo "Building project..."
