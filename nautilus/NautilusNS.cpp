@@ -9,6 +9,8 @@
 namespace nautilus {
 
     uint32_t FPS = 60;
+    bool exit = false;
+    std::vector< NautilusShell* > shells;
 
     unsigned char* loadSTBI(
         std::string _path, 

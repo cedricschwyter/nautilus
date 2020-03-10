@@ -7,7 +7,7 @@
 #include <iostream>
 
 NautilusShell::NautilusShell() {
-    createWindow();
+    
 }
 
 NautilusStatus NautilusShell::createWindow() {
@@ -55,6 +55,27 @@ NautilusStatus NautilusShell::createWindow() {
         4);
     glfwSetWindowIcon(this->m_window, 1, windowIcon);
     nautilus::freeSTBI(windowIcon[0].pixels);
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusShell::setShellContext(NautilusShellContext _context) {
+    this->m_shellContext = _context;
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusShell::setShellTitle(std::string _title) {
+    this->m_title = _title;
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusShell::setShellExtent(uint32_t _width, uint32_t _height) {
+    this->m_width = _width;
+    this->m_height = _height;
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusShell::setShellIcon(std::string _path) {
+    this->m_shellIconPath = _path;
     return NAUTILUS_STATUS_OK;
 }
 

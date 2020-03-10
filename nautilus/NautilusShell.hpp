@@ -11,6 +11,8 @@
 class NautilusShell {
 public:
 
+    GLFWwindow* m_window;
+
     /**
      * Default constructor
      */
@@ -61,21 +63,24 @@ public:
     NautilusStatus setShellIcon(std::string _path);
 
     /**
+     * Creates the actual shell window
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus createWindow(void);
+
+    /**
      * Default destructor
      */ 
     ~NautilusShell(void);
 
 protected:
 
-    GLFWwindow* m_window;
     NautilusShellContext m_shellContext;
     GLFWmonitor* m_monitor;
     std::string m_title;
     uint32_t m_width;
     uint32_t m_height;
     std::string m_shellIconPath;
-
-    NautilusStatus createWindow(void);
 
 };
 

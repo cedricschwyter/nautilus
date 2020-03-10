@@ -6,10 +6,13 @@
 #include "Nautilus.hpp"
 
 #include <string>
+#include <vector>
 
 namespace nautilus {
 
     extern uint32_t FPS;
+    extern bool exit;
+    extern std::vector< NautilusShell* > shells;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 
