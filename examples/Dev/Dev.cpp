@@ -15,7 +15,6 @@ namespace dev {
      */
     NautilusStatus init(void) {
         core = new NautilusCore();
-        core->start();
         shell = new DevShell();
         shell->setShellContext(NAUTILUS_SHELL_CONTEXT_WINDOWED);
         shell->setShellTitle("Dev Example");

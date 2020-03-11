@@ -12,6 +12,7 @@ namespace nautilus {
     bool exit = false;
     std::vector< NautilusShell* > shells;
     std::mutex shellsLock;
+    bool running = false;
 
     unsigned char* loadSTBI(
         std::string _path, 

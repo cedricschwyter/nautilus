@@ -16,6 +16,7 @@ public:
     GLFWwindow* m_window = nullptr;
     bool attached = false;
     std::mutex attachedMutex;
+    bool windowCreated = false;
 
     /**
      * Default constructor

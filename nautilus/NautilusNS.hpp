@@ -16,6 +16,7 @@ namespace nautilus {
     extern bool exit;
     extern std::vector< NautilusShell* > shells;
     extern std::mutex shellsLock;
+    extern bool running;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 
