@@ -1,14 +1,17 @@
-version: 2
+version: 2.1
 
 jobs:
   build:
     docker:
-      - image: "debian:stretch"
+      - image: circleci/buildpack-deps:bionic
     steps:
       - checkout
       - run:
+          name: Initialize submodules
+          command: git submodule sync --recursive && git submodule update --init --recursive
+      - run:
           name: Install dependencies	
-          command: bash nautilus-install.sh --no-build
+          command: sudo bash nautilus-install.sh --no-build
       - run:
           name: Build
-          command: bash nautilus-install.sh
+          command: sudo bash nautilus-install.sh

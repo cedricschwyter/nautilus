@@ -6,8 +6,13 @@
 
 #include <GLFW/glfw3.h>
 
+#include <thread>
+#include <mutex>
+
 class NautilusCore {
 public:
+
+    std::thread t0;
 
     /**
      * Default constructor
@@ -20,6 +25,12 @@ public:
      * @return Returns a NautilusStatus status code
      */
     NautilusStatus attachShell(NautilusShell* _shell);
+
+    /**
+     * Starts the applications main loop
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus start(void);
 
     /**
      * Contains the main loop of the application

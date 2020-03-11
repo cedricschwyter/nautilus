@@ -109,7 +109,7 @@ endif()
 
 # Compiler specific stuff
 IF(MSVC)
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc")
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc /std:c++17")
 ENDIF(MSVC)
 
 IF(WIN32)

@@ -70,8 +70,9 @@ else
         echo "No supported package manager found!"
         exit 1
     fi
+    git submodule sync
+    git submodule update --init --recursive
     if [[ "$build" = true ]]; then
-        git submodule update --init --recursive
         echo "Generating build files..."
         if cmake CMakeLists.txt; then
             echo "Building project..."

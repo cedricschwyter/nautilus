@@ -7,7 +7,7 @@
 #include <iostream>
 
 NautilusShell::NautilusShell() {
-    
+
 }
 
 NautilusStatus NautilusShell::createWindow() {
@@ -44,6 +44,9 @@ NautilusStatus NautilusShell::createWindow() {
             this->m_title.c_str(),
             this->m_monitor,
             nullptr);
+    }
+    if(this->m_window == nullptr) {
+        return NAUTILUS_STATUS_FATAL;
     }
     glfwMakeContextCurrent(this->m_window);
     GLFWimage windowIcon[1];

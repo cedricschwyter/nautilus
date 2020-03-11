@@ -7,11 +7,15 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <thread>
+#include <mutex>
 
 class NautilusShell {
 public:
 
-    GLFWwindow* m_window;
+    GLFWwindow* m_window = nullptr;
+    bool attached = false;
+    std::mutex attachedMutex;
 
     /**
      * Default constructor

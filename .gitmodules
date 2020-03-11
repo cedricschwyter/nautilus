@@ -1,19 +1,19 @@
 [submodule "ext/glm"]
 	path = ext/glm
-	url = https://github.com/g-truc/glm
+	url = https://github.com/g-truc/glm.git
 
 [submodule "ext/glfw"]
 	path = ext/glfw
-	url = https://github.com/glfw/glfw
+	url = https://github.com/glfw/glfw.git
 
 [submodule "ext/imgui"]
 	path = ext/imgui
-	url = https://github.com/ocornut/imgui
+	url = https://github.com/ocornut/imgui.git
 
 [submodule "ext/stb"]
 	path = ext/stb
-	url = https://github.com/nothings/stb
+	url = https://github.com/nothings/stb.git
 
 [submodule "ext/tinyobjloader"]
 	path = ext/tinyobjloader
-	url = https://github.com/tinyobjloader/tinyobjloader
+	url = https://github.com/tinyobjloader/tinyobjloader.git
