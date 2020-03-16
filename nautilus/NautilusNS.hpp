@@ -12,11 +12,15 @@
 
 namespace nautilus {
 
-    extern uint32_t FPS;
-    extern bool exit;
-    extern std::vector< NautilusShell* > shells;
-    extern std::mutex shellsLock;
-    extern bool running;
+    extern uint32_t                             FPS;
+    extern bool                                 exit;
+    extern std::mutex                           exitLock;
+    extern bool                                 running;
+    extern std::mutex                           runningLock;
+    extern std::vector< NautilusShell* >        shells;
+    extern std::mutex                           shellsLock;
+    extern std::vector< std::thread* >          threadpool;
+    extern std::mutex                           threadpoolLock;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 
@@ -47,6 +51,15 @@ namespace nautilus {
      * @return Returns a NautilusStatus status code
      */
     NautilusStatus freeSTBI(unsigned char* _pixels);
+
+    /**
+     * Finds the index of an element in a std::vector
+     * @param _vec The vector containing the element
+     * @param _element The element itself
+     * @return Returns a std::pair of bool (element found in vector?) and its index if found
+     */ 
+    template< typename T>
+    std::pair< bool, int32_t > getIndexOfElement(const std::vector< T >& _vec, const T& _element);
 
 }
 

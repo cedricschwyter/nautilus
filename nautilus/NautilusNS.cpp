@@ -8,11 +8,15 @@
 
 namespace nautilus {
 
-    uint32_t FPS = 60;
-    bool exit = false;
-    std::vector< NautilusShell* > shells;
-    std::mutex shellsLock;
-    bool running = false;
+    uint32_t                            FPS             = 60;
+    bool                                exit            = false;
+    std::mutex                          exitLock;
+    bool                                running         = false;
+    std::mutex                          runningLock;
+    std::vector< NautilusShell* >       shells;
+    std::mutex                          shellsLock;
+    std::vector< std::thread* >         threadpool;
+    std::mutex                          threadpoolLock;
 
     unsigned char* loadSTBI(
         std::string _path, 
@@ -36,6 +40,21 @@ namespace nautilus {
     NautilusStatus nautilusSetFramerate(uint32_t _fps) {
         nautilus::FPS = _fps;
         return NAUTILUS_STATUS_OK;
+    }
+
+    template< typename T >
+    std::pair< bool, int32_t > getIndexOfElement(const std::vector< T >& _vec, const T& _element) {
+        std::pair< bool, int32_t > result;
+        auto it = std::find(_vec.begin(), _vec.end(), _element);
+        if (it != _vec.end()) {
+            result.second = distance(_vec.begin(), it);
+            result.first = true;
+        }
+        else {
+            result.first = false;
+            result.second = -1;
+        }
+        return result;
     }
 
 }

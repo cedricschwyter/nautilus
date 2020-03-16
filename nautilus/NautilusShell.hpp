@@ -13,10 +13,12 @@
 class NautilusShell {
 public:
 
-    GLFWwindow* m_window = nullptr;
-    bool attached = false;
-    std::mutex attachedMutex;
-    bool windowCreated = false;
+    GLFWwindow*         m_window            = nullptr;
+    bool                m_attached          = false;
+    std::mutex          m_attachedMutex;
+    bool                m_windowCreated     = false;
+    uint32_t            m_id;
+    std::mutex          m_idLock;
 
     /**
      * Default constructor
@@ -74,18 +76,30 @@ public:
     NautilusStatus createWindow(void);
 
     /**
+     * Handles per-shell events
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus events(void);
+
+    /**
+     * Detaches the shell from the core it is attached to
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus detach(void);
+
+    /**
      * Default destructor
      */ 
     ~NautilusShell(void);
 
 protected:
 
-    NautilusShellContext m_shellContext;
-    GLFWmonitor* m_monitor;
-    std::string m_title;
-    uint32_t m_width;
-    uint32_t m_height;
-    std::string m_shellIconPath;
+    NautilusShellContext    m_shellContext;
+    GLFWmonitor*            m_monitor;
+    std::string             m_title;
+    uint32_t                m_width;
+    uint32_t                m_height;
+    std::string             m_shellIconPath;
 
 };
 

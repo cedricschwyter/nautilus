@@ -11,9 +11,9 @@
 
 class NautilusCore {
 public:
-
-    std::thread t0;
-
+    
+    std::thread* m_t0;
+    
     /**
      * Default constructor
      */
@@ -42,10 +42,6 @@ public:
      * Default destructor
      */ 
     ~NautilusCore(void);
-
-private:
-
-    NautilusShell* m_shell;
 
 };
 

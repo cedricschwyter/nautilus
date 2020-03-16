@@ -41,5 +41,6 @@ namespace dev {
  */
 int main() {
     dev::init();
+    dev::clean();
     return NAUTILUS_STATUS_OK;
 }

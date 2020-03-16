@@ -11,7 +11,7 @@ NautilusShell::NautilusShell() {
 }
 
 NautilusStatus NautilusShell::createWindow() {
-    if(!this->windowCreated) {
+    if(!this->m_windowCreated) {
         this->m_monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(this->m_monitor);
         if(this->m_shellContext == NAUTILUS_SHELL_CONTEXT_WINDOWED) {
@@ -58,7 +58,7 @@ NautilusStatus NautilusShell::createWindow() {
             4);
         glfwSetWindowIcon(this->m_window, 1, windowIcon);
         nautilus::freeSTBI(windowIcon[0].pixels);
-        this->windowCreated = true;
+        this->m_windowCreated = true;
     }
     return NAUTILUS_STATUS_OK;
 }
@@ -84,8 +84,26 @@ NautilusStatus NautilusShell::setShellIcon(std::string _path) {
     return NAUTILUS_STATUS_OK;
 }
 
+NautilusStatus NautilusShell::events() {
+    if(glfwGetKey(this->m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        this->detach();
+    }
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusShell::detach() {
+    glfwSetWindowShouldClose(this->m_window, GLFW_TRUE);
+    std::scoped_lock< std::mutex > lock(m_attachedMutex);
+    this->m_attached = false;
+    std::scoped_lock< std::mutex > shellsLock(nautilus::shellsLock);
+    std::vector< NautilusShell* >::iterator it = nautilus::shells.begin();
+    std::advance(it, this->m_id);
+    nautilus::shells.erase(it);
+    glfwDestroyWindow(this->m_window);
+    return NAUTILUS_STATUS_OK;
+}
+
 NautilusShell::~NautilusShell() {
-    
 }
 
 #endif      // NAUTILUS_SHELL_CPP
