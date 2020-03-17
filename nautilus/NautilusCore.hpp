@@ -12,8 +12,6 @@
 class NautilusCore {
 public:
     
-    std::thread* m_t0;
-    
     /**
      * Default constructor
      */
@@ -27,16 +25,16 @@ public:
     NautilusStatus attachShell(NautilusShell* _shell);
 
     /**
-     * Starts the applications main loop
-     * @return Returns a NautilusStatus status code
-     */
-    NautilusStatus start(void);
-
-    /**
      * Contains the main loop of the application
      * @return Returns a NautilusStatus status code
      */
     NautilusStatus loop(void);
+
+    /**
+     * Exits the application and ends all processes owned by it
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus exit(void);
 
     /**
      * Default destructor

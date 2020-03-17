@@ -5,7 +5,6 @@
 #include "NautilusNS.hpp"
 
 NautilusCore::NautilusCore() {
-
 }
 
 NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
@@ -21,39 +20,39 @@ NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
     std::unique_lock< std::mutex > lock(_shell->m_attachedMutex);
     _shell->m_attached = true;
     lock.unlock();
-    start();
-    return NAUTILUS_STATUS_OK;
-}
-
-NautilusStatus NautilusCore::start() {
     if(!nautilus::running) {
         nautilus::running = true;
-        m_t0 = new std::thread(&NautilusCore::loop, this);
-        m_t0->join();
+        this->loop();
     }
     return NAUTILUS_STATUS_OK;
 }
-
 NautilusStatus NautilusCore::loop() {
     glfwInit();
     while(!nautilus::exit && nautilus::running) {
-        std::scoped_lock< std::mutex > shellLock(nautilus::shellsLock);
-        std::cout << nautilus::shells.size() << std::endl;
+        std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
         for(NautilusShell* shell : nautilus::shells) {
-            std::scoped_lock< std::mutex > lock(shell->m_attachedMutex);
+            shellLock.unlock();
+            std::unique_lock< std::mutex > lock(shell->m_attachedMutex);
             if(shell->m_attached) {
+                lock.unlock();
                 shell->createWindow();
                 glfwMakeContextCurrent(shell->m_window);
-                shell->events();
                 shell->onRender();
-                glfwSwapBuffers(shell->m_window);
+                shell->events();
                 glfwPollEvents();
+                glfwSwapBuffers(shell->m_window);
             }
+            shellLock.lock();
         }
-        std::scoped_lock< std::mutex > exitLock(nautilus::exitLock);
-        if(nautilus::shells.size() == 0) nautilus::exit = true;
+        if(nautilus::shells.size() == 0) this->exit();
     }
     glfwTerminate();
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusCore::exit() {
+    std::scoped_lock< std::mutex > exitMutex(nautilus::exitLock);
+    nautilus::exit = true;
     return NAUTILUS_STATUS_OK;
 }
 

@@ -16,7 +16,6 @@ public:
     GLFWwindow*         m_window            = nullptr;
     bool                m_attached          = false;
     std::mutex          m_attachedMutex;
-    bool                m_windowCreated     = false;
     uint32_t            m_id;
     std::mutex          m_idLock;
 
@@ -73,7 +72,7 @@ public:
      * Creates the actual shell window
      * @return Returns a NautilusStatus status code
      */
-    NautilusStatus createWindow(void);
+    virtual NautilusStatus createWindow(void) = 0;
 
     /**
      * Handles per-shell events
@@ -100,6 +99,7 @@ protected:
     uint32_t                m_width;
     uint32_t                m_height;
     std::string             m_shellIconPath;
+    bool                    m_windowCreated     = false;
 
 };
 
