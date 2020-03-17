@@ -12,6 +12,8 @@
 class NautilusCore {
 public:
     
+    std::thread* m_t0;
+
     /**
      * Default constructor
      */
@@ -35,6 +37,13 @@ public:
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus exit(void);
+
+    /**
+     * Terminates the application, must be called manually by user, 
+     * otherwise program will exit before even starting the main loop.
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus terminate(void);
 
     /**
      * Default destructor

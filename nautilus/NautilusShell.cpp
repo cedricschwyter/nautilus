@@ -33,13 +33,12 @@ NautilusStatus NautilusShell::setShellIcon(std::string _path) {
 
 NautilusStatus NautilusShell::events() {
     if(glfwGetKey(this->m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        this->detach();
+        glfwSetWindowShouldClose(this->m_window, GLFW_TRUE);
     }
     return NAUTILUS_STATUS_OK;
 }
 
 NautilusStatus NautilusShell::detach() {
-    glfwSetWindowShouldClose(this->m_window, GLFW_TRUE);
     std::scoped_lock< std::mutex > lock(m_attachedMutex);
     this->m_attached = false;
     std::scoped_lock< std::mutex > shellsLock(nautilus::shellsLock);

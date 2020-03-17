@@ -22,7 +22,7 @@ NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
     lock.unlock();
     if(!nautilus::running) {
         nautilus::running = true;
-        this->loop();
+        m_t0 = new std::thread(&NautilusCore::loop, this);
     }
     return NAUTILUS_STATUS_OK;
 }
@@ -41,6 +41,7 @@ NautilusStatus NautilusCore::loop() {
                 shell->events();
                 glfwPollEvents();
                 glfwSwapBuffers(shell->m_window);
+                if(glfwWindowShouldClose(shell->m_window)) shell->detach();
             }
             shellLock.lock();
         }
@@ -53,6 +54,11 @@ NautilusStatus NautilusCore::loop() {
 NautilusStatus NautilusCore::exit() {
     std::scoped_lock< std::mutex > exitMutex(nautilus::exitLock);
     nautilus::exit = true;
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusCore::terminate() {
+    m_t0->join();
     return NAUTILUS_STATUS_OK;
 }
 
