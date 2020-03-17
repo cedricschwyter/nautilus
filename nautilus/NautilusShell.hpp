@@ -6,6 +6,7 @@
 
 #include <GLFW/glfw3.h>
 
+#include <map>
 #include <iostream>
 #include <thread>
 #include <mutex>

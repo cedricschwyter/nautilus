@@ -8,11 +8,12 @@ NautilusCore::NautilusCore() {
 }
 
 NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
-    static uint32_t id = 0;
+    static int32_t id = 0;
     std::unique_lock< std::mutex > idLock(_shell->m_idLock);
     _shell->m_id = id;
     idLock.unlock();
     id++;
+    nautilus::shellCount++;
     std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
     nautilus::shells.push_back(_shell);
     shellLock.unlock();
@@ -26,9 +27,12 @@ NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
     }
     return NAUTILUS_STATUS_OK;
 }
+
 NautilusStatus NautilusCore::loop() {
     glfwInit();
+    std::unique_lock< std::mutex > exitLock(nautilus::exitLock);
     while(!nautilus::exit && nautilus::running) {
+        exitLock.unlock();
         std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
         for(NautilusShell* shell : nautilus::shells) {
             shellLock.unlock();
@@ -45,14 +49,15 @@ NautilusStatus NautilusCore::loop() {
             }
             shellLock.lock();
         }
-        if(nautilus::shells.size() == 0) this->exit();
+        if(nautilus::shellCount == 0) this->exit();
+        exitLock.lock();
     }
     glfwTerminate();
     return NAUTILUS_STATUS_OK;
 }
 
 NautilusStatus NautilusCore::exit() {
-    std::scoped_lock< std::mutex > exitMutex(nautilus::exitLock);
+    std::scoped_lock< std::mutex > exitLock(nautilus::exitLock);
     nautilus::exit = true;
     return NAUTILUS_STATUS_OK;
 }

@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 #include <thread>
 #include <mutex>
 
@@ -21,6 +22,7 @@ namespace nautilus {
     extern std::mutex                           shellsLock;
     extern std::vector< std::thread* >          threadpool;
     extern std::mutex                           threadpoolLock;
+    extern uint32_t                             shellCount;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 
@@ -60,6 +62,15 @@ namespace nautilus {
      */ 
     template< typename T>
     std::pair< bool, int32_t > getIndexOfElement(const std::vector< T >& _vec, const T& _element);
+
+    /**
+     * Finds the index of an element in a std::vector
+     * @param _vec The vector containing the element
+     * @param _element The element itself
+     * @return Returns a std::pair of bool (element found in vector?) and its index if found
+     */ 
+    template< typename T >
+    std::pair< bool, int32_t > getIndexOfElement(const std::vector< T* >& _vec, const T* _element);
 
 }
 

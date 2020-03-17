@@ -17,6 +17,7 @@ namespace nautilus {
     std::mutex                          shellsLock;
     std::vector< std::thread* >         threadpool;
     std::mutex                          threadpoolLock;
+    uint32_t                            shellCount      = 0;
 
     unsigned char* loadSTBI(
         std::string _path, 
@@ -47,7 +48,22 @@ namespace nautilus {
         std::pair< bool, int32_t > result;
         auto it = std::find(_vec.begin(), _vec.end(), _element);
         if (it != _vec.end()) {
-            result.second = distance(_vec.begin(), it);
+            result.second = std::distance(_vec.begin(), it);
+            result.first = true;
+        }
+        else {
+            result.first = false;
+            result.second = -1;
+        }
+        return result;
+    }
+
+    template< typename T >
+    std::pair< bool, int32_t > getIndexOfElement(const std::vector< T* >& _vec, const T* _element) {
+        std::pair< bool, int32_t > result;
+        auto it = std::find(_vec.begin(), _vec.end(), _element);
+        if (it != _vec.end()) {
+            result.second = std::distance(_vec.begin(), it);
             result.first = true;
         }
         else {
