@@ -21,7 +21,7 @@ for:
   before_build:
     - cmake -G "Visual Studio 16 2019" .
   build:
-    project: nautilusExamples.sln
+    project: NAUTILUS_EXAMPLES.sln
     parallel: true
 install:
 - sh: sudo bash nautilus-install.sh --no-build

@@ -15,7 +15,7 @@ namespace dev {
      * Initializes everything
      * @return Returns a NautilusStatus status code
      */
-    NautilusStatus init(void) {
+    NautilusStatus run(void) {
         core = new NautilusCore();
         shell = new DevShell();
         otherShell = new DevShell();
@@ -59,7 +59,7 @@ namespace dev {
  * Main entry point for the application
  */
 int main() {
-    dev::init();
+    dev::run();
     dev::clean();
     return NAUTILUS_STATUS_OK;
 }

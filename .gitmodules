@@ -17,3 +17,11 @@
 [submodule "ext/tinyobjloader"]
 	path = ext/tinyobjloader
 	url = https://github.com/tinyobjloader/tinyobjloader.git
+
+[submodule "ext/irrklang"]
+	path = ext/irrklang
+	url = https://github.com/kcuzner/irrrpgbuilder.git
+
+[submodule "ext/assimp"]
+	path = ext/assimp
+	url = https://github.com/assimp/assimp.git

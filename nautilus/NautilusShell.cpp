@@ -7,7 +7,6 @@
 #include <iostream>
 
 NautilusShell::NautilusShell() {
-
 }
 
 NautilusStatus NautilusShell::setShellContext(NautilusShellContext _context) {

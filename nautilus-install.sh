@@ -68,7 +68,8 @@ else
         fi
     else
         echo "No supported package manager found!"
-        exit 1
+        echo "Going full kamikaze. Hoping relevant dependencies (git, cmake, make, pkg-config g++/clang++ (or any other C++17-capable compiler)) 
+            and other libraries are installed or included in the repository in this case. Good luck!"
     fi
     git submodule sync
     git submodule update --init --recursive

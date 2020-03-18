@@ -230,3 +230,7 @@ data/models/cerberus/*.*
 .vscode/
 CMakeDoxyfile.in
 CMakeDoxygenDefaults.cmake
+bin/assimp
+bin/unit
+lib/libassimp.a
+lib/libIrrXML.a
