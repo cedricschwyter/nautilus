@@ -16,7 +16,7 @@ public:
 
     GLFWwindow*         m_window            = nullptr;
     bool                m_attached          = false;
-    std::mutex          m_attachedMutex;
+    std::mutex          m_attachedLock;
     uint32_t            m_id;
     std::mutex          m_idLock;
 

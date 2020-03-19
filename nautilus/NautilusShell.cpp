@@ -38,9 +38,10 @@ NautilusStatus NautilusShell::events() {
 }
 
 NautilusStatus NautilusShell::detach() {
-    std::scoped_lock< std::mutex > lock(m_attachedMutex);
+    std::scoped_lock< std::mutex > lock(m_attachedLock);
     this->m_attached = false;
     glfwDestroyWindow(this->m_window);
+    std::scoped_lock< std::mutex > shellCountLock(nautilus::shellCountLock);
     nautilus::shellCount--;
     return NAUTILUS_STATUS_OK;
 }

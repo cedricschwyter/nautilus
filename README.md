@@ -52,8 +52,82 @@ Currently and in the near future, there will be no official support for macOS.
 
 ## Getting started
 
-Tutorial here.
+The nautilus-project is a graphics, windowing, sound and physics library with focus to user simplicity. There are various different examples whose source can be found in the `examples` subdirectory of the repository. The library works on a basic concept: The `NautilusCore` object and attachable `NautilusShell` objects.
+To create a basic window with your favorite graphics API (OpenGL in the example) create a new derived class from the `NautilusOpenGLShell` (other possibilities include `NautilusVulkanShell`) object and override the required functions `onAttach` and `onRender`: 
+
+    class ExampleShell 
+        : public NautilusOpenGLShell {
+        using NautilusOpenGLShell::NautilusOpenGLShell;
+    public:
+
+        /**
+        * Gets executed when the shell is attached to the core
+        * @return Returns a NautilusStatus status code
+        */
+        NautilusStatus onAttach(void) {
+            return NAUTILUS_STATUS_OK;
+        }
+
+        /**
+        * Gets executed at the specified frequency to compute rendering operations
+        * @return Returns a NautilusStatus status code
+        */
+        NautilusStatus onRender(void) {
+            return NAUTILUS_STATUS_OK;
+        }
+
+    };
+
+You can then instantiate one `NautilusCore` and one `NautilusShell` object from the class implementation you have just written:
+
+    NautilusCore*   core;
+    NautilusShell*  shell;
+
+    /**
+     * Initializes everything
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus run(void) {
+        core = new NautilusCore();
+        shell = new ExampleShell();
+
+        shell->setShellContext(NAUTILUS_SHELL_CONTEXT_WINDOWED);
+        shell->setShellTitle("Dev Example 1");
+        shell->setShellExtent(1280, 720);
+        shell->setShellIcon("res/images/icons/nautilus.png");
+        core->attachShell(shell);
+
+        return NAUTILUS_STATUS_OK;
+    }
+
+A call to `NautilusCore::terminate()` is required before the program exits, as the thread running the application loop is joined then. Otherwise, the application loop will not even get started.
+
+    /**
+     * Cleans allocated resources
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus clean(void) {
+        core->terminate();
+        delete shell;
+        delete core;
+        return NAUTILUS_STATUS_OK;
+    }
+
+    /**
+     * Main entry point for the application
+     */
+    int main() {
+        run();
+        clean();
+        return NAUTILUS_STATUS_OK;
+    }
+
+You can create as many different shell objects and derived classes of it, as long as you always write the necessary function implementations. A `NautilusShell` object essentially represents a window containing a graphics context from the chosen graphics API.
 
 ## Troubleshoot
 
-Troubleshoot instructions here.
+In the worst case scenario, the compilation of the entire project takes about 20 to 30 minutes on a single thread (view continuous integration services for more information). To accelerate the process you can run the compilation on multiple threads:
+
+    make -j<number_of_threads>
+
+where `<number_of_threads>` is at max the amount of supported threads of your CPU. This depends strongly on the manufacturer, whether hyperthreading is supported and other factors. Usually a good number to start is to just input the value 4 as this is supported on a wide variety of systems.

@@ -1,28 +1,46 @@
 version: 1.0.{build}
 image:
 - Visual Studio 2019
+- Visual Studio 2017
 - Ubuntu
 - Ubuntu1804
 platform: x64
 configuration: Release
 for:
--
-  matrix:
-    only:
-      - image: Visual Studio 2019
-  environment:
-    VULKAN_SDK: C:/VulkanSDK/1.1.114.0
-  cache:
-    - VulkanSDK.exe
-  install:
-    - if not exist VulkanSDK.exe curl -L --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.1.114.0/windows/VulkanSDK-1.1.114.0-Installer.exe?Human=true
-    - VulkanSDK.exe /S
-    - git submodule update --init --recursive
-  before_build:
-    - cmake -G "Visual Studio 16 2019" .
-  build:
-    project: NAUTILUS_EXAMPLES.sln
-    parallel: true
+  -
+    matrix:
+      only:
+        - image: Visual Studio 2019
+    environment:
+      VULKAN_SDK: C:/VulkanSDK/1.1.114.0
+    cache:
+      - VulkanSDK.exe
+    install:
+      - if not exist VulkanSDK.exe curl -L --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.1.114.0/windows/VulkanSDK-1.1.114.0-Installer.exe?Human=true
+      - VulkanSDK.exe /S
+      - git submodule update --init --recursive
+    before_build:
+      - cmake -G "Visual Studio 16 2019" .
+    build:
+      project: NAUTILUS_EXAMPLES.sln
+      parallel: true
+  -
+    matrix:
+      only:
+        - image: Visual Studio 2017
+    environment:
+      VULKAN_SDK: C:/VulkanSDK/1.1.114.0
+    cache:
+      - VulkanSDK.exe
+    install:
+      - if not exist VulkanSDK.exe curl -L --silent --show-error --output VulkanSDK.exe https://vulkan.lunarg.com/sdk/download/1.1.114.0/windows/VulkanSDK-1.1.114.0-Installer.exe?Human=true
+      - VulkanSDK.exe /S
+      - git submodule update --init --recursive
+    before_build:
+      - cmake -G "Visual Studio 15 2017 Win64" .
+    build:
+      project: NAUTILUS_EXAMPLES.sln
+      parallel: true
 install:
 - sh: sudo bash nautilus-install.sh --no-build
 build_script:

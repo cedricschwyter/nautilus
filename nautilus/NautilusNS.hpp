@@ -23,6 +23,7 @@ namespace nautilus {
     extern std::vector< std::thread* >          threadpool;
     extern std::mutex                           threadpoolLock;
     extern uint32_t                             shellCount;
+    extern std::mutex                           shellCountLock;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 

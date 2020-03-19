@@ -25,3 +25,7 @@
 [submodule "ext/assimp"]
 	path = ext/assimp
 	url = https://github.com/assimp/assimp.git
+
+[submodule "ext/vulkan"]
+	path = ext/vulkan
+	url = https://github.com/KhronosGroup/Vulkan-Headers.git

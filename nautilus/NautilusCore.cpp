@@ -18,7 +18,7 @@ NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
     nautilus::shells.push_back(_shell);
     shellLock.unlock();
     _shell->onAttach();
-    std::unique_lock< std::mutex > lock(_shell->m_attachedMutex);
+    std::unique_lock< std::mutex > lock(_shell->m_attachedLock);
     _shell->m_attached = true;
     lock.unlock();
     if(!nautilus::running) {
@@ -36,7 +36,7 @@ NautilusStatus NautilusCore::loop() {
         std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
         for(NautilusShell* shell : nautilus::shells) {
             shellLock.unlock();
-            std::unique_lock< std::mutex > lock(shell->m_attachedMutex);
+            std::unique_lock< std::mutex > lock(shell->m_attachedLock);
             if(shell->m_attached) {
                 lock.unlock();
                 shell->createWindow();
@@ -49,6 +49,7 @@ NautilusStatus NautilusCore::loop() {
             }
             shellLock.lock();
         }
+        std::scoped_lock< std::mutex > shellCountLock(nautilus::shellCountLock);
         if(nautilus::shellCount == 0) this->exit();
         exitLock.lock();
     }

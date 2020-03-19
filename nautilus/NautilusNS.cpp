@@ -18,6 +18,7 @@ namespace nautilus {
     std::vector< std::thread* >         threadpool;
     std::mutex                          threadpoolLock;
     uint32_t                            shellCount      = 0;
+    std::mutex                          shellCountLock;
 
     unsigned char* loadSTBI(
         std::string _path, 
