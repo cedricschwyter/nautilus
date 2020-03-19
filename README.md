@@ -124,6 +124,17 @@ A call to `NautilusCore::terminate()` is required before the program exits, as t
 
 You can create as many different shell objects and derived classes of it, as long as you always write the necessary function implementations. A `NautilusShell` object essentially represents a window containing a graphics context from the chosen graphics API.
 
+### Linking the library
+
+To use the library in your own C++ project is really simple: The only file you have to manually include in your sourcecode is `#include <Nautilus.hpp>`. Put the either self-compiled or pre-compiled binary library file (Windows: `nautilus.lib`, Linux: `libnautilus.a`) in the same folder as your `CMakeLists.txt`. In your `CMakeLists.txt` link against the `nautilus` library target and include the necessary include directories (which is the `nautilus`-subfolder in the repository):
+
+    include_directories("path/to/nautilus")
+    target_link_libraries(myProject nautilus)
+
+### Note
+
+At the time of writing this guide, the `nautilus`-library is still a header-only capable library, meaning you do not have to link the binary library file to the project to make it work. The instructions are here for the potential future case of a non-header-only library.
+
 ## Troubleshoot
 
 In the worst case scenario, the compilation of the entire project takes about 20 to 30 minutes on a single thread (view continuous integration services for more information). To accelerate the process you can run the compilation on multiple threads:
