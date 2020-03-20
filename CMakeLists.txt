@@ -6,6 +6,8 @@ set(NAME NAUTILUS_EXAMPLES)
 
 project(${NAME})
 
+set(NAUTILUS_HEADER_DIRECTORY "${CMAKE_SOURCE_DIR}/include")
+
 include_directories("ext")
 include_directories("ext/glm")
 include_directories("ext/assimp/include")
@@ -15,7 +17,8 @@ include_directories("ext/stb")
 include_directories("ext/glfw/include")
 include_directories("ext/glad/include")
 include_directories("ext/vulkan/include")
-include_directories("include")
+include_directories(${NAUTILUS_HEADER_DIRECTORY})
+
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)

@@ -8,3 +8,5 @@ else(WIN32)
     add_library(nautilus STATIC ${BASE_SRC})
     target_link_libraries(nautilus ${Vulkan_LIBRARY} glfw ${GLFW_LIBRARIES} glm ${GLM_LIBRARIES} ${ASSIMP_LIBRARIES} ${XCB_LIBRARIES} ${WAYLAND_CLIENT_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 endif(WIN32)
+
+add_custom_command(TARGET nautilus PRE_BUILD COMMAND cp -r ${BASE_HEADERS} -t ${NAUTILUS_HEADER_DIRECTORY})
