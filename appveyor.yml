@@ -17,7 +17,7 @@ for:
     build_script:
     - sh: sudo bash nautilus-install.sh
     after_build:
-    - sh: zip -j nautilus-linux-rolling.zip nautilus/libnautilus.a
+    - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && zip -r nautilus-linux-rolling.zip libs/ include/
     artifacts:
       - path: nautilus-linux-rolling.zip
         name: libnautilus-linux
@@ -48,7 +48,7 @@ for:
       project: NAUTILUS_EXAMPLES.sln
       parallel: true
     after_build:
-      - 7z a nautilus-win-rolling-%APPVEYOR_BUILD_VERSION%.zip C:/projects/nautilus/nautilus/Release/nautilus.lib
+      - mkdir C:\projects\nautilus\libs && move C:\projects\nautilus\nautilus\Release\nautilus.lib C:\projects\nautilus\libs && 7z a nautilus-win-rolling-%APPVEYOR_BUILD_VERSION%.zip libs/ include/
     artifacts:
       - path: nautilus-win-rolling-$(appveyor_build_version).zip
         name: libnautilus-win

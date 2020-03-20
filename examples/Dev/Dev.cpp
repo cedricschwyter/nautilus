@@ -1,4 +1,4 @@
-#include <Nautilus.hpp>
+#include <nautilus/Nautilus.hpp>
 
 #include "DevShell.hpp"
 

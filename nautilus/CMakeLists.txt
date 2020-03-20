@@ -1,4 +1,4 @@
-file(GLOB BASE_SRC "*.c" "*.cpp" "*.hpp" "../ext/imgui/*.cpp")
+file(GLOB BASE_SRC "*.c" "*.cpp" "../ext/imgui/*.cpp")
 file(GLOB BASE_HEADERS "*.hpp" ".h")
 
 if(WIN32)

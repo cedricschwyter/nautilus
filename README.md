@@ -126,14 +126,14 @@ You can create as many different shell objects and derived classes of it, as lon
 
 ### Linking the library
 
-To use the library in your own C++ project is really simple: The only file you have to manually include in your sourcecode is `#include <Nautilus.hpp>`. Put the either self-compiled or pre-compiled binary library file (Windows: `nautilus.lib`, Linux: `libnautilus.a`) in the same folder as your `CMakeLists.txt`. In your `CMakeLists.txt` link against the `nautilus` library target and include the necessary include directories (which is the `nautilus`-subfolder in the repository):
+To use the library in your own C++ project is really simple: The only file you have to manually include in your sourcecode is `#include <nautilus/Nautilus.hpp>`. Put the either self-compiled or pre-compiled binary library file (Windows: `nautilus.lib`, Linux: `libnautilus.a`) in the same folder as your `CMakeLists.txt`. In your `CMakeLists.txt` link against the `nautilus` library target and include the necessary include directories (the `include`-subfolder of the repository):
 
-    include_directories("path/to/nautilus")
+    include_directories("path/to/include")
     target_link_libraries(myProject nautilus)
 
 ### Note
 
-At the time of writing this guide, the `nautilus`-library is still a header-only capable library, meaning you do not have to link the binary library file to the project to make it work. The instructions are here for the potential future case of a non-header-only library.
+At the time of writing this guide, the `nautilus`-library is still a header-only capable library, meaning you do not have to link the binary library file to the project to make it work as long as you link to the `nautilus`-subfolder as the include directory instead of the dedicated `include` directory. The instructions are here for the potential future case of a non-header-only library.
 
 ## Troubleshoot
 

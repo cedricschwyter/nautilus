@@ -1,7 +1,7 @@
 #ifndef DEV_SHELL_HPP
 #define DEV_SHELL_HPP
 
-#include <Nautilus.hpp>
+#include <nautilus/Nautilus.hpp>
 
 class DevShell 
     : public NautilusOpenGLShell {

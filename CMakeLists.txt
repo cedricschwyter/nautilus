@@ -15,7 +15,7 @@ include_directories("ext/stb")
 include_directories("ext/glfw/include")
 include_directories("ext/glad/include")
 include_directories("ext/vulkan/include")
-include_directories("nautilus")
+include_directories("include")
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
