@@ -75,7 +75,11 @@ NautilusStatus NautilusOpenGLShell::createWindow() {
 }
 
 NautilusStatus NautilusOpenGLShell::initAPI() {
-
+    if(!this->m_initialized) {
+        if(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+            std::cerr << "Failed to load function pointers through GLAD!\n";
+        this->m_initialized = true;
+    }
     return NAUTILUS_STATUS_OK;
 }
 

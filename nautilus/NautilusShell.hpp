@@ -178,6 +178,7 @@ protected:
     uint32_t                m_height;
     std::string             m_shellIconPath;
     bool                    m_windowCreated     = false;
+    bool                    m_initialized       = false;
 
 };
 

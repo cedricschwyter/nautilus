@@ -1,9 +1,9 @@
 #ifndef NAUTILUS_NS_HPP
 #define NAUTILUS_NS_HPP
 
-#include <GLFW/glfw3.h>
-
 #include "Nautilus.hpp"
+
+#include <GLFW/glfw3.h>
 
 #include <string>
 #include <vector>

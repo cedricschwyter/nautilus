@@ -683,6 +683,8 @@
 #ifndef NAUTILUS_HPP
 #define NAUTILUS_HPP
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include "NautilusCore.hpp"
 #include "NautilusShell.hpp"
 #include "NautilusOpenGLShell.hpp"
