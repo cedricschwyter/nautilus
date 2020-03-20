@@ -40,6 +40,7 @@ NautilusStatus NautilusCore::loop() {
             if(shell->m_attached) {
                 lock.unlock();
                 shell->createWindow();
+                shell->setCallbacks();
                 glfwMakeContextCurrent(shell->m_window);
                 shell->onRender();
                 shell->events();

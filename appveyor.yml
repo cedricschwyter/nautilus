@@ -57,7 +57,7 @@ for:
     deploy:
       tag: $(appveyor_build_version)-r
       release: nautilus-rolling-$(appveyor_build_version)
-      description: Rolling channel for releases of nautilus compiled libraries
+      description: Rolling channel for releases of nautilus compiled libraries --- $(APPVEYOR_REPO_COMMIT_MESSAGE)
       provider: GitHub
       auth_token:
         secure: otHmBJW4rJT8ONsToA2oc13ybNJR1oktyFX8tHeoJ/97fX570JRnUbrG3ubRrbFi

@@ -6,6 +6,12 @@
 NautilusOpenGLShell::NautilusOpenGLShell() {
 }
 
+void NautilusOpenGLShell::onAttach() {
+}
+
+void NautilusOpenGLShell::onRender() {
+}
+
 NautilusStatus NautilusOpenGLShell::createWindow() {
     if(!this->m_windowCreated) {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -60,9 +66,16 @@ NautilusStatus NautilusOpenGLShell::createWindow() {
             4);
         glfwSetWindowIcon(this->m_window, 1, windowIcon);
         nautilus::freeSTBI(windowIcon[0].pixels);
+        glfwSetWindowUserPointer(this->m_window, this);
         glfwShowWindow(this->m_window);
         this->m_windowCreated = true;
+        initAPI();
     }
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusOpenGLShell::initAPI() {
+
     return NAUTILUS_STATUS_OK;
 }
 

@@ -12,13 +12,13 @@ public:
      * Gets executed when the shell is attached to the core
      * @return Returns a NautilusStatus status code
      */
-    NautilusStatus onAttach(void); 
+    void onAttach(void); 
 
     /**
      * Gets executed at the specified frequency to compute rendering operations
      * @return Returns a NautilusStatus status code
      */
-    NautilusStatus onRender(void);
+    void onRender(void);
 
 };
 

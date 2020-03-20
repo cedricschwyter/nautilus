@@ -5,12 +5,10 @@
 
 #include <iostream>
 
-NautilusStatus DevShell::onAttach() {
-    return NAUTILUS_STATUS_OK;
+void DevShell::onAttach() {
 }
 
-NautilusStatus DevShell::onRender() {
-    return NAUTILUS_STATUS_OK;
+void DevShell::onRender() {
 }
 
 #endif      // DEV_SHELL_CPP

@@ -14,10 +14,29 @@ public:
     NautilusOpenGLShell(void);
 
     /**
+     * Gets executed when the shell gets attached to the core
+     * @return Returns a NautilusStatus status code
+     */
+    virtual void onAttach(void);
+
+    /**
+     * Gets executed at the specified frequency by the application loop
+     * Computes rendering operations
+     * @return Returns a NautilusStatus status code
+     */ 
+    virtual void onRender(void);
+
+    /**
      * Creates an OpenGL-capable GLFW-window
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus createWindow(void);
+
+    /**
+     * Initializes the OpenGL API
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus initAPI(void);
 
     /**
      * Default destructor

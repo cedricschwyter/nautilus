@@ -689,5 +689,6 @@
 #include "NautilusStatus.hpp"
 #include "NautilusNS.hpp"
 #include "NautilusShellContext.hpp"
+#include "NautilusShellDispatcher.hpp"
 
 #endif      // NAUTILUS_HPP
