@@ -12,13 +12,6 @@ namespace nautilus {
 
         /**
          * @note Dispatch method to call non-static function in a static way
-         * Gets executed when the window is detached from the core
-         * @param _window A pointer to the GLFWwindow
-         */ 
-        void onDetach(GLFWwindow* _window);
-
-        /**
-         * @note Dispatch method to call non-static function in a static way
          * Gets executed when the window is resized
          * @param _window A pointer to the GLFWwindow
          * @param _w The new window width

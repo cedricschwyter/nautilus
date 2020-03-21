@@ -10,21 +10,27 @@ NautilusShell::NautilusShell() {
 }
 
 void NautilusShell::onDetach(GLFWwindow* _window) {
+    nautilus::logger::log("onDetach");
 }
 
 void NautilusShell::onResize(GLFWwindow* _window, int _w, int _h) {
+    nautilus::logger::log("onResize");
 }
 
 void NautilusShell::onFocus(GLFWwindow* _window, int _focus) {
+    nautilus::logger::log("onFocus");
 }
 
 void NautilusShell::onIconify(GLFWwindow* _window, int _iconify) {
+    nautilus::logger::log("onIconify");
 }
 
 void NautilusShell::onCursor(GLFWwindow* _window, double _x, double _y) {
+    nautilus::logger::log("onCursor");
 }
 
 void NautilusShell::onCursorIn(GLFWwindow* _window, int _enter) {
+    nautilus::logger::log("onCursorIn");
 }
 
 void NautilusShell::onKey(
@@ -33,9 +39,11 @@ void NautilusShell::onKey(
     int             _scancode, 
     int             _action, 
     int             _mods) {
+    nautilus::logger::log("onKey");
 }
 
 void NautilusShell::onScroll(GLFWwindow* _window, double _dx, double _dy) {
+    nautilus::logger::log("onScroll");
 }
 
 NautilusStatus NautilusShell::setShellContext(NautilusShellContext _context) {
@@ -67,6 +75,7 @@ NautilusStatus NautilusShell::events() {
 }
 
 NautilusStatus NautilusShell::detach() {
+    this->onDetach(this->m_window);
     std::scoped_lock< std::mutex > lock(m_attachedLock);
     this->m_attached = false;
     glfwDestroyWindow(this->m_window);
@@ -76,7 +85,6 @@ NautilusStatus NautilusShell::detach() {
 }
 
 NautilusStatus NautilusShell::setCallbacks() {
-    glfwSetWindowCloseCallback(this->m_window, nautilus::dispatcher::onDetach);
     glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::onResize);
     glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::onFocus);
     glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::onIconify);

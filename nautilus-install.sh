@@ -53,7 +53,7 @@ else
     fi
     echo "Trying to install dependencies for ${distroname} using ${pkgman} on ${session}."
     if [[ ${pkgman} == yum ]]; then
-        if yum -y update && yum -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel glfw glfw-devel assimp assimp-devel SDL2 SDL2-devel SDL2_image SDL2_image-devel mesa-libGL-devel boost boost-system boost-devel boost-filesystem; then
+        if yum -y update && yum -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel glfw glfw-devel assimp assimp-devel mesa-libGL-devel boost boost-system boost-devel boost-filesystem; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -61,7 +61,7 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == pacman ]]; then
-        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb glm glfw-${session} assimp sdl2 sdl2_image boost boost-libs; then
+        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb glm glfw-${session} assimp boost boost-libs; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -69,7 +69,7 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == apt ]]; then
-        if apt-get -y update && apt-get -y --fix-missing install git cmake make pkg-config gcc g++ gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev libsdl2-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev libboost-all-dev; then
+        if apt-get -y update && apt-get -y --fix-missing install git cmake make pkg-config gcc g++ gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev libboost-all-dev; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"

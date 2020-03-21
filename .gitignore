@@ -234,3 +234,4 @@ bin/assimp
 bin/unit
 lib/libassimp.a
 lib/libIrrXML.a
+logs/
