@@ -3,6 +3,7 @@
 
 #include "NautilusStatus.hpp"
 #include "NautilusShell.hpp"
+#include "NautilusLogger.hpp"
 
 #include <GLFW/glfw3.h>
 

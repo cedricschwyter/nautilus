@@ -26,9 +26,9 @@ for:
       only:
         - image: Ubuntu1804
     install:
-    - sh: sudo bash nautilus-install.sh --no-build
+    - sh: sudo apt-get update -y && sudo apt-get -y install git cmake make gcc-8 g++-8 libxinerama-dev libxcursor-dev libxrandr-dev libx11-dev libxi-dev libegl1-mesa-dev && export CC=gcc-8 && export CXX=g++-8 && git submodule sync && git submodule update --init --recursive
     build_script:
-    - sh: sudo bash nautilus-install.sh
+    - sh: cmake CMakeLists.txt && make
   -
     matrix:
       only:

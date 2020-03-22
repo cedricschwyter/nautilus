@@ -5,6 +5,7 @@
 #include "NautilusNS.hpp"
 
 NautilusCore::NautilusCore() {
+    nautilus::logger::init();
 }
 
 NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
@@ -66,16 +67,16 @@ NautilusStatus NautilusCore::exit() {
 
 NautilusStatus NautilusCore::terminate() {
     m_t0->join();
-    return NAUTILUS_STATUS_OK;
-}
-
-NautilusCore::~NautilusCore() {
     std::unique_lock< std::mutex > exitMutex(nautilus::exitLock);
     nautilus::exit = true;
     exitMutex.unlock();
     std::scoped_lock< std::mutex > lock(nautilus::threadpoolLock);
     for(std::thread* t : nautilus::threadpool) t->join();
     for(std::thread* t : nautilus::threadpool) delete t;
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusCore::~NautilusCore() {
 }
 
 #endif      // NAUTILUS_CORE_CPP

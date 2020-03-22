@@ -7,11 +7,6 @@ namespace nautilus {
 
     namespace dispatcher {
 
-        void onDetach(GLFWwindow* _window) {
-            NautilusShell* context = reinterpret_cast< NautilusShell* >(glfwGetWindowUserPointer(_window));
-            context->onDetach(_window);
-        }
-
         void onResize(GLFWwindow* _window, int _w, int _h) {
             NautilusShell* context = reinterpret_cast< NautilusShell* >(glfwGetWindowUserPointer(_window));
             context->onResize(_window, _w, _h);
