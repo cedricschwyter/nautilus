@@ -11,7 +11,7 @@ namespace nautilus {
         std::ofstream       standardLog;
         std::mutex          logLock;
 
-        namespace fs = std::experimental::filesystem;
+        namespace fs = std::filesystem;
 
         NautilusStatus init(const char* _logdir) {
             if(!nautilus::logger::loggerInitialized) {

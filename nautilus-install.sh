@@ -16,7 +16,7 @@ else
     arch=$(uname -m)
     kernel=$(uname -r)
     declare -A osInfo;
-    osInfo[/etc/redhat-release]=yum
+    osInfo[/etc/redhat-release]=dnf
     osInfo[/etc/arch-release]=pacman
     osInfo[/etc/gentoo-release]=emerge
     osInfo[/etc/SuSE-release]=zypp
@@ -52,8 +52,10 @@ else
         session=wayland
     fi
     echo "Trying to install dependencies for ${distroname} using ${pkgman} on ${session}."
-    if [[ ${pkgman} == yum ]]; then
-        if yum -y update && yum -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel glfw glfw-devel assimp assimp-devel mesa-libGL-devel boost boost-system boost-devel boost-filesystem; then
+    if [[ ${pkgman} == dnf ]]; then
+        if dnf -y update && dnf -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel glfw glfw-devel assimp assimp-devel mesa-libGL-devel && dnf -y groupinstall "X Software Development"; then
+            export CC=gcc-8
+            export CXX=g++-8
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -61,7 +63,9 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == pacman ]]; then
-        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb glm glfw-${session} assimp boost boost-libs; then
+        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb glm glfw-${session} assimp xorg; then
+            export CC=gcc-8
+            export CXX=g++-8
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -69,7 +73,9 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == apt ]]; then
-        if apt-get -y update && apt-get -y --fix-missing install git cmake make pkg-config gcc g++ gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev libboost-all-dev; then
+        if apt-get -y update && apt-get -y --fix-missing install git cmake make pkg-config gcc-8 g++-8 gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev; then
+            export CC=gcc-8
+            export CXX=g++-8
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -79,8 +85,7 @@ else
         fi
     else
         echo "No supported package manager found!"
-        echo "Going full kamikaze. Hoping relevant dependencies (git, cmake, make, pkg-config g++/clang++ (or any other C++17-capable compiler)) 
-            and necessary libraries are installed or included in the repository in this case. Good luck!"
+        echo "Going full kamikaze. Hoping relevant dependencies (git, cmake, make, pkg-config g++/clang++ (or any other C++17-capable compiler)) and necessary libraries are installed or included in the repository in this case. Good luck!"
     fi
     git submodule sync
     git submodule update --init --recursive
