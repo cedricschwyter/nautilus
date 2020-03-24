@@ -61,18 +61,16 @@ To create a basic window with your favorite graphics API (OpenGL in the example)
     public:
 
         /**
-        * Gets executed when the shell is attached to the core
-        * @return Returns a NautilusStatus status code
-        */
+         * Gets executed when the shell is attached to the core
+         */
         void onAttach(void) {
             // statements to execute on attachment here
         }
 
         /**
-        * Gets executed at the specified frequency to compute rendering operations
-        * @return Returns a NautilusStatus status code
-        */
-        NautilusStatus onRender(void) {
+         * Gets executed at the specified frequency to compute rendering operations
+         */
+        void onRender(void) {
             // OpenGL rendering statements here
         }
 

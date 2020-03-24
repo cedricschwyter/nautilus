@@ -6,12 +6,8 @@
 
 class NautilusOpenGLShell
     : public NautilusShell {
+    using NautilusShell::NautilusShell;
 public:
-
-    /**
-     * Default constructor
-     */
-    NautilusOpenGLShell(void);
 
     /**
      * Gets executed when the shell gets attached to the core
@@ -37,11 +33,6 @@ public:
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus initAPI(void);
-
-    /**
-     * Default destructor
-     */ 
-    ~NautilusOpenGLShell(void);
 
 };
 

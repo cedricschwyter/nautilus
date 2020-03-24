@@ -75,6 +75,11 @@ NautilusStatus NautilusCore::terminate() {
     return NAUTILUS_STATUS_OK;
 }
 
+NautilusStatus NautilusCore::setEnableVulkanValidationLayers() {
+    nautilus::enableVulkanValidationLayers = true;
+    return NAUTILUS_STATUS_OK;
+}
+
 NautilusCore::~NautilusCore() {
 }
 

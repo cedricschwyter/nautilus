@@ -4,8 +4,8 @@
 #include <nautilus/Nautilus.hpp>
 
 class DevShell 
-    : public NautilusOpenGLShell {
-    using NautilusOpenGLShell::NautilusOpenGLShell;
+    : public NautilusVulkanShell {
+    using NautilusVulkanShell::NautilusVulkanShell;
 public:
 
     /**

@@ -8,17 +8,24 @@
 
 namespace nautilus {
 
-    uint32_t                            FPS             = 60;
-    bool                                exit            = false;
+    std::string                         globalApplicationName           = "Nautilus by D3PSI";
+    bool                                exit                            = false;
     std::mutex                          exitLock;
-    bool                                running         = false;
+    bool                                running                         = false;
     std::mutex                          runningLock;
     std::vector< NautilusShell* >       shells;
     std::mutex                          shellsLock;
     std::vector< std::thread* >         threadpool;
     std::mutex                          threadpoolLock;
-    uint32_t                            shellCount      = 0;
+    uint32_t                            shellCount                      = 0;
     std::mutex                          shellCountLock;
+    VkInstance                          vulkanInstance;
+    VkAllocationCallbacks*              vulkanAllocator                 = nullptr;
+    bool                                vulkanInstanceCreated           = false;
+    bool                                enableVulkanValidationLayers    = false;
+    const std::vector< const char* >    vulkanValidationLayers          = {
+            "VK_LAYER_LUNARG_standard_validation"
+    };
 
     unsigned char* loadSTBI(
         std::string _path, 
@@ -36,11 +43,6 @@ namespace nautilus {
 
     NautilusStatus freeSTBI(unsigned char* _pixels) {
         stbi_image_free(_pixels);
-        return NAUTILUS_STATUS_OK;
-    }
-
-    NautilusStatus nautilusSetFramerate(uint32_t _fps) {
-        nautilus::FPS = _fps;
         return NAUTILUS_STATUS_OK;
     }
 
@@ -72,6 +74,82 @@ namespace nautilus {
             result.second = -1;
         }
         return result;
+    }
+
+    NautilusStatus createVulkanInstance() {
+        if(nautilus::vulkanInstanceCreated) return NAUTILUS_STATUS_OK;
+        nautilus::logger::log("Requesting Vulkan validation layers...");
+        if(nautilus::enableVulkanValidationLayers && nautilus::vulkanValidationLayersSupported())
+            nautilus::logger::log("Successfully activated Vulkan validation layers");
+        else
+            nautilus::logger::log("Vulkan validation layers are not available", NAUTILUS_STATUS_FATAL);
+        auto extensions = nautilus::queryRequiredVulkanExtensions();
+        VkApplicationInfo applicationInfo                  = {};
+        applicationInfo.sType                              = VK_STRUCTURE_TYPE_APPLICATION_INFO;
+        applicationInfo.pApplicationName                   = nautilus::globalApplicationName.c_str();
+        applicationInfo.applicationVersion                 = VK_MAKE_VERSION(1, 0, 0);
+        applicationInfo.pEngineName                        = nautilus::globalApplicationName.c_str();
+        applicationInfo.engineVersion                      = VK_MAKE_VERSION(1, 0, 0);
+        applicationInfo.apiVersion                         = VK_API_VERSION_1_0;
+        VkInstanceCreateInfo instanceCreateInfo            = {};
+        instanceCreateInfo.sType                           = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
+        instanceCreateInfo.pApplicationInfo                = &applicationInfo;
+        instanceCreateInfo.enabledExtensionCount           = static_cast< uint32_t >(extensions.size());
+        instanceCreateInfo.ppEnabledExtensionNames         = extensions.data();   
+        if(nautilus::enableVulkanValidationLayers) {   
+            instanceCreateInfo.enabledLayerCount           = static_cast< uint32_t >(nautilus::vulkanValidationLayers.size());
+            instanceCreateInfo.ppEnabledLayerNames         = nautilus::vulkanValidationLayers.data();
+        }
+        else  
+            instanceCreateInfo.enabledLayerCount           = 0;
+        nautilus::logger::log("Creating VkInstance...");
+        VkResult result = vkCreateInstance(&instanceCreateInfo, nautilus::vulkanAllocator, &nautilus::vulkanInstance);
+        ASSERT_VULKAN(result);
+        nautilus::logger::log("Successfully created VkInstance");
+        nautilus::vulkanInstanceCreated = true;
+        return NAUTILUS_STATUS_OK;
+    }
+
+    bool vulkanValidationLayersSupported() {
+        uint32_t validationLayerCount;
+        vkEnumerateInstanceLayerProperties(&validationLayerCount, nullptr);
+        std::vector< VkLayerProperties > availableValidationLayers(validationLayerCount);
+        vkEnumerateInstanceLayerProperties(&validationLayerCount, availableValidationLayers.data());
+        // Check if all layers in vulkanValidationLayers exist in availableValidationLayers
+        for (const char* layer : nautilus::vulkanValidationLayers) {
+            bool found = false;
+            for (const auto& layerProp : availableValidationLayers)
+                if (strcmp(layer, layerProp.layerName) == 0) {
+                    found = true;
+                    break;
+                }
+            if (!found) 
+                return false;
+        }
+        return true;
+    }
+
+    std::vector< const char* > queryRequiredVulkanExtensions() {
+        nautilus::logger::log("Querying available extensions...");
+        uint32_t extCount = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &extCount, nullptr);
+        std::vector< VkExtensionProperties > availableExtensions(extCount);
+        vkEnumerateInstanceExtensionProperties(nullptr, &extCount, availableExtensions.data());
+        std::string exts = "Available extensions:";
+        for (const auto& ext : availableExtensions) {
+            std::string extName = ext.extensionName;
+            exts += "\n\t\t\t\t" + extName;
+        }
+        nautilus::logger::log(exts.c_str());
+        uint32_t glfwExtCount = 0;
+        const char** glfwExt;
+        nautilus::logger::log("Querying GLFW-extensions...");
+        glfwExt = glfwGetRequiredInstanceExtensions(&glfwExtCount);
+        nautilus::logger::log("Successfully enabled required GLFW-extensions");
+        std::vector< const char* > extensions(glfwExt, glfwExt + glfwExtCount);
+        if (nautilus::enableVulkanValidationLayers)
+            extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+        return extensions;
     }
 
 }

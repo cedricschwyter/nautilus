@@ -14,20 +14,18 @@ namespace nautilus {
         namespace fs = std::filesystem;
 
         NautilusStatus init(const char* _logdir) {
-            if(!nautilus::logger::loggerInitialized) {
-                fs::create_directory("logs");
-                standardLog.open("logs/nautilus.log", std::ios::trunc);
-                nautilus::logger::loggerInitialized = true;
-            }
+            if(nautilus::logger::loggerInitialized) return NAUTILUS_STATUS_OK;
+            fs::create_directory("logs");
+            standardLog.open("logs/nautilus.log", std::ios::trunc);
+            nautilus::logger::loggerInitialized = true;
             return NAUTILUS_STATUS_OK;
         }
 
         NautilusStatus log(std::string _logEntry, NautilusStatus _status) {
-            if(nautilus::logger::loggerInitialized) {
-                std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
-                std::cout << _logEntry << std::endl;
-                standardLog << _logEntry << std::endl;
-            }
+            if(!nautilus::logger::loggerInitialized) return NAUTILUS_STATUS_OK;
+            std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
+            std::cout << _logEntry << std::endl;
+            standardLog << _logEntry << std::endl;
             return NAUTILUS_STATUS_OK;
         }
 

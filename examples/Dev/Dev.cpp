@@ -20,6 +20,7 @@ namespace dev {
         shell->setShellTitle("Dev Example 1");
         shell->setShellExtent(1280, 720);
         shell->setShellIcon("res/images/icons/nautilus.png");
+        core->setEnableVulkanValidationLayers();
         core->attachShell(shell);
         return NAUTILUS_STATUS_OK;
     }

@@ -47,6 +47,15 @@ public:
     NautilusStatus terminate(void);
 
     /**
+     * Enables Vulkan validation layers if available
+     * Only set in debug/development, do not set in release
+     * or deployment/production as these are very performance-heavy
+     * Sets validation layers for all NautilusVulkanShells
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus setEnableVulkanValidationLayers(void);
+
+    /**
      * Default destructor
      */ 
     ~NautilusCore(void);

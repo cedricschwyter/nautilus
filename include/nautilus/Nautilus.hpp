@@ -685,13 +685,16 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <vulkan/vulkan.h>
 #include "NautilusCore.hpp"
 #include "NautilusShell.hpp"
 #include "NautilusOpenGLShell.hpp"
+#include "NautilusVulkanShell.hpp"
 #include "NautilusStatus.hpp"
 #include "NautilusNS.hpp"
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusLogger.hpp"
+#include "NautilusAssert.hpp"
 
 #endif      // NAUTILUS_HPP

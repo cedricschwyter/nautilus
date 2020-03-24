@@ -4,6 +4,7 @@
 #include "NautilusStatus.hpp"
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
+#include "NautilusAssert.hpp"
 
 #include <GLFW/glfw3.h>
 

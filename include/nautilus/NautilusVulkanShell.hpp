@@ -1,39 +1,45 @@
-#ifndef NAUTILUS_OPENGL_SHELL_HPP
-#define NAUTILUS_OPENGL_SHELL_HPP
+#ifndef NAUTILUS_VULKAN_SHELL_HPP
+#define NAUTILUS_VULKAN_SHELL_HPP
 
 #include "NautilusShell.hpp"
 #include "NautilusNS.hpp"
+#include "NautilusAssert.hpp"
 
-class NautilusOpenGLShell
-    : public NautilusShell {
+#include <vector>
+#include <string.h>
+
+class NautilusVulkanShell : 
+    public NautilusShell {
     using NautilusShell::NautilusShell;
-public:
+public:    
 
     /**
      * Gets executed when the shell gets attached to the core
-     * @return Returns a NautilusStatus status code
      */
     virtual void onAttach(void);
 
     /**
      * Gets executed at the specified frequency by the application loop
      * Computes rendering operations
-     * @return Returns a NautilusStatus status code
      */ 
     virtual void onRender(void);
 
     /**
-     * Creates an OpenGL-capable GLFW-window
+     * Creates a Vulkan-capable GLFW-window
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus createWindow(void);
 
     /**
-     * Initializes the OpenGL API
+     * Initializes the Vulkan API
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus initAPI(void);
 
+protected:
+
+private:
+
 };
 
-#endif      // NAUTILUS_OPENGL_SHELL_HPP
+#endif      // NAUTILUS_VULKAN_SHELL_HPP

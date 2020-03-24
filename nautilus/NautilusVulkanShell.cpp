@@ -1,22 +1,20 @@
-#ifndef NAUTILUS_OPENGL_SHELL_CPP
-#define NAUTILUS_OPENGL_SHELL_CPP
+#ifndef NAUTILUS_VULKAN_SHELL_CPP
+#define NAUTILUS_VULKAN_SHELL_CPP
 
-#include "NautilusOpenGLShell.hpp"
+#include "NautilusVulkanShell.hpp"
 
-void NautilusOpenGLShell::onAttach() {
+void NautilusVulkanShell::onAttach() {
 }
 
-void NautilusOpenGLShell::onRender() {
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+void NautilusVulkanShell::onRender() {
 }
 
-NautilusStatus NautilusOpenGLShell::createWindow() {
+NautilusStatus NautilusVulkanShell::createWindow() { 
     if(this->m_windowCreated) return NAUTILUS_STATUS_OK;
     nautilus::logger::log("Creating GLFWwindow...");
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
     glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -75,19 +73,9 @@ NautilusStatus NautilusOpenGLShell::createWindow() {
     return NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusOpenGLShell::initAPI() {
-    if(this->m_initializedAPI) return NAUTILUS_STATUS_OK;
-    nautilus::logger::log("Initializing OpenGL...");
-    if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        nautilus::logger::log("Failed to load OpenGL function pointers through GLAD", NAUTILUS_STATUS_FATAL);
-        return NAUTILUS_STATUS_FATAL;
-    }
-    glViewport(0, 0, this->m_width, this->m_height);
-    glfwShowWindow(this->m_window);
-    glfwFocusWindow(this->m_window);
-    nautilus::logger::log("Successfully initialized OpenGL");
-    this->m_initializedAPI = true;
+NautilusStatus NautilusVulkanShell::initAPI() {
+    nautilus::createVulkanInstance();
     return NAUTILUS_STATUS_OK;
 }
 
-#endif      // NAUTILUS_OPENGL_SHELL_CPP
+#endif      // NAUTILUS_VULKAN_SHELL_CPP

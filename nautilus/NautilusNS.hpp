@@ -4,6 +4,7 @@
 #include "Nautilus.hpp"
 
 #include <GLFW/glfw3.h>
+#include <vulkan/vulkan.h>
 
 #include <string>
 #include <vector>
@@ -13,7 +14,7 @@
 
 namespace nautilus {
 
-    extern uint32_t                             FPS;
+    extern std::string                          globalApplicationName;
     extern bool                                 exit;
     extern std::mutex                           exitLock;
     extern bool                                 running;
@@ -24,6 +25,9 @@ namespace nautilus {
     extern std::mutex                           threadpoolLock;
     extern uint32_t                             shellCount;
     extern std::mutex                           shellCountLock;
+    extern bool                                 vulkanInstanceCreated;
+    extern bool                                 enableVulkanValidationLayers;
+    extern const std::vector< const char* >     vulkanValidationLayers ;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 
@@ -72,6 +76,24 @@ namespace nautilus {
      */ 
     template< typename T >
     std::pair< bool, int32_t > getIndexOfElement(const std::vector< T* >& _vec, const T* _element);
+
+    /**
+     * Creates the Vulkan instance object
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus createVulkanInstance(void);
+
+    /**
+     * Checks whether Vulkan validation layers are supported
+     * @return Returns true if validation layers are supported, returns false otherwise
+     */ 
+    bool vulkanValidationLayersSupported(void);
+
+    /**
+     * Queries for the required Vulkan extensions
+     * @return Returns an array of const char*'s each representing one extensions
+     */
+    std::vector< const char* > queryRequiredVulkanExtensions(void);
 
 }
 
