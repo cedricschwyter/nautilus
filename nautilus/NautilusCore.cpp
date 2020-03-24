@@ -44,7 +44,6 @@ NautilusStatus NautilusCore::loop() {
                 shell->setCallbacks();
                 glfwMakeContextCurrent(shell->m_window);
                 shell->onRender();
-                shell->events();
                 glfwPollEvents();
                 glfwSwapBuffers(shell->m_window);
                 if(glfwWindowShouldClose(shell->m_window)) shell->detach();
