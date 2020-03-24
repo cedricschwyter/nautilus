@@ -64,8 +64,8 @@ To create a basic window with your favorite graphics API (OpenGL in the example)
         * Gets executed when the shell is attached to the core
         * @return Returns a NautilusStatus status code
         */
-        NautilusStatus onAttach(void) {
-            return NAUTILUS_STATUS_OK;
+        void onAttach(void) {
+            // statements to execute on attachment here
         }
 
         /**
@@ -73,7 +73,7 @@ To create a basic window with your favorite graphics API (OpenGL in the example)
         * @return Returns a NautilusStatus status code
         */
         NautilusStatus onRender(void) {
-            return NAUTILUS_STATUS_OK;
+            // OpenGL rendering statements here
         }
 
     };
@@ -100,7 +100,7 @@ You can then instantiate one `NautilusCore` and one `NautilusShell` object from 
         return NAUTILUS_STATUS_OK;
     }
 
-A call to `NautilusCore::terminate()` is required before the program exits, as the thread running the application loop is joined then. Otherwise, the application loop will not even get started.
+A call to `NautilusCore::terminate()` is required before the program exits, as the thread running the application loop is joined then. Otherwise, the application loop will not even get started and you will not see any window or other visual output.
 
     /**
      * Cleans allocated resources

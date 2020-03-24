@@ -14,6 +14,7 @@ void NautilusOpenGLShell::onRender() {
 
 NautilusStatus NautilusOpenGLShell::createWindow() {
     if(!this->m_windowCreated) {
+        nautilus::logger::log("Creating GLFWwindow...");
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -55,8 +56,10 @@ NautilusStatus NautilusOpenGLShell::createWindow() {
                 nullptr);
         }
         if(this->m_window == nullptr) {
+            nautilus::logger::log("Failed to create GLFWwindow", NAUTILUS_STATUS_FATAL);
             return NAUTILUS_STATUS_FATAL;
         }
+        glfwMakeContextCurrent(this->m_window);
         GLFWimage windowIcon[1];
         windowIcon[0].pixels = nautilus::loadSTBI(
             this->m_shellIconPath,
@@ -67,18 +70,25 @@ NautilusStatus NautilusOpenGLShell::createWindow() {
         glfwSetWindowIcon(this->m_window, 1, windowIcon);
         nautilus::freeSTBI(windowIcon[0].pixels);
         glfwSetWindowUserPointer(this->m_window, this);
-        glfwShowWindow(this->m_window);
         this->m_windowCreated = true;
+        nautilus::logger::log("Successfully created GLFWwindow");
         initAPI();
     }
     return NAUTILUS_STATUS_OK;
 }
 
 NautilusStatus NautilusOpenGLShell::initAPI() {
-    if(!this->m_initialized) {
-        if(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-            std::cerr << "Failed to load function pointers through GLAD!\n";
-        this->m_initialized = true;
+    if(!this->m_initializedAPI) {
+        nautilus::logger::log("Initializing OpenGL...");
+        if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+            nautilus::logger::log("Failed to load OpenGL function pointers through GLAD", NAUTILUS_STATUS_FATAL);
+            return NAUTILUS_STATUS_FATAL;
+        }
+        glViewport(0, 0, this->m_width, this->m_height);
+        glfwShowWindow(this->m_window);
+        glfwFocusWindow(this->m_window);
+        nautilus::logger::log("Successfully initialized OpenGL");
+        this->m_initializedAPI = true;
     }
     return NAUTILUS_STATUS_OK;
 }

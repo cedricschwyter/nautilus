@@ -39,7 +39,9 @@ void NautilusShell::onKey(
     int             _scancode, 
     int             _action, 
     int             _mods) {
-    nautilus::logger::log("onKey");
+    if(_key == GLFW_KEY_ESCAPE && _action == GLFW_PRESS) {
+        glfwSetWindowShouldClose(this->m_window, GLFW_TRUE);
+    }
 }
 
 void NautilusShell::onScroll(GLFWwindow* _window, double _dx, double _dy) {
@@ -67,13 +69,6 @@ NautilusStatus NautilusShell::setShellIcon(std::string _path) {
     return NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::events() {
-    if(glfwGetKey(this->m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        glfwSetWindowShouldClose(this->m_window, GLFW_TRUE);
-    }
-    return NAUTILUS_STATUS_OK;
-}
-
 NautilusStatus NautilusShell::detach() {
     this->onDetach(this->m_window);
     std::scoped_lock< std::mutex > lock(m_attachedLock);
@@ -85,12 +80,15 @@ NautilusStatus NautilusShell::detach() {
 }
 
 NautilusStatus NautilusShell::setCallbacks() {
-    glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::onResize);
-    glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::onFocus);
-    glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::onIconify);
-    glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::onCursor);
-    glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::onCursorIn);
-    glfwSetKeyCallback(this->m_window, nautilus::dispatcher::onKey);
+    if(!this->m_callbacksSet) {
+        glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::onResize);
+        glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::onFocus);
+        glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::onIconify);
+        glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::onCursor);
+        glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::onCursorIn);
+        glfwSetKeyCallback(this->m_window, nautilus::dispatcher::onKey);
+        this->m_callbacksSet = true;
+    }
     return NAUTILUS_STATUS_OK;
 }
 

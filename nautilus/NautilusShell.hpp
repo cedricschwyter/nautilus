@@ -20,6 +20,8 @@ public:
     std::mutex          m_attachedLock;
     uint32_t            m_id;
     std::mutex          m_idLock;
+    bool                m_callbacksSet      = false;
+    bool                m_defaultKeyBinds   = true;
 
     /**
      * Default constructor
@@ -153,12 +155,6 @@ public:
     virtual NautilusStatus initAPI(void) = 0;
 
     /**
-     * Handles per-shell events
-     * @return Returns a NautilusStatus status code
-     */ 
-    NautilusStatus events(void);
-
-    /**
      * Detaches the shell from the core it is attached to
      * @return Returns a NautilusStatus status code
      */ 
@@ -178,7 +174,7 @@ protected:
     uint32_t                m_height;
     std::string             m_shellIconPath;
     bool                    m_windowCreated     = false;
-    bool                    m_initialized       = false;
+    bool                    m_initializedAPI       = false;
 
 };
 
