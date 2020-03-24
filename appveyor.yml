@@ -2,6 +2,7 @@ version: 1.0.{build}
 image:
 - Ubuntu
 - Ubuntu1804
+- macOS
 - Visual Studio 2019
 - Visual Studio 2017
 platform: x64
@@ -28,7 +29,20 @@ for:
     install:
     - sh: sudo apt-get update -y && sudo apt-get -y install git cmake make gcc-8 g++-8 libxinerama-dev libxcursor-dev libxrandr-dev libx11-dev libxi-dev libegl1-mesa-dev && export CC=gcc-8 && export CXX=g++-8 && git submodule sync && git submodule update --init --recursive
     build_script:
-    - sh: cmake CMakeLists.txt && make
+    - sh: cmake CMakeLists.txt && make -j2
+  -
+    matrix:
+      only:
+        - image: macOS
+    install:
+    - sh: bash nautilus-install.sh --no-build
+    build_script:
+    - sh: bash nautilus-install.sh
+    after_build:
+    - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && zip -r nautilus-macos-rolling.zip libs/ include/
+    artifacts:
+      - path: nautilus-macos-rolling.zip
+        name: libnautilus-macos
   -
     matrix:
       only:
@@ -42,7 +56,7 @@ for:
       - VulkanSDK.exe /S
       - git submodule update --init --recursive
     before_build:
-      - ps: .\get_linux_artifact_appveyor.ps1
+      - ps: .\get_build_artifacts_appveyor.ps1
       - cmake -G "Visual Studio 16 2019" .
     build:
       project: NAUTILUS_EXAMPLES.sln
@@ -54,14 +68,16 @@ for:
         name: libnautilus-win
       - path: nautilus-linux-rolling-$(appveyor_build_version).zip
         name: libnautilus-linux
+      - path: nautilus-macos-rolling-$(appveyor_build_version).zip
+        name: libnautilus-macos
     deploy:
-      tag: $(appveyor_build_version)-r
+      tag: r$(appveyor_build_version)
       release: nautilus-rolling-$(appveyor_build_version)
       description: Rolling channel for releases of nautilus compiled libraries --- $(APPVEYOR_REPO_COMMIT_MESSAGE)
       provider: GitHub
       auth_token:
         secure: otHmBJW4rJT8ONsToA2oc13ybNJR1oktyFX8tHeoJ/97fX570JRnUbrG3ubRrbFi
-      artifact: libnautilus-linux, libnautilus-win
+      artifact: libnautilus-linux, libnautilus-win, libnautilus-macos
       draft: false
       prerelease: false
       on:

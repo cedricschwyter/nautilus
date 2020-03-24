@@ -1,15 +1,14 @@
-name: C/C++ CI
+name: Linux C/C++ CI
 
 on: [push, pull_request]
 
 jobs:
- build:
+  build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ ubuntu-18.04, ubuntu-latest ]
-        compiler: [ g++ ]
-    name: ${{ matrix.compiler }} compilation on ${{ matrix.os }} 
+    name: Compilation on ${{ matrix.os }} 
     steps:
      - name: Checkout code
        uses: actions/checkout@master
@@ -17,3 +16,5 @@ jobs:
        run: sudo bash nautilus-install.sh --no-build
      - name: Build
        run: sudo bash nautilus-install.sh
+
+    

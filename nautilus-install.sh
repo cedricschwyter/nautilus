@@ -1,18 +1,56 @@
 #!/bin/bash
 echo "Thank you for choosing to install nautilus created by D3PSI!"
+build=true
+while [ "$1" != "" ]; do
+    case $1 in
+        --no-build )            shift
+                                build=false
+                                ;;
+    esac
+    shift
+done
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 1>&2
-   exit 1
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        echo "Trying to install dependencies for macOS..."
+        if brew update && brew upgrade && brew install git glfw3 glm assimp cmake make molten-vk vulkan-headers; then
+            echo "Successfully installed dependencies for macOS"
+        else
+            echo "Could not install one or more dependencies of nautilus. Going kamikaze, hoping all will work out."
+        fi
+        git submodule sync
+        git submodule update --init --recursive
+        if [[ "$build" = true ]]; then
+            echo "Generating build files..."
+            if cmake CMakeLists.txt; then
+                echo "Building project..."
+                threads=$(sysctl -n hw.ncpu)
+                if [[ "$docker" = true ]]; then
+                    if make; then
+                        echo "You can now run the examples which have been built and written to bin/. Enjoy!"
+                    else
+                        echo "Failed to build the project!"
+                        exit 1
+                    fi
+                else
+                    echo "Compiling using $threads threads..."
+                    if make -j$threads; then
+                        echo "You can now run the examples which have been built and written to bin/. Enjoy!"
+                    else
+                        echo "Failed to build the project!"
+                        exit 1
+                    fi
+                fi
+            else
+                echo "Failed to generate build files!"
+                exit 1
+            fi
+        fi
+        exit 0;
+    else
+        echo "This script must be run as root" 1>&2
+        exit 1
+    fi
 else
-    build=true
-    while [ "$1" != "" ]; do
-        case $1 in
-            --no-build )            shift
-                                    build=false
-                                    ;;
-        esac
-        shift
-    done
     arch=$(uname -m)
     kernel=$(uname -r)
     declare -A osInfo;
