@@ -74,7 +74,14 @@ NautilusStatus NautilusVulkanShell::createWindow() {
 }
 
 NautilusStatus NautilusVulkanShell::initAPI() {
+    if(this->m_initializedAPI) return NAUTILUS_STATUS_OK;
+    nautilus::logger::log("Initializing Vulkan...");
     nautilus::createVulkanInstance();
+    nautilus::createVulkanDebugMessenger();
+    glfwShowWindow(this->m_window);
+    glfwFocusWindow(this->m_window);
+    this->m_initializedAPI = true;
+    nautilus::logger::log("Successfully initialized Vulkan");
     return NAUTILUS_STATUS_OK;
 }
 

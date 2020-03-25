@@ -8,24 +8,25 @@
 
 namespace nautilus {
 
-    std::string                         globalApplicationName           = "Nautilus by D3PSI";
-    bool                                exit                            = false;
+    std::string                         globalApplicationName                   = "Nautilus by D3PSI";
+    bool                                exit                                    = false;
     std::mutex                          exitLock;
-    bool                                running                         = false;
+    bool                                running                                 = false;
     std::mutex                          runningLock;
     std::vector< NautilusShell* >       shells;
     std::mutex                          shellsLock;
     std::vector< std::thread* >         threadpool;
     std::mutex                          threadpoolLock;
-    uint32_t                            shellCount                      = 0;
+    uint32_t                            shellCount                              = 0;
     std::mutex                          shellCountLock;
-    VkInstance                          vulkanInstance;
-    VkAllocationCallbacks*              vulkanAllocator                 = nullptr;
-    bool                                vulkanInstanceCreated           = false;
-    bool                                enableVulkanValidationLayers    = false;
-    const std::vector< const char* >    vulkanValidationLayers          = {
+    VkInstance                          vulkanInstance                          = VK_NULL_HANDLE;
+    VkAllocationCallbacks*              vulkanAllocator                         = nullptr;
+    bool                                vulkanInstanceCreated                   = false;
+    bool                                enableVulkanValidationLayers            = false;
+    const std::vector< const char* >    vulkanValidationLayers                  = {
             "VK_LAYER_LUNARG_standard_validation"
     };
+    VkDebugUtilsMessengerEXT            vulkanValidationLayerDebugMessenger     = VK_NULL_HANDLE;
 
     unsigned char* loadSTBI(
         std::string _path, 
@@ -150,6 +151,74 @@ namespace nautilus {
         if (nautilus::enableVulkanValidationLayers)
             extensions.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
         return extensions;
+    }
+
+    NautilusStatus createVulkanDebugMessenger() {
+        if(!nautilus::enableVulkanValidationLayers) return NAUTILUS_STATUS_OK;
+        nautilus::logger::log("Creating Vulkan debug utils messenger...");
+        VkDebugUtilsMessengerCreateInfoEXT debugUtilsMessengerCreateInfo        = {};
+        debugUtilsMessengerCreateInfo.sType                                     = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
+        debugUtilsMessengerCreateInfo.messageSeverity                           = VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT
+                                                                                | VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT
+                                                                                | VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT;
+        debugUtilsMessengerCreateInfo.messageType                               = VK_DEBUG_UTILS_MESSAGE_TYPE_GENERAL_BIT_EXT
+                                                                                | VK_DEBUG_UTILS_MESSAGE_TYPE_VALIDATION_BIT_EXT
+                                                                                | VK_DEBUG_UTILS_MESSAGE_TYPE_PERFORMANCE_BIT_EXT;
+        debugUtilsMessengerCreateInfo.pfnUserCallback                           = nautilus::vulkanValidationLayerDebugMessageCallback;
+        debugUtilsMessengerCreateInfo.pUserData                                 = nullptr;
+        VkResult result = nautilus::createVulkanDebugUtilsMessenger(
+            nautilus::vulkanInstance,
+            &debugUtilsMessengerCreateInfo,
+            nautilus::vulkanAllocator,
+            &nautilus::vulkanValidationLayerDebugMessenger);
+        ASSERT_VULKAN(result);
+        nautilus::logger::log("Successfully created Vulkan debug utils messenger");
+        return NAUTILUS_STATUS_OK;
+    }
+
+    VKAPI_ATTR VkBool32 VKAPI_CALL vulkanValidationLayerDebugMessageCallback(
+        VkDebugUtilsMessageSeverityFlagBitsEXT           _messageSeverity,
+        VkDebugUtilsMessageTypeFlagsEXT                  _messageType,
+        const VkDebugUtilsMessengerCallbackDataEXT*      _pCallbackData,
+        void*                                            _pUserData) {
+        std::string header = "Validation Layer:    ";
+        std::string message(_pCallbackData->pMessage);
+        if(_messageSeverity > VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
+            nautilus::logger::log(header + message, NAUTILUS_STATUS_FATAL);
+        else
+            nautilus::logger::log(header + message);
+        return VK_FALSE;
+    }
+
+    VkResult createVulkanDebugUtilsMessenger(
+        VkInstance                                      _instance,
+        const VkDebugUtilsMessengerCreateInfoEXT*       _pCreateInfo,
+        const VkAllocationCallbacks*                    _pAllocator,
+        VkDebugUtilsMessengerEXT*                       _pDebugMessenger) {
+        nautilus::logger::log("Gathering proc-address for 'vkCreateDebugUtilsMessengerEXT'");
+        // Get debug-messenger-creation-proc-address from Vulkan
+        auto createDebugMessenger = (PFN_vkCreateDebugUtilsMessengerEXT)vkGetInstanceProcAddr(_instance, "vkCreateDebugUtilsMessengerEXT");
+        if(createDebugMessenger != nullptr)
+            return createDebugMessenger(
+                _instance,
+                _pCreateInfo,
+                _pAllocator,
+                _pDebugMessenger);
+        else
+            return VK_ERROR_EXTENSION_NOT_PRESENT;
+    }
+
+    NautilusStatus destroyVulkanDebugUtilsMessenger(
+        VkInstance                          _instance,
+        VkDebugUtilsMessengerEXT            _debugMessenger,
+        const VkAllocationCallbacks*        _pAllocator) {
+        nautilus::logger::log("Gathering proc-address for 'vkDestroyDebugUtilsMessengerEXT'");
+        auto destroyDebugMessenger = (PFN_vkDestroyDebugUtilsMessengerEXT)vkGetInstanceProcAddr(_instance, "vkDestroyDebugUtilsMessengerEXT");
+        if(destroyDebugMessenger != nullptr) {
+            destroyDebugMessenger(_instance, _debugMessenger, _pAllocator);
+            return NAUTILUS_STATUS_OK;
+        } else
+            return NAUTILUS_STATUS_FATAL;
     }
 
 }

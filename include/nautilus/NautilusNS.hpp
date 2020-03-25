@@ -95,6 +95,52 @@ namespace nautilus {
      */
     std::vector< const char* > queryRequiredVulkanExtensions(void);
 
+    /**
+     * Creates the debug messenger for Vulkan validation layers
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus createVulkanDebugMessenger(void);
+
+    /**
+     * Callback function for Vulkan debug messenger
+     * @param _messageSeverity The severity bit of the message (aka error, warning, info...)
+     * @param _messageType The Vulkan message type
+     * @param _pCallbackData The message data
+     * @param _pUserData The user data
+     * @return Returns a VkBool32
+     */ 
+    VKAPI_ATTR VkBool32 VKAPI_CALL vulkanValidationLayerDebugMessageCallback(
+        VkDebugUtilsMessageSeverityFlagBitsEXT           _messageSeverity,
+        VkDebugUtilsMessageTypeFlagsEXT                  _messageType,
+        const VkDebugUtilsMessengerCallbackDataEXT*      _pCallbackData,
+        void*                                            _pUserData);
+
+    /**
+     * Creates the debug messenger
+     * @param _instance The Vulkan instance handle
+     * @param _pCreateInfo The create info structure
+     * @param _pAllocator The allocator
+     * @param _pDebugMessenger The debug messenger handle
+     * @return Returns a VkResult status code
+     */
+    VkResult createVulkanDebugUtilsMessenger(
+        VkInstance                                      _instance,
+        const VkDebugUtilsMessengerCreateInfoEXT*       _pCreateInfo,
+        const VkAllocationCallbacks*                    _pAllocator,
+        VkDebugUtilsMessengerEXT*                       _pDebugMessenger);
+
+    /**
+     * Destroys the debug messenger
+     * @param _instance The Vulkan instance handle
+     * @param _debugMessenger The actual messenger handle
+     * @param _pAllocator The Vulkan allocator
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus destroyVulkanDebugUtilsMessenger(
+        VkInstance                          _instance,
+        VkDebugUtilsMessengerEXT            _debugMessenger,
+        const VkAllocationCallbacks*        _pAllocator);
+
 }
 
 #endif      // NAUTILUS_NS_HPP
