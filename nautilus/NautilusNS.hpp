@@ -7,23 +7,25 @@
 
 #include <string>
 #include <vector>
+#include <chrono>
 #include <map>
 #include <thread>
 #include <mutex>
 
 namespace nautilus {
 
-    extern uint32_t                             FPS;
-    extern bool                                 exit;
-    extern std::mutex                           exitLock;
-    extern bool                                 running;
-    extern std::mutex                           runningLock;
-    extern std::vector< NautilusShell* >        shells;
-    extern std::mutex                           shellsLock;
-    extern std::vector< std::thread* >          threadpool;
-    extern std::mutex                           threadpoolLock;
-    extern uint32_t                             shellCount;
-    extern std::mutex                           shellCountLock;
+    extern uint32_t                                     FPS;
+    extern bool                                         exit;
+    extern std::mutex                                   exitLock;
+    extern bool                                         running;
+    extern std::mutex                                   runningLock;
+    extern std::vector< NautilusShell* >                shells;
+    extern std::mutex                                   shellsLock;
+    extern std::vector< std::thread* >                  threadpool;
+    extern std::mutex                                   threadpoolLock;
+    extern uint32_t                                     shellCount;
+    extern std::mutex                                   shellCountLock;
+
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 

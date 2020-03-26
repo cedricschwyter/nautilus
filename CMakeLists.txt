@@ -30,6 +30,8 @@ set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(ASSIMP_BUILD_SAMPLES OFF CACHE BOOL "" FORCE)
 
+set(OpenGL_GL_PREFERENCE "GLVND")
+
 add_subdirectory("ext/glm")
 
 OPTION(USE_D2D_WSI "Build the project using Direct to Display swapchain" OFF)

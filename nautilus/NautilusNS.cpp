@@ -8,18 +8,18 @@
 
 namespace nautilus {
 
-    uint32_t                            FPS             = 60;
-    bool                                exit            = false;
-    std::mutex                          exitLock;
-    bool                                running         = false;
-    std::mutex                          runningLock;
-    std::vector< NautilusShell* >       shells;
-    std::mutex                          shellsLock;
-    std::vector< std::thread* >         threadpool;
-    std::mutex                          threadpoolLock;
-    uint32_t                            shellCount      = 0;
-    std::mutex                          shellCountLock;
-
+    uint32_t                                    FPS             = 60;
+    bool                                        exit            = false;
+    std::mutex                                  exitLock;
+    bool                                        running         = false;
+    std::mutex                                  runningLock;
+    std::vector< NautilusShell* >               shells;
+    std::mutex                                  shellsLock;
+    std::vector< std::thread* >                 threadpool;
+    std::mutex                                  threadpoolLock;
+    uint32_t                                    shellCount      = 0;
+    std::mutex                                  shellCountLock;
+    
     unsigned char* loadSTBI(
         std::string _path, 
         int*        _x, 
