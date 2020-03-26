@@ -27,6 +27,11 @@ namespace nautilus {
             "VK_LAYER_LUNARG_standard_validation"
     };
     VkDebugUtilsMessengerEXT            vulkanValidationLayerDebugMessenger     = VK_NULL_HANDLE;
+    const std::vector< const char* >    requiredExtensions                      = {
+            VK_KHR_SWAPCHAIN_EXTENSION_NAME
+    };
+    VkSampleCountFlagBits               maxVulkanMSAASampleCount                = VK_SAMPLE_COUNT_1_BIT;
+
 
     unsigned char* loadSTBI(
         std::string _path, 
@@ -139,7 +144,7 @@ namespace nautilus {
         std::string exts = "Available extensions:";
         for (const auto& ext : availableExtensions) {
             std::string extName = ext.extensionName;
-            exts += "\n\t\t\t\t" + extName;
+            exts += "\n\t" + extName;
         }
         nautilus::logger::log(exts.c_str());
         uint32_t glfwExtCount = 0;

@@ -3,10 +3,6 @@ function(buildExample EXAMPLE_NAME)
 	message(STATUS "Generating project file for example in ${EXAMPLE_FOLDER}")
 
 	file(GLOB SOURCE *.cpp ${BASE_HEADERS} ${EXAMPLE_FOLDER}/*.cpp)
-	SET(MAIN_CPP ${EXAMPLE_FOLDER}/${EXAMPLE_NAME}.cpp)
-	IF(EXISTS ${EXAMPLE_FOLDER}/main.cpp)
-		SET(MAIN_CPP ${EXAMPLE_FOLDER}/main.cpp)
-	ENDIF()
 	
 	IF(USE_WAYLAND_WSI)
 		SET(SOURCE ${SOURCE} ${CMAKE_BINARY_DIR}/xdg-shell-client-protocol.h ${CMAKE_BINARY_DIR}/xdg-shell-protocol.c)
@@ -25,15 +21,21 @@ function(buildExample EXAMPLE_NAME)
 		install(TARGETS ${EXAMPLE_NAME} DESTINATION ${CMAKE_INSTALL_BINDIR})
 	ENDIF()
 endfunction(buildExample)
-
+MACRO(SUBDIRLIST result curdir)
+  FILE(GLOB children RELATIVE ${curdir} ${curdir}/*)
+  SET(dirlist "")
+  FOREACH(child ${children})
+    IF(IS_DIRECTORY ${curdir}/${child} AND NOT ${child} STREQUAL "CMakeFiles")
+      LIST(APPEND dirlist ${child})
+    ENDIF()
+  ENDFOREACH()
+  SET(${result} ${dirlist})
+ENDMACRO()
+SUBDIRLIST(EXAMPLES ${CMAKE_CURRENT_SOURCE_DIR})
 function(buildExamples)
 	foreach(EXAMPLE ${EXAMPLES})
 		buildExample(${EXAMPLE})
 	endforeach(EXAMPLE)
 endfunction(buildExamples)
-
-set(EXAMPLES
-	Dev
-)
-
+MESSAGE(STATUS ${EXAMPLES})
 buildExamples()

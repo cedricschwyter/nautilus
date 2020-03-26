@@ -141,7 +141,14 @@ public:
      * Creates the actual shell window
      * @return Returns a NautilusStatus status code
      */
-    virtual NautilusStatus createWindow(void) = 0;
+    NautilusStatus createWindow(void);
+
+    /**
+     * Sets the default window hints for the corresponding API
+     * Must be implemented by derived API shell
+     * @return Returns a NautilusStatus status code
+     */ 
+    virtual NautilusStatus setDefaultWindowHints(void) = 0;
 
     /**
      * Sets the necessary callback pointers
@@ -168,14 +175,14 @@ public:
 
 protected:
 
-    NautilusShellContext    m_shellContext;
+    NautilusShellContext    m_shellContext      = NAUTILUS_SHELL_CONTEXT_WINDOWED;
     GLFWmonitor*            m_monitor;
-    std::string             m_title;
-    uint32_t                m_width;
-    uint32_t                m_height;
-    std::string             m_shellIconPath;
+    std::string             m_title             = "Nautilus by D3PSI";
+    uint32_t                m_width             = 1280;
+    uint32_t                m_height            = 720;
+    std::string             m_shellIconPath     = "res/images/icons/nautilus.png";
     bool                    m_windowCreated     = false;
-    bool                    m_initializedAPI       = false;
+    bool                    m_initializedAPI    = false;
 
 };
 

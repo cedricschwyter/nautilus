@@ -23,10 +23,10 @@ public:
     virtual void onRender(void);
 
     /**
-     * Creates an OpenGL-capable GLFW-window
+     * Sets the default window hints for the corresponding API
      * @return Returns a NautilusStatus status code
      */ 
-    NautilusStatus createWindow(void);
+    virtual NautilusStatus setDefaultWindowHints(void);
 
     /**
      * Initializes the OpenGL API

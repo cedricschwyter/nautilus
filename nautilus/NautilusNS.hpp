@@ -25,9 +25,13 @@ namespace nautilus {
     extern std::mutex                           threadpoolLock;
     extern uint32_t                             shellCount;
     extern std::mutex                           shellCountLock;
+    extern VkInstance                           vulkanInstance;
     extern bool                                 vulkanInstanceCreated;
+    extern VkAllocationCallbacks*               vulkanAllocator;
     extern bool                                 enableVulkanValidationLayers;
-    extern const std::vector< const char* >     vulkanValidationLayers ;
+    extern const std::vector< const char* >     vulkanValidationLayers;
+    extern const std::vector< const char* >     requiredExtensions;
+    extern VkSampleCountFlagBits                maxVulkanMSAASampleCount;
 
     /**
      * Defines a wrapper function to load an image using stb_image.h, 
