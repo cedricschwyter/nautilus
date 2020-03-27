@@ -11,6 +11,7 @@
 #include <GLFW/glfw3.h>
 
 #include <vector>
+#include <algorithm>
 #include <string.h>
 #include <set>
 
@@ -44,8 +45,18 @@ public:
 
 protected:
 
-    VkSurfaceKHR        m_surface               = VK_NULL_HANDLE;
-    VkPhysicalDevice    m_physicalDevice        = VK_NULL_HANDLE;
+    VkSurfaceKHR                    m_surface               = VK_NULL_HANDLE;
+    VkPhysicalDevice                m_physicalDevice        = VK_NULL_HANDLE;
+    VkDevice                        m_logicalDevice         = VK_NULL_HANDLE;
+    VkQueue                         m_graphicsQueue         = VK_NULL_HANDLE;
+    VkQueue                         m_presentQueue          = VK_NULL_HANDLE;
+    VkQueue                         m_transferQueue         = VK_NULL_HANDLE;
+    std::vector< VkImage >          m_swapchainImages;
+    VkFormat                        m_swapchainImageFormat;
+    VkExtent2D                      m_swapchainImageExtent;
+    VkSwapchainKHR                  m_swapchain             = VK_NULL_HANDLE;
+    std::vector< VkImageView >      m_swapchainImageViews;
+    std::vector< VkFramebuffer >    m_swapchainFramebuffers;
 
 private:
 
@@ -101,6 +112,39 @@ private:
      * @return Returns a NautilusVulkanSwapchainDetails structure containing all necessary Vulkan information
      */ 
     NautilusVulkanSwapchainDetails querySwapchainDetails(VkPhysicalDevice _device);
+
+    /**
+     * Creates a logical device from the selected physical vulkan device
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus createLogicalDevice(void);
+
+    /**
+     * Creates the required swapchain
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus createSwapchain(void);
+
+    /**
+     * Evaluates the best format for the swapchain surface
+     * @param _availableFormats An array of available formats
+     * @return Returns the VkSurfaceFormatKHR that is best suited for the swapchain
+     */ 
+    VkSurfaceFormatKHR evaluateBestSwapchainSurfaceFormat(const std::vector< VkSurfaceFormatKHR >& _availableFormats);
+
+    /**
+     * Evaluates the best swapchain surface presentation mode
+     * @param _availablePresentModes An array of available presentation modes
+     * @return Returns the VkPresentModeKHR that is best suited for the swapchain
+     */ 
+    VkPresentModeKHR evaluateBestSwapchainSurfacePresentMode(const std::vector< VkPresentModeKHR >& _availablePresentModes);
+
+    /**
+     * Evaluates the best swapchain extent
+     * @param _capabilities The swapchains capabilities
+     * @return Returns a VkExtent2D structure containing width and height of the swapchain
+     */ 
+    VkExtent2D evaluateSwapchainExtent(const VkSurfaceCapabilitiesKHR& _capabilities);
 
 };
 

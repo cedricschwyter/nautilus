@@ -30,7 +30,7 @@ namespace nautilus {
     extern VkAllocationCallbacks*               vulkanAllocator;
     extern bool                                 enableVulkanValidationLayers;
     extern const std::vector< const char* >     vulkanValidationLayers;
-    extern const std::vector< const char* >     requiredExtensions;
+    extern const std::vector< const char* >     vulkanRequiredExtensions;
     extern VkSampleCountFlagBits                maxVulkanMSAASampleCount;
 
     /**

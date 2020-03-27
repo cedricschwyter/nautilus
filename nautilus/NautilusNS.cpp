@@ -27,7 +27,7 @@ namespace nautilus {
             "VK_LAYER_LUNARG_standard_validation"
     };
     VkDebugUtilsMessengerEXT            vulkanValidationLayerDebugMessenger     = VK_NULL_HANDLE;
-    const std::vector< const char* >    requiredExtensions                      = {
+    const std::vector< const char* >    vulkanRequiredExtensions                = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME
     };
     VkSampleCountFlagBits               maxVulkanMSAASampleCount                = VK_SAMPLE_COUNT_1_BIT;
