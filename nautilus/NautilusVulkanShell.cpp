@@ -29,6 +29,8 @@ NautilusStatus NautilusVulkanShell::initAPI() {
     this->selectBestPhysicalDevice();
     this->createLogicalDevice();
     this->createSwapchain();
+    this->createSwapchainImageViews();
+    this->initializeSynchronizationObjects();
     glfwShowWindow(this->m_window);
     glfwFocusWindow(this->m_window);
     this->m_initializedAPI = true;
@@ -354,6 +356,95 @@ VkExtent2D NautilusVulkanShell::evaluateSwapchainExtent(const VkSurfaceCapabilit
         preferredExtent.height            = std::clamp(preferredExtent.height, _capabilities.minImageExtent.height, _capabilities.maxImageExtent.height);
         return preferredExtent;
     }
+}
+
+NautilusStatus NautilusVulkanShell::createSwapchainImageViews() {
+    nautilus::logger::log("Creating swapchain image views...");
+    this->m_swapchainImageViews.resize(this->m_swapchainImages.size());
+    for(size_t i = 0; i < this->m_swapchainImages.size(); i++)     
+        this->m_swapchainImageViews[i] = this->createImageView(
+            this->m_swapchainImages[i], 
+            this->m_swapchainImageFormat, 
+            VK_IMAGE_ASPECT_COLOR_BIT,
+            1);
+    nautilus::logger::log("Successfully created swapchain image views");
+    return NAUTILUS_STATUS_OK;
+}
+
+VkImageView NautilusVulkanShell::createImageView(
+    VkImage                 _image, 
+    VkFormat                _format, 
+    VkImageAspectFlags      _aspectFlags,
+    uint32_t                _mipLevels) {
+    nautilus::logger::log("Creating image view...");
+    VkImageViewCreateInfo imageViewCreateInfo               = {};
+    imageViewCreateInfo.sType                               = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    imageViewCreateInfo.image                               = _image;
+    imageViewCreateInfo.viewType                            = VK_IMAGE_VIEW_TYPE_2D;
+    imageViewCreateInfo.format                              = _format;
+    imageViewCreateInfo.subresourceRange.aspectMask         = _aspectFlags;
+    imageViewCreateInfo.subresourceRange.baseMipLevel       = 0;
+    imageViewCreateInfo.subresourceRange.levelCount         = _mipLevels;
+    imageViewCreateInfo.subresourceRange.baseArrayLayer     = 0;
+    imageViewCreateInfo.subresourceRange.layerCount         = 1;
+    imageViewCreateInfo.components.r                        = VK_COMPONENT_SWIZZLE_IDENTITY;
+    imageViewCreateInfo.components.g                        = VK_COMPONENT_SWIZZLE_IDENTITY;
+    imageViewCreateInfo.components.b                        = VK_COMPONENT_SWIZZLE_IDENTITY;
+    imageViewCreateInfo.components.a                        = VK_COMPONENT_SWIZZLE_IDENTITY;
+    VkImageView imgView;
+    VkResult result = vkCreateImageView(
+        this->m_logicalDevice,
+        &imageViewCreateInfo,
+        nautilus::vulkanAllocator,
+        &imgView);
+    nautilus::logger::log("Successfully created image view");
+    return imgView;
+}
+
+NautilusStatus NautilusVulkanShell::initializeSynchronizationObjects() {
+    nautilus::logger::log("Initializing sync-objects...");
+    this->m_swapchainImageAvailableSemaphores.resize(this->m_maxInFlightFrames);
+    this->m_renderingCompletedSemaphores.resize(this->m_maxInFlightFrames);
+    this->m_inFlightFences.resize(this->m_maxInFlightFrames);
+    VkSemaphoreCreateInfo semaphoreCreateInfo        = {};
+    semaphoreCreateInfo.sType                        = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;
+    VkFenceCreateInfo fenceCreateInfo                = {};
+    fenceCreateInfo.sType                            = VK_STRUCTURE_TYPE_FENCE_CREATE_INFO;
+    fenceCreateInfo.flags                            = VK_FENCE_CREATE_SIGNALED_BIT;
+    for(size_t i = 0; i < this->m_maxInFlightFrames; i++) {
+        ASSERT_VULKAN(vkCreateSemaphore(
+            this->m_logicalDevice,
+            &semaphoreCreateInfo,
+            nautilus::vulkanAllocator,
+            &this->m_swapchainImageAvailableSemaphores[i]));
+        nautilus::logger::log("Successfully initialized semaphore");
+        ASSERT_VULKAN(vkCreateSemaphore(
+            this->m_logicalDevice,
+            &semaphoreCreateInfo,
+            nautilus::vulkanAllocator,
+            &this->m_renderingCompletedSemaphores[i]));
+        nautilus::logger::log("Successfully initialized semaphore");
+        ASSERT_VULKAN(vkCreateFence(
+            this->m_logicalDevice,
+            &fenceCreateInfo,
+            nautilus::vulkanAllocator,
+            &this->m_inFlightFences[i]));
+        nautilus::logger::log("Successfully initialized fence");
+    }
+    ASSERT_VULKAN(vkCreateFence(
+        this->m_logicalDevice,
+        &fenceCreateInfo,
+        nautilus::vulkanAllocator,
+        &this->m_graphicsFence));
+    nautilus::logger::log("Successfully initialized graphics fence");
+    ASSERT_VULKAN(vkCreateFence(
+        this->m_logicalDevice,
+        &fenceCreateInfo,
+        nautilus::vulkanAllocator,
+        &this->m_transferFence));
+    nautilus::logger::log("Successfully initialized transfer fence");
+    nautilus::logger::log("Successfully initialized sync-objects");
+    return NAUTILUS_STATUS_OK;
 }
 
 #endif      // NAUTILUS_VULKAN_SHELL_CPP

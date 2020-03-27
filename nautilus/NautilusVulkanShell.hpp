@@ -57,6 +57,12 @@ protected:
     VkSwapchainKHR                  m_swapchain             = VK_NULL_HANDLE;
     std::vector< VkImageView >      m_swapchainImageViews;
     std::vector< VkFramebuffer >    m_swapchainFramebuffers;
+    std::vector< VkSemaphore >      m_swapchainImageAvailableSemaphores;
+    std::vector< VkSemaphore >      m_renderingCompletedSemaphores;
+    std::vector< VkFence >          m_inFlightFences;
+    uint32_t                        m_maxInFlightFrames     = 3;
+    VkFence                         m_graphicsFence         = VK_NULL_HANDLE;
+    VkFence                         m_transferFence         = VK_NULL_HANDLE;
 
 private:
 
@@ -145,6 +151,31 @@ private:
      * @return Returns a VkExtent2D structure containing width and height of the swapchain
      */ 
     VkExtent2D evaluateSwapchainExtent(const VkSurfaceCapabilitiesKHR& _capabilities);
+
+    /**
+     * Creates the swapchain image views for the swapchain
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus createSwapchainImageViews(void);
+
+    /**
+     * Creates a view for a Vulkan image
+     * @param _image The VkImage to create a VkImageView handle from
+     * @param _format The image format
+     * @param _aspectFlags The aspect mask to specify in the view creation process
+     * @param _mipLevels The amount of mip levels
+     */ 
+    VkImageView createImageView(
+        VkImage                 _image, 
+        VkFormat                _format, 
+        VkImageAspectFlags      _aspectFlags,
+        uint32_t                _mipLevels);
+
+    /**
+     * Initializes synchronization objects for multiple queue accesses
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus initializeSynchronizationObjects(void);
 
 };
 
