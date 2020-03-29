@@ -49,8 +49,17 @@ protected:
     VkPhysicalDevice                m_physicalDevice        = VK_NULL_HANDLE;
     VkDevice                        m_logicalDevice         = VK_NULL_HANDLE;
     VkQueue                         m_graphicsQueue         = VK_NULL_HANDLE;
+    VkCommandPool                   m_graphicsCommandPool   = VK_NULL_HANDLE;
+    VkFence                         m_graphicsFence         = VK_NULL_HANDLE;
+    std::mutex                      m_graphicsLock;
     VkQueue                         m_presentQueue          = VK_NULL_HANDLE;
+    VkCommandPool                   m_presentCommandPool    = VK_NULL_HANDLE;
+    VkFence                         m_presentFence          = VK_NULL_HANDLE;
+    std::mutex                      m_presentLock;
     VkQueue                         m_transferQueue         = VK_NULL_HANDLE;
+    VkCommandPool                   m_transferCommandPool   = VK_NULL_HANDLE;
+    VkFence                         m_transferFence         = VK_NULL_HANDLE;
+    std::mutex                      m_transferLock;
     std::vector< VkImage >          m_swapchainImages;
     VkFormat                        m_swapchainImageFormat;
     VkExtent2D                      m_swapchainImageExtent;
@@ -61,8 +70,6 @@ protected:
     std::vector< VkSemaphore >      m_renderingCompletedSemaphores;
     std::vector< VkFence >          m_inFlightFences;
     uint32_t                        m_maxInFlightFrames     = 3;
-    VkFence                         m_graphicsFence         = VK_NULL_HANDLE;
-    VkFence                         m_transferFence         = VK_NULL_HANDLE;
 
 private:
 
@@ -176,6 +183,18 @@ private:
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus initializeSynchronizationObjects(void);
+
+    /**
+     * Allocates the required command pools
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus allocateCommandPools(void);
+
+    /**
+     * Allocates the actual command buffers
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus allocateCommandBuffers(void);
 
 };
 

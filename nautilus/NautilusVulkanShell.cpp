@@ -31,6 +31,7 @@ NautilusStatus NautilusVulkanShell::initAPI() {
     this->createSwapchain();
     this->createSwapchainImageViews();
     this->initializeSynchronizationObjects();
+    this->allocateCommandPools();
     glfwShowWindow(this->m_window);
     glfwFocusWindow(this->m_window);
     this->m_initializedAPI = true;
@@ -444,6 +445,35 @@ NautilusStatus NautilusVulkanShell::initializeSynchronizationObjects() {
         &this->m_transferFence));
     nautilus::logger::log("Successfully initialized transfer fence");
     nautilus::logger::log("Successfully initialized sync-objects");
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusVulkanShell::allocateCommandPools() {
+    nautilus::logger::log("Allocating command pool...");
+    NautilusVulkanQueueFamily family = findSuitableQueueFamily(this->m_physicalDevice);
+    VkCommandPoolCreateInfo commandPoolCreateInfo          = {};
+    commandPoolCreateInfo.sType                            = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    commandPoolCreateInfo.queueFamilyIndex                 = family.graphicsFamilyIndex.value();
+    std::unique_lock< std::mutex > graphicsLock(this->m_graphicsLock);
+    ASSERT_VULKAN(vkCreateCommandPool(
+        this->m_logicalDevice,
+        &commandPoolCreateInfo,
+        nautilus::vulkanAllocator,
+        &this->m_graphicsCommandPool));
+    graphicsLock.unlock();
+    nautilus::logger::log("Successfully allocated command pool");
+    nautilus::logger::log("Allocating command pool...");
+    commandPoolCreateInfo                                  = {};
+    commandPoolCreateInfo.sType                            = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+    commandPoolCreateInfo.queueFamilyIndex                 = family.transferFamilyIndex.value();
+    std::unique_lock< std::mutex > transferLock(this->m_transferLock);
+    ASSERT_VULKAN(vkCreateCommandPool(
+        this->m_logicalDevice,
+        &commandPoolCreateInfo,
+        nautilus::vulkanAllocator,
+        &this->m_transferCommandPool));
+    transferLock.unlock();
+    nautilus::logger::log("Successfully allocated command pool");
     return NAUTILUS_STATUS_OK;
 }
 
