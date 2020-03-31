@@ -3,12 +3,21 @@
 
 #include "NautilusOpenGLShell.hpp"
 
+NautilusOpenGLShell::NautilusOpenGLShell() {
+    this->m_API = NAUTILUS_API_OPENGL;
+}
+
 void NautilusOpenGLShell::onAttach() {
 }
 
 void NautilusOpenGLShell::onRender() {
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+NautilusStatus NautilusOpenGLShell::render() {
+    this->onRender();
+    return NAUTILUS_STATUS_OK;
 }
 
 NautilusStatus NautilusOpenGLShell::setDefaultWindowHints() {

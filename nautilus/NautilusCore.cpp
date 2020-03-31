@@ -18,10 +18,6 @@ NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
     std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
     nautilus::shells.push_back(_shell);
     shellLock.unlock();
-    _shell->onAttach();
-    std::unique_lock< std::mutex > lock(_shell->m_attachedLock);
-    _shell->m_attached = true;
-    lock.unlock();
     if(!nautilus::running) {
         nautilus::running = true;
         m_t0 = new std::thread(&NautilusCore::loop, this);
@@ -40,13 +36,14 @@ NautilusStatus NautilusCore::loop() {
             std::unique_lock< std::mutex > lock(shell->m_attachedLock);
             if(shell->m_attached) {
                 lock.unlock();
-                shell->createWindow();
-                shell->setCallbacks();
                 glfwMakeContextCurrent(shell->m_window);
                 shell->onRender();
                 glfwPollEvents();
                 glfwSwapBuffers(shell->m_window);
                 if(glfwWindowShouldClose(shell->m_window)) shell->detach();
+            } else {
+                lock.unlock();
+                shell->attach();
             }
             shellLock.lock();
         }

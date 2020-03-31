@@ -3,11 +3,16 @@
 
 #include "NautilusShell.hpp"
 #include "NautilusNS.hpp"
+#include "NautilusAPI.hpp"
 
 class NautilusOpenGLShell
     : public NautilusShell {
-    using NautilusShell::NautilusShell;
 public:
+
+    /**
+     * Default constructor
+     */ 
+    NautilusOpenGLShell(void);
 
     /**
      * Gets executed when the shell gets attached to the core
@@ -23,6 +28,12 @@ public:
     virtual void onRender(void);
 
     /**
+     * Executes OpenGL rendering routine
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus render(void);
+
+    /**
      * Sets the default window hints for the corresponding API
      * @return Returns a NautilusStatus status code
      */ 
@@ -33,6 +44,11 @@ public:
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus initAPI(void);
+
+    /**
+     * Default destructor
+     */ 
+    ~NautilusOpenGLShell(void) = default;
 
 };
 

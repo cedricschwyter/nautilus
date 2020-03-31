@@ -696,5 +696,6 @@
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusLogger.hpp"
 #include "NautilusAssert.hpp"
+#include "NautilusAPI.hpp"
 
 #endif      // NAUTILUS_HPP

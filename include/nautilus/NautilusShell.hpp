@@ -5,6 +5,7 @@
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusAssert.hpp"
+#include "NautilusAPI.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -23,11 +24,12 @@ public:
     std::mutex          m_idLock;
     bool                m_callbacksSet      = false;
     bool                m_defaultKeyBinds   = true;
+    NautilusAPI         m_API               = NAUTILUS_API_UNSPECIFIED;;
 
     /**
      * Default constructor
      */
-    NautilusShell(void);
+    NautilusShell(void) = default;
 
     /**
      * Gets executed when the shell gets attached to the core
@@ -145,7 +147,6 @@ public:
 
     /**
      * Sets the default window hints for the corresponding API
-     * Must be implemented by derived API shell
      * @return Returns a NautilusStatus status code
      */ 
     virtual NautilusStatus setDefaultWindowHints(void) = 0;
@@ -158,9 +159,23 @@ public:
 
     /**
      * Initializes the graphics API
+     * Must be implemented by derived API shell
      * @return Returns a NautilusStatus status code
      */ 
     virtual NautilusStatus initAPI(void) = 0;
+
+    /**
+     * Executes API-specific rendering routines
+     * Must be implemented by derived API shell
+     * @return Returns a NautilusStatus status code
+     */ 
+    virtual NautilusStatus render(void) = 0;
+
+    /**
+     * Attaches and initializes the shell
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus attach(void); 
 
     /**
      * Detaches the shell from the core it is attached to
@@ -171,7 +186,7 @@ public:
     /**
      * Default destructor
      */ 
-    ~NautilusShell(void);
+    ~NautilusShell(void) = default;
 
 protected:
 

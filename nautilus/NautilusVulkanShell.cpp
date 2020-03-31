@@ -3,10 +3,19 @@
 
 #include "NautilusVulkanShell.hpp"
 
+NautilusVulkanShell::NautilusVulkanShell() {
+    this->m_API = NAUTILUS_API_VULKAN;
+}
+
 void NautilusVulkanShell::onAttach() {
 }
 
 void NautilusVulkanShell::onRender() {
+}
+
+NautilusStatus NautilusVulkanShell::render() {
+    this->onRender();
+    return NAUTILUS_STATUS_OK;
 }
 
 NautilusStatus NautilusVulkanShell::setDefaultWindowHints() {
@@ -32,6 +41,7 @@ NautilusStatus NautilusVulkanShell::initAPI() {
     this->createSwapchainImageViews();
     this->initializeSynchronizationObjects();
     this->allocateCommandPools();
+    this->createRenderPasses();
     glfwShowWindow(this->m_window);
     glfwFocusWindow(this->m_window);
     this->m_initializedAPI = true;
@@ -474,6 +484,107 @@ NautilusStatus NautilusVulkanShell::allocateCommandPools() {
         &this->m_transferCommandPool));
     transferLock.unlock();
     nautilus::logger::log("Successfully allocated command pool");
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusVulkanShell::createRenderPasses() {
+    nautilus::logger::log("Creating render passes...");
+    VkAttachmentDescription colorAttachmentDescription          = {};
+    colorAttachmentDescription.format                           = this->m_swapchainImageFormat;
+    colorAttachmentDescription.samples                          = VK_SAMPLE_COUNT_1_BIT; 
+    colorAttachmentDescription.loadOp                           = VK_ATTACHMENT_LOAD_OP_CLEAR;
+    colorAttachmentDescription.storeOp                          = VK_ATTACHMENT_STORE_OP_STORE;
+    colorAttachmentDescription.stencilLoadOp                    = VK_ATTACHMENT_LOAD_OP_DONT_CARE;                  // No stencil buffering, so nobody cares about stencil operations
+    colorAttachmentDescription.stencilStoreOp                   = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    colorAttachmentDescription.initialLayout                    = VK_IMAGE_LAYOUT_UNDEFINED;
+    colorAttachmentDescription.finalLayout                      = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;         // Render the image to the offscreen render-target
+    colorAttachmentDescription.finalLayout                      = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+    VkAttachmentReference colorAttachmentReference              = {};
+    colorAttachmentReference.attachment                         = 0; 
+    colorAttachmentReference.layout                             = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+    /*VkAttachmentDescription depthBufferAttachmentDescription    = {};
+    depthBufferAttachmentDescription.format                     = depthBuffer->imgFormat;
+    depthBufferAttachmentDescription.samples                    = VK_SAMPLE_COUNT_1_BIT;
+    depthBufferAttachmentDescription.loadOp                     = VK_ATTACHMENT_LOAD_OP_CLEAR;
+    depthBufferAttachmentDescription.storeOp                    = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    depthBufferAttachmentDescription.stencilLoadOp              = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+    depthBufferAttachmentDescription.stencilStoreOp             = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    depthBufferAttachmentDescription.initialLayout              = VK_IMAGE_LAYOUT_UNDEFINED;
+    depthBufferAttachmentDescription.finalLayout                = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+    VkAttachmentReference depthBufferAttachmentReference        = {};
+    depthBufferAttachmentReference.attachment                   = 1;
+    depthBufferAttachmentReference.layout                       = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;*/
+    VkAttachmentDescription colorAttachmentResolve              = {};
+    colorAttachmentResolve.format                               = this->m_swapchainImageFormat;
+    colorAttachmentResolve.samples                              = VK_SAMPLE_COUNT_1_BIT;     // Sample multisampled color attachment down to present to screen
+    colorAttachmentResolve.loadOp                               = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+    colorAttachmentResolve.storeOp                              = VK_ATTACHMENT_STORE_OP_STORE;
+    colorAttachmentResolve.stencilLoadOp                        = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+    colorAttachmentResolve.stencilStoreOp                       = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    colorAttachmentResolve.initialLayout                        = VK_IMAGE_LAYOUT_UNDEFINED;
+    colorAttachmentResolve.finalLayout                          = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
+    VkAttachmentReference colorAttachmentResolveRef             = {};
+    colorAttachmentResolveRef.attachment                        = 2;
+    colorAttachmentResolveRef.layout                            = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+    VkSubpassDescription subpassDescription                     = {};
+    subpassDescription.pipelineBindPoint                        = VK_PIPELINE_BIND_POINT_GRAPHICS;
+    subpassDescription.colorAttachmentCount                     = 1;
+    subpassDescription.pColorAttachments                        = &colorAttachmentReference;
+    //subpassDescription.pDepthStencilAttachment                  = &depthBufferAttachmentReference;
+    subpassDescription.pResolveAttachments                      = &colorAttachmentResolveRef;
+    std::vector< VkAttachmentDescription > attachments          = { 
+        colorAttachmentDescription
+        //depthBufferAttachmentDescription, 
+    };
+    VkRenderPassCreateInfo renderPassCreateInfo                 = {};
+    renderPassCreateInfo.sType                                  = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
+    renderPassCreateInfo.attachmentCount                        = static_cast< uint32_t >(attachments.size());
+    renderPassCreateInfo.pAttachments                           = attachments.data();
+    renderPassCreateInfo.subpassCount                           = 1;
+    renderPassCreateInfo.pSubpasses                             = &subpassDescription;
+    VkSubpassDependency subpassDependency                       = {};
+    subpassDependency.srcSubpass                                = VK_SUBPASS_EXTERNAL;
+    subpassDependency.dstSubpass                                = 0;
+    subpassDependency.srcStageMask                              = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    subpassDependency.srcAccessMask                             = 0;
+    subpassDependency.dstStageMask                              = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    subpassDependency.dstAccessMask                             = VK_ACCESS_COLOR_ATTACHMENT_READ_BIT
+                                                                | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    renderPassCreateInfo.dependencyCount                        = 1;
+    renderPassCreateInfo.pDependencies                          = &subpassDependency;
+    ASSERT_VULKAN(vkCreateRenderPass(
+        this->m_logicalDevice,
+        &renderPassCreateInfo, 
+        nautilus::vulkanAllocator, 
+        &this->m_renderPass));
+    nautilus::logger::log("Successfully created render passes");
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusVulkanShell::allocateSwapchainFramebuffers() {
+    nautilus::logger::log("Allocating framebuffers...");
+    this->m_swapchainFramebuffers.resize(this->m_swapchainImageViews.size());
+    for (size_t i = 0; i < this->m_swapchainImageViews.size(); i++) {
+        nautilus::logger::log("Creating framebuffer...");
+        std::vector< VkImageView > attachments = {
+            this->m_swapchainImageViews[i],
+        };
+        VkFramebufferCreateInfo framebufferCreateInfo          = {};
+        framebufferCreateInfo.sType                            = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
+        framebufferCreateInfo.renderPass                       = this->m_renderPass;
+        framebufferCreateInfo.attachmentCount                  = static_cast< uint32_t >(attachments.size());
+        framebufferCreateInfo.pAttachments                     = attachments.data();
+        framebufferCreateInfo.width                            = this->m_swapchainImageExtent.width;
+        framebufferCreateInfo.height                           = this->m_swapchainImageExtent.height;
+        framebufferCreateInfo.layers                           = 1;
+        ASSERT_VULKAN(vkCreateFramebuffer(
+            this->m_logicalDevice,
+            &framebufferCreateInfo,
+            nautilus::vulkanAllocator,
+            &this->m_swapchainFramebuffers[i]));
+        nautilus::logger::log("Successfully allocated framebuffer");
+    }
+    nautilus::logger::log("Successfully allocated framebuffers");
     return NAUTILUS_STATUS_OK;
 }
 

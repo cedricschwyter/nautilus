@@ -17,8 +17,12 @@
 
 class NautilusVulkanShell : 
     public NautilusShell {
-    using NautilusShell::NautilusShell;
-public:    
+public:
+
+    /**
+     * Default constructor
+     */
+    NautilusVulkanShell(void);
 
     /**
      * Gets executed when the shell gets attached to the core
@@ -32,6 +36,12 @@ public:
     virtual void onRender(void);
 
     /**
+     * Executes OpenGL rendering routine
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus render(void);
+
+    /**
      * Sets the default window hints for the corresponding API
      * @return Returns a NautilusStatus status code
      */ 
@@ -42,6 +52,11 @@ public:
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus initAPI(void);
+
+    /**
+     * Default destructor
+     */ 
+    ~NautilusVulkanShell(void) = default;
 
 protected:
 
@@ -70,6 +85,7 @@ protected:
     std::vector< VkSemaphore >      m_renderingCompletedSemaphores;
     std::vector< VkFence >          m_inFlightFences;
     uint32_t                        m_maxInFlightFrames     = 3;
+    VkRenderPass                    m_renderPass;
 
 private:
 
@@ -195,6 +211,18 @@ private:
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus allocateCommandBuffers(void);
+
+    /**
+     * Creates the render pass(es) for Vulkan's pipeline
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus createRenderPasses(void);
+
+    /**
+     * Allocates the framebuffers for the swapchain and creates their views
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus allocateSwapchainFramebuffers(void);
 
 };
 

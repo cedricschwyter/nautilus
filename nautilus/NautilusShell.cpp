@@ -6,9 +6,6 @@
 
 #include <iostream>
 
-NautilusShell::NautilusShell() {
-}
-
 void NautilusShell::onDetach(GLFWwindow* _window) {
     nautilus::logger::log("onDetach");
 }
@@ -69,6 +66,15 @@ NautilusStatus NautilusShell::setShellIcon(std::string _path) {
     return NAUTILUS_STATUS_OK;
 }
 
+NautilusStatus NautilusShell::attach() {
+    this->createWindow();
+    this->setCallbacks();
+    this->onAttach();
+    std::unique_lock< std::mutex > lock(this->m_attachedLock);
+    this->m_attached = true;
+    return NAUTILUS_STATUS_OK;
+}
+
 NautilusStatus NautilusShell::detach() {
     this->onDetach(this->m_window);
     std::scoped_lock< std::mutex > lock(m_attachedLock);
@@ -80,15 +86,14 @@ NautilusStatus NautilusShell::detach() {
 }
 
 NautilusStatus NautilusShell::setCallbacks() {
-    if(!this->m_callbacksSet) {
-        glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::onResize);
-        glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::onFocus);
-        glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::onIconify);
-        glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::onCursor);
-        glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::onCursorIn);
-        glfwSetKeyCallback(this->m_window, nautilus::dispatcher::onKey);
-        this->m_callbacksSet = true;
-    }
+    if(this->m_callbacksSet) return NAUTILUS_STATUS_OK;
+    glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::onResize);
+    glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::onFocus);
+    glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::onIconify);
+    glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::onCursor);
+    glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::onCursorIn);
+    glfwSetKeyCallback(this->m_window, nautilus::dispatcher::onKey);
+    this->m_callbacksSet = true;
     return NAUTILUS_STATUS_OK;
 }
 
@@ -149,9 +154,6 @@ NautilusStatus NautilusShell::createWindow() {
     this->initAPI();
     this->m_windowCreated = true;
     return NAUTILUS_STATUS_OK;
-}
-
-NautilusShell::~NautilusShell() {
 }
 
 #endif      // NAUTILUS_SHELL_CPP
