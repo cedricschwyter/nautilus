@@ -14,3 +14,11 @@ $version_appveyor = $env:APPVEYOR_BUILD_VERSION
 $localArtifactPath = "$downloadLocation\nautilus-linux-rolling-$version_appveyor.zip"
 Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" `
 -OutFile $localArtifactPath -Headers @{ "Authorization" = "Bearer $token" }
+
+$jobId = $project.build.jobs[1].jobId
+$artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+$artifactFileName = $artifacts[0].fileName
+$version_appveyor = $env:APPVEYOR_BUILD_VERSION
+$localArtifactPath = "$downloadLocation\nautilus-macos-rolling-$version_appveyor.zip"
+Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" `
+-OutFile $localArtifactPath -Headers @{ "Authorization" = "Bearer $token" }

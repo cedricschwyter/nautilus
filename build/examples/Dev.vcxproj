@@ -1,0 +1,365 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3AFE7FD9-B52A-3A96-9CA0-C96FDBEE366F}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>dev</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">dev.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">dev</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">dev.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">dev</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">dev.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">dev</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">dev.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">dev</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=c++17</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR="C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/";GLFW_DLL;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/\";GLFW_DLL;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\nautilus\Debug\nautilusd.lib;C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\ext\glfw\src\Debug\glfw3ddll.lib;..\ext\assimp\lib\Debug\assimp-vc142-mtd.lib;..\ext\assimp\lib\Debug\zlibstaticd.lib;..\ext\assimp\lib\Debug\IrrXMLd.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/Debug/dev.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/Debug/dev.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=c++17</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR="C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/";GLFW_DLL;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/\";GLFW_DLL;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\nautilus\Release\nautilus.lib;C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\ext\glfw\src\Release\glfw3dll.lib;..\ext\assimp\lib\Release\assimp-vc142-mt.lib;..\ext\assimp\lib\Release\zlibstatic.lib;..\ext\assimp\lib\Release\IrrXML.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/Release/dev.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/Release/dev.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=c++17</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR="C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/";GLFW_DLL;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/\";GLFW_DLL;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\nautilus\MinSizeRel\nautilus.lib;C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\ext\glfw\src\MinSizeRel\glfw3dll.lib;..\ext\assimp\lib\MinSizeRel\assimp-vc142-mt.lib;..\ext\assimp\lib\MinSizeRel\zlibstatic.lib;..\ext\assimp\lib\MinSizeRel\IrrXML.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/MinSizeRel/dev.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/MinSizeRel/dev.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) -std=c++17</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR="C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/";GLFW_DLL;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;VK_USE_PLATFORM_WIN32_KHR;NOMINMAX;_USE_MATH_DEFINES;NDEBUG;_CRT_SECURE_NO_WARNINGS;VK_EXAMPLE_DATA_DIR=\"C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/data/\";GLFW_DLL;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glm;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\tinyobjloader;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\irrklang\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\stb;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glfw\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\glad\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\vulkan\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\ext\assimp\code\..\include;C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\nautilus\RelWithDebInfo\nautilus.lib;C:\VulkanSDK\1.1.114.0\Lib\vulkan-1.lib;..\ext\glfw\src\RelWithDebInfo\glfw3dll.lib;..\ext\assimp\lib\RelWithDebInfo\assimp-vc142-mt.lib;..\ext\assimp\lib\RelWithDebInfo\zlibstatic.lib;..\ext\assimp\lib\RelWithDebInfo\IrrXML.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/RelWithDebInfo/dev.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/RelWithDebInfo/dev.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/cedri/Documents/Visual C++ Workspace/nautilus" "-BC:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build" --check-stamp-file "C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/cedri/Documents/Visual C++ Workspace/nautilus" "-BC:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build" --check-stamp-file "C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/cedri/Documents/Visual C++ Workspace/nautilus" "-BC:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build" --check-stamp-file "C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/examples/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/cedri/Documents/Visual C++ Workspace/nautilus" "-BC:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build" --check-stamp-file "C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\dev\Dev.cpp" />
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\dev\DevShell.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ZERO_CHECK.vcxproj">
+      <Project>{48A7566D-2615-3EB5-B0A2-60C3FD3ED008}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\contrib\irrXML\IrrXML.vcxproj">
+      <Project>{3A19BEDC-6322-3905-A34F-29859DDA56AF}</Project>
+      <Name>IrrXML</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\code\assimp.vcxproj">
+      <Project>{4B04D168-19B5-37AA-A3A9-6D211ACB050D}</Project>
+      <Name>assimp</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\glfw\src\glfw.vcxproj">
+      <Project>{B6546CB3-CF3D-3BFE-A65C-36B63DD7AD0E}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\nautilus\nautilus.vcxproj">
+      <Project>{DC55270B-7A67-3088-89F5-8361C7C00207}</Project>
+      <Name>nautilus</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\contrib\zlib\zlibstatic.vcxproj">
+      <Project>{39B3847C-14BA-3CC8-B48E-8CD463E2A793}</Project>
+      <Name>zlibstatic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -24,7 +24,8 @@ namespace nautilus {
     bool                                vulkanInstanceCreated                   = false;
     bool                                enableVulkanValidationLayers            = false;
     const std::vector< const char* >    vulkanValidationLayers                  = {
-            "VK_LAYER_LUNARG_standard_validation"
+            "VK_LAYER_LUNARG_standard_validation",
+            "VK_LAYER_KHRONOS_validation"
     };
     VkDebugUtilsMessengerEXT            vulkanValidationLayerDebugMessenger     = VK_NULL_HANDLE;
     const std::vector< const char* >    vulkanRequiredExtensions                = {

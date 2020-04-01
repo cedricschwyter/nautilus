@@ -12,7 +12,6 @@
 [Rr]elease/
 [Rr]eleases/
 x64/
-build/
 bld/
 [Oo]bj/
 
@@ -218,12 +217,6 @@ data/models/cerberus/*.*
 
 *.args.json
 
-# Ignore VS project files
-*.sln
-*.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
-
 # Ignore macOS .DS_Store
 .DS_Store
 
@@ -235,3 +228,4 @@ bin/unit
 lib/libassimp.a
 lib/libIrrXML.a
 logs/
+build/.cmake/

@@ -172,6 +172,13 @@ public:
     virtual NautilusStatus render(void) = 0;
 
     /**
+     * Executes API-specific cleanup and garbage collection routines
+     * Must be implemented by derived API shell
+     * @return Returns a NautilusStatus status code
+     */ 
+    virtual NautilusStatus clean(void) = 0;
+
+    /**
      * Attaches and initializes the shell
      * @return Returns a NautilusStatus status code
      */

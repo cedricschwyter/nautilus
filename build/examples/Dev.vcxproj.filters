@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\dev\Dev.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\dev\DevShell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{E167D458-1A96-36AD-8502-B94BB33BC85B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

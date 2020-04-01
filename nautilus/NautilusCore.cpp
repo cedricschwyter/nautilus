@@ -37,7 +37,7 @@ NautilusStatus NautilusCore::loop() {
             if(shell->m_attached) {
                 lock.unlock();
                 glfwMakeContextCurrent(shell->m_window);
-                shell->onRender();
+                shell->render();
                 glfwPollEvents();
                 glfwSwapBuffers(shell->m_window);
                 if(glfwWindowShouldClose(shell->m_window)) shell->detach();
@@ -51,6 +51,7 @@ NautilusStatus NautilusCore::loop() {
         if(nautilus::shellCount == 0) this->exit();
         exitLock.lock();
     }
+    std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
     glfwTerminate();
     return NAUTILUS_STATUS_OK;
 }

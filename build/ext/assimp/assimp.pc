@@ -1,0 +1,11 @@
+prefix=C:/Program Files (x86)/NAUTILUS_EXAMPLES
+exec_prefix=C:/Program Files (x86)/NAUTILUS_EXAMPLES/
+libdir=C:/Program Files (x86)/NAUTILUS_EXAMPLES/lib
+includedir=C:/Program Files (x86)/NAUTILUS_EXAMPLES/include
+
+Name: NAUTILUS_EXAMPLES
+Description: Import various well-known 3D model formats in an uniform manner.
+Version: 5.0.1
+Libs: -L${libdir} -lassimp
+Libs.private:  
+Cflags: -I${includedir}

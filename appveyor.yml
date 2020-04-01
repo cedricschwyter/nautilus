@@ -1,8 +1,9 @@
 version: 1.0.{build}
 image:
 - Ubuntu
-- Ubuntu1804
+- macos
 - Visual Studio 2019
+- Ubuntu1804
 - Visual Studio 2017
 platform: x64
 configuration: Release
@@ -17,7 +18,7 @@ for:
     build_script:
     - sh: sudo bash nautilus-install.sh
     after_build:
-    - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && zip -r nautilus-linux-rolling.zip libs/ include/
+    - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && rm -rfv examples/ && mkdir examples && mkdir examples/res && cp -r res/* examples/res && cp -r bin/* examples/ && zip -r nautilus-linux-rolling.zip libs/ include/ examples/
     artifacts:
       - path: nautilus-linux-rolling.zip
         name: libnautilus-linux
@@ -32,6 +33,24 @@ for:
   -
     matrix:
       only:
+        - image: macos
+    cache: 
+      - VulkanSDK.tar.gz
+    install:
+    - sh: bash nautilus-install.sh --no-build
+    - sh: curl -L --silent --show-error --output VulkanSDK.tar.gz https://vulkan.lunarg.com/sdk/download/1.1.114.0/mac/vulkansdk-macos-1.1.114.0.tar.gz?Human=true
+    - sh: tar -xzf VulkanSDK.tar.gz
+    - sh: cd vulkansdk-macos-1.1.114.0/ && ./install_vulkan.py --force-install && cd ..
+    build_script:
+    - sh: bash nautilus-install.sh
+    after_build:
+    - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && rm -rfv examples/ && mkdir examples && mkdir examples/res && cp -r res/* examples/res && cp -r bin/* examples/ && zip -r nautilus-macos-rolling.zip libs/ include/ examples/
+    artifacts:
+      - path: nautilus-macos-rolling.zip
+        name: libnautilus-macos
+  -
+    matrix:
+      only:
         - image: Visual Studio 2019
     environment:
       VULKAN_SDK: C:/VulkanSDK/1.1.114.0
@@ -42,26 +61,35 @@ for:
       - VulkanSDK.exe /S
       - git submodule update --init --recursive
     before_build:
-      - ps: .\get_linux_artifact_appveyor.ps1
-      - cmake -G "Visual Studio 16 2019" .
+      - ps: .\get_build_artifacts_appveyor.ps1
+      - cmake -G "Visual Studio 16 2019" -S . -B build/
     build:
-      project: NAUTILUS_EXAMPLES.sln
+      project: build/NAUTILUS_EXAMPLES.sln
       parallel: true
     after_build:
-      - mkdir C:\projects\nautilus\libs && move C:\projects\nautilus\nautilus\Release\nautilus.lib C:\projects\nautilus\libs && 7z a nautilus-win-rolling-%APPVEYOR_BUILD_VERSION%.zip libs/ include/
+      - mkdir C:\projects\nautilus\libs
+      - move C:\projects\nautilus\build\nautilus\Release\nautilus.lib C:\projects\nautilus\libs
+      - rmdir /s /q C:\projects\nautilus\examples 
+      - if not exist C:\projects\nautilus\examples mkdir C:\projects\nautilus\examples 
+      - xcopy /e /v C:\projects\nautilus\res C:\projects\nautilus\examples\res\ 
+      - copy C:\projects\nautilus\build\ext\glfw\src\Release\glfw3.dll C:\projects\nautilus\examples\
+      - xcopy C:\projects\nautilus\build\bin\Release C:\projects\nautilus\examples\ 
+      - 7z a nautilus-win-rolling-%APPVEYOR_BUILD_VERSION%.zip libs/ include/ examples/
     artifacts:
       - path: nautilus-win-rolling-$(appveyor_build_version).zip
         name: libnautilus-win
       - path: nautilus-linux-rolling-$(appveyor_build_version).zip
         name: libnautilus-linux
+      - path: nautilus-macos-rolling-$(appveyor_build_version).zip
+        name: libnautilus-macos
     deploy:
-      tag: $(appveyor_build_version)-r
+      tag: r$(appveyor_build_version)
       release: nautilus-rolling-$(appveyor_build_version)
       description: Rolling channel for releases of nautilus compiled libraries --- $(APPVEYOR_REPO_COMMIT_MESSAGE)
       provider: GitHub
       auth_token:
         secure: otHmBJW4rJT8ONsToA2oc13ybNJR1oktyFX8tHeoJ/97fX570JRnUbrG3ubRrbFi
-      artifact: libnautilus-linux, libnautilus-win
+      artifact: libnautilus-linux, libnautilus-win, libnautilus-macos
       draft: false
       prerelease: false
       on:

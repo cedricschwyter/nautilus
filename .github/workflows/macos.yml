@@ -1,0 +1,29 @@
+name: macOS C/C++ CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-10.15, macos-latest ]
+    name: Compilation on ${{ matrix.os }} 
+    steps:
+     - name: Checkout code
+       uses: actions/checkout@master
+     - name: Cache VulkanSDK
+       uses: actions/cache@v1
+       env:
+         cache-name: cache-vk-sdk-macos
+       with:
+         path: VulkanSDK.tar.gz
+         key: ${{ env.cache-name }}
+     - name: Install dependencies
+       run: |
+         bash nautilus-install.sh --no-build
+         [[ ! -f "VulkanSDK.tar.gz" ]] && curl -L --silent --show-error --output VulkanSDK.tar.gz https://vulkan.lunarg.com/sdk/download/1.1.114.0/mac/vulkansdk-macos-1.1.114.0.tar.gz?Human=true
+         tar -xzf VulkanSDK.tar.gz
+         cd vulkansdk-macos-1.1.114.0/ && ./install_vulkan.py --force-install && cd ..
+     - name: Build
+       run: bash nautilus-install.sh

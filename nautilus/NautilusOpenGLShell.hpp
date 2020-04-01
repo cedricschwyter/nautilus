@@ -28,6 +28,12 @@ public:
     virtual void onRender(void);
 
     /**
+     * Cleans all allocated OpenGL resources by the shell
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus clean(void);
+
+    /**
      * Executes OpenGL rendering routine
      * @return Returns a NautilusStatus status code
      */ 

@@ -22,10 +22,17 @@ namespace nautilus {
         }
 
         NautilusStatus log(std::string _logEntry, NautilusStatus _status) {
-            if(!nautilus::logger::loggerInitialized) return NAUTILUS_STATUS_OK;
-            std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
-            std::cout << _logEntry << std::endl;
-            standardLog << _logEntry << std::endl;
+            if(nautilus::logger::loggerInitialized) {
+                static auto start = std::chrono::system_clock::now();
+                auto now = std::chrono::system_clock::now();
+                std::time_t nowT = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+                std::string timeString = std::ctime(&nowT);
+                std::chrono::duration< double > elapsedTime = now - start;
+                std::string log = timeString + "RT: " + std::to_string(elapsedTime.count()) + " === " + _logEntry; 
+                std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
+                std::cout << log << std::endl;
+                standardLog << log << std::endl;
+            }
             return NAUTILUS_STATUS_OK;
         }
 

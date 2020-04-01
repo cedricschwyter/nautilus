@@ -46,4 +46,9 @@ NautilusStatus NautilusOpenGLShell::initAPI() {
     return NAUTILUS_STATUS_OK;
 }
 
+NautilusStatus NautilusOpenGLShell::clean() {
+    glfwDestroyWindow(this->m_window);
+    return NAUTILUS_STATUS_OK;
+}
+
 #endif      // NAUTILUS_OPENGL_SHELL_CPP

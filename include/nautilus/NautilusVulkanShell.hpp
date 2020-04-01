@@ -36,6 +36,12 @@ public:
     virtual void onRender(void);
 
     /**
+     * Cleans all allocated Vulkan resources by the shell
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus clean(void);
+
+    /**
      * Executes OpenGL rendering routine
      * @return Returns a NautilusStatus status code
      */ 
@@ -60,32 +66,35 @@ public:
 
 protected:
 
-    VkSurfaceKHR                    m_surface               = VK_NULL_HANDLE;
-    VkPhysicalDevice                m_physicalDevice        = VK_NULL_HANDLE;
-    VkDevice                        m_logicalDevice         = VK_NULL_HANDLE;
-    VkQueue                         m_graphicsQueue         = VK_NULL_HANDLE;
-    VkCommandPool                   m_graphicsCommandPool   = VK_NULL_HANDLE;
-    VkFence                         m_graphicsFence         = VK_NULL_HANDLE;
+    VkSurfaceKHR                    m_surface                       = VK_NULL_HANDLE;
+    VkPhysicalDevice                m_physicalDevice                = VK_NULL_HANDLE;
+    VkDevice                        m_logicalDevice                 = VK_NULL_HANDLE;
+    VkQueue                         m_graphicsQueue                 = VK_NULL_HANDLE;
+    VkCommandPool                   m_graphicsCommandPool           = VK_NULL_HANDLE;
+    VkFence                         m_graphicsFence                 = VK_NULL_HANDLE;
     std::mutex                      m_graphicsLock;
-    VkQueue                         m_presentQueue          = VK_NULL_HANDLE;
-    VkCommandPool                   m_presentCommandPool    = VK_NULL_HANDLE;
-    VkFence                         m_presentFence          = VK_NULL_HANDLE;
+    VkQueue                         m_presentQueue                  = VK_NULL_HANDLE;
+    VkCommandPool                   m_presentCommandPool            = VK_NULL_HANDLE;
+    VkFence                         m_presentFence                  = VK_NULL_HANDLE;
     std::mutex                      m_presentLock;
-    VkQueue                         m_transferQueue         = VK_NULL_HANDLE;
-    VkCommandPool                   m_transferCommandPool   = VK_NULL_HANDLE;
-    VkFence                         m_transferFence         = VK_NULL_HANDLE;
+    VkQueue                         m_transferQueue                 = VK_NULL_HANDLE;
+    VkCommandPool                   m_transferCommandPool           = VK_NULL_HANDLE;
+    VkFence                         m_transferFence                 = VK_NULL_HANDLE;
     std::mutex                      m_transferLock;
     std::vector< VkImage >          m_swapchainImages;
     VkFormat                        m_swapchainImageFormat;
     VkExtent2D                      m_swapchainImageExtent;
-    VkSwapchainKHR                  m_swapchain             = VK_NULL_HANDLE;
+    VkSwapchainKHR                  m_swapchain                     = VK_NULL_HANDLE;
     std::vector< VkImageView >      m_swapchainImageViews;
     std::vector< VkFramebuffer >    m_swapchainFramebuffers;
     std::vector< VkSemaphore >      m_swapchainImageAvailableSemaphores;
     std::vector< VkSemaphore >      m_renderingCompletedSemaphores;
     std::vector< VkFence >          m_inFlightFences;
-    uint32_t                        m_maxInFlightFrames     = 3;
+    uint32_t                        m_maxInFlightFrames             = 3;
     VkRenderPass                    m_renderPass;
+    std::vector< VkCommandBuffer >  m_commandBuffers;
+    uint32_t                        m_currentSwapchainImage         = 0;
+    bool                            m_hasFramebufferBeenResized     = false;
 
 private:
 
@@ -207,12 +216,6 @@ private:
     NautilusStatus allocateCommandPools(void);
 
     /**
-     * Allocates the actual command buffers
-     * @return Returns a NautilusStatus status code
-     */ 
-    NautilusStatus allocateCommandBuffers(void);
-
-    /**
      * Creates the render pass(es) for Vulkan's pipeline
      * @return Returns a NautilusStatus status code
      */ 
@@ -223,6 +226,37 @@ private:
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus allocateSwapchainFramebuffers(void);
+
+    /**
+     * Allocates the command buffers for the shell
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus allocateCommandBuffers(void);
+
+    /**
+     * Records the swapchain command buffers
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus recordSwapchainCommandBuffers(void);
+
+    /**
+     * Acquires, submits and presents the next swapchain image 
+     * (in the common tongue: "renders" the image)
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus showNextSwapchainImage(void);
+
+    /**
+     * Recreates the swapchain when it's out of date (after window resize and such)
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus recreateSwapchain(void);
+
+    /**
+     * Cleans all resources allocated by the shell's swapchain
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus cleanSwapchain(void);
 
 };
 

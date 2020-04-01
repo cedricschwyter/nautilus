@@ -8,6 +8,7 @@
 
 #include <string>
 #include <vector>
+#include <chrono>
 #include <map>
 #include <thread>
 #include <mutex>
@@ -30,6 +31,7 @@ namespace nautilus {
     extern VkAllocationCallbacks*               vulkanAllocator;
     extern bool                                 enableVulkanValidationLayers;
     extern const std::vector< const char* >     vulkanValidationLayers;
+    extern VkDebugUtilsMessengerEXT             vulkanValidationLayerDebugMessenger;
     extern const std::vector< const char* >     vulkanRequiredExtensions;
     extern VkSampleCountFlagBits                maxVulkanMSAASampleCount;
 
