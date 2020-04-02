@@ -5,6 +5,7 @@ image:
 - Visual Studio 2019
 - Ubuntu1804
 - Visual Studio 2017
+- macos
 platform: x64
 configuration: Release
 skip_tags: true
@@ -37,14 +38,14 @@ for:
     cache: 
       - VulkanSDK.tar.gz
     install:
-    - sh: bash nautilus-install.sh --no-build
+    - sh: git submodule sync && git submodule update --init --recursive
     - sh: curl -L --silent --show-error --output VulkanSDK.tar.gz https://vulkan.lunarg.com/sdk/download/1.1.114.0/mac/vulkansdk-macos-1.1.114.0.tar.gz?Human=true
     - sh: tar -xzf VulkanSDK.tar.gz
     - sh: cd vulkansdk-macos-1.1.114.0/ && ./install_vulkan.py --force-install && cd ..
     build_script:
-    - sh: bash nautilus-install.sh
+    - sh: cmake CMakeLists.txt && make -j2
     after_build:
-    - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && rm -rfv examples/ && mkdir examples && mkdir examples/res && cp -r res/* examples/res && cp -r bin/* examples/ && zip -r nautilus-macos-rolling.zip libs/ include/ examples/
+    - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && rm -rfv examples/ && mkdir examples && mkdir examples/res && cp -r res/* examples/res && cp -r bin/* examples/ && cp -r lib/*.dylib examples/ && cp -r lib/*.dylib libs/ && zip -r nautilus-macos-rolling.zip libs/ include/ examples/
     artifacts:
       - path: nautilus-macos-rolling.zip
         name: libnautilus-macos
@@ -111,3 +112,16 @@ for:
     build:
       project: NAUTILUS_EXAMPLES.sln
       parallel: true
+  -
+    matrix:
+      only:
+        - image: macos
+    cache: 
+      - VulkanSDK.tar.gz
+    install:
+    - sh: bash nautilus-install.sh
+    - sh: curl -L --silent --show-error --output VulkanSDK.tar.gz https://vulkan.lunarg.com/sdk/download/1.1.114.0/mac/vulkansdk-macos-1.1.114.0.tar.gz?Human=true
+    - sh: tar -xzf VulkanSDK.tar.gz
+    - sh: cd vulkansdk-macos-1.1.114.0/ && ./install_vulkan.py --force-install && cd ..
+    build_script:
+    - sh: bash nautilus-install.sh

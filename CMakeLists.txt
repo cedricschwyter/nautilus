@@ -41,6 +41,7 @@ set(RESOURCE_INSTALL_DIR "" CACHE PATH "Path to install resources to (leave empt
 
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	set(MACOSX_COMPILATION ON)
+	set(CMAKE_INSTALL_RPATH "$ORIGIN/../libs:$ORIGIN/")
 ENDIF()
 
 message(STATUS "Using module to find Vulkan")
