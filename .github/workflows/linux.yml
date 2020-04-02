@@ -15,6 +15,6 @@ jobs:
      - name: Install dependencies
        run: sudo bash nautilus-install.sh --no-build
      - name: Build
-       run: sudo bash nautilus-install.sh
+       run: sudo bash nautilus-install.sh --ci
 
     

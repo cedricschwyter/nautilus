@@ -1,11 +1,14 @@
 #!/bin/bash
 echo "Thank you for choosing to install nautilus created by D3PSI!"
 build=true
-buildall=false
+ci=false
 while [ "$1" != "" ]; do
     case $1 in
         --no-build )            shift
                                 build=false
+                                ;;
+        --ci )                  shift
+                                ci=true
                                 ;;
     esac
     shift
@@ -93,8 +96,6 @@ else
     echo "Trying to install dependencies for ${distroname} using ${pkgman} on ${session}."
     if [[ ${pkgman} == dnf ]]; then
         if dnf -y update && dnf -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel glfw glfw-devel assimp assimp-devel mesa-libGL-devel && dnf -y groupinstall "X Software Development"; then
-            export CC=gcc-8
-            export CXX=g++-8
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -103,8 +104,6 @@ else
         fi
     elif [[ ${pkgman} == pacman ]]; then
         if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb glm glfw-${session} assimp xorg; then
-            export CC=gcc-8
-            export CXX=g++-8
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -113,8 +112,6 @@ else
         fi
     elif [[ ${pkgman} == apt ]]; then
         if apt-get -y update && apt-get -y --fix-missing install git cmake make pkg-config gcc-8 g++-8 gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev; then
-            export CC=gcc-8
-            export CXX=g++-8
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -129,6 +126,10 @@ else
     git submodule sync
     git submodule update --init --recursive
     if [[ "$build" = true ]]; then
+        if [[ "$ci" = true ]]; then
+            export CC=gcc-8
+            export CXX=g++-8
+        fi
         echo "Generating build files..."
         if cmake CMakeLists.txt; then
             echo "Building project..."

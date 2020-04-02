@@ -17,7 +17,7 @@ for:
     install:
     - sh: sudo bash nautilus-install.sh --no-build
     build_script:
-    - sh: sudo bash nautilus-install.sh
+    - sh: sudo bash nautilus-install.sh --ci
     after_build:
     - sh: mkdir libs && mv nautilus/libnautilus.a libs/ && rm -rfv examples/ && mkdir examples && mkdir examples/res && cp -r res/* examples/res && cp -r bin/* examples/ && zip -r nautilus-linux-rolling.zip libs/ include/ examples/
     artifacts:
@@ -119,9 +119,9 @@ for:
     cache: 
       - VulkanSDK.tar.gz
     install:
-    - sh: bash nautilus-install.sh
+    - sh: bash nautilus-install.sh --no-build
     - sh: curl -L --silent --show-error --output VulkanSDK.tar.gz https://vulkan.lunarg.com/sdk/download/1.1.114.0/mac/vulkansdk-macos-1.1.114.0.tar.gz?Human=true
     - sh: tar -xzf VulkanSDK.tar.gz
     - sh: cd vulkansdk-macos-1.1.114.0/ && ./install_vulkan.py --force-install && cd ..
     build_script:
-    - sh: bash nautilus-install.sh
+    - sh: bash nautilus-install.sh --ci

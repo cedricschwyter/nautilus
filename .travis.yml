@@ -16,7 +16,7 @@ install:
   - sudo bash nautilus-install.sh --no-build
 
 script:
-  - sudo bash nautilus-install.sh
+  - sudo bash nautilus-install.sh --ci
 
 notifications:
   email:
