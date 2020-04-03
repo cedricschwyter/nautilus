@@ -4,11 +4,35 @@
 #include "NautilusCore.hpp"
 #include "NautilusNS.hpp"
 
-NautilusCore::NautilusCore() {
-    nautilus::logger::init();
+NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
+    return get().attachShellInternal(_shell);
 }
 
-NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
+NautilusStatus NautilusCore::loop() {
+    return get().loopInternal();
+}
+
+NautilusStatus NautilusCore::exit() {
+    return get().exitInternal();
+}
+
+NautilusStatus NautilusCore::terminate() {
+    return get().terminateInternal();
+}
+
+NautilusStatus NautilusCore::setEnableVulkanValidationLayers() {
+    return get().setEnableVulkanValidationLayersInternal();
+}
+
+NautilusCore::NautilusCore() {
+}
+
+NautilusCore& NautilusCore::get() {
+    static NautilusCore s_instance;
+    return s_instance;
+}
+
+NautilusStatus NautilusCore::attachShellInternal(NautilusShell* _shell) {
     static int32_t id = 0;
     std::unique_lock< std::mutex > idLock(_shell->m_idLock);
     _shell->m_id = id;
@@ -20,12 +44,14 @@ NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
     shellLock.unlock();
     if(!nautilus::running) {
         nautilus::running = true;
-        m_t0 = new std::thread(&NautilusCore::loop, this);
+        m_t0 = new std::thread([] () {
+            NautilusCore::loop();
+        });
     }
     return NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::loop() {
+NautilusStatus NautilusCore::loopInternal() {
     glfwInit();
     std::unique_lock< std::mutex > exitLock(nautilus::exitLock);
     while(!nautilus::exit && nautilus::running) {
@@ -56,13 +82,13 @@ NautilusStatus NautilusCore::loop() {
     return NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::exit() {
+NautilusStatus NautilusCore::exitInternal() {
     std::scoped_lock< std::mutex > exitLock(nautilus::exitLock);
     nautilus::exit = true;
     return NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::terminate() {
+NautilusStatus NautilusCore::terminateInternal() {
     m_t0->join();
     std::unique_lock< std::mutex > exitMutex(nautilus::exitLock);
     nautilus::exit = true;
@@ -73,7 +99,7 @@ NautilusStatus NautilusCore::terminate() {
     return NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::setEnableVulkanValidationLayers() {
+NautilusStatus NautilusCore::setEnableVulkanValidationLayersInternal() {
     nautilus::enableVulkanValidationLayers = true;
     return NAUTILUS_STATUS_OK;
 }

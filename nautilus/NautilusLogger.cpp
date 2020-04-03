@@ -22,6 +22,7 @@ namespace nautilus {
         }
 
         NautilusStatus log(std::string _logEntry, NautilusStatus _status) {
+            nautilus::logger::init();
             if(nautilus::logger::loggerInitialized) {
                 static auto start = std::chrono::system_clock::now();
                 auto now = std::chrono::system_clock::now();

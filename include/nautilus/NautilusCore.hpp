@@ -15,36 +15,33 @@ public:
     
     std::thread* m_t0;
 
-    /**
-     * Default constructor
-     */
-    NautilusCore(void);
+    static NautilusCore& get(void);
 
     /**
      * Attaches a shell to the core
      * @param _shell A pointer to a derived shell object
      * @return Returns a NautilusStatus status code
      */
-    NautilusStatus attachShell(NautilusShell* _shell);
+    static NautilusStatus attachShell(NautilusShell* _shell);
 
     /**
      * Contains the main loop of the application
      * @return Returns a NautilusStatus status code
      */
-    NautilusStatus loop(void);
+    static NautilusStatus loop(void);
 
     /**
      * Exits the application and ends all processes owned by it
      * @return Returns a NautilusStatus status code
      */ 
-    NautilusStatus exit(void);
+    static NautilusStatus exit(void);
 
     /**
      * Terminates the application, must be called manually by user, 
      * otherwise program will exit before even starting the main loop.
      * @return Returns a NautilusStatus status code
      */ 
-    NautilusStatus terminate(void);
+    static NautilusStatus terminate(void);
 
     /**
      * Enables Vulkan validation layers if available
@@ -53,7 +50,49 @@ public:
      * Sets validation layers for all NautilusVulkanShells
      * @return Returns a NautilusStatus status code
      */ 
-    NautilusStatus setEnableVulkanValidationLayers(void);
+    static NautilusStatus setEnableVulkanValidationLayers(void);
+
+private:
+
+    /**
+     * Attaches a shell to the core
+     * @param _shell A pointer to a derived shell object
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus attachShellInternal(NautilusShell* _shell);
+
+    /**
+     * Contains the main loop of the application
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus loopInternal(void);
+
+    /**
+     * Exits the application and ends all processes owned by it
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus exitInternal(void);
+
+    /**
+     * Terminates the application, must be called manually by user, 
+     * otherwise program will exit before even starting the main loop.
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus terminateInternal(void);
+
+    /**
+     * Enables Vulkan validation layers if available
+     * Only set in debug/development, do not set in release
+     * or deployment/production as these are very performance-heavy
+     * Sets validation layers for all NautilusVulkanShells
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus setEnableVulkanValidationLayersInternal(void);
+
+    /**
+     * Default constructor
+     */
+    NautilusCore(void);
 
     /**
      * Default destructor

@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <array>
 #include <string.h>
 #include <set>
 
