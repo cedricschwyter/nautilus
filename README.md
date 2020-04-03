@@ -83,9 +83,8 @@ To create a basic window with your favorite graphics API (OpenGL in the example)
 
     };
 
-You can then instantiate one `NautilusCore` and one `NautilusShell` object from the class implementation you have just written:
+You can then instantiate a `NautilusShell` object from the class implementation you have just written and attach it with optional settings to the `NautilusCore` object:
 
-    NautilusCore*   core;
     NautilusShell*  shell;
 
     /**
@@ -93,28 +92,26 @@ You can then instantiate one `NautilusCore` and one `NautilusShell` object from 
      * @return Returns a NautilusStatus status code
      */
     NautilusStatus run(void) {
-        core = new NautilusCore();
         shell = new ExampleShell();
 
         shell->setShellContext(NAUTILUS_SHELL_CONTEXT_WINDOWED);
         shell->setShellTitle("Dev Example 1");
         shell->setShellExtent(1280, 720);
         shell->setShellIcon("res/images/icons/nautilus.png");
-        core->attachShell(shell);
+        NautilusCore::attachShell(shell);
 
         return NAUTILUS_STATUS_OK;
     }
 
-A call to `NautilusCore::terminate()` is required before the program exits, as the thread running the application loop is joined then. Otherwise, the application loop will not even get started and you will not see any window or other visual output.
+A call to `NautilusCore::terminate()` is required before the program exits, as the thread running the application loop is joined then. Otherwise, the application loop will not even get started and you will not see any window or other visual output. The `NautilusCore`-object is implemented as a singleton, meaning there will only ever be one instance of the class which you never have to instantiate (you can just use the functions defined in the class straight-out-of-the-box):
 
     /**
      * Cleans allocated resources
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus clean(void) {
-        core->terminate();
+        NautilusCore::terminate();
         delete shell;
-        delete core;
         return NAUTILUS_STATUS_OK;
     }
 
