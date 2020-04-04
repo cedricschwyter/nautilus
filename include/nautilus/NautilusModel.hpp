@@ -1,0 +1,6 @@
+#ifndef NAUTILUS_MODEL_HPP
+#define NAUTILUS_MODEL_HPP
+
+
+
+#endif      // NAUTILUS_MODEL_HPP

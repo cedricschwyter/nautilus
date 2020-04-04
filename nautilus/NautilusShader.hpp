@@ -1,0 +1,6 @@
+#ifndef NAUTILUS_SHADER_HPP
+#define NAUTILUS_SHADER_HPP
+
+
+
+#endif      // NAUTILUS_SHADER_HPP
