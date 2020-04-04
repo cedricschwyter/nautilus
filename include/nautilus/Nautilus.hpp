@@ -677,7 +677,7 @@
 /**
  * Welcome to nautilus by D3PSI, a complete graphics engine!
  * Please refer to LICENSE.md or the block comment above for licensing information.
- * To get started, read the getting started section of the GitHub-repositories wiki!
+ * To get started, read the getting started section of the GitHub-repository's wiki!
  * Enjoy!
  */
 #ifndef NAUTILUS_HPP
