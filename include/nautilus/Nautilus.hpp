@@ -686,16 +686,20 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.h>
+
+#include "NautilusAPI.hpp"
+#include "NautilusAssert.hpp"
 #include "NautilusCore.hpp"
-#include "NautilusShell.hpp"
-#include "NautilusOpenGLShell.hpp"
-#include "NautilusVulkanShell.hpp"
-#include "NautilusStatus.hpp"
+#include "NautilusLogger.hpp"
 #include "NautilusNS.hpp"
+#include "NautilusOpenGLShell.hpp"
+#include "NautilusShell.hpp"
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
-#include "NautilusLogger.hpp"
-#include "NautilusAssert.hpp"
-#include "NautilusAPI.hpp"
+#include "NautilusStatus.hpp"
+#include "NautilusVulkanPipeline.hpp"
+#include "NautilusVulkanQueueFamily.hpp"
+#include "NautilusVulkanShell.hpp"
+#include "NautilusVulkanSwapchainDetails.hpp"
 
 #endif      // NAUTILUS_HPP

@@ -292,6 +292,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusOpenGLShell.cpp" />
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusShell.cpp" />
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusShellDispatcher.cpp" />
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusVulkanPipeline.cpp" />
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusVulkanShell.cpp" />
   </ItemGroup>
   <ItemGroup>
