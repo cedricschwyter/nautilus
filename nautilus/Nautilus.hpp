@@ -686,11 +686,15 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "NautilusAPI.hpp"
 #include "NautilusAssert.hpp"
 #include "NautilusCamera.hpp"
 #include "NautilusCore.hpp"
+#include "NautilusFocusCamera.hpp"
+#include "NautilusFPSCamera.hpp"
 #include "NautilusLogger.hpp"
 #include "NautilusMesh.hpp"
 #include "NautilusModel.hpp"
@@ -701,6 +705,10 @@
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusStatus.hpp"
+#include "NautilusVulkanBuffer.hpp"
+#include "NautilusVulkanDepthBuffer.hpp"
+#include "NautilusVulkanDescriptor.hpp"
+#include "NautilusVulkanImage.hpp"
 #include "NautilusVulkanPipeline.hpp"
 #include "NautilusVulkanQueueFamily.hpp"
 #include "NautilusVulkanShell.hpp"

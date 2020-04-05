@@ -1,7 +1,8 @@
 #ifndef NAUTILUS_NS_HPP
 #define NAUTILUS_NS_HPP
 
-#include "Nautilus.hpp"
+#include "NautilusShell.hpp"
+#include "NautilusLogger.hpp"
 
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.h>
@@ -15,7 +16,7 @@
 
 namespace nautilus {
 
-    extern std::string                          globalApplicationName;
+    extern const std::string                    globalApplicationName;
     extern bool                                 exit;
     extern std::mutex                           exitLock;
     extern bool                                 running;

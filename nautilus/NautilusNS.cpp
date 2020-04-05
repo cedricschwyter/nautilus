@@ -8,7 +8,7 @@
 
 namespace nautilus {
 
-    std::string                         globalApplicationName                   = "Nautilus by D3PSI";
+    const std::string                   globalApplicationName                   = "Nautilus by D3PSI";
     bool                                exit                                    = false;
     std::mutex                          exitLock;
     bool                                running                                 = false;
