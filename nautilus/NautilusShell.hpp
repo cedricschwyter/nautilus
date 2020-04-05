@@ -111,6 +111,85 @@ public:
     virtual void onScroll(GLFWwindow* _window, double _dx, double _dy);
 
     /**
+     * Attaches and initializes the shell
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus attach(void); 
+    
+    /**
+     * Executes API-specific rendering routines
+     * Must be implemented by derived API shell
+     * @return Returns a NautilusStatus status code
+     */ 
+    virtual NautilusStatus render(void) = 0;
+
+    /**
+     * Detaches the shell from the core it is attached to
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus detach(void);
+
+    /**
+     * Gets executed when the window is resized
+     * @param _window A pointer to the GLFWwindow
+     * @param _w The new window width
+     * @param _h The new window height
+     */ 
+    virtual void resize(GLFWwindow* _window, int _w, int _h);
+
+    /**
+     * Gets executed when the window is detached from the core
+     * @param _window A pointer to the GLFWwindow
+     * @param _focus GLFW_TRUE if focus given, GLFW_FALSE if focus lost
+     */ 
+    virtual void focus(GLFWwindow* _window, int _focus);
+
+    /**
+     * Gets executed when the window is iconified/minimized/restored
+     * @param _window A pointer to the GLFWwindow
+     * @param _iconify GLFW_TRUE if the window was iconified, GLFW_FALSE if it was restored
+     */ 
+    virtual void iconify(GLFWwindow* _window, int _iconify);
+
+    /**
+     * Gets executed when the mouse cursor is moved within the window
+     * @param _window A pointer to the GLFWwindow
+     * @param _x The new x-coordinate relative to the left edge of the window
+     * @param _y The new y-coordinate relative to the top edge of the window
+     */ 
+    virtual void cursor(GLFWwindow* _window, double _x, double _y);
+
+    /**
+     * Gets executed when the cursor is moved inside the window
+     * @param _window A pointer to the GLFWwindow
+     * @param _enter GLFW_TRUE if the cursor has entered the window, GLFW_FALSE if it has left it
+     */ 
+    virtual void cursorIn(GLFWwindow* _window, int _enter);
+
+    /**
+     * Gets executed when a key is pressed
+     * @param _window A pointer to the GLFWwindow
+     * @param _key The GLFW keycode
+     * @param _scancode  The system scancode of the key
+     * @param _action The action (GLFW_PRESS, GLFW_RELEASE, GLFW_REPEAT)
+     * @param _mods Bitfield describing width modifier keys were held down
+     */ 
+    virtual void key(
+        GLFWwindow*     _window, 
+        int             _key, 
+        int             _scancode, 
+        int             _action, 
+        int             _mods);
+
+    /**
+     * Gets executed when the window is detached from the core
+     * @param _window A pointer to the GLFWwindow
+     * @param _dx The x-offset of the scroll wheel
+     * @param _dy The y-offset of the scroll wheel
+     */ 
+    virtual void scroll(GLFWwindow* _window, double _dx, double _dy);
+
+    /**
      * Sets the window context to fullscreen, borderless or windowed
      * @param _context The NautilusShellContext to set the shell to
      * @return Returns a NautilusStatus status code
@@ -165,30 +244,11 @@ public:
     virtual NautilusStatus initAPI(void) = 0;
 
     /**
-     * Executes API-specific rendering routines
-     * Must be implemented by derived API shell
-     * @return Returns a NautilusStatus status code
-     */ 
-    virtual NautilusStatus render(void) = 0;
-
-    /**
      * Executes API-specific cleanup and garbage collection routines
      * Must be implemented by derived API shell
      * @return Returns a NautilusStatus status code
      */ 
     virtual NautilusStatus clean(void) = 0;
-
-    /**
-     * Attaches and initializes the shell
-     * @return Returns a NautilusStatus status code
-     */
-    NautilusStatus attach(void); 
-
-    /**
-     * Detaches the shell from the core it is attached to
-     * @return Returns a NautilusStatus status code
-     */ 
-    NautilusStatus detach(void);
 
     /**
      * Default destructor

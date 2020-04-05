@@ -8,7 +8,6 @@ NautilusVulkanShell::NautilusVulkanShell() {
 }
 
 void NautilusVulkanShell::onAttach() {
-    this->m_title = "Standard Vulkan Example with nautilus by D3PSI";
 }
 
 void NautilusVulkanShell::onRender() {
@@ -20,6 +19,7 @@ NautilusStatus NautilusVulkanShell::render() {
 }
 
 NautilusStatus NautilusVulkanShell::setDefaultWindowHints() {
+    this->m_title = "Standard Vulkan Example with nautilus by D3PSI";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -32,18 +32,18 @@ NautilusStatus NautilusVulkanShell::setDefaultWindowHints() {
 NautilusStatus NautilusVulkanShell::initAPI() {
     if(this->m_initializedAPI) return NAUTILUS_STATUS_OK;
     nautilus::logger::log("Initializing Vulkan...");
-    nautilus::createVulkanInstance();
-    nautilus::createVulkanDebugMessenger();
-    this->createSurfaceGLFW();
-    this->selectBestPhysicalDevice();
-    this->createLogicalDevice();
-    this->createSwapchain();
-    this->createSwapchainImageViews();
-    this->initializeSynchronizationObjects();
-    this->allocateCommandPools();
-    this->createRenderPasses();
-    this->allocateSwapchainFramebuffers();
-    this->allocateCommandBuffers();
+    ASSERT_NAUTILUS(nautilus::createVulkanInstance());
+    ASSERT_NAUTILUS(nautilus::createVulkanDebugMessenger());
+    ASSERT_NAUTILUS(this->createSurfaceGLFW());
+    ASSERT_NAUTILUS(this->selectBestPhysicalDevice());
+    ASSERT_NAUTILUS(this->createLogicalDevice());
+    ASSERT_NAUTILUS(this->createSwapchain());
+    ASSERT_NAUTILUS(this->createSwapchainImageViews());
+    ASSERT_NAUTILUS(this->initializeSynchronizationObjects());
+    ASSERT_NAUTILUS(this->allocateCommandPools());
+    ASSERT_NAUTILUS(this->createRenderPasses());
+    ASSERT_NAUTILUS(this->allocateSwapchainFramebuffers());
+    ASSERT_NAUTILUS(this->allocateCommandBuffers());
     glfwShowWindow(this->m_window);
     glfwFocusWindow(this->m_window);
     this->m_initializedAPI = true;
@@ -684,7 +684,7 @@ NautilusStatus NautilusVulkanShell::showNextSwapchainImage() {
     presentationInfo.swapchainCount                    = 1;
     presentationInfo.pSwapchains                       = swapchains;
     presentationInfo.pImageIndices                     = &swapchainImageIndex;
-    ASSERT_VULKAN(vkQueuePresentKHR(this->m_presentQueue, &presentationInfo));
+    result = vkQueuePresentKHR(this->m_presentQueue, &presentationInfo);
     if(result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || this->m_hasFramebufferBeenResized) {
         this->m_hasFramebufferBeenResized = false;
         this->recreateSwapchain();
@@ -696,6 +696,24 @@ NautilusStatus NautilusVulkanShell::showNextSwapchainImage() {
 }
 
 NautilusStatus NautilusVulkanShell::recreateSwapchain() {
+    if(this->m_firstRecreation) return NAUTILUS_STATUS_OK;
+    vkDeviceWaitIdle(this->m_logicalDevice);
+    std::unique_lock< std::mutex > commandLock(this->m_commandBufferLock);
+    int width = 0;
+    int height = 0;
+    while (width == 0 || height == 0) {
+        glfwGetFramebufferSize(this->m_window, &width, &height);
+        glfwWaitEvents();
+    }
+    commandLock.unlock();
+    ASSERT_NAUTILUS(this->cleanSwapchain());
+    ASSERT_NAUTILUS(this->createSwapchain());
+    ASSERT_NAUTILUS(this->createSwapchainImageViews());
+    ASSERT_NAUTILUS(this->initializeSynchronizationObjects());
+    ASSERT_NAUTILUS(this->createRenderPasses());
+    ASSERT_NAUTILUS(this->allocateSwapchainFramebuffers());
+    ASSERT_NAUTILUS(this->allocateCommandBuffers()); 
+    this->m_firstRecreation = false;
     return NAUTILUS_STATUS_OK;
 }
 
@@ -765,6 +783,11 @@ NautilusStatus NautilusVulkanShell::cleanSwapchain() {
     nautilus::logger::log("Successfully destroyed sync-objects");
     nautilus::logger::log("Successfully cleaned swapchain");
     return NAUTILUS_STATUS_OK;
+}
+
+void NautilusVulkanShell::resize(GLFWwindow* _window, int _w, int _h) {
+    this->m_hasFramebufferBeenResized = true;
+    this->onResize(_window, _h, _w);
 }
 
 #endif      // NAUTILUS_VULKAN_SHELL_CPP

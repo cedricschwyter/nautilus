@@ -18,7 +18,7 @@ namespace nautilus {
          * @param _w The new window width
          * @param _h The new window height
          */ 
-        void onResize(GLFWwindow* _window, int _w, int _h);
+        void resize(GLFWwindow* _window, int _w, int _h);
 
         /**
          * @note Dispatch method to call non-static function in a static way
@@ -26,7 +26,7 @@ namespace nautilus {
          * @param _window A pointer to the GLFWwindow
          * @param _focus GLFW_TRUE if focus given, GLFW_FALSE if focus lost
          */ 
-        void onFocus(GLFWwindow* _window, int _focus);
+        void focus(GLFWwindow* _window, int _focus);
 
         /**
          * @note Dispatch method to call non-static function in a static way
@@ -34,7 +34,7 @@ namespace nautilus {
          * @param _window A pointer to the GLFWwindow
          * @param _iconify GLFW_TRUE if the window was iconified, GLFW_FALSE if it was restored
          */ 
-        void onIconify(GLFWwindow* _window, int _iconify);
+        void iconify(GLFWwindow* _window, int _iconify);
 
         /**
          * @note Dispatch method to call non-static function in a static way
@@ -43,7 +43,7 @@ namespace nautilus {
          * @param _x The new x-coordinate relative to the left edge of the window
          * @param _y The new y-coordinate relative to the top edge of the window
          */ 
-        void onCursor(GLFWwindow* _window, double _x, double _y);
+        void cursor(GLFWwindow* _window, double _x, double _y);
 
         /**
          * @note Dispatch method to call non-static function in a static way
@@ -51,7 +51,7 @@ namespace nautilus {
          * @param _window A pointer to the GLFWwindow
          * @param _enter GLFW_TRUE if the cursor has entered the window, GLFW_FALSE if it has left it
          */ 
-        void onCursorIn(GLFWwindow* _window, int _enter);
+        void cursorIn(GLFWwindow* _window, int _enter);
 
         /**
          * @note Dispatch method to call non-static function in a static way
@@ -62,7 +62,7 @@ namespace nautilus {
          * @param _action The action (GLFW_PRESS, GLFW_RELEASE, GLFW_REPEAT)
          * @param _mods Bitfield describing width modifier keys were held down
          */ 
-        void onKey(
+        void key(
             GLFWwindow*     _window, 
             int             _key, 
             int             _scancode, 
@@ -76,7 +76,7 @@ namespace nautilus {
          * @param _dx The x-offset of the scroll wheel
          * @param _dy The y-offset of the scroll wheel
          */ 
-        void onScroll(GLFWwindow* _window, double _dx, double _dy);
+        void scroll(GLFWwindow* _window, double _dx, double _dy);
 
     }
 

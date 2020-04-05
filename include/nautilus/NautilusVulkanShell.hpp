@@ -13,6 +13,7 @@
 #include <vector>
 #include <algorithm>
 #include <array>
+#include <mutex>
 #include <string.h>
 #include <set>
 
@@ -35,6 +36,14 @@ public:
      * Computes rendering operations
      */ 
     virtual void onRender(void);
+
+    /**
+     * Resizes the window
+     * @param _window A pointer to the GLFWwindow
+     * @param _w The new window width
+     * @param _h The new window height
+     */ 
+    void resize(GLFWwindow* _window, int _w, int _h);
 
     /**
      * Cleans all allocated Vulkan resources by the shell
@@ -94,8 +103,10 @@ protected:
     uint32_t                        m_maxInFlightFrames             = 3;
     VkRenderPass                    m_renderPass;
     std::vector< VkCommandBuffer >  m_commandBuffers;
+    std::mutex                      m_commandBufferLock;
     uint32_t                        m_currentSwapchainImage         = 0;
     bool                            m_hasFramebufferBeenResized     = false;
+    bool                            m_firstRecreation               = true;
 
 private:
 

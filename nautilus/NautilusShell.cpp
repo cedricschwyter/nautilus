@@ -45,6 +45,44 @@ void NautilusShell::onScroll(GLFWwindow* _window, double _dx, double _dy) {
     nautilus::logger::log("onScroll");
 }
 
+void NautilusShell::resize(GLFWwindow* _window, int _w, int _h) {
+    this->onResize(_window, _w, _h);
+}
+
+void NautilusShell::focus(GLFWwindow* _window, int _focus) {
+    this->onFocus(_window, _focus);
+}
+
+void NautilusShell::iconify(GLFWwindow* _window, int _iconify) {
+    this->onIconify(_window, _iconify);
+}
+
+void NautilusShell::cursor(GLFWwindow* _window, double _x, double _y) {
+    this->onCursor(_window, _x, _y);
+}
+
+void NautilusShell::cursorIn(GLFWwindow* _window, int _enter) {
+    this->onCursorIn(_window, _enter);
+}
+
+void NautilusShell::key(
+    GLFWwindow*     _window, 
+    int             _key, 
+    int             _scancode, 
+    int             _action, 
+    int             _mods) {
+    this->onKey(
+        _window,
+        _key,
+        _scancode,
+        _action,
+        _mods);
+}
+
+void NautilusShell::scroll(GLFWwindow* _window, double _dx, double _dy) {
+    this->onScroll(_window, _dx, _dy);
+}
+
 NautilusStatus NautilusShell::setShellContext(NautilusShellContext _context) {
     this->m_shellContext = _context;
     return NAUTILUS_STATUS_OK;
@@ -87,12 +125,12 @@ NautilusStatus NautilusShell::detach() {
 
 NautilusStatus NautilusShell::setCallbacks() {
     if(this->m_callbacksSet) return NAUTILUS_STATUS_OK;
-    glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::onResize);
-    glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::onFocus);
-    glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::onIconify);
-    glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::onCursor);
-    glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::onCursorIn);
-    glfwSetKeyCallback(this->m_window, nautilus::dispatcher::onKey);
+    glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::resize);
+    glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::focus);
+    glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::iconify);
+    glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::cursor);
+    glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::cursorIn);
+    glfwSetKeyCallback(this->m_window, nautilus::dispatcher::key);
     this->m_callbacksSet = true;
     return NAUTILUS_STATUS_OK;
 }
