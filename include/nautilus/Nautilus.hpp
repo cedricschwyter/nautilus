@@ -693,6 +693,7 @@
 #include "NautilusAssert.hpp"
 #include "NautilusCamera.hpp"
 #include "NautilusCore.hpp"
+#include "NautilusDefaults.hpp"
 #include "NautilusFocusCamera.hpp"
 #include "NautilusFPSCamera.hpp"
 #include "NautilusLogger.hpp"

@@ -5,6 +5,9 @@
 #include "NautilusNS.hpp"
 #include "NautilusAPI.hpp"
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 class NautilusOpenGLShell
     : public NautilusShell {
 public:

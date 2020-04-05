@@ -1,9 +1,11 @@
 #ifndef NAUTILUS_LOGGER_HPP
 #define NAUTILUS_LOGGER_HPP
 
-#include "Nautilus.hpp"
+#include "NautilusStatus.hpp"
 
 #include <filesystem>
+#include <string>
+#include <iostream>
 #include <fstream>
 #include <mutex>
 #include <chrono>
