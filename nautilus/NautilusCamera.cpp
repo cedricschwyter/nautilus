@@ -10,7 +10,10 @@ NautilusCamera::~NautilusCamera() {
 }
 
 glm::mat4 NautilusCamera::view() {
-    return glm::mat4();
+    return glm::lookAt(
+        this->m_cameraVectors.m_pos, 
+        this->m_cameraVectors.m_pos + this->m_cameraVectors.m_frt, 
+        this->m_cameraVectors.m_cup);
 }
 
 #endif      // NAUTILUS_CAMERA_CPP
