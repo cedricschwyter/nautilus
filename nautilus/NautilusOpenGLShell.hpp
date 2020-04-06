@@ -5,6 +5,9 @@
 #include "NautilusNS.hpp"
 #include "NautilusAPI.hpp"
 
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 class NautilusOpenGLShell
     : public NautilusShell {
 public:
@@ -16,40 +19,40 @@ public:
 
     /**
      * Gets executed when the shell gets attached to the core
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
     virtual void onAttach(void);
 
     /**
      * Gets executed at the specified frequency by the application loop
      * Computes rendering operations
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
     virtual void onRender(void);
 
     /**
      * Cleans all allocated OpenGL resources by the shell
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus clean(void);
+    nautilus::NautilusStatus clean(void);
 
     /**
      * Executes OpenGL rendering routine
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus render(void);
+    nautilus::NautilusStatus render(void);
 
     /**
      * Sets the default window hints for the corresponding API
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual NautilusStatus setDefaultWindowHints(void);
+    virtual nautilus::NautilusStatus setDefaultWindowHints(void);
 
     /**
      * Initializes the OpenGL API
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus initAPI(void);
+    nautilus::NautilusStatus initAPI(void);
 
     /**
      * Default destructor

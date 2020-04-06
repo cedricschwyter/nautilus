@@ -13,7 +13,7 @@ namespace nautilus {
 
         namespace fs = std::filesystem;
 
-        NautilusStatus init(const char* _logdir) {
+        nautilus::NautilusStatus init(const char* _logdir) {
             if(nautilus::logger::loggerInitialized) return NAUTILUS_STATUS_OK;
             fs::create_directory("logs");
             standardLog.open("logs/nautilus.log", std::ios::trunc);
@@ -21,7 +21,7 @@ namespace nautilus {
             return NAUTILUS_STATUS_OK;
         }
 
-        NautilusStatus log(std::string _logEntry, NautilusStatus _status) {
+        nautilus::NautilusStatus log(std::string _logEntry, nautilus::NautilusStatus _status) {
             nautilus::logger::init();
             if(nautilus::logger::loggerInitialized) {
                 static auto start = std::chrono::system_clock::now();
