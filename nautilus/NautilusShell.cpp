@@ -162,12 +162,15 @@ NautilusStatus NautilusShell::setShellCamera(NautilusCameraMode _mode) {
     delete this->m_camera;
     switch(_mode) {
         case NAUTILUS_CAMERA_MODE_2D:
+            this->m_dim = NAUTILUS_DIMENSION_2D;
             this->m_camera = new NautilusCamera2D();
             break;
         case NAUTILUS_CAMERA_MODE_FPS:
+            this->m_dim = NAUTILUS_DIMENSION_3D;
             this->m_camera = new NautilusCameraFPS();
             break;
         case NAUTILUS_CAMERA_MODE_FOCUS:
+            this->m_dim = NAUTILUS_DIMENSION_3D;
             this->m_camera = new NautilusCameraFocus();
             break;
         default:

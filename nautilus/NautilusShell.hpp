@@ -205,7 +205,7 @@ public:
     NautilusStatus attach(void); 
 
     /**
-     * Detaches the shell from the core it is attached to
+     * Detaches the shell from the core
      * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus detach(void);
