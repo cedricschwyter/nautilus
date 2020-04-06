@@ -13,7 +13,7 @@
  * @param _status The status code to assert
  * @throw Throws an std::runtime_error when _status is negative 
  */ 
-inline void ASSERT_NAUTILUS(NautilusStatus _status) {
+inline void ASSERT_NAUTILUS(nautilus::NautilusStatus _status) {
     if(_status < 0) {
         throw std::runtime_error("Nautilus ran into a fatal problem: " + _status);
     }

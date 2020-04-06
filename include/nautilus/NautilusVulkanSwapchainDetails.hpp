@@ -5,9 +5,14 @@
 
 #include <vector>
 
-struct NautilusVulkanSwapchainDetails {
-    VkSurfaceCapabilitiesKHR            surfaceCapabilities;
-    std::vector< VkSurfaceFormatKHR >   supportedFormats;
-    std::vector< VkPresentModeKHR >     presentationModes;
-};
+namespace nautilus {
+
+    struct NautilusVulkanSwapchainDetails {
+        VkSurfaceCapabilitiesKHR            surfaceCapabilities;
+        std::vector< VkSurfaceFormatKHR >   supportedFormats;
+        std::vector< VkPresentModeKHR >     presentationModes;
+    };
+
+}
+
 #endif  // NAUTILUS_VULKAN_SWAPCHAIN_DETAILS_HPP

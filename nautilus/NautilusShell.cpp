@@ -45,65 +45,112 @@ void NautilusShell::onScroll(GLFWwindow* _window, double _dx, double _dy) {
     nautilus::logger::log("onScroll");
 }
 
-NautilusStatus NautilusShell::setShellContext(NautilusShellContext _context) {
+void NautilusShell::resize(GLFWwindow* _window, int _w, int _h) {
+    this->onResize(_window, _w, _h);
+}
+
+void NautilusShell::focus(GLFWwindow* _window, int _focus) {
+    this->onFocus(_window, _focus);
+}
+
+void NautilusShell::iconify(GLFWwindow* _window, int _iconify) {
+    this->onIconify(_window, _iconify);
+}
+
+void NautilusShell::cursor(GLFWwindow* _window, double _x, double _y) {
+    this->onCursor(_window, _x, _y);
+    this->m_camera->mouseInput(_window, _x, _y);
+}
+
+void NautilusShell::cursorIn(GLFWwindow* _window, int _enter) {
+    this->onCursorIn(_window, _enter);
+}
+
+void NautilusShell::key(
+    GLFWwindow*     _window, 
+    int             _key, 
+    int             _scancode, 
+    int             _action, 
+    int             _mods) {
+    this->onKey(
+        _window,
+        _key,
+        _scancode,
+        _action,
+        _mods);
+    this->m_camera->keyInput(
+        _window,
+        _key,
+        _scancode,
+        _action,
+        _mods);
+}
+
+void NautilusShell::scroll(GLFWwindow* _window, double _dx, double _dy) {
+    this->onScroll(_window, _dx, _dy);
+    this->m_camera->scrollInput(_window, _dx, _dy);
+}
+
+nautilus::NautilusStatus NautilusShell::setShellContext(nautilus::NautilusShellContext _context) {
     this->m_shellContext = _context;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::setShellTitle(std::string _title) {
+nautilus::NautilusStatus NautilusShell::setShellTitle(std::string _title) {
     this->m_title = _title;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::setShellExtent(uint32_t _width, uint32_t _height) {
+nautilus::NautilusStatus NautilusShell::setShellExtent(uint32_t _width, uint32_t _height) {
     this->m_width = _width;
     this->m_height = _height;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::setShellIcon(std::string _path) {
+nautilus::NautilusStatus NautilusShell::setShellIcon(std::string _path) {
     this->m_shellIconPath = _path;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::attach() {
+nautilus::NautilusStatus NautilusShell::attach() {
     this->createWindow();
     this->setCallbacks();
     this->onAttach();
     std::unique_lock< std::mutex > lock(this->m_attachedLock);
     this->m_attached = true;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::detach() {
+nautilus::NautilusStatus NautilusShell::detach() {
     std::scoped_lock< std::mutex > lock(m_attachedLock);
     this->m_attached = false;
+    delete this->m_camera;
     this->clean();
     this->onDetach(this->m_window);
     std::scoped_lock< std::mutex > shellCountLock(nautilus::shellCountLock);
     nautilus::shellCount--;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::setCallbacks() {
-    if(this->m_callbacksSet) return NAUTILUS_STATUS_OK;
-    glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::onResize);
-    glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::onFocus);
-    glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::onIconify);
-    glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::onCursor);
-    glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::onCursorIn);
-    glfwSetKeyCallback(this->m_window, nautilus::dispatcher::onKey);
+nautilus::NautilusStatus NautilusShell::setCallbacks() {
+    if(this->m_callbacksSet) return nautilus::NAUTILUS_STATUS_OK;
+    glfwSetFramebufferSizeCallback(this->m_window, nautilus::dispatcher::resize);
+    glfwSetWindowFocusCallback(this->m_window, nautilus::dispatcher::focus);
+    glfwSetWindowIconifyCallback(this->m_window, nautilus::dispatcher::iconify);
+    glfwSetCursorPosCallback(this->m_window, nautilus::dispatcher::cursor);
+    glfwSetCursorEnterCallback(this->m_window, nautilus::dispatcher::cursorIn);
+    glfwSetKeyCallback(this->m_window, nautilus::dispatcher::key);
     this->m_callbacksSet = true;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusShell::createWindow() { 
-    if(this->m_windowCreated) return NAUTILUS_STATUS_OK;
+nautilus::NautilusStatus NautilusShell::createWindow() { 
+    if(this->m_windowCreated) return nautilus::NAUTILUS_STATUS_OK;
     nautilus::logger::log("Creating GLFWwindow...");
     this->setDefaultWindowHints();
     this->m_monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(this->m_monitor);
-    if(this->m_shellContext == NAUTILUS_SHELL_CONTEXT_WINDOWED) {
+    if(this->m_shellContext == nautilus::NAUTILUS_SHELL_CONTEXT_WINDOWED) {
         this->m_window = glfwCreateWindow(
             this->m_width,
             this->m_height,
@@ -115,7 +162,7 @@ NautilusStatus NautilusShell::createWindow() {
             mode->width / 2 - this->m_width / 2,
             mode->height / 2 - this->m_height / 2);
     }
-    else if(this->m_shellContext == NAUTILUS_SHELL_CONTEXT_FULLSCREEN) {
+    else if(this->m_shellContext == nautilus::NAUTILUS_SHELL_CONTEXT_FULLSCREEN) {
         glfwWindowHint(GLFW_RED_BITS, mode->redBits);
         glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
         glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
@@ -127,7 +174,7 @@ NautilusStatus NautilusShell::createWindow() {
             this->m_monitor,
             nullptr);
     }
-    else if(this->m_shellContext == NAUTILUS_SHELL_CONTEXT_BORDERLESS) {
+    else if(this->m_shellContext == nautilus::NAUTILUS_SHELL_CONTEXT_BORDERLESS) {
         this->m_window = glfwCreateWindow(
             mode->width,
             mode->height,
@@ -136,8 +183,8 @@ NautilusStatus NautilusShell::createWindow() {
             nullptr);
     }
     if(this->m_window == nullptr) {
-        nautilus::logger::log("Failed to create GLFWwindow", NAUTILUS_STATUS_FATAL);
-        return NAUTILUS_STATUS_FATAL;
+        nautilus::logger::log("Failed to create GLFWwindow", nautilus::NAUTILUS_STATUS_FATAL);
+        return nautilus::NAUTILUS_STATUS_FATAL;
     }
     glfwMakeContextCurrent(this->m_window);
     GLFWimage windowIcon[1];
@@ -153,7 +200,35 @@ NautilusStatus NautilusShell::createWindow() {
     nautilus::logger::log("Successfully created GLFWwindow");
     this->initAPI();
     this->m_windowCreated = true;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusShell::setShellCamera(nautilus::NautilusCameraMode _mode) {
+    this->m_cameraMode = _mode;
+    delete this->m_camera;
+    switch(_mode) {
+        case nautilus::NAUTILUS_CAMERA_MODE_2D:
+            this->m_dim = nautilus::NAUTILUS_DIMENSION_2D;
+            this->m_camera = new NautilusCamera2D();
+            break;
+        case nautilus::NAUTILUS_CAMERA_MODE_FPS:
+            this->m_dim = nautilus::NAUTILUS_DIMENSION_3D;
+            this->m_camera = new NautilusCameraFPS();
+            break;
+        case nautilus::NAUTILUS_CAMERA_MODE_FOCUS:
+            this->m_dim = nautilus::NAUTILUS_DIMENSION_3D;
+            this->m_camera = new NautilusCameraFocus();
+            break;
+        default:
+            nautilus::logger::log("Unknown camera mode", nautilus::NAUTILUS_STATUS_FATAL);
+            break;
+    }
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusShell::setShellDimension(nautilus::NautilusDimension _dim) {
+    this->m_dim = _dim;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
 #endif      // NAUTILUS_SHELL_CPP
