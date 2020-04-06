@@ -40,18 +40,85 @@ void NautilusCamera::update() {
 }
 
 nautilus::NautilusStatus NautilusCamera::move(nautilus::NautilusCameraMovementDirection _dir) {
+    switch(_dir) {
+        case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_FORWARD:
+            this->m_cameraVectors.m_pos += this->m_speed * this->m_cameraVectors.m_frt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_BACKWARD:
+            this->m_cameraVectors.m_pos -= this->m_speed * this->m_cameraVectors.m_frt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_LEFT:
+            this->m_cameraVectors.m_pos -= this->m_speed * this->m_cameraVectors.m_rgt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_RIGHT:
+            this->m_cameraVectors.m_pos += this->m_speed * this->m_cameraVectors.m_rgt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_UP:
+            this->m_cameraVectors.m_pos += this->m_speed * this->m_cameraVectors.m_cup;
+            break;
+        case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_DOWN:
+            this->m_cameraVectors.m_pos -= this->m_speed * this->m_cameraVectors.m_cup;
+            break;
+        default:
+            nautilus::logger::log("Unknown movement direction", nautilus::NAUTILUS_STATUS_FATAL);
+            return nautilus::NAUTILUS_STATUS_FATAL;
+    }
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 nautilus::NautilusStatus NautilusCamera::move(glm::vec3 _dir) {
+    this->m_cameraVectors.m_pos += this->m_speed * _dir;
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusCamera::rotate(nautilus::NautilusCameraCoordinateSystemAxis _rot) {
+nautilus::NautilusStatus NautilusCamera::moveTo(glm::vec3 _pos) {
+    this->m_cameraVectors.m_pos = _pos;
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusCamera::rotate(glm::vec3 _rot) {
+nautilus::NautilusStatus NautilusCamera::rotate(nautilus::NautilusCameraCoordinateSystemAxis _rot, float _amt) {
+    switch(_rot) {
+        case nautilus::NAUTILUS_CAMERA_COORDINATE_SYSTEM_AXIS_X:
+            this->m_angles.m_pitch += this->m_sens * _amt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_COORDINATE_SYSTEM_AXIS_Y:
+            this->m_angles.m_yaw += this->m_sens * _amt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_COORDINATE_SYSTEM_AXIS_Z:
+            this->m_angles.m_roll += this->m_sens * _amt;
+            break;
+        default: 
+            nautilus::logger::log("Invalid view space rotation axis", nautilus::NAUTILUS_STATUS_FATAL);
+            break;
+    }
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusCamera::rotate(glm::vec3 _rot, float _amt) {
+    // TODO: implement calculations for arbitrary rotation axis
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusCamera::rotateTo(nautilus::NautilusCameraCoordinateSystemAxis _rot, float _amt) {
+    switch(_rot) {
+        case nautilus::NAUTILUS_CAMERA_COORDINATE_SYSTEM_AXIS_X:
+            this->m_angles.m_pitch+= this->m_sens * _amt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_COORDINATE_SYSTEM_AXIS_Y:
+            this->m_angles.m_yaw = this->m_sens * _amt;
+            break;
+        case nautilus::NAUTILUS_CAMERA_COORDINATE_SYSTEM_AXIS_Z:
+            this->m_angles.m_roll = this->m_sens * _amt;
+            break;
+        default: 
+            nautilus::logger::log("Invalid view space rotation axis", nautilus::NAUTILUS_STATUS_FATAL);
+            break;
+    }
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusCamera::rotateTo(glm::vec3 _rot, float _amt) {
+    // TODO: implement calculations for arbitrary rotation axis
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

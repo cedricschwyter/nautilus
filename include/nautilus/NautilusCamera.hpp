@@ -5,6 +5,7 @@
 #include "NautilusStatus.hpp"
 #include "NautilusCameraMovementDirection.hpp"
 #include "NautilusCameraCoordinateSystemAxis.hpp"
+#include "NautilusLogger.hpp"
 
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -87,32 +88,63 @@ public:
     virtual void scrollInput(GLFWwindow* _window, double _dx, double _dy) = 0;
 
     /**
-     * Moves the camera
+     * Moves the camera relative to its current position
      * @param _dir The movement direction of the camera
      * @return Returns a nautilus::NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus move(nautilus::NautilusCameraMovementDirection _dir);
 
     /**
-     * Moves the camera
+     * Moves the camera relative to its current position
      * @param _dir The movement direction of the camera
      * @return Returns a nautilus::NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus move(glm::vec3 _dir);
 
     /**
-     * Rotates the camera
-     * @param _rot The rotation axis
+     * Moves the camera to an absolute world space position
+     * @param _pos The position of the camera
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual nautilus::NautilusStatus rotate(nautilus::NautilusCameraCoordinateSystemAxis _rot);
+    virtual nautilus::NautilusStatus moveTo(glm::vec3 _pos);
 
     /**
      * Rotates the camera
-     * @param _rot The rotation axis
+     * @param _rot The view space rotation axis
+     *      ==> X: points left/right on the screen
+     *      ==> Y: points up/down on the screen
+     *      ==> Z: points into the screen
+     * @param _amt The relative amount to move
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual nautilus::NautilusStatus rotate(glm::vec3 _axis);
+    virtual nautilus::NautilusStatus rotate(nautilus::NautilusCameraCoordinateSystemAxis _rot, float _amt = 1.0f);
+
+    /**
+     * Rotates the camera
+     * @param _rot The arbitrary rotation axis
+     * @param _amt The relative amount to move
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus rotate(glm::vec3 _rot, float _amt = 1.0f);
+
+    /**
+     * Rotates the camera around an arbitrary rotation axis to an absolute value
+     * @param _rot The view space rotation axis
+     *      ==> X: points left/right on the screen
+     *      ==> Y: points up/down on the screen
+     *      ==> Z: points into the screen
+     * @param _amt The absolute amount to rotate to
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus rotateTo(nautilus::NautilusCameraCoordinateSystemAxis _rot, float _amt = 1.0f);
+
+    /**
+     * Rotates the camera around an arbitrary rotation axis to an absolute value
+     * @param _rot The arbitrary rotation axis
+     * @param _amt The absolute amount to rotate to
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus rotateTo(glm::vec3 _rot, float _amt);
 
     /**
      * Returns the view matrix according to the current camera vectors
@@ -127,9 +159,9 @@ public:
 
 private:
 
-    double      m_speed             = 2.0;
-    double      m_sens              = 0.1;
-    double      m_fov               = 105.0;
+    float       m_speed             = nautilus::defaults::CAMERA_SPEED;
+    float       m_sens              = nautilus::defaults::CAMERA_SENS;
+    float       m_fov               = nautilus::defaults::CAMERA_FOV;
     bool        m_inputEnabled      = true;
     bool        m_firstMouse        = true;
 

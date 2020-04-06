@@ -7,9 +7,9 @@ namespace nautilus {
 
     namespace defaults {
 
-        extern const double                         CAMERA_SPEED;
-        extern const double                         CAMERA_SENS;
-        extern const double                         CAMERA_FOV;
+        extern const float                          CAMERA_SPEED;
+        extern const float                          CAMERA_SENS;
+        extern const float                          CAMERA_FOV;
 
         extern const glm::vec3                      WORLD_ORIGIN;
         extern const glm::vec3                      WORLD_UP_GL;
