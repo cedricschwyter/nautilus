@@ -6,6 +6,12 @@
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusAssert.hpp"
 #include "NautilusAPI.hpp"
+#include "NautilusCamera.hpp"
+#include "NautilusCameraFocus.hpp"
+#include "NautilusCameraFPS.hpp"
+#include "NautilusCamera2D.hpp"
+#include "NautilusCameraMode.hpp"
+#include "NautilusDimension.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -111,6 +117,20 @@ public:
     virtual void onScroll(GLFWwindow* _window, double _dx, double _dy);
 
     /**
+     * Sets the camera mode for the shell
+     * @param _mode The mode to set the camera to
+     * @return Returns a NautilusStatus status code
+     */ 
+    virtual NautilusStatus setShellCamera(NautilusCameraMode _mode);
+
+    /**
+     * Sets the shell to 2D/3D mode
+     * @param _dim The amount of dimensions
+     * @return Returns a NautilusStatus status code
+     */
+    NautilusStatus setShellDimension(NautilusDimension _dim);
+
+    /**
      * Sets the window context to fullscreen, borderless or windowed
      * @param _context The NautilusShellContext to set the shell to
      * @return Returns a NautilusStatus status code
@@ -205,6 +225,9 @@ protected:
     std::string             m_shellIconPath     = "res/images/icons/nautilus.png";
     bool                    m_windowCreated     = false;
     bool                    m_initializedAPI    = false;
+    NautilusDimension       m_dim               = NAUTILUS_DIMENSION_2D;
+    NautilusCameraMode      m_cameraMode        = NAUTILUS_CAMERA_MODE_FPS;
+    NautilusCamera*         m_camera;
 
 };
 

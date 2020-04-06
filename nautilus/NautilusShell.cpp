@@ -78,6 +78,7 @@ NautilusStatus NautilusShell::attach() {
 NautilusStatus NautilusShell::detach() {
     std::scoped_lock< std::mutex > lock(m_attachedLock);
     this->m_attached = false;
+    delete this->m_camera;
     this->clean();
     this->onDetach(this->m_window);
     std::scoped_lock< std::mutex > shellCountLock(nautilus::shellCountLock);
@@ -153,6 +154,31 @@ NautilusStatus NautilusShell::createWindow() {
     nautilus::logger::log("Successfully created GLFWwindow");
     this->initAPI();
     this->m_windowCreated = true;
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusShell::setShellCamera(NautilusCameraMode _mode) {
+    this->m_cameraMode = _mode;
+    delete this->m_camera;
+    switch(_mode) {
+        case NAUTILUS_CAMERA_MODE_2D:
+            this->m_camera = new NautilusCamera2D();
+            break;
+        case NAUTILUS_CAMERA_MODE_FPS:
+            this->m_camera = new NautilusCameraFPS();
+            break;
+        case NAUTILUS_CAMERA_MODE_FOCUS:
+            this->m_camera = new NautilusCameraFocus();
+            break;
+        default:
+            nautilus::logger::log("Unknown camera mode", NAUTILUS_STATUS_FATAL);
+            break;
+    }
+    return NAUTILUS_STATUS_OK;
+}
+
+NautilusStatus NautilusShell::setShellDimension(NautilusDimension _dim) {
+    this->m_dim = _dim;
     return NAUTILUS_STATUS_OK;
 }
 

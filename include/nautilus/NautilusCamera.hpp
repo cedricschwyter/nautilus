@@ -11,9 +11,9 @@ public:
 
     struct NautilusCameraVectors {
         glm::vec3 m_pos             = nautilus::defaults::WORLD_ORIGIN;
-        glm::vec3 m_frt             = glm::vec3(0.0f);
+        glm::vec3 m_frt             = glm::vec3(1.0f, 0.0f, 0.0f);
         glm::vec3 m_wup             = nautilus::defaults::WORLD_UP;
-        glm::vec3 m_rgt             = glm::vec3(0.0f);
+        glm::vec3 m_rgt             = glm::vec3(0.0f, 0.0f, 1.0f);
         glm::vec3 m_cup             = nautilus::defaults::WORLD_UP;
     } m_cameraVectors;
 
