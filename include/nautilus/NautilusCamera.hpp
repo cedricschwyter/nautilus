@@ -11,6 +11,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <algorithm>
+
 class NautilusCamera {
 public:
 
@@ -157,7 +159,7 @@ public:
      */ 
     virtual void update(void);
 
-private:
+protected:
 
     float       m_speed             = nautilus::defaults::CAMERA_SPEED;
     float       m_sens              = nautilus::defaults::CAMERA_SENS;

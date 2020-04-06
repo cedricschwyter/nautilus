@@ -59,6 +59,7 @@ void NautilusShell::iconify(GLFWwindow* _window, int _iconify) {
 
 void NautilusShell::cursor(GLFWwindow* _window, double _x, double _y) {
     this->onCursor(_window, _x, _y);
+    this->m_camera->mouseInput(_window, _x, _y);
 }
 
 void NautilusShell::cursorIn(GLFWwindow* _window, int _enter) {
@@ -77,10 +78,17 @@ void NautilusShell::key(
         _scancode,
         _action,
         _mods);
+    this->m_camera->keyInput(
+        _window,
+        _key,
+        _scancode,
+        _action,
+        _mods);
 }
 
 void NautilusShell::scroll(GLFWwindow* _window, double _dx, double _dy) {
     this->onScroll(_window, _dx, _dy);
+    this->m_camera->scrollInput(_window, _dx, _dy);
 }
 
 nautilus::NautilusStatus NautilusShell::setShellContext(nautilus::NautilusShellContext _context) {

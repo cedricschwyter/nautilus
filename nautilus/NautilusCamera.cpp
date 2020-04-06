@@ -40,24 +40,30 @@ void NautilusCamera::update() {
 }
 
 nautilus::NautilusStatus NautilusCamera::move(nautilus::NautilusCameraMovementDirection _dir) {
+    static float deltaTime = 0.0f;
+    static float lastFrame = 0.0f;
+    float currentFrame = static_cast< float >(glfwGetTime());
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
+    float speed = this->m_speed * deltaTime;
     switch(_dir) {
         case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_FORWARD:
-            this->m_cameraVectors.m_pos += this->m_speed * this->m_cameraVectors.m_frt;
+            this->m_cameraVectors.m_pos += speed * this->m_cameraVectors.m_frt;
             break;
         case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_BACKWARD:
-            this->m_cameraVectors.m_pos -= this->m_speed * this->m_cameraVectors.m_frt;
+            this->m_cameraVectors.m_pos -= speed * this->m_cameraVectors.m_frt;
             break;
         case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_LEFT:
-            this->m_cameraVectors.m_pos -= this->m_speed * this->m_cameraVectors.m_rgt;
+            this->m_cameraVectors.m_pos -= speed * this->m_cameraVectors.m_rgt;
             break;
         case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_RIGHT:
-            this->m_cameraVectors.m_pos += this->m_speed * this->m_cameraVectors.m_rgt;
+            this->m_cameraVectors.m_pos += speed * this->m_cameraVectors.m_rgt;
             break;
         case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_UP:
-            this->m_cameraVectors.m_pos += this->m_speed * this->m_cameraVectors.m_cup;
+            this->m_cameraVectors.m_pos += speed * this->m_cameraVectors.m_cup;
             break;
         case nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_DOWN:
-            this->m_cameraVectors.m_pos -= this->m_speed * this->m_cameraVectors.m_cup;
+            this->m_cameraVectors.m_pos -= speed * this->m_cameraVectors.m_cup;
             break;
         default:
             nautilus::logger::log("Unknown movement direction", nautilus::NAUTILUS_STATUS_FATAL);
