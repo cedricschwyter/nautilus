@@ -39,4 +39,20 @@ void NautilusCamera::update() {
     this->m_cameraVectors.m_cup = glm::normalize(glm::cross(this->m_cameraVectors.m_rgt, this->m_cameraVectors.m_frt));
 }
 
+nautilus::NautilusStatus NautilusCamera::move(nautilus::NautilusCameraMovementDirection _dir) {
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusCamera::move(glm::vec3 _dir) {
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusCamera::rotate(nautilus::NautilusCameraCoordinateSystemAxis _rot) {
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusCamera::rotate(glm::vec3 _rot) {
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
 #endif      // NAUTILUS_CAMERA_CPP

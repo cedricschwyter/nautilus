@@ -2,6 +2,9 @@
 #define NAUTILUS_CAMERA_HPP
 
 #include "NautilusDefaults.hpp"
+#include "NautilusStatus.hpp"
+#include "NautilusCameraMovementDirection.hpp"
+#include "NautilusCameraCoordinateSystemAxis.hpp"
 
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -82,6 +85,34 @@ public:
      * @param _dy The y-offset of the scroll wheel
      */ 
     virtual void scrollInput(GLFWwindow* _window, double _dx, double _dy) = 0;
+
+    /**
+     * Moves the camera
+     * @param _dir The movement direction of the camera
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus move(nautilus::NautilusCameraMovementDirection _dir);
+
+    /**
+     * Moves the camera
+     * @param _dir The movement direction of the camera
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus move(glm::vec3 _dir);
+
+    /**
+     * Rotates the camera
+     * @param _rot The rotation axis
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus rotate(nautilus::NautilusCameraCoordinateSystemAxis _rot);
+
+    /**
+     * Rotates the camera
+     * @param _rot The rotation axis
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus rotate(glm::vec3 _axis);
 
     /**
      * Returns the view matrix according to the current camera vectors

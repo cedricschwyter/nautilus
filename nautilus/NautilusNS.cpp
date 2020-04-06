@@ -48,7 +48,7 @@ namespace nautilus {
                     _req_comp));
     }
 
-    NautilusStatus freeSTBI(unsigned char* _pixels) {
+    nautilus::NautilusStatus freeSTBI(unsigned char* _pixels) {
         stbi_image_free(_pixels);
         return NAUTILUS_STATUS_OK;
     }
@@ -83,7 +83,7 @@ namespace nautilus {
         return result;
     }
 
-    NautilusStatus createVulkanInstance() {
+    nautilus::NautilusStatus createVulkanInstance() {
         if(nautilus::vulkanInstanceCreated) return NAUTILUS_STATUS_OK;
         nautilus::logger::log("Requesting Vulkan validation layers...");
         if(nautilus::enableVulkanValidationLayers && nautilus::vulkanValidationLayersSupported())
@@ -159,7 +159,7 @@ namespace nautilus {
         return extensions;
     }
 
-    NautilusStatus createVulkanDebugMessenger() {
+    nautilus::NautilusStatus createVulkanDebugMessenger() {
         if(!nautilus::enableVulkanValidationLayers) return NAUTILUS_STATUS_OK;
         nautilus::logger::log("Creating Vulkan debug utils messenger...");
         VkDebugUtilsMessengerCreateInfoEXT debugUtilsMessengerCreateInfo        = {};
@@ -214,7 +214,7 @@ namespace nautilus {
             return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 
-    NautilusStatus destroyVulkanDebugUtilsMessenger(
+    nautilus::NautilusStatus destroyVulkanDebugUtilsMessenger(
         VkInstance                          _instance,
         VkDebugUtilsMessengerEXT            _debugMessenger,
         const VkAllocationCallbacks*        _pAllocator) {

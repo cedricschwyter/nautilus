@@ -89,9 +89,9 @@ You can then instantiate a `NautilusShell` object from the class implementation 
 
     /**
      * Initializes everything
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus run(void) {
+    nautilus::NautilusStatus run(void) {
         shell = new ExampleShell();
 
         shell->setShellContext(NAUTILUS_SHELL_CONTEXT_WINDOWED);
@@ -100,19 +100,19 @@ You can then instantiate a `NautilusShell` object from the class implementation 
         shell->setShellIcon("res/images/icons/nautilus.png");
         NautilusCore::attachShell(shell);
 
-        return NAUTILUS_STATUS_OK;
+        return nautilus::NAUTILUS_STATUS_OK;
     }
 
 A call to `NautilusCore::terminate()` is required before the program exits, as the thread running the application loop is joined then. Otherwise, the application loop will not even get started and you will not see any window or other visual output. The `NautilusCore`-object is implemented as a singleton, meaning there will only ever be one instance of the class which you never have to instantiate (you can just use the functions defined in the class straight-out-of-the-box):
 
     /**
      * Cleans allocated resources
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus clean(void) {
+    nautilus::NautilusStatus clean(void) {
         NautilusCore::terminate();
         delete shell;
-        return NAUTILUS_STATUS_OK;
+        return nautilus::NAUTILUS_STATUS_OK;
     }
 
     /**
@@ -121,7 +121,7 @@ A call to `NautilusCore::terminate()` is required before the program exits, as t
     int main() {
         run();
         clean();
-        return NAUTILUS_STATUS_OK;
+        return nautilus::NAUTILUS_STATUS_OK;
     }
 
 You can create as many different shell objects and derived classes of it, as long as you always write the necessary function implementations. A `NautilusShell` object essentially represents a window containing a graphics context from the chosen graphics API.

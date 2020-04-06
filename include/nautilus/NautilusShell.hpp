@@ -23,14 +23,14 @@
 class NautilusShell {
 public:
 
-    GLFWwindow*         m_window            = nullptr;
-    bool                m_attached          = false;
-    std::mutex          m_attachedLock;
-    uint32_t            m_id;
-    std::mutex          m_idLock;
-    bool                m_callbacksSet      = false;
-    bool                m_defaultKeyBinds   = true;
-    NautilusAPI         m_API               = NAUTILUS_API_UNSPECIFIED;;
+    GLFWwindow*                 m_window            = nullptr;
+    bool                        m_attached          = false;
+    std::mutex                  m_attachedLock;
+    uint32_t                    m_id;
+    std::mutex                  m_idLock;
+    bool                        m_callbacksSet      = false;
+    bool                        m_defaultKeyBinds   = true;
+    nautilus::NautilusAPI       m_API               = nautilus::NAUTILUS_API_UNSPECIFIED;;
 
     /**
      * Default constructor
@@ -39,14 +39,14 @@ public:
 
     /**
      * Gets executed when the shell gets attached to the core
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
     virtual void onAttach(void) = 0;
 
     /**
      * Gets executed at the specified frequency by the application loop
      * Computes rendering operations
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
     virtual void onRender(void) = 0;
 
@@ -119,96 +119,96 @@ public:
     /**
      * Sets the camera mode for the shell
      * @param _mode The mode to set the camera to
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual NautilusStatus setShellCamera(NautilusCameraMode _mode);
+    virtual nautilus::NautilusStatus setShellCamera(nautilus::NautilusCameraMode _mode);
 
     /**
      * Sets the shell to 2D/3D mode
      * @param _dim The amount of dimensions
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus setShellDimension(NautilusDimension _dim);
+    nautilus::NautilusStatus setShellDimension(nautilus::NautilusDimension _dim);
 
     /**
      * Sets the window context to fullscreen, borderless or windowed
      * @param _context The NautilusShellContext to set the shell to
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus setShellContext(NautilusShellContext _context);
+    nautilus::NautilusStatus setShellContext(nautilus::NautilusShellContext _context);
 
     /**
      * Sets the shells title
      * @param _title The title of the window
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus setShellTitle(std::string _title);
+    nautilus::NautilusStatus setShellTitle(std::string _title);
 
     /**
      * Sets the shell window size
      * @param _width The width of the window
      * @param _height The height of the window
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus setShellExtent(uint32_t _width, uint32_t _height);
+    nautilus::NautilusStatus setShellExtent(uint32_t _width, uint32_t _height);
 
     /**
      * Sets the shells window icon
      * @param _path The path to the icon on disk
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus setShellIcon(std::string _path);
+    nautilus::NautilusStatus setShellIcon(std::string _path);
 
     /**
      * Creates the actual shell window
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus createWindow(void);
+    nautilus::NautilusStatus createWindow(void);
 
     /**
      * Sets the default window hints for the corresponding API
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual NautilusStatus setDefaultWindowHints(void) = 0;
+    virtual nautilus::NautilusStatus setDefaultWindowHints(void) = 0;
 
     /**
      * Sets the necessary callback pointers
-     * @returns Returns a NautilusStatus status code
+     * @returns Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus setCallbacks(void);
+    nautilus::NautilusStatus setCallbacks(void);
 
     /**
      * Initializes the graphics API
      * Must be implemented by derived API shell
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual NautilusStatus initAPI(void) = 0;
+    virtual nautilus::NautilusStatus initAPI(void) = 0;
 
     /**
      * Executes API-specific rendering routines
      * Must be implemented by derived API shell
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual NautilusStatus render(void) = 0;
+    virtual nautilus::NautilusStatus render(void) = 0;
 
     /**
      * Executes API-specific cleanup and garbage collection routines
      * Must be implemented by derived API shell
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual NautilusStatus clean(void) = 0;
+    virtual nautilus::NautilusStatus clean(void) = 0;
 
     /**
      * Attaches and initializes the shell
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus attach(void); 
+    nautilus::NautilusStatus attach(void); 
 
     /**
      * Detaches the shell from the core
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus detach(void);
+    nautilus::NautilusStatus detach(void);
 
     /**
      * Default destructor
@@ -217,17 +217,17 @@ public:
 
 protected:
 
-    NautilusShellContext    m_shellContext      = NAUTILUS_SHELL_CONTEXT_WINDOWED;
-    GLFWmonitor*            m_monitor;
-    std::string             m_title             = "Nautilus by D3PSI";
-    uint32_t                m_width             = 1280;
-    uint32_t                m_height            = 720;
-    std::string             m_shellIconPath     = "res/images/icons/nautilus.png";
-    bool                    m_windowCreated     = false;
-    bool                    m_initializedAPI    = false;
-    NautilusDimension       m_dim               = NAUTILUS_DIMENSION_2D;
-    NautilusCameraMode      m_cameraMode        = NAUTILUS_CAMERA_MODE_FPS;
-    NautilusCamera*         m_camera;
+    nautilus::NautilusShellContext  m_shellContext      = nautilus::NAUTILUS_SHELL_CONTEXT_WINDOWED;
+    GLFWmonitor*                    m_monitor;
+    std::string                     m_title             = "Nautilus by D3PSI";
+    uint32_t                        m_width             = 1280;
+    uint32_t                        m_height            = 720;
+    std::string                     m_shellIconPath     = "res/images/icons/nautilus.png";
+    bool                            m_windowCreated     = false;
+    bool                            m_initializedAPI    = false;
+    nautilus::NautilusDimension     m_dim               = nautilus::NAUTILUS_DIMENSION_2D;
+    nautilus::NautilusCameraMode    m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_FPS;
+    NautilusCamera*                 m_camera;
 
 };
 

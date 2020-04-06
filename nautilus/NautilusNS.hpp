@@ -62,9 +62,9 @@ namespace nautilus {
      * Defines a wrapper function to free a loaded image using stb_image.h, 
      * because said file can only be included in *one* .cpp-source file
      * @param _pixels The array of pixels as an unsigned char pointer
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */
-    NautilusStatus freeSTBI(unsigned char* _pixels);
+    nautilus::NautilusStatus freeSTBI(unsigned char* _pixels);
 
     /**
      * Finds the index of an element in a std::vector
@@ -86,9 +86,9 @@ namespace nautilus {
 
     /**
      * Creates the Vulkan instance object
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus createVulkanInstance(void);
+    nautilus::NautilusStatus createVulkanInstance(void);
 
     /**
      * Checks whether Vulkan validation layers are supported
@@ -104,9 +104,9 @@ namespace nautilus {
 
     /**
      * Creates the debug messenger for Vulkan validation layers
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus createVulkanDebugMessenger(void);
+    nautilus::NautilusStatus createVulkanDebugMessenger(void);
 
     /**
      * Callback function for Vulkan debug messenger
@@ -141,9 +141,9 @@ namespace nautilus {
      * @param _instance The Vulkan instance handle
      * @param _debugMessenger The actual messenger handle
      * @param _pAllocator The Vulkan allocator
-     * @return Returns a NautilusStatus status code
+     * @return Returns a nautilus::NautilusStatus status code
      */ 
-    NautilusStatus destroyVulkanDebugUtilsMessenger(
+    nautilus::NautilusStatus destroyVulkanDebugUtilsMessenger(
         VkInstance                          _instance,
         VkDebugUtilsMessengerEXT            _debugMessenger,
         const VkAllocationCallbacks*        _pAllocator);
