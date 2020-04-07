@@ -695,6 +695,7 @@ nautilus::NautilusStatus NautilusVulkanShell::showNextSwapchainImage() {
 }
 
 nautilus::NautilusStatus NautilusVulkanShell::recreateSwapchain() {
+    nautilus::logger::log("recreate");
     if(this->m_firstRecreation) return nautilus::NAUTILUS_STATUS_OK;
     vkDeviceWaitIdle(this->m_logicalDevice);
     std::unique_lock< std::mutex > commandLock(this->m_commandBufferLock);

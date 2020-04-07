@@ -286,8 +286,8 @@ protected:
     bool                            m_windowCreated     = false;
     bool                            m_initializedAPI    = false;
     nautilus::NautilusDimension     m_dim               = nautilus::NAUTILUS_DIMENSION_2D;
-    nautilus::NautilusCameraMode    m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_FPS;
-    NautilusCamera*                 m_camera;
+    nautilus::NautilusCameraMode    m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_2D;
+    NautilusCamera*                 m_camera            = new NautilusCamera2D();
 
 };
 
