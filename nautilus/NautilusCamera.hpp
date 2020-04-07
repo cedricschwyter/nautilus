@@ -25,9 +25,9 @@ public:
     } m_cameraVectors;
 
     struct NautilusCameraEulerAngles {
-        double m_yaw                = 0.0;
-        double m_pitch              = 0.0;
-        double m_roll               = 0.0;
+        float m_yaw                 = 0.0f;
+        float m_pitch               = 0.0f;
+        float m_roll                = 0.0f;
     } m_angles;
 
     /**
@@ -46,9 +46,9 @@ public:
     NautilusCamera(
         NautilusCameraVectors       _vec,
         NautilusCameraEulerAngles   _ang,
-        double                      _speed  = nautilus::defaults::CAMERA_SPEED,
-        double                      _sens   = nautilus::defaults::CAMERA_SENS,
-        double                      _fov    = nautilus::defaults::CAMERA_FOV);
+        float                       _speed  = nautilus::defaults::CAMERA_SPEED,
+        float                       _sens   = nautilus::defaults::CAMERA_SENS,
+        float                       _fov    = nautilus::defaults::CAMERA_FOV);
 
     /**
      * Default destructor

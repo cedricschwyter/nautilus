@@ -8,9 +8,17 @@ class NautilusCameraFocus
 public:
 
     /**
-     * Default constructor
+     * Constructor with arguments
+     * @param _focus The focal point of the focus camera
      */ 
-    NautilusCameraFocus(void);
+    NautilusCameraFocus(glm::vec3 _focus = nautilus::defaults::WORLD_ORIGIN);
+
+    /**
+     * Focuses the camera onto a point in world space
+     * @param _focus The point to focus
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus focus(glm::vec3 _focus);
 
     /**
      * Handles keyboard input
@@ -49,6 +57,8 @@ public:
     ~NautilusCameraFocus(void);
 
 private:
+
+    glm::vec3 m_focus = nautilus::defaults::WORLD_ORIGIN;
 
 };
 

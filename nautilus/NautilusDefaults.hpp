@@ -10,6 +10,10 @@ namespace nautilus {
         extern const float                          CAMERA_SPEED;
         extern const float                          CAMERA_SENS;
         extern const float                          CAMERA_FOV;
+        extern const float                          CAMERA_MIN_FOV;
+        extern const float                          CAMERA_MAX_FOV;
+        extern const float                          CAMERA_MIN_PITCH;
+        extern const float                          CAMERA_MAX_PITCH;
 
         extern const glm::vec3                      WORLD_ORIGIN;
         extern const glm::vec3                      WORLD_UP_GL;

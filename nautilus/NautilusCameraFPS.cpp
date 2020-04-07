@@ -41,7 +41,7 @@ void NautilusCameraFPS::mouseInput(GLFWwindow* _window, double _x, double _y) {
         yOff *= this->m_sens;
         this->m_angles.m_yaw += xOff;
         this->m_angles.m_pitch += yOff;
-        this->m_angles.m_pitch = std::clamp(this->m_angles.m_pitch, -89.0, 89.0);
+        this->m_angles.m_pitch = std::clamp(this->m_angles.m_pitch, nautilus::defaults::CAMERA_MIN_PITCH, nautilus::defaults::CAMERA_MAX_PITCH);
         this->update();
     }
 }
@@ -49,7 +49,7 @@ void NautilusCameraFPS::mouseInput(GLFWwindow* _window, double _x, double _y) {
 void NautilusCameraFPS::scrollInput(GLFWwindow* _window, double _dx, double _dy) {
     if(this->m_inputEnabled) {
         this->m_fov -= _dy;
-        this->m_fov = std::clamp(this->m_fov, 1.0f, 130.0f);
+        this->m_fov = std::clamp(this->m_fov, nautilus::defaults::CAMERA_MIN_FOV, nautilus::defaults::CAMERA_MAX_FOV);
     }
 }
 
