@@ -12,6 +12,7 @@
 #include "NautilusCamera2D.hpp"
 #include "NautilusCameraMode.hpp"
 #include "NautilusDimension.hpp"
+#include "NautilusViewport.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -239,6 +240,21 @@ public:
     nautilus::NautilusStatus setShellIcon(std::string _path);
 
     /**
+     * Sets the viewport for the shell
+     * @param _viewport The viewport extent data
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus setShellViewport(nautilus::NautilusViewport _viewport);
+
+    /**
+     * Updates the viewport dynamically
+     * Must be implemented by derived API shell
+     * @param _viewport The viewport extent data
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus updateShellViewport(nautilus::NautilusViewport _viewport) = 0;
+
+    /**
      * Creates the actual shell window
      * @return Returns a nautilus::NautilusStatus status code
      */
@@ -288,6 +304,7 @@ protected:
     nautilus::NautilusDimension     m_dim               = nautilus::NAUTILUS_DIMENSION_2D;
     nautilus::NautilusCameraMode    m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_FPS;
     NautilusCamera*                 m_camera;
+    nautilus::NautilusViewport      m_viewport;
 
 };
 

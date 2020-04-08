@@ -231,4 +231,9 @@ nautilus::NautilusStatus NautilusShell::setShellDimension(nautilus::NautilusDime
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
+nautilus::NautilusStatus NautilusShell::setShellViewport(nautilus::NautilusViewport _viewport) {
+    this->m_viewport = _viewport;
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
 #endif      // NAUTILUS_SHELL_CPP

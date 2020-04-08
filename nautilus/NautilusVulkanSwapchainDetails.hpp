@@ -8,9 +8,9 @@
 namespace nautilus {
 
     struct NautilusVulkanSwapchainDetails {
-        VkSurfaceCapabilitiesKHR            surfaceCapabilities;
-        std::vector< VkSurfaceFormatKHR >   supportedFormats;
-        std::vector< VkPresentModeKHR >     presentationModes;
+        VkSurfaceCapabilitiesKHR            m_surfaceCapabilities;
+        std::vector< VkSurfaceFormatKHR >   m_supportedFormats;
+        std::vector< VkPresentModeKHR >     m_presentationModes;
     };
 
 }

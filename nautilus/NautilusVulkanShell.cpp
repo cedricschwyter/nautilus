@@ -103,8 +103,8 @@ uint32_t NautilusVulkanShell::evaluateDeviceSuitabilityScore(VkPhysicalDevice _d
         score += 1000;
     if(!family.isComplete() 
         || !this->checkDeviceSwapchainExtensionSupport(_device) 
-        || swapchainDetails.supportedFormats.empty() 
-        || swapchainDetails.presentationModes.empty()
+        || swapchainDetails.m_supportedFormats.empty() 
+        || swapchainDetails.m_presentationModes.empty()
         || !physicalDeviceFeatures.samplerAnisotropy)       // absolutely necessary features needed to run application on that GPU
         return 0;
     return score;
@@ -168,7 +168,7 @@ nautilus::NautilusVulkanQueueFamily NautilusVulkanShell::findSuitableQueueFamily
     int i = 0;
     for(const auto& qF : queueFamily) {
         if(qF.queueCount > 0 && (qF.queueFlags & VK_QUEUE_GRAPHICS_BIT))   // Does the queue family have at least one queue and does it support graphics-operations?
-            family.graphicsFamilyIndex = i;
+            family.m_graphicsFamilyIndex = i;
         VkBool32 presentSupport = false;
         vkGetPhysicalDeviceSurfaceSupportKHR(
             _device,
@@ -176,10 +176,10 @@ nautilus::NautilusVulkanQueueFamily NautilusVulkanShell::findSuitableQueueFamily
             this->m_surface,
             &presentSupport);
         if(qF.queueCount > 0 && presentSupport)            // Also a presentation queue family is needed to actually display to the surface
-            family.presentationFamilyIndex = i;
+            family.m_presentationFamilyIndex = i;
         if(qF.queueCount > 0 && (qF.queueFlags & VK_QUEUE_TRANSFER_BIT) 
             && !(qF.queueFlags & VK_QUEUE_GRAPHICS_BIT))    // Transfer queue for memory operations
-            family.transferFamilyIndex = i;
+            family.m_transferFamilyIndex = i;
         if(family.isComplete()) 
             break;
         i++;
@@ -190,7 +190,7 @@ nautilus::NautilusVulkanQueueFamily NautilusVulkanShell::findSuitableQueueFamily
 nautilus::NautilusVulkanSwapchainDetails NautilusVulkanShell::querySwapchainDetails(VkPhysicalDevice _device) {
     nautilus::logger::log("Gathering swapchain details...");
     nautilus::NautilusVulkanSwapchainDetails details;
-    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_device, this->m_surface, &details.surfaceCapabilities);
+    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_device, this->m_surface, &details.m_surfaceCapabilities);
     uint32_t numFormats;
     vkGetPhysicalDeviceSurfaceFormatsKHR(
         _device, 
@@ -198,12 +198,12 @@ nautilus::NautilusVulkanSwapchainDetails NautilusVulkanShell::querySwapchainDeta
         &numFormats, 
         nullptr);
     if(numFormats != 0) {
-        details.supportedFormats.resize(numFormats);
+        details.m_supportedFormats.resize(numFormats);
         vkGetPhysicalDeviceSurfaceFormatsKHR(
             _device,
             this->m_surface,
             &numFormats,
-            details.supportedFormats.data());
+            details.m_supportedFormats.data());
     }
     uint32_t numPresentModes;
     vkGetPhysicalDeviceSurfacePresentModesKHR(
@@ -212,12 +212,12 @@ nautilus::NautilusVulkanSwapchainDetails NautilusVulkanShell::querySwapchainDeta
         &numPresentModes,
         nullptr);
     if(numPresentModes != 0) {     
-        details.presentationModes.resize(numPresentModes);
+        details.m_presentationModes.resize(numPresentModes);
         vkGetPhysicalDeviceSurfacePresentModesKHR(
             _device,
             this->m_surface,
             &numPresentModes,
-            details.presentationModes.data());
+            details.m_presentationModes.data());
     }
     nautilus::logger::log("Successfully gathered swapchain details");
     return details;
@@ -227,7 +227,7 @@ nautilus::NautilusStatus NautilusVulkanShell::createLogicalDevice() {
     nautilus::logger::log("Creating logical device...");
     nautilus::NautilusVulkanQueueFamily family = findSuitableQueueFamily(this->m_physicalDevice);
     std::vector< VkDeviceQueueCreateInfo > deviceQueueCreateInfos;
-    std::set< uint32_t > uniqueQueueFamilies = { family.graphicsFamilyIndex.value(), family.presentationFamilyIndex.value(), family.transferFamilyIndex.value() };
+    std::set< uint32_t > uniqueQueueFamilies = { family.m_graphicsFamilyIndex.value(), family.m_presentationFamilyIndex.value(), family.m_transferFamilyIndex.value() };
     float queuePriority = 1.0f;
     for(uint32_t qF : uniqueQueueFamilies) {
         VkDeviceQueueCreateInfo deviceQueueCreateInfo          = {};
@@ -261,21 +261,21 @@ nautilus::NautilusStatus NautilusVulkanShell::createLogicalDevice() {
     nautilus::logger::log("Retrieving queue handle for graphics queue...");
     vkGetDeviceQueue(
         this->m_logicalDevice,
-        family.graphicsFamilyIndex.value(),
+        family.m_graphicsFamilyIndex.value(),
         0,
         &this->m_graphicsQueue);
     nautilus::logger::log("Successfully retrieved queue handle for graphics queue");
     nautilus::logger::log("Retrieving queue handle for presentation queue...");
     vkGetDeviceQueue(
         this->m_logicalDevice,
-        family.presentationFamilyIndex.value(),
+        family.m_presentationFamilyIndex.value(),
         0,
         &this->m_presentQueue);
     nautilus::logger::log("Successfully retrieved queue handle for presentation queue");
     nautilus::logger::log("Retrieving queue handle for transfer queue...");
     vkGetDeviceQueue(
         this->m_logicalDevice,
-        family.transferFamilyIndex.value(),
+        family.m_transferFamilyIndex.value(),
         0,
         &this->m_transferQueue);
     nautilus::logger::log("Successfully retrieved queue handle for transfer queue");
@@ -285,14 +285,14 @@ nautilus::NautilusStatus NautilusVulkanShell::createLogicalDevice() {
 nautilus::NautilusStatus NautilusVulkanShell::createSwapchain() {
     nautilus::logger::log("Creating swapchain...");
     nautilus::NautilusVulkanSwapchainDetails  details             = this->querySwapchainDetails(this->m_physicalDevice);
-    VkSurfaceFormatKHR              surfaceFormat       = this->evaluateBestSwapchainSurfaceFormat(details.supportedFormats);
-    VkPresentModeKHR                presentMode         = this->evaluateBestSwapchainSurfacePresentMode(details.presentationModes);
-    VkExtent2D                      extent              = this->evaluateSwapchainExtent(details.surfaceCapabilities);
+    VkSurfaceFormatKHR              surfaceFormat       = this->evaluateBestSwapchainSurfaceFormat(details.m_supportedFormats);
+    VkPresentModeKHR                presentMode         = this->evaluateBestSwapchainSurfacePresentMode(details.m_presentationModes);
+    VkExtent2D                      extent              = this->evaluateSwapchainExtent(details.m_surfaceCapabilities);
     this->m_swapchainImageFormat                        = surfaceFormat.format;
     this->m_swapchainImageExtent                        = extent;
-    uint32_t                        swapchainImageCount = details.surfaceCapabilities.minImageCount + 1;
-    if(details.surfaceCapabilities.maxImageCount > 0 && swapchainImageCount > details.surfaceCapabilities.maxImageCount)
-        swapchainImageCount                             = details.surfaceCapabilities.maxImageCount;
+    uint32_t                        swapchainImageCount = details.m_surfaceCapabilities.minImageCount + 1;
+    if(details.m_surfaceCapabilities.maxImageCount > 0 && swapchainImageCount > details.m_surfaceCapabilities.maxImageCount)
+        swapchainImageCount                             = details.m_surfaceCapabilities.maxImageCount;
     VkSwapchainCreateInfoKHR        swapchainCreateInfo = {};
     swapchainCreateInfo.sType                           = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
     swapchainCreateInfo.surface                         = this->m_surface;
@@ -303,15 +303,15 @@ nautilus::NautilusStatus NautilusVulkanShell::createSwapchain() {
     swapchainCreateInfo.imageArrayLayers                = 1;                                          // Amount of layers in an image, always 1, unless doing stereoscopic stuff
     swapchainCreateInfo.imageUsage                      = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;        // Render directly to swapchain
     nautilus::NautilusVulkanQueueFamily family                    = this->findSuitableQueueFamily(this->m_physicalDevice);
-    uint32_t queueFamilyIndices[]                       = { family.graphicsFamilyIndex.value(), family.presentationFamilyIndex.value() };
-    if(family.graphicsFamilyIndex != family.presentationFamilyIndex) {           // If presentation queue and graphics queue are in the same queue family, exclusive ownership is not necessary
+    uint32_t queueFamilyIndices[]                       = { family.m_graphicsFamilyIndex.value(), family.m_presentationFamilyIndex.value() };
+    if(family.m_graphicsFamilyIndex != family.m_presentationFamilyIndex) {           // If presentation queue and graphics queue are in the same queue family, exclusive ownership is not necessary
         swapchainCreateInfo.imageSharingMode            = VK_SHARING_MODE_CONCURRENT;
         swapchainCreateInfo.queueFamilyIndexCount       = 2;
         swapchainCreateInfo.pQueueFamilyIndices         = queueFamilyIndices;
     }
     else  // else it is
         swapchainCreateInfo.imageSharingMode            = VK_SHARING_MODE_EXCLUSIVE;
-    swapchainCreateInfo.preTransform                    = details.surfaceCapabilities.currentTransform;        // Specify current image transform as no transform is necessary
+    swapchainCreateInfo.preTransform                    = details.m_surfaceCapabilities.currentTransform;        // Specify current image transform as no transform is necessary
     swapchainCreateInfo.compositeAlpha                  = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;                   // Window should not be blended with other windows behind it, no thanks
     swapchainCreateInfo.clipped                         = true;                                                // Do not render pixels that are outside the clip space as this is just performance loss
     swapchainCreateInfo.presentMode                     = presentMode;
@@ -464,7 +464,7 @@ nautilus::NautilusStatus NautilusVulkanShell::allocateCommandPools() {
     nautilus::NautilusVulkanQueueFamily family = findSuitableQueueFamily(this->m_physicalDevice);
     VkCommandPoolCreateInfo commandPoolCreateInfo          = {};
     commandPoolCreateInfo.sType                            = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    commandPoolCreateInfo.queueFamilyIndex                 = family.graphicsFamilyIndex.value();
+    commandPoolCreateInfo.queueFamilyIndex                 = family.m_graphicsFamilyIndex.value();
     std::unique_lock< std::mutex > graphicsLock(this->m_graphicsLock);
     ASSERT_VULKAN(vkCreateCommandPool(
         this->m_logicalDevice,
@@ -476,7 +476,7 @@ nautilus::NautilusStatus NautilusVulkanShell::allocateCommandPools() {
     nautilus::logger::log("Allocating command pool...");
     commandPoolCreateInfo                                  = {};
     commandPoolCreateInfo.sType                            = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
-    commandPoolCreateInfo.queueFamilyIndex                 = family.transferFamilyIndex.value();
+    commandPoolCreateInfo.queueFamilyIndex                 = family.m_transferFamilyIndex.value();
     std::unique_lock< std::mutex > transferLock(this->m_transferLock);
     ASSERT_VULKAN(vkCreateCommandPool(
         this->m_logicalDevice,
@@ -787,6 +787,10 @@ nautilus::NautilusStatus NautilusVulkanShell::cleanSwapchain() {
 void NautilusVulkanShell::resize(GLFWwindow* _window, int _w, int _h) {
     this->m_hasFramebufferBeenResized = true;
     this->onResize(_window, _h, _w);
+}
+
+nautilus::NautilusStatus NautilusVulkanShell::updateShellViewport(nautilus::NautilusViewport _viewport) {
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
 #endif      // NAUTILUS_VULKAN_SHELL_CPP

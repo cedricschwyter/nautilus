@@ -43,6 +43,13 @@ public:
     nautilus::NautilusStatus render(void);
 
     /**
+     * Updates the viewport dynamically
+     * @param _viewport The viewport extent data
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus updateShellViewport(nautilus::NautilusViewport _viewport);
+
+    /**
      * Sets the default window hints for the corresponding API
      * @return Returns a nautilus::NautilusStatus status code
      */ 
