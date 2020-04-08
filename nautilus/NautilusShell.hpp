@@ -12,6 +12,7 @@
 #include "NautilusCamera2D.hpp"
 #include "NautilusCameraMode.hpp"
 #include "NautilusDimension.hpp"
+#include "NautilusViewport.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -200,14 +201,14 @@ public:
      * @param _mode The mode to set the camera to
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual nautilus::NautilusStatus setShellCamera(nautilus::NautilusCameraMode _mode);
+    virtual nautilus::NautilusStatus setShellCamera(const nautilus::NautilusCameraMode& _mode);
 
     /**
      * Sets the shell to 2D/3D mode
      * @param _dim The amount of dimensions
      * @return Returns a nautilus::NautilusStatus status code
      */
-    nautilus::NautilusStatus setShellDimension(nautilus::NautilusDimension _dim);
+    nautilus::NautilusStatus setShellDimension(const nautilus::NautilusDimension& _dim);
 
     /**
      * Sets the window context to fullscreen, borderless or windowed
@@ -237,6 +238,21 @@ public:
      * @return Returns a nautilus::NautilusStatus status code
      */
     nautilus::NautilusStatus setShellIcon(std::string _path);
+
+    /**
+     * Sets the viewport for the shell
+     * @param _viewport The viewport extent data
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus setShellViewport(const nautilus::NautilusViewport& _viewport);
+
+    /**
+     * Updates the viewport dynamically
+     * Must be implemented by derived API shell
+     * @param _viewport The viewport extent data
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus updateShellViewport(const nautilus::NautilusViewport& _viewport) = 0;
 
     /**
      * Creates the actual shell window
@@ -288,6 +304,7 @@ protected:
     nautilus::NautilusDimension     m_dim               = nautilus::NAUTILUS_DIMENSION_2D;
     nautilus::NautilusCameraMode    m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_2D;
     NautilusCamera*                 m_camera            = new NautilusCamera2D();
+    nautilus::NautilusViewport      m_viewport;
 
 };
 

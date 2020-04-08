@@ -6,16 +6,16 @@
 namespace nautilus {
 
     struct NautilusVulkanQueueFamily {
-        std::optional< uint32_t > graphicsFamilyIndex;
-        std::optional< uint32_t > presentationFamilyIndex;
-        std::optional< uint32_t > transferFamilyIndex;
+        std::optional< uint32_t > m_graphicsFamilyIndex;
+        std::optional< uint32_t > m_presentationFamilyIndex;
+        std::optional< uint32_t > m_transferFamilyIndex;
 
         /**
          * Checks whether a queue family index has been found
          * @return Returns true if an index exists for every required queue 
          */
         bool isComplete(void) {
-            return graphicsFamilyIndex.has_value() && presentationFamilyIndex.has_value() && transferFamilyIndex.has_value();
+            return m_graphicsFamilyIndex.has_value() && m_presentationFamilyIndex.has_value() && m_transferFamilyIndex.has_value();
         }
     };
 

@@ -713,6 +713,7 @@
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusStatus.hpp"
+#include "NautilusViewport.hpp"
 #include "NautilusVulkanBuffer.hpp"
 #include "NautilusVulkanDepthBuffer.hpp"
 #include "NautilusVulkanDescriptor.hpp"
