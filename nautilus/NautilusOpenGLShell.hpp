@@ -64,7 +64,7 @@ public:
     /**
      * Default destructor
      */ 
-    ~NautilusOpenGLShell(void) = default;
+    ~NautilusOpenGLShell(void);
 
 };
 

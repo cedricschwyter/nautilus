@@ -6,6 +6,14 @@
 
 #include <iostream>
 
+NautilusShell::NautilusShell() {
+    this->m_camera = new NautilusCamera2D();
+}
+
+NautilusShell::~NautilusShell() {
+    delete this->m_camera;
+}
+
 void NautilusShell::onDetach(GLFWwindow* _window) {
     nautilus::logger::log("onDetach");
 }

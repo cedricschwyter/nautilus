@@ -79,7 +79,7 @@ public:
     /**
      * Default destructor
      */ 
-    ~NautilusVulkanShell(void) = default;
+    ~NautilusVulkanShell(void);
 
 protected:
 

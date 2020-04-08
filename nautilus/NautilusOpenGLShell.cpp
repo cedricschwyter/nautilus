@@ -7,6 +7,9 @@ NautilusOpenGLShell::NautilusOpenGLShell() {
     this->m_API = nautilus::NAUTILUS_API_OPENGL;
 }
 
+NautilusOpenGLShell::~NautilusOpenGLShell() {
+}
+
 void NautilusOpenGLShell::onAttach() {
 }
 

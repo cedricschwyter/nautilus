@@ -7,6 +7,9 @@ NautilusVulkanShell::NautilusVulkanShell() {
     this->m_API = nautilus::NAUTILUS_API_VULKAN;
 }
 
+NautilusVulkanShell::~NautilusVulkanShell() {
+}
+
 void NautilusVulkanShell::onAttach() {
 }
 

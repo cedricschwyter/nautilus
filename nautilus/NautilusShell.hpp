@@ -19,6 +19,9 @@
 #include <map>
 #include <iostream>
 #include <thread>
+#include <algorithm>
+#include <cstring>
+#include <string>
 #include <mutex>
 
 class NautilusShell {
@@ -36,8 +39,8 @@ public:
     /**
      * Default constructor
      */
-    NautilusShell(void) = default;
-
+    NautilusShell(void);
+    
     /**
      * Gets executed when the shell gets attached to the core
      * @return Returns a nautilus::NautilusStatus status code
@@ -289,7 +292,7 @@ public:
     /**
      * Default destructor
      */ 
-    ~NautilusShell(void) = default;
+    ~NautilusShell(void);
 
 protected:
 
@@ -303,7 +306,7 @@ protected:
     bool                            m_initializedAPI    = false;
     nautilus::NautilusDimension     m_dim               = nautilus::NAUTILUS_DIMENSION_2D;
     nautilus::NautilusCameraMode    m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_2D;
-    NautilusCamera*                 m_camera            = new NautilusCamera2D();
+    NautilusCamera*                 m_camera;
     nautilus::NautilusViewport      m_viewport;
 
 };
