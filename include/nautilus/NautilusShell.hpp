@@ -201,14 +201,14 @@ public:
      * @param _mode The mode to set the camera to
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual nautilus::NautilusStatus setShellCamera(nautilus::NautilusCameraMode _mode);
+    virtual nautilus::NautilusStatus setShellCamera(const nautilus::NautilusCameraMode& _mode);
 
     /**
      * Sets the shell to 2D/3D mode
      * @param _dim The amount of dimensions
      * @return Returns a nautilus::NautilusStatus status code
      */
-    nautilus::NautilusStatus setShellDimension(nautilus::NautilusDimension _dim);
+    nautilus::NautilusStatus setShellDimension(const nautilus::NautilusDimension& _dim);
 
     /**
      * Sets the window context to fullscreen, borderless or windowed
@@ -244,7 +244,7 @@ public:
      * @param _viewport The viewport extent data
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    nautilus::NautilusStatus setShellViewport(nautilus::NautilusViewport _viewport);
+    nautilus::NautilusStatus setShellViewport(const nautilus::NautilusViewport& _viewport);
 
     /**
      * Updates the viewport dynamically
@@ -252,7 +252,7 @@ public:
      * @param _viewport The viewport extent data
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual nautilus::NautilusStatus updateShellViewport(nautilus::NautilusViewport _viewport) = 0;
+    virtual nautilus::NautilusStatus updateShellViewport(const nautilus::NautilusViewport& _viewport) = 0;
 
     /**
      * Creates the actual shell window

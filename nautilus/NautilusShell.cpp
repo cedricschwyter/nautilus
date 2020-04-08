@@ -203,7 +203,7 @@ nautilus::NautilusStatus NautilusShell::createWindow() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusShell::setShellCamera(nautilus::NautilusCameraMode _mode) {
+nautilus::NautilusStatus NautilusShell::setShellCamera(const nautilus::NautilusCameraMode& _mode) {
     this->m_cameraMode = _mode;
     delete this->m_camera;
     switch(_mode) {
@@ -226,12 +226,12 @@ nautilus::NautilusStatus NautilusShell::setShellCamera(nautilus::NautilusCameraM
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusShell::setShellDimension(nautilus::NautilusDimension _dim) {
+nautilus::NautilusStatus NautilusShell::setShellDimension(const nautilus::NautilusDimension& _dim) {
     this->m_dim = _dim;
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusShell::setShellViewport(nautilus::NautilusViewport _viewport) {
+nautilus::NautilusStatus NautilusShell::setShellViewport(const nautilus::NautilusViewport& _viewport) {
     this->m_viewport = _viewport;
     return nautilus::NAUTILUS_STATUS_OK;
 }

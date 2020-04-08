@@ -51,7 +51,7 @@ nautilus::NautilusStatus NautilusOpenGLShell::clean() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusOpenGLShell::updateShellViewport(nautilus::NautilusViewport _viewport) {
+nautilus::NautilusStatus NautilusOpenGLShell::updateShellViewport(const nautilus::NautilusViewport& _viewport) {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

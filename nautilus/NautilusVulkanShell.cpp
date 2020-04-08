@@ -789,7 +789,7 @@ void NautilusVulkanShell::resize(GLFWwindow* _window, int _w, int _h) {
     this->onResize(_window, _h, _w);
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::updateShellViewport(nautilus::NautilusViewport _viewport) {
+nautilus::NautilusStatus NautilusVulkanShell::updateShellViewport(const nautilus::NautilusViewport& _viewport) {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

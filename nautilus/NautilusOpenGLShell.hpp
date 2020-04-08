@@ -47,7 +47,7 @@ public:
      * @param _viewport The viewport extent data
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    nautilus::NautilusStatus updateShellViewport(nautilus::NautilusViewport _viewport);
+    nautilus::NautilusStatus updateShellViewport(const nautilus::NautilusViewport& _viewport);
 
     /**
      * Sets the default window hints for the corresponding API
