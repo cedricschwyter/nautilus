@@ -111,7 +111,7 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == apt ]]; then
-        if apt-get -y update && apt-get -y --fix-missing install git cmake make pkg-config gcc-8 g++-8 gdb libglfw3 libglfw3-dev libncurses5-dev libncursesw5-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev; then
+        if apt-get -y update && apt-get -y install git cmake make pkg-config gcc-8 g++-8 gdb libglfw3 libglfw3-dev libncurses5-dev libncursesw5-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"

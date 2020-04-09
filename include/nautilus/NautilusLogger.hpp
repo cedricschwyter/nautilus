@@ -1,9 +1,12 @@
 #ifndef NAUTILUS_LOGGER_HPP
 #define NAUTILUS_LOGGER_HPP
 
-#include "Nautilus.hpp"
+#include "NautilusStatus.hpp"
 
 #include <filesystem>
+#include <string>
+#include <cmath>
+#include <iostream>
 #ifndef _WIN32
 #include <curses.h>
 #include <ncurses.h>
@@ -23,17 +26,17 @@ namespace nautilus {
         /**
          * Initializes the logger
          * @param _logdir The directory to store the logs. If null, logs will not be written to disk.
-         * @return Returns a NautilusStatus status code
+         * @return Returns a nautilus::NautilusStatus status code
          */ 
-        NautilusStatus init(const char* _logdir = nullptr);
+        nautilus::NautilusStatus init(const char* _logdir = nullptr);
 
         /**
          * Creates a new log entry with status level
          * @param _logEntry The entry to log
          * @param _status The status level
-         * @return Returns a NautilusStatus status code
+         * @return Returns a nautilus::NautilusStatus status code
          */ 
-        NautilusStatus log(std::string _logEntry, NautilusStatus _status = NAUTILUS_STATUS_OK);
+        nautilus::NautilusStatus log(std::string _logEntry, nautilus::NautilusStatus _status = NAUTILUS_STATUS_OK);
 
         /**
          * Prints metadata about the application

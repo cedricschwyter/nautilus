@@ -4,23 +4,23 @@
 #include "NautilusCore.hpp"
 #include "NautilusNS.hpp"
 
-NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
+nautilus::NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
     return get().attachShellInternal(_shell);
 }
 
-NautilusStatus NautilusCore::loop() {
+nautilus::NautilusStatus NautilusCore::loop() {
     return get().loopInternal();
 }
 
-NautilusStatus NautilusCore::exit() {
+nautilus::NautilusStatus NautilusCore::exit() {
     return get().exitInternal();
 }
 
-NautilusStatus NautilusCore::terminate() {
+nautilus::NautilusStatus NautilusCore::terminate() {
     return get().terminateInternal();
 }
 
-NautilusStatus NautilusCore::setEnableVulkanValidationLayers() {
+nautilus::NautilusStatus NautilusCore::setEnableVulkanValidationLayers() {
     return get().setEnableVulkanValidationLayersInternal();
 }
 
@@ -32,7 +32,7 @@ NautilusCore& NautilusCore::get() {
     return s_instance;
 }
 
-NautilusStatus NautilusCore::attachShellInternal(NautilusShell* _shell) {
+nautilus::NautilusStatus NautilusCore::attachShellInternal(NautilusShell* _shell) {
     static int32_t id = 0;
     std::unique_lock< std::mutex > idLock(_shell->m_idLock);
     _shell->m_id = id;
@@ -48,10 +48,10 @@ NautilusStatus NautilusCore::attachShellInternal(NautilusShell* _shell) {
             NautilusCore::loop();
         });
     }
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::loopInternal() {
+nautilus::NautilusStatus NautilusCore::loopInternal() {
     glfwInit();
     std::unique_lock< std::mutex > exitLock(nautilus::exitLock);
     while(!nautilus::exit && nautilus::running) {
@@ -81,16 +81,16 @@ NautilusStatus NautilusCore::loopInternal() {
     std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
     glfwTerminate();
     nautilus::logger::terminate();
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::exitInternal() {
+nautilus::NautilusStatus NautilusCore::exitInternal() {
     std::scoped_lock< std::mutex > exitLock(nautilus::exitLock);
     nautilus::exit = true;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::terminateInternal() {
+nautilus::NautilusStatus NautilusCore::terminateInternal() {
     m_t0->join();
     std::unique_lock< std::mutex > exitMutex(nautilus::exitLock);
     nautilus::exit = true;
@@ -98,12 +98,12 @@ NautilusStatus NautilusCore::terminateInternal() {
     std::scoped_lock< std::mutex > lock(nautilus::threadpoolLock);
     for(std::thread* t : nautilus::threadpool) t->join();
     for(std::thread* t : nautilus::threadpool) delete t;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
-NautilusStatus NautilusCore::setEnableVulkanValidationLayersInternal() {
+nautilus::NautilusStatus NautilusCore::setEnableVulkanValidationLayersInternal() {
     nautilus::enableVulkanValidationLayers = true;
-    return NAUTILUS_STATUS_OK;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
 NautilusCore::~NautilusCore() {

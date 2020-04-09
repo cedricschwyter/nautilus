@@ -2,6 +2,8 @@
 #define NAUTILUS_VULKAN_BUFFER_HPP
 
 #include "NautilusLogger.hpp"
+#include "NautilusNS.hpp"
+#include "NautilusVulkanQueueFamily.hpp"
 #include "NautilusVulkanCoreHandles.hpp"
 
 #include <vulkan/vulkan.h>

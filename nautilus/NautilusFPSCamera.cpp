@@ -3,10 +3,6 @@
 
 #include "NautilusFPSCamera.hpp"
 
-NautilusFPSCamera::NautilusFPSCamera() {
-}
 
-NautilusFPSCamera::~NautilusFPSCamera() {
-}
 
 #endif      // NAUTILUS_FPS_CAMERA_CPP

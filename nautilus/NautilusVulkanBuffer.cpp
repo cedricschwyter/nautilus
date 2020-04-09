@@ -2,6 +2,7 @@
 #define NAUTILUS_VULKAN_BUFFER_CPP
 
 #include "NautilusVulkanBuffer.hpp"
+#include "NautilusAssert.hpp"
 
 NautilusVulkanBuffer::NautilusVulkanBuffer() {
 }
@@ -36,7 +37,7 @@ NautilusVulkanBuffer::NautilusVulkanBuffer(
     const VkBufferUsageFlags&                   _usage, 
     const VkMemoryPropertyFlags&                _prop) : m_core(_core) {
     VkBufferCreateInfo createInfo = {};
-    NautilusVulkanQueueFamily fam = nautilus::findSuitableVulkanQueueFamily(this->m_core.m_physicalDevice, this->m_core.m_surface);
+    nautilus::NautilusVulkanQueueFamily fam = nautilus::findSuitableVulkanQueueFamily(this->m_core.m_physicalDevice, this->m_core.m_surface);
     this->m_info = createInfo;
     nautilus::logger::log("Creating buffer...");
     ASSERT_VULKAN(vkCreateBuffer(

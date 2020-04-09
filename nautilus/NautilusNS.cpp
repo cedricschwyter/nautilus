@@ -8,7 +8,7 @@
 
 namespace nautilus {
 
-    std::string                         globalApplicationName                   = "Nautilus by D3PSI";
+    const std::string                   globalApplicationName                   = "Nautilus by D3PSI";
     bool                                exit                                    = false;
     std::mutex                          exitLock;
     bool                                running                                 = false;
@@ -48,7 +48,7 @@ namespace nautilus {
                     _req_comp));
     }
 
-    NautilusStatus freeSTBI(unsigned char* _pixels) {
+    nautilus::NautilusStatus freeSTBI(unsigned char* _pixels) {
         stbi_image_free(_pixels);
         return NAUTILUS_STATUS_OK;
     }
@@ -83,7 +83,7 @@ namespace nautilus {
         return result;
     }
 
-    NautilusStatus createVulkanInstance() {
+    nautilus::NautilusStatus createVulkanInstance() {
         if(nautilus::vulkanInstanceCreated) return NAUTILUS_STATUS_OK;
         nautilus::logger::log("Requesting Vulkan validation layers...");
         if(nautilus::enableVulkanValidationLayers && nautilus::vulkanValidationLayersSupported())
@@ -159,7 +159,7 @@ namespace nautilus {
         return extensions;
     }
 
-    NautilusStatus createVulkanDebugMessenger() {
+    nautilus::NautilusStatus createVulkanDebugMessenger() {
         if(!nautilus::enableVulkanValidationLayers) return NAUTILUS_STATUS_OK;
         nautilus::logger::log("Creating Vulkan debug utils messenger...");
         VkDebugUtilsMessengerCreateInfoEXT debugUtilsMessengerCreateInfo        = {};
@@ -214,7 +214,7 @@ namespace nautilus {
             return VK_ERROR_EXTENSION_NOT_PRESENT;
     }
 
-    NautilusStatus destroyVulkanDebugUtilsMessenger(
+    nautilus::NautilusStatus destroyVulkanDebugUtilsMessenger(
         VkInstance                          _instance,
         VkDebugUtilsMessengerEXT            _debugMessenger,
         const VkAllocationCallbacks*        _pAllocator) {
@@ -236,7 +236,7 @@ namespace nautilus {
         int i = 0;
         for(const auto& qF : queueFamily) {
             if(qF.queueCount > 0 && (qF.queueFlags & VK_QUEUE_GRAPHICS_BIT))   // Does the queue family have at least one queue and does it support graphics-operations?
-                family.graphicsFamilyIndex = i;
+                family.m_graphicsFamilyIndex = i;
             VkBool32 presentSupport = false;
             vkGetPhysicalDeviceSurfaceSupportKHR(
                 _device,
@@ -244,10 +244,10 @@ namespace nautilus {
                 _surface,
                 &presentSupport);
             if(qF.queueCount > 0 && presentSupport)            // Also a presentation queue family is needed to actually display to the surface
-                family.presentationFamilyIndex = i;
+                family.m_presentationFamilyIndex = i;
             if(qF.queueCount > 0 && (qF.queueFlags & VK_QUEUE_TRANSFER_BIT) 
                 && !(qF.queueFlags & VK_QUEUE_GRAPHICS_BIT))    // Transfer queue for memory operations
-                family.transferFamilyIndex = i;
+                family.m_transferFamilyIndex = i;
             if(family.isComplete()) 
                 break;
             i++;

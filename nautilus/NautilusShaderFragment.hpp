@@ -1,0 +1,8 @@
+#ifndef NAUTILUS_SHADER_FRAGMENT_HPP
+#define NAUTILUS_SHADER_FRAGMENT_HPP
+
+#include "NautilusShader.hpp"
+
+
+
+#endif      // NAUTILUS_SHADER_FRAGMENT_HPP
