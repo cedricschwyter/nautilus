@@ -29,3 +29,7 @@
 [submodule "ext/vulkan"]
 	path = ext/vulkan
 	url = https://github.com/KhronosGroup/Vulkan-Headers.git
+
+[submodule "ext/ncurses"]
+	path = ext/ncurses
+	url = https://github.com/mirror/ncurses.git
