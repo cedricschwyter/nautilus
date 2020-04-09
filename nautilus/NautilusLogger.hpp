@@ -4,8 +4,10 @@
 #include "Nautilus.hpp"
 
 #include <filesystem>
+#ifndef _WIN32
 #include <curses.h>
 #include <ncurses.h>
+#endif      // _WIN32
 #include <fstream>
 #include <mutex>
 #include <chrono>
