@@ -3,6 +3,7 @@
 
 #include "NautilusShaderComponentType.hpp"
 #include "NautilusStatus.hpp"
+#include "NautilusShaderStage.hpp"
 
 #include <string>
 

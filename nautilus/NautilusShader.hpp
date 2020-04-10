@@ -6,7 +6,7 @@
 #include "NautilusShaderComponent.hpp"
 #include "NautilusShaderComponentUniform.hpp"
 #include "NautilusShaderComponentUniformType.hpp"
-#include "NautilusShaderComponentUniformInOut.hpp"
+#include "NautilusShaderComponentInOut.hpp"
 
 #include <string>
 
