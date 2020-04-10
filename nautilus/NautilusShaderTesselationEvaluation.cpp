@@ -3,6 +3,10 @@
 
 #include "NautilusShaderTesselationEvaluation.hpp"
 
+NautilusShaderTesselationEvaluation::NautilusShaderTesselationEvaluation() {
+}
 
+NautilusShaderTesselationEvaluation::~NautilusShaderTesselationEvaluation() {
+}
 
 #endif      // NAUTILUS_SHADER_TESSELATION_EVALUATION_CPP

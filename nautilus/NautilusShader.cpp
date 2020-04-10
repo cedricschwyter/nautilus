@@ -9,6 +9,10 @@ NautilusShader::NautilusShader() {
 NautilusShader::NautilusShader(NautilusAPI _api) : m_api(_api) {
 }
 
+NautilusStatus NautilusShader::attach(NautilusShaderComponent* _comp) {
+    return NAUTILUS_STATUS_OK;
+}
+
 NautilusShader::~NautilusShader() {
 }
 

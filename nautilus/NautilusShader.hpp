@@ -3,10 +3,10 @@
 
 #include "NautilusAPI.hpp"
 #include "NautilusStatus.hpp"
-#include "NautilusShaderUniformInOut.hpp"
-#include "NautilusShaderUniformType.hpp"
 #include "NautilusShaderComponent.hpp"
-#include "NautilusShaderUniform.hpp"
+#include "NautilusShaderComponentUniform.hpp"
+#include "NautilusShaderComponentUniformType.hpp"
+#include "NautilusShaderComponentUniformInOut.hpp"
 
 #include <string>
 
@@ -20,7 +20,7 @@ public:
 
     /**
      * Constructor with arguments
-     * @param _api The nautilus api to construct shader source for
+     * @param _api The nautilus API to construct shader source for
      */
     NautilusShader(NautilusAPI _api); 
 

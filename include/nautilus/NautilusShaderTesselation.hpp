@@ -1,8 +1,42 @@
 #ifndef NAUTILUS_SHADER_TESSELATION_HPP
 #define NAUTILUS_SHADER_TESSELATION_HPP
 
-#include "NautilusShader.hpp"
+#include "NautilusShaderTesselationControl.hpp"
+#include "NautilusShaderTesselationEvaluation.hpp"
 
+class NautilusShaderTesselation {
+public:
 
+    /**
+     * Default constructor
+     */
+    NautilusShaderTesselation(void); 
+
+    /**
+     * Sets the corresponding shader objects
+     * @param _shader The shader object
+     * @return Returns a NautilusStatus status code
+     */ 
+    NautilusStatus setControl(const NautilusShaderTesselationControl& _shader);
+    NautilusStatus setEvaluation(const NautilusShaderTesselationEvaluation& _shader);
+
+    /**
+     * Returns the corresponding shader
+     * @return Returns a NautilusShader object of the corresponding shader
+     */ 
+    NautilusShaderTesselationControl control(void);
+    NautilusShaderTesselationEvaluation evaluation(void);
+
+    /**
+     * Default destructor
+     */
+    ~NautilusShaderTesselation(void); 
+
+private:
+
+    NautilusShaderTesselationControl    m_control;
+    NautilusShaderTesselationEvaluation m_evaluation;
+
+};
 
 #endif      // NAUTILUS_SHADER_TESSELATION_HPP

@@ -3,6 +3,10 @@
 
 #include "NautilusShaderVertex.hpp"
 
+NautilusShaderVertex::NautilusShaderVertex() {
+}
 
+NautilusShaderVertex::~NautilusShaderVertex() {
+}
 
 #endif      // NAUTILUS_SHADER_VERTEX_CPP

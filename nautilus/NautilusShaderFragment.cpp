@@ -3,6 +3,10 @@
 
 #include "NautilusShaderFragment.hpp"
 
+NautilusShaderFragment::NautilusShaderFragment() {
+}
 
+NautilusShaderFragment::~NautilusShaderFragment() {
+}
 
 #endif      // NAUTILUS_SHADER_FRAGMENT_CPP

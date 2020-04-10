@@ -3,6 +3,10 @@
 
 #include "NautilusShaderCompute.hpp"
 
+NautilusShaderCompute::NautilusShaderCompute() {
+}
 
+NautilusShaderCompute::~NautilusShaderCompute() {
+}
 
 #endif      // NAUTILUS_SHADER_COMPUTE_CPP
