@@ -1,7 +1,9 @@
 #ifndef NAUTILUS_NS_HPP
 #define NAUTILUS_NS_HPP
 
-#include "Nautilus.hpp"
+#include "NautilusLogger.hpp"
+#include "NautilusVulkanQueueFamily.hpp"
+#include "NautilusVulkanCoreHandles.hpp"
 
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.h>
@@ -146,6 +148,28 @@ namespace nautilus {
         VkInstance                          _instance,
         VkDebugUtilsMessengerEXT            _debugMessenger,
         const VkAllocationCallbacks*        _pAllocator);
+
+    /**
+     * Finds suitable queue family indices on a physical device
+     * @param _device The physical device to check
+     * @param _surface The VkSurfaceKHR
+     * @param _handles A structure containing all the important Vulkan handles
+     * @return Returns a NautilusVulkanQueueFamily structure containing all necessary indices
+     */ 
+    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface);
+    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles);
+
+    /**
+     * Returns suitable memory type index
+     * @param _handles The Vulkan core handles
+     * @param _typeFilter The memory type filter for Vulkan GPU memory
+     * @param _memoryPropertyFlags The memory properties
+     * @return Returns either an valid (>0) index or a negative NautilusStatus status code
+     */ 
+    uint32_t enumerateSuitableVulkanMemoryType(
+        const NautilusVulkanCoreHandles&       _handles, 
+        const uint32_t&                        _typeFilter, 
+        const VkMemoryPropertyFlags&           _memoryPropertyFlags);
 
 }
 

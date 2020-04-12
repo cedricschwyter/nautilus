@@ -20,8 +20,8 @@ namespace nautilus {
     uint32_t                            shellCount                              = 0;
     std::mutex                          shellCountLock;
     VkInstance                          vulkanInstance                          = VK_NULL_HANDLE;
-    VkAllocationCallbacks*              vulkanAllocator                         = nullptr;
     bool                                vulkanInstanceCreated                   = false;
+    VkAllocationCallbacks*              vulkanAllocator                         = nullptr;
     bool                                enableVulkanValidationLayers            = false;
     const std::vector< const char* >    vulkanValidationLayers                  = {
             "VK_LAYER_LUNARG_standard_validation",
@@ -227,6 +227,51 @@ namespace nautilus {
             return NAUTILUS_STATUS_FATAL;
     }
 
+    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface) {
+        NautilusVulkanQueueFamily family;
+        uint32_t queueFamilyCount = 0;
+        vkGetPhysicalDeviceQueueFamilyProperties(_device, &queueFamilyCount, nullptr);
+        std::vector< VkQueueFamilyProperties > queueFamily(queueFamilyCount);
+        vkGetPhysicalDeviceQueueFamilyProperties(_device, &queueFamilyCount, queueFamily.data());
+        int i = 0;
+        for(const auto& qF : queueFamily) {
+            if(qF.queueCount > 0 && (qF.queueFlags & VK_QUEUE_GRAPHICS_BIT))   // Does the queue family have at least one queue and does it support graphics-operations?
+                family.graphicsFamilyIndex = i;
+            VkBool32 presentSupport = false;
+            vkGetPhysicalDeviceSurfaceSupportKHR(
+                _device,
+                i, 
+                _surface,
+                &presentSupport);
+            if(qF.queueCount > 0 && presentSupport)            // Also a presentation queue family is needed to actually display to the surface
+                family.presentationFamilyIndex = i;
+            if(qF.queueCount > 0 && (qF.queueFlags & VK_QUEUE_TRANSFER_BIT) 
+                && !(qF.queueFlags & VK_QUEUE_GRAPHICS_BIT))    // Transfer queue for memory operations
+                family.transferFamilyIndex = i;
+            if(family.isComplete()) 
+                break;
+            i++;
+        }
+        return family;
+    }
+
+    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles) {
+        return nautilus::findSuitableVulkanQueueFamily(_handles.m_physicalDevice, _handles.m_surface);
+    }
+
+    uint32_t enumerateSuitableVulkanMemoryType(
+        const NautilusVulkanCoreHandles&       _handles, 
+        const uint32_t&                        _typeFilter, 
+        const VkMemoryPropertyFlags&           _memoryPropertyFlags) {
+        VkPhysicalDeviceMemoryProperties memProp;
+        vkGetPhysicalDeviceMemoryProperties(_handles.m_physicalDevice, &memProp);
+        for (uint32_t i = 0; i < memProp.memoryTypeCount; i++) 
+            // Does the memory type have all of the necessary properties?
+            if (_typeFilter & (1 << i) && (memProp.memoryTypes[i].propertyFlags & _memoryPropertyFlags) == _memoryPropertyFlags)       // Some bitwise-operation magic to find appropriate bit-indices
+                return i;
+        logger::log("Failed to find suitable memory type!", NAUTILUS_STATUS_FATAL);
+        return NAUTILUS_STATUS_FATAL;
+    }
 }
 
 #endif      // NAUTILUS_NS_CPP

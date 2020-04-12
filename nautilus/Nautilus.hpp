@@ -711,6 +711,7 @@
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusStatus.hpp"
+#include "NautilusVulkanCoreHandles.hpp"
 #include "NautilusVulkanPipeline.hpp"
 #include "NautilusVulkanQueueFamily.hpp"
 #include "NautilusVulkanShell.hpp"

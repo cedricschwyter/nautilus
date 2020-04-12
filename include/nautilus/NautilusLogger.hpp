@@ -4,6 +4,10 @@
 #include "Nautilus.hpp"
 
 #include <filesystem>
+#ifndef _WIN32
+#include <curses.h>
+#include <ncurses.h>
+#endif      // _WIN32
 #include <fstream>
 #include <mutex>
 #include <chrono>
@@ -30,6 +34,18 @@ namespace nautilus {
          * @return Returns a NautilusStatus status code
          */ 
         NautilusStatus log(std::string _logEntry, NautilusStatus _status = NAUTILUS_STATUS_OK);
+
+        /**
+         * Prints metadata about the application
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus meta(void);
+
+        /**
+         * Terminates the logger
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus terminate(void);
 
     }
 

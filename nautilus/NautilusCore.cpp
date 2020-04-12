@@ -73,12 +73,14 @@ NautilusStatus NautilusCore::loopInternal() {
             }
             shellLock.lock();
         }
+        nautilus::logger::meta();
         std::scoped_lock< std::mutex > shellCountLock(nautilus::shellCountLock);
         if(nautilus::shellCount == 0) this->exit();
         exitLock.lock();
     }
     std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
     glfwTerminate();
+    nautilus::logger::terminate();
     return NAUTILUS_STATUS_OK;
 }
 
