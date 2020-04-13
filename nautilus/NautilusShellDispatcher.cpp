@@ -47,9 +47,9 @@ namespace nautilus {
                 _mods);
         }
 
-        void mouseScroll(GLFWwindow* _window, double _dx, double _dy) {
+        void scroll(GLFWwindow* _window, double _dx, double _dy) {
             NautilusShell* context = reinterpret_cast< NautilusShell* >(glfwGetWindowUserPointer(_window));
-            context->mouseScroll(_window, _dx, _dy);
+            context->scroll(_window, _dx, _dy);
         }
 
     }

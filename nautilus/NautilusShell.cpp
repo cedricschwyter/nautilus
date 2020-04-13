@@ -15,27 +15,21 @@ NautilusShell::~NautilusShell() {
 }
 
 void NautilusShell::onDetach(GLFWwindow* _window) {
-    nautilus::logger::log("onDetach");
 }
 
 void NautilusShell::onResize(GLFWwindow* _window, int _w, int _h) {
-    nautilus::logger::log("onResize");
 }
 
 void NautilusShell::onFocus(GLFWwindow* _window, int _focus) {
-    nautilus::logger::log("onFocus");
 }
 
 void NautilusShell::onIconify(GLFWwindow* _window, int _iconify) {
-    nautilus::logger::log("onIconify");
 }
 
 void NautilusShell::onCursor(GLFWwindow* _window, double _x, double _y) {
-    nautilus::logger::log("onCursor");
 }
 
 void NautilusShell::onCursorIn(GLFWwindow* _window, int _enter) {
-    nautilus::logger::log("onCursorIn");
 }
 
 void NautilusShell::onKey(
@@ -50,7 +44,6 @@ void NautilusShell::onKey(
 }
 
 void NautilusShell::onScroll(GLFWwindow* _window, double _dx, double _dy) {
-    nautilus::logger::log("onScroll");
 }
 
 void NautilusShell::resize(GLFWwindow* _window, int _w, int _h) {
@@ -94,9 +87,9 @@ void NautilusShell::key(
         _mods);
 }
 
-void NautilusShell::mouseScroll(GLFWwindow* _window, double _dx, double _dy) {
+void NautilusShell::scroll(GLFWwindow* _window, double _dx, double _dy) {
     this->onScroll(_window, _dx, _dy);
-    this->m_camera->scrollInput(_window, _dx, _dy);
+    this->m_camera->scroll(_window, _dx, _dy);
 }
 
 nautilus::NautilusStatus NautilusShell::setShellContext(nautilus::NautilusShellContext _context) {

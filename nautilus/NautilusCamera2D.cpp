@@ -20,7 +20,7 @@ void NautilusCamera2D::keyInput(
 void NautilusCamera2D::mouseInput(GLFWwindow* _window, double _x, double _y) {
 }
 
-void NautilusCamera2D::scrollInput(GLFWwindow* _window, double _dx, double _dy) {
+void NautilusCamera2D::scroll(GLFWwindow* _window, double _dx, double _dy) {
 }
 
 #endif      // NAUTILUS_CAMERA_2D_CPP

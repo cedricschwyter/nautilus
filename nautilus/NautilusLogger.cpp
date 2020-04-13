@@ -3,6 +3,11 @@
 
 #include "NautilusLogger.hpp"
 
+#ifndef _WIN32
+#include <curses.h>
+#include <ncurses.h>
+#endif      // _WIN32
+
 namespace nautilus {
 
     namespace logger {
@@ -26,7 +31,7 @@ namespace nautilus {
             start_color();
             noecho();
             nautilus::logger::logWindow = newwin(LINES, std::floor(COLS / 2), 0, 1);
-            nautilus::logger::metaDataWindow = newwin(std::floor(LINES / 2), std::floor(COLS / 2), std::floor(LINES / 2), 1);
+            nautilus::logger::metaDataWindow = newwin(std::floor(LINES / 2), std::floor(COLS / 2), 0, std::floor(COLS / 2));
             scrollok(nautilus::logger::logWindow, true);
             scrollok(nautilus::logger::metaDataWindow, true);
             #endif      // _WIN32
@@ -47,9 +52,7 @@ namespace nautilus {
                 std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
                 #ifndef _WIN32
                 wmove(nautilus::logger::logWindow, LINES, 1);
-                attron(A_UNDERLINE);
                 waddstr(nautilus::logger::logWindow, timeStringTerm.c_str()); 
-                attroff(A_UNDERLINE);
                 waddstr(nautilus::logger::logWindow, logString.c_str());
                 wrefresh(nautilus::logger::logWindow);
                 #else
@@ -69,8 +72,8 @@ namespace nautilus {
                 std::chrono::duration< double > elapsedTime = now - nautilus::logger::start;
                 std::string meta = "Time: " + std::to_string(elapsedTime.count());
                 std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
-                wmove(nautilus::logger::metaDataWindow, 0, std::floor(COLS / 2));
                 wclear(nautilus::logger::metaDataWindow);
+                wmove(nautilus::logger::metaDataWindow, 0, std::floor(COLS / 2));
                 waddstr(nautilus::logger::metaDataWindow, meta.c_str());
                 wrefresh(nautilus::logger::metaDataWindow);
             }

@@ -85,6 +85,7 @@ NautilusVulkanBuffer& NautilusVulkanBuffer::operator=(const NautilusVulkanBuffer
         1, 
         &copy);
     nautilus::endVulkanCommandBuffer(cmdBuf);
+    return *this;
 }
 
 NautilusVulkanBuffer::~NautilusVulkanBuffer() {

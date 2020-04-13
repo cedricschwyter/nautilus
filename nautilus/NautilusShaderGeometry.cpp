@@ -3,6 +3,10 @@
 
 #include "NautilusShaderGeometry.hpp"
 
+NautilusShaderGeometry::NautilusShaderGeometry() {
+}
 
+NautilusShaderGeometry::~NautilusShaderGeometry() {
+}
 
 #endif      // NAUTILUS_SHADER_GEOMERY_CPP

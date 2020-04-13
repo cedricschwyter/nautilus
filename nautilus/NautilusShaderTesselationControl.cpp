@@ -3,6 +3,10 @@
 
 #include "NautilusShaderTesselationControl.hpp"
 
+NautilusShaderTesselationControl::NautilusShaderTesselationControl() {
+}
 
+NautilusShaderTesselationControl::~NautilusShaderTesselationControl() {
+}
 
 #endif      // NAUTILUS_SHADER_TESSELATION_CONTROL_CPP

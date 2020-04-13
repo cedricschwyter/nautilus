@@ -155,6 +155,7 @@ private:
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Finds suitable queue family indices on a physical device
      * @param _device The physical device to check
      * @return Returns a NautilusVulkanQueueFamily structure containing all necessary indices
@@ -164,6 +165,8 @@ private:
     /**
 =======
 >>>>>>> ncurses
+=======
+>>>>>>> shader
      * Enumerates a physical devices swapchain details
      * @param _device The physical device to check
      * @return Returns a NautilusVulkanSwapchainDetails structure containing all necessary Vulkan information

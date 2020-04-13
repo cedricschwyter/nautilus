@@ -42,7 +42,7 @@ void NautilusCameraFocus::keyInput(
 void NautilusCameraFocus::mouseInput(GLFWwindow* _window, double _x, double _y) {
 }
 
-void NautilusCameraFocus::scrollInput(GLFWwindow* _window, double _dx, double _dy) {
+void NautilusCameraFocus::scroll(GLFWwindow* _window, double _dx, double _dy) {
     if(this->m_inputEnabled) {
         this->m_fov -= _dy;
         this->m_fov = std::clamp(this->m_fov, nautilus::defaults::CAMERA_MIN_FOV, nautilus::defaults::CAMERA_MAX_FOV);

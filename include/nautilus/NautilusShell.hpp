@@ -197,7 +197,7 @@ public:
      * @param _dx The x-offset of the scroll wheel
      * @param _dy The y-offset of the scroll wheel
      */ 
-    virtual void mouseScroll(GLFWwindow* _window, double _dx, double _dy);
+    virtual void scroll(GLFWwindow* _window, double _dx, double _dy);
 
     /*
      * Sets the camera mode for the shell

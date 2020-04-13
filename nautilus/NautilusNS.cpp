@@ -273,7 +273,7 @@ namespace nautilus {
     }
 
     VkCommandBuffer startVulkanCommandBuffer(const nautilus::NautilusVulkanQueueType& _queue) {
-
+        return VkCommandBuffer();
     }
 
     NautilusStatus endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf) {

@@ -1,0 +1,8 @@
+#ifndef NAUTILUS_OPENGL_PIPELINE_CPP
+#define NAUTILUS_OPENGL_PIPELINE_CPP
+
+#include "NautilusOpenGLPipeline.hpp"
+
+
+
+#endif      // NAUTILUS_OPENGL_PIPELINE_CPP

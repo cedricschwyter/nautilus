@@ -3,10 +3,10 @@
 
 #include "NautilusAPI.hpp"
 #include "NautilusStatus.hpp"
-#include "NautilusShaderUniformInOut.hpp"
-#include "NautilusShaderUniformType.hpp"
 #include "NautilusShaderComponent.hpp"
-#include "NautilusShaderUniform.hpp"
+#include "NautilusShaderComponentUniform.hpp"
+#include "NautilusShaderComponentUniformType.hpp"
+#include "NautilusShaderComponentInOut.hpp"
 
 #include <string>
 

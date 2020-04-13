@@ -158,8 +158,8 @@ namespace nautilus {
      * @param _handles A structure containing all the important Vulkan handles
      * @return Returns a NautilusVulkanQueueFamily structure containing all necessary indices
      */ 
-    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface);
-    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles);
+    nautilus::NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface);
+    nautilus::NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles);
 
     /**
      * Returns suitable memory type index
@@ -169,9 +169,9 @@ namespace nautilus {
      * @return Returns either an valid (>0) index or a negative NautilusStatus status code
      */ 
     uint32_t enumerateSuitableVulkanMemoryType(
-        const NautilusVulkanCoreHandles&       _handles, 
-        const uint32_t&                        _typeFilter, 
-        const VkMemoryPropertyFlags&           _memoryPropertyFlags);
+        const nautilus::NautilusVulkanCoreHandles&  _handles, 
+        const uint32_t&                             _typeFilter, 
+        const VkMemoryPropertyFlags&                _memoryPropertyFlags);
 
     /**
      * Starts to record a command buffer for a specified queue type

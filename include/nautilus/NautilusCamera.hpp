@@ -87,7 +87,7 @@ public:
      * @param _dx The x-offset of the scroll wheel
      * @param _dy The y-offset of the scroll wheel
      */ 
-    virtual void scrollInput(GLFWwindow* _window, double _dx, double _dy) = 0;
+    virtual void scroll(GLFWwindow* _window, double _dx, double _dy) = 0;
 
     /**
      * Moves the camera relative to its current position
