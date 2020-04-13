@@ -4,6 +4,7 @@
 #include "NautilusShell.hpp"
 #include "NautilusLogger.hpp"
 #include "NautilusVulkanQueueFamily.hpp"
+#include "NautilusVulkanQueueType.hpp"
 #include "NautilusVulkanCoreHandles.hpp"
 
 #include <GLFW/glfw3.h>
@@ -171,6 +172,23 @@ namespace nautilus {
         const NautilusVulkanCoreHandles&       _handles, 
         const uint32_t&                        _typeFilter, 
         const VkMemoryPropertyFlags&           _memoryPropertyFlags);
+
+    /**
+     * Starts to record a command buffer for a specified queue type
+     * Must immediately after vkCmd* be terminated by 
+     * nautilus::endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf) 
+     * You are going to run into multithreading issues on you GPU otherwie
+     * @param _queue The type of queue to record command buffer for
+     * @return Returns a handle to the VkCommandBuffer
+     */
+    VkCommandBuffer startVulkanCommandBuffer(const nautilus::NautilusVulkanQueueType& _queue);
+
+    /**
+     * Ends the recording of a command buffer
+     * @param _cmdBuf The command buffer to end
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    NautilusStatus endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf);
 
 }
 
