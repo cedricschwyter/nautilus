@@ -1,0 +1,8 @@
+#ifndef NAUTILUS_VULKAN_BUFFER_DEPTH_HPP
+#define NAUTILUS_VULKAN_BUFFER_DEPTH_HPP
+
+#include "NautilusVulkanBuffer.hpp"
+
+
+
+#endif      //  NAUTILUS_VULKAN_BUFFER_DEPTH_HPP

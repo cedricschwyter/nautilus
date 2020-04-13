@@ -24,7 +24,6 @@ namespace nautilus {
     VkAllocationCallbacks*              vulkanAllocator                         = nullptr;
     bool                                enableVulkanValidationLayers            = false;
     const std::vector< const char* >    vulkanValidationLayers                  = {
-            "VK_LAYER_LUNARG_standard_validation",
             "VK_LAYER_KHRONOS_validation"
     };
     VkDebugUtilsMessengerEXT            vulkanValidationLayerDebugMessenger     = VK_NULL_HANDLE;
@@ -272,6 +271,15 @@ namespace nautilus {
         logger::log("Failed to find suitable memory type!", NAUTILUS_STATUS_FATAL);
         return NAUTILUS_STATUS_FATAL;
     }
+
+    VkCommandBuffer startVulkanCommandBuffer(const nautilus::NautilusVulkanQueueType& _queue) {
+
+    }
+
+    NautilusStatus endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf) {
+        return NAUTILUS_STATUS_OK;
+    }
+
 }
 
 #endif      // NAUTILUS_NS_CPP

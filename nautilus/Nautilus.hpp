@@ -704,6 +704,7 @@
 #include "NautilusVulkanCoreHandles.hpp"
 #include "NautilusVulkanPipeline.hpp"
 #include "NautilusVulkanQueueFamily.hpp"
+#include "NautilusVulkanQueueType.hpp"
 #include "NautilusVulkanShell.hpp"
 #include "NautilusVulkanSwapchainDetails.hpp"
 

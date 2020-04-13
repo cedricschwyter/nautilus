@@ -1,0 +1,8 @@
+#ifndef NAUTILUS_VULKAN_BUFFER_VERTEX_CPP
+#define NAUTILUS_VULKAN_BUFFER_VERTEX_CPP
+
+#include "NautilusVulkanBufferVertex.hpp"
+
+
+
+#endif      // NAUTILUS_VULKAN_BUFFER_VERTEX_CPP

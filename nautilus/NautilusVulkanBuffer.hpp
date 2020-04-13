@@ -3,6 +3,9 @@
 
 #include "NautilusLogger.hpp"
 #include "NautilusVulkanCoreHandles.hpp"
+#include "NautilusVulkanQueueFamily.hpp"
+#include "NautilusVulkanQueueType.hpp"
+#include "NautilusNS.hpp"
 
 #include <vulkan/vulkan.h>
 
@@ -37,6 +40,37 @@ public:
         const VkDeviceSize&                         _size, 
         const VkBufferUsageFlags&                   _usage, 
         const VkMemoryPropertyFlags&                _prop);
+
+    /**
+     * Copy constructor
+     * @param _other The other instance to copy values from
+     */
+    NautilusVulkanBuffer(const NautilusVulkanBuffer& _other); 
+
+    /**
+     * Assignment operator
+     * @param _other The other instance to copy values from
+     * @return Returns a reference to a NautilusVulkanBuffer instance
+     */ 
+    NautilusVulkanBuffer& operator=(const NautilusVulkanBuffer& _other);
+
+    /**
+     * Binds a buffer
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    NautilusStatus bind(void);
+
+    /**
+     * Fills a buffer
+     * @param _data The data to fill the buffer with
+     * @param _staging Use a staging buffer
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    template< typename T >
+    NautilusStatus fill(const T& _data, const bool _staging = false);
+    template< typename T >
+    NautilusStatus fill(T&& _data, const bool _staging = false);
+    NautilusStatus fill(const void* _data, const bool _staging = false);
 
     /**
      * Default destructor

@@ -70,6 +70,7 @@ namespace nautilus {
 
         NautilusStatus terminate() {
             endwin();
+            return NAUTILUS_STATUS_OK;
         }
 
     }

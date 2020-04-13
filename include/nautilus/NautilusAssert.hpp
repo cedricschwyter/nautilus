@@ -15,7 +15,7 @@
  */ 
 inline void ASSERT_NAUTILUS(NautilusStatus _status) {
     if(_status < 0) {
-        throw std::runtime_error("Nautilus ran into a fatal problem: " + _status);
+        throw std::runtime_error("Nautilus ran into a fatal problem: CODE " + std::to_string(_status));
     }
 }
 
@@ -26,7 +26,7 @@ inline void ASSERT_NAUTILUS(NautilusStatus _status) {
  */ 
 inline void ASSERT_VULKAN(VkResult _result) {
     if(_result != 0) {
-        throw std::runtime_error("Vulkan ran into a fatal problem: " + _result);
+        throw std::runtime_error("Vulkan ran into a fatal problem: CODE " + std::to_string(_result));
     }
 }
 
