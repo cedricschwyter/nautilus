@@ -23,6 +23,7 @@
 #include <cstring>
 #include <string>
 #include <mutex>
+#include <chrono>
 
 class NautilusShell {
 public:
@@ -276,6 +277,19 @@ public:
     nautilus::NautilusStatus setCallbacks(void);
 
     /**
+     * Sets the shells FPS
+     * @param _fps The maximum FPS of the shell
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus setShellRefreshRate(uint32_t _fps);
+
+    /**
+     * Returns true if the shell needs to refresh
+     * @return Returns true if enough time has passed for the shell to refresh
+     */ 
+    bool mustRender(void);
+
+    /**
      * Initializes the graphics API
      * Must be implemented by derived API shell
      * @return Returns a nautilus::NautilusStatus status code
@@ -308,6 +322,7 @@ protected:
     nautilus::NautilusCameraMode    m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_2D;
     NautilusCamera*                 m_camera;
     nautilus::NautilusViewport      m_viewport;
+    uint32_t                        m_fps               = nautilus::defaults::SHELL_FPS;
 
 };
 

@@ -110,7 +110,6 @@ protected:
     std::mutex                              m_commandBufferLock;
     uint32_t                                m_currentSwapchainImage         = 0;
     bool                                    m_hasFramebufferBeenResized     = false;
-    bool                                    m_firstRecreation               = true;
 
 private:
 
@@ -154,8 +153,6 @@ private:
     VkSampleCountFlagBits enumerateMaximumMultisamplingSampleCount(void);
 
     /**
-<<<<<<< HEAD
-<<<<<<< HEAD
      * Finds suitable queue family indices on a physical device
      * @param _device The physical device to check
      * @return Returns a NautilusVulkanQueueFamily structure containing all necessary indices
@@ -163,10 +160,6 @@ private:
     nautilus::NautilusVulkanQueueFamily findSuitableQueueFamily(VkPhysicalDevice _device);
 
     /**
-=======
->>>>>>> ncurses
-=======
->>>>>>> shader
      * Enumerates a physical devices swapchain details
      * @param _device The physical device to check
      * @return Returns a NautilusVulkanSwapchainDetails structure containing all necessary Vulkan information

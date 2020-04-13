@@ -20,6 +20,8 @@ namespace nautilus {
         extern const glm::vec3                      WORLD_UP_VK;
         extern const glm::vec3                      WORLD_UP;
 
+        extern const uint32_t                       SHELL_FPS;
+
     }
 
 }

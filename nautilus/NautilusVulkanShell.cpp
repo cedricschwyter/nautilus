@@ -33,6 +33,7 @@ nautilus::NautilusStatus NautilusVulkanShell::initAPI() {
     if(this->m_initializedAPI) return nautilus::NAUTILUS_STATUS_OK;
     nautilus::logger::log("Initializing Vulkan...");
     ASSERT_NAUTILUS(nautilus::createVulkanInstance());
+    this->m_core.m_instance = nautilus::vulkanInstance;
     ASSERT_NAUTILUS(nautilus::createVulkanDebugMessenger());
     ASSERT_NAUTILUS(this->createSurfaceGLFW());
     ASSERT_NAUTILUS(this->selectBestPhysicalDevice());
@@ -54,7 +55,7 @@ nautilus::NautilusStatus NautilusVulkanShell::initAPI() {
 nautilus::NautilusStatus NautilusVulkanShell::createSurfaceGLFW() {
     nautilus::logger::log("Creating Vulkan surface...");
     ASSERT_VULKAN(glfwCreateWindowSurface(
-        nautilus::vulkanInstance, 
+        this->m_core.m_instance, 
         this->m_window, 
         this->m_core.m_allocator, 
         &this->m_core.m_surface));
@@ -65,13 +66,13 @@ nautilus::NautilusStatus NautilusVulkanShell::createSurfaceGLFW() {
 nautilus::NautilusStatus NautilusVulkanShell::selectBestPhysicalDevice() {
     nautilus::logger::log("Enumerating GPUs...");
     uint32_t physicalDeviceCount = 0;
-    vkEnumeratePhysicalDevices(nautilus::vulkanInstance, &physicalDeviceCount, nullptr);
+    vkEnumeratePhysicalDevices(this->m_core.m_instance, &physicalDeviceCount, nullptr);
     if(physicalDeviceCount == 0) {
         nautilus::logger::log("Failed to find a suitable GPU", nautilus::NAUTILUS_STATUS_FATAL);
         return nautilus::NAUTILUS_STATUS_FATAL;
     }
     std::vector< VkPhysicalDevice > physicalDevices(physicalDeviceCount);
-    vkEnumeratePhysicalDevices(nautilus::vulkanInstance, &physicalDeviceCount, physicalDevices.data());
+    vkEnumeratePhysicalDevices(this->m_core.m_instance, &physicalDeviceCount, physicalDevices.data());
     std::multimap< int, VkPhysicalDevice > possibleGPUs;
     for(const auto& physicalDev : physicalDevices) {
         this->printPhysicalDevicePropertiesAndFeatures(physicalDev);
@@ -632,8 +633,6 @@ nautilus::NautilusStatus NautilusVulkanShell::showNextSwapchainImage() {
 }
 
 nautilus::NautilusStatus NautilusVulkanShell::recreateSwapchain() {
-    nautilus::logger::log("recreate");
-    if(this->m_firstRecreation) return nautilus::NAUTILUS_STATUS_OK;
     vkDeviceWaitIdle(this->m_core.m_logicalDevice);
     std::unique_lock< std::mutex > commandLock(this->m_commandBufferLock);
     int width = 0;
@@ -650,7 +649,6 @@ nautilus::NautilusStatus NautilusVulkanShell::recreateSwapchain() {
     ASSERT_NAUTILUS(this->createRenderPasses());
     ASSERT_NAUTILUS(this->allocateSwapchainFramebuffers());
     ASSERT_NAUTILUS(this->allocateCommandBuffers()); 
-    this->m_firstRecreation = false;
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
@@ -670,19 +668,13 @@ nautilus::NautilusStatus NautilusVulkanShell::clean() {
     nautilus::logger::log("Successfully destroyed device");
     if(nautilus::enableVulkanValidationLayers) {
         nautilus::destroyVulkanDebugUtilsMessenger(
-            nautilus::vulkanInstance, 
+            this->m_core.m_instance, 
             nautilus::vulkanValidationLayerDebugMessenger, 
             this->m_core.m_allocator);
         nautilus::logger::log("Successfully destroyed debug utils messenger");
     }
-    vkDestroySurfaceKHR(nautilus::vulkanInstance, this->m_core.m_surface, this->m_core.m_allocator);
+    vkDestroySurfaceKHR(this->m_core.m_instance, this->m_core.m_surface, this->m_core.m_allocator);
     nautilus::logger::log("Successfully destroyed surface");
-    vkDestroyInstance(nautilus::vulkanInstance, this->m_core.m_allocator);
-    nautilus::logger::log("Successfully destroyed instance");
-    glfwDestroyWindow(this->m_window);
-    nautilus::logger::log("Successfully destroyed window");
-    nautilus::logger::log("Successfully terminated GLFW");
-    nautilus::logger::log("Successfully cleaned allocated resources, shutting down...");
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

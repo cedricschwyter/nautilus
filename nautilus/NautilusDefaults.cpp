@@ -20,6 +20,8 @@ namespace nautilus {
         const glm::vec3                     WORLD_UP_VK                             = glm::vec3(0.0f, -1.0f, 0.0f);
         const glm::vec3                     WORLD_UP                                = glm::vec3(0.0f, 1.0f, 0.0f);
 
+        const uint32_t                      SHELL_FPS                               = 30;
+
     }
 
 }

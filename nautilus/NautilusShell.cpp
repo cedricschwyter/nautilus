@@ -128,6 +128,9 @@ nautilus::NautilusStatus NautilusShell::detach() {
     delete this->m_camera;
     this->clean();
     this->onDetach(this->m_window);
+    glfwDestroyWindow(this->m_window);
+    nautilus::shells.erase(nautilus::shells.begin() 
+        + nautilus::getIndexOfElement(nautilus::shells, this).second);
     std::scoped_lock< std::mutex > shellCountLock(nautilus::shellCountLock);
     nautilus::shellCount--;
     return nautilus::NAUTILUS_STATUS_OK;
@@ -188,6 +191,7 @@ nautilus::NautilusStatus NautilusShell::createWindow() {
         return nautilus::NAUTILUS_STATUS_FATAL;
     }
     glfwMakeContextCurrent(this->m_window);
+    glfwSwapInterval(1);
     GLFWimage windowIcon[1];
     windowIcon[0].pixels = nautilus::loadSTBI(
         this->m_shellIconPath,
@@ -235,6 +239,18 @@ nautilus::NautilusStatus NautilusShell::setShellDimension(const nautilus::Nautil
 nautilus::NautilusStatus NautilusShell::setShellViewport(const nautilus::NautilusViewport& _viewport) {
     this->m_viewport = _viewport;
     return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusShell::setShellRefreshRate(uint32_t _fps) {
+    this->m_fps = _fps;
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+bool NautilusShell::mustRender() {
+    static auto start = std::chrono::system_clock::now();
+    auto now = std::chrono::system_clock::now();
+    std::chrono::duration< double > elapsed = now - start;
+    return elapsed.count() >= 1 / this->m_fps * 1000.0;
 }
 
 #endif      // NAUTILUS_SHELL_CPP

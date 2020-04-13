@@ -24,7 +24,7 @@ namespace nautilus {
     VkAllocationCallbacks*              vulkanAllocator                         = nullptr;
     bool                                enableVulkanValidationLayers            = false;
     const std::vector< const char* >    vulkanValidationLayers                  = {
-            "VK_LAYER_KHRONOS_validation"
+            "VK_LAYER_KHRONOS_validation",
     };
     VkDebugUtilsMessengerEXT            vulkanValidationLayerDebugMessenger     = VK_NULL_HANDLE;
     const std::vector< const char* >    vulkanRequiredExtensions                = {
@@ -50,36 +50,6 @@ namespace nautilus {
     nautilus::NautilusStatus freeSTBI(unsigned char* _pixels) {
         stbi_image_free(_pixels);
         return NAUTILUS_STATUS_OK;
-    }
-
-    template< typename T >
-    std::pair< bool, int32_t > getIndexOfElement(const std::vector< T >& _vec, const T& _element) {
-        std::pair< bool, int32_t > result;
-        auto it = std::find(_vec.begin(), _vec.end(), _element);
-        if (it != _vec.end()) {
-            result.second = std::distance(_vec.begin(), it);
-            result.first = true;
-        }
-        else {
-            result.first = false;
-            result.second = -1;
-        }
-        return result;
-    }
-
-    template< typename T >
-    std::pair< bool, int32_t > getIndexOfElement(const std::vector< T* >& _vec, const T* _element) {
-        std::pair< bool, int32_t > result;
-        auto it = std::find(_vec.begin(), _vec.end(), _element);
-        if (it != _vec.end()) {
-            result.second = std::distance(_vec.begin(), it);
-            result.first = true;
-        }
-        else {
-            result.first = false;
-            result.second = -1;
-        }
-        return result;
     }
 
     nautilus::NautilusStatus createVulkanInstance() {

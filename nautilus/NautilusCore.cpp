@@ -63,7 +63,8 @@ nautilus::NautilusStatus NautilusCore::loopInternal() {
             if(shell->m_attached) {
                 lock.unlock();
                 glfwMakeContextCurrent(shell->m_window);
-                shell->render();
+                if(shell->mustRender())
+                    shell->render();
                 glfwPollEvents();
                 glfwSwapBuffers(shell->m_window);
                 if(glfwWindowShouldClose(shell->m_window)) shell->detach();

@@ -16,7 +16,7 @@ done
 if [[ $EUID -ne 0 ]]; then
     if [[ "$OSTYPE" == "darwin"* ]]; then
         echo "Trying to install dependencies for macOS..."
-        if brew update && brew install git glfw3 ncurses glm assimp cmake make ninja python3 curl; then
+        if brew update && brew install git glfw3 glm assimp cmake make ninja python3 curl; then
             echo "Successfully installed dependencies for macOS"
         else
             echo "Could not install one or more dependencies of nautilus. Going kamikaze, hoping all will work out."
@@ -95,7 +95,7 @@ else
     fi
     echo "Trying to install dependencies for ${distroname} using ${pkgman} on ${session}."
     if [[ ${pkgman} == dnf ]]; then
-        if dnf -y update && dnf -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel ncurses-devel ncurses glfw glfw-devel assimp assimp-devel mesa-libGL-devel && dnf -y groupinstall "X Software Development"; then
+        if dnf -y update && dnf -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel glfw glfw-devel assimp assimp-devel mesa-libGL-devel mesa-vulkan-devel mesa-vulkan-drivers vulkan-validation-layers vulkan-validation-layers-devel vulkan-tools && dnf -y groupinstall "X Software Development"; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -103,7 +103,7 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == pacman ]]; then
-        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb ncurses glm glfw-${session} assimp xorg; then
+        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb  glm glfw-${session} assimp xorg vulkan-validation-layers vulkan-extra-layers vulkan-mesa-layer vulkan-tools; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -111,7 +111,7 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == apt ]]; then
-        if apt-get -y update && apt-get -y install git cmake make pkg-config gcc-8 g++-8 gdb libglfw3 libglfw3-dev libncurses5-dev libncursesw5-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev; then
+        if apt-get -y update && apt-get -y install git cmake make pkg-config gcc-8 g++-8 gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev libvulkan1 libvulkan-dev mesa-vulkan-drivers vulkan-utils; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"

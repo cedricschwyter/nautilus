@@ -50,7 +50,6 @@ nautilus::NautilusStatus NautilusOpenGLShell::initAPI() {
 }
 
 nautilus::NautilusStatus NautilusOpenGLShell::clean() {
-    glfwDestroyWindow(this->m_window);
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
