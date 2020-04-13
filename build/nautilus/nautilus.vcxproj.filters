@@ -24,16 +24,22 @@
     </ClCompile>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> github-pages
+=======
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> camera
+<<<<<<< HEAD
 =======
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
 >>>>>>> camera
 =======
-    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
->>>>>>> camera
+>>>>>>> github-pages
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusFPSCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

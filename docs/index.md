@@ -1,6 +1,6 @@
 # nautilus
 
-![Nautilus Icon](https://github.com/D3PSI/nautilus/blob/master/res/images/icons/nautilus.png)
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
 [![Build Status](https://travis-ci.com/D3PSI/nautilus.svg?branch=master)](https://travis-ci.com/D3PSI/nautilus)
 [![build](https://ci.appveyor.com/api/projects/status/6cp2udvipkuchs42/branch/master?svg=true)](https://ci.appveyor.com/project/D3PSI/nautilus/branch/master)
