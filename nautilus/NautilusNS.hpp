@@ -76,7 +76,9 @@ namespace nautilus {
      * @return Returns an std::pair of bool (element found in vector?) and its index if found
      */ 
     template< template< typename, typename > typename _Titer, typename _T >
-    std::pair< bool, int32_t > getIndexOfElement(const _Titer< _T* , std::allocator< _T* > >& _container, _T* _element);
+    std::pair< bool, int32_t > getIndexOfElement(const _Titer< _T , std::allocator< _T > >& _container, const _T& _element);
+    template< template< typename, typename > typename _Titer, typename _T >
+    std::pair< bool, int32_t > getIndexOfElement(const _Titer< _T* , std::allocator< _T* > >& _container, const _T*& _element);
 
     /**
      * Creates the Vulkan instance object
