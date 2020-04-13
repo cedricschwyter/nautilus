@@ -64,7 +64,7 @@ public:
      * @param _action The action (GLFW_PRESS, GLFW_RELEASE, GLFW_REPEAT)
      * @param _mods Bitfield describing width modifier keys were held down
      */ 
-    virtual void keyInput(
+    virtual void key(
         GLFWwindow*     _window, 
         int             _key, 
         int             _scancode, 
@@ -78,7 +78,7 @@ public:
      * @param _x The new x-coordinate relative to the left edge of the window
      * @param _y The new y-coordinate relative to the top edge of the window
      */ 
-    virtual void mouseInput(GLFWwindow* _window, double _x, double _y) = 0;
+    virtual void cursor(GLFWwindow* _window, double _x, double _y) = 0;
 
     /**
      * Handles scroll input

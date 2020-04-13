@@ -9,7 +9,7 @@ NautilusCamera2D::NautilusCamera2D() {
 NautilusCamera2D::~NautilusCamera2D() {
 }
 
-void NautilusCamera2D::keyInput(
+void NautilusCamera2D::key(
     GLFWwindow*     _window, 
     int             _key, 
     int             _scancode, 
@@ -17,7 +17,7 @@ void NautilusCamera2D::keyInput(
     int             _mods) {
 }
 
-void NautilusCamera2D::mouseInput(GLFWwindow* _window, double _x, double _y) {
+void NautilusCamera2D::cursor(GLFWwindow* _window, double _x, double _y) {
 }
 
 void NautilusCamera2D::scroll(GLFWwindow* _window, double _dx, double _dy) {

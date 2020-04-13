@@ -23,6 +23,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+>>>>>>> camera
 =======
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp">
       <Filter>Source Files</Filter>

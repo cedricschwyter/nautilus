@@ -9,7 +9,7 @@ NautilusCameraFPS::NautilusCameraFPS() {
 NautilusCameraFPS::~NautilusCameraFPS() {
 }
 
-void NautilusCameraFPS::keyInput(
+void NautilusCameraFPS::key(
     GLFWwindow*     _window, 
     int             _key, 
     int             _scancode, 
@@ -21,7 +21,7 @@ void NautilusCameraFPS::keyInput(
     if(_key == GLFW_KEY_D && _action == GLFW_PRESS) this->move(nautilus::NAUTILUS_CAMERA_MOVEMENT_DIRECTION_RIGHT);
 }
 
-void NautilusCameraFPS::mouseInput(GLFWwindow* _window, double _x, double _y) {
+void NautilusCameraFPS::cursor(GLFWwindow* _window, double _x, double _y) {
     static double lastX = 0.0;
     static double lastY = 0.0;
     if(this->m_inputEnabled) {

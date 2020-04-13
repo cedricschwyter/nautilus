@@ -15,7 +15,7 @@ nautilus::NautilusStatus NautilusCameraFocus::focus(glm::vec3 _focus) {
     return nautilus::NAUTILUS_STATUS_OK;
 } 
 
-void NautilusCameraFocus::keyInput(
+void NautilusCameraFocus::key(
     GLFWwindow*     _window, 
     int             _key, 
     int             _scancode, 
@@ -39,7 +39,7 @@ void NautilusCameraFocus::keyInput(
     }
 }
 
-void NautilusCameraFocus::mouseInput(GLFWwindow* _window, double _x, double _y) {
+void NautilusCameraFocus::cursor(GLFWwindow* _window, double _x, double _y) {
 }
 
 void NautilusCameraFocus::scroll(GLFWwindow* _window, double _dx, double _dy) {

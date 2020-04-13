@@ -60,7 +60,7 @@ void NautilusShell::iconify(GLFWwindow* _window, int _iconify) {
 
 void NautilusShell::cursor(GLFWwindow* _window, double _x, double _y) {
     this->onCursor(_window, _x, _y);
-    this->m_camera->mouseInput(_window, _x, _y);
+    this->m_camera->cursor(_window, _x, _y);
 }
 
 void NautilusShell::cursorIn(GLFWwindow* _window, int _enter) {
@@ -79,7 +79,7 @@ void NautilusShell::key(
         _scancode,
         _action,
         _mods);
-    this->m_camera->keyInput(
+    this->m_camera->key(
         _window,
         _key,
         _scancode,
