@@ -25,13 +25,17 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> github-pages
+=======
+>>>>>>> cross-api-interface
 =======
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
 >>>>>>> camera
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp">
@@ -40,6 +44,8 @@
 >>>>>>> camera
 =======
 >>>>>>> github-pages
+=======
+>>>>>>> cross-api-interface
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusFPSCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -291,6 +291,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp" />
 >>>>>>> camera
@@ -302,6 +303,11 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp" />
 >>>>>>> camera
 >>>>>>> github-pages
+=======
+=======
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusDefaults.cpp" />
+>>>>>>> camera
+>>>>>>> cross-api-interface
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusFPSCamera.cpp" />
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusFocusCamera.cpp" />
     <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\nautilus\NautilusLogger.cpp" />
