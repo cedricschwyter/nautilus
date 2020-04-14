@@ -1,17 +1,67 @@
 version: 2.1
 
 jobs:
-  build:
+  "Ubuntu Latest":
     docker:
-      - image: circleci/buildpack-deps:bionic
+      - image: ubuntu
     steps:
       - checkout
       - run:
-          name: Initialize submodules
-          command: git submodule sync --recursive && git submodule update --init --recursive
-      - run:
           name: Install dependencies	
-          command: sudo bash nautilus-install.sh --no-build
+          command: bash nautilus-install.sh --no-build
       - run:
           name: Build
-          command: sudo bash nautilus-install.sh --ci
+          command: bash nautilus-install.sh --ci
+  "Debian Latest":
+    docker:
+      - image: debian
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies	
+          command: bash nautilus-install.sh --no-build
+      - run:
+          name: Build
+          command: bash nautilus-install.sh --ci
+  "Fedora Latest":
+    docker:
+      - image: fedora
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies	
+          command: bash nautilus-install.sh --no-build
+      - run:
+          name: Build
+          command: bash nautilus-install.sh
+  "CentOS Latest":
+    docker:
+      - image: centos
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies	
+          command: bash nautilus-install.sh --no-build
+      - run:
+          name: Build
+          command: bash nautilus-install.sh
+  "OpenSUSE Tumbleweed Latest":
+    docker:
+      - image: opensuse/tumbleweed
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies	
+          command: bash nautilus-install.sh --no-build
+      - run:
+          name: Build
+          command: bash nautilus-install.sh
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - "Ubuntu Latest"
+      - "Debian Latest"
+      - "Fedora Latest"
+      - "CentOS Latest"
+      - "OpenSUSE Tumbleweed Latest"

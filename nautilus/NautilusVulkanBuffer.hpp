@@ -68,10 +68,10 @@ public:
      * @param _staging Use a staging buffer
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    template< typename T >
-    nautilus::NautilusStatus fill(const T& _data, const bool _staging = false);
-    template< typename T >
-    nautilus::NautilusStatus fill(T&& _data, const bool _staging = false);
+    template< typename _T >
+    nautilus::NautilusStatus fill(const _T& _data, const bool _staging = false);
+    template< typename _T >
+    nautilus::NautilusStatus fill(_T&& _data, const bool _staging = false);
     nautilus::NautilusStatus fill(const void* _data, const bool _staging = false);
 
     /**

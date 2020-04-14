@@ -104,13 +104,13 @@ nautilus::NautilusStatus NautilusVulkanBuffer::bind() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-template< typename T >
-nautilus::NautilusStatus NautilusVulkanBuffer::fill(const T& _data, const bool _staging) {
+template< typename _T >
+nautilus::NautilusStatus NautilusVulkanBuffer::fill(const _T& _data, const bool _staging) {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-template< typename T >
-nautilus::NautilusStatus NautilusVulkanBuffer::fill(T&& _data, const bool _staging) {
+template< typename _T >
+nautilus::NautilusStatus NautilusVulkanBuffer::fill(_T&& _data, const bool _staging) {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

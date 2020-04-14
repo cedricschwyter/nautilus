@@ -77,10 +77,10 @@ else
             pkgman=${osInfo[$f]}
         fi
     done
-    if [[ -n "$(command -v lsb_release)" ]]; then
+    if [[ -f "/etc/os-release" ]]; then
+        distroname=$(awk -F= '/^NAME/{print $2}' /etc/os-release)
+    elif [[ -n "$(command -v lsb_release)" ]]; then
         distroname=$(lsb_release -s -d)
-    elif [[ -f "/etc/os-release" ]]; then
-        distroname=$(grep PRETTY_NAME /etc/os-release | sed 's/PRETTY_NAME=//g' | tr -d '="')
     elif [[ -f "/etc/debian_version" ]]; then
         distroname="Debian $(cat /etc/debian_version)"
     elif [[ -f "/etc/redhat-release" ]]; then
@@ -94,8 +94,16 @@ else
         session=wayland
     fi
     echo "Trying to install dependencies for ${distroname} using ${pkgman} on ${session}."
-    if [[ ${pkgman} == dnf ]]; then
-        if dnf -y update && dnf -y install git cmake make pkgconf-pkg-config gcc g++ glm-devel glfw glfw-devel assimp assimp-devel mesa-libGL-devel mesa-vulkan-devel mesa-vulkan-drivers vulkan-validation-layers vulkan-validation-layers-devel vulkan-tools && dnf -y groupinstall "X Software Development"; then
+    if [[ $distroname == *Fedora* ]]; then
+        if dnf -y update && dnf -y install git cmake make pkgconf-pkg-config gcc g++ gdb glm-devel glfw glfw-devel assimp assimp-devel mesa-libGL-devel mesa-vulkan-devel mesa-vulkan-drivers vulkan-validation-layers vulkan-validation-layers-devel vulkan-tools && dnf -y groupinstall "X Software Development"; then
+            echo "Successfully installed dependencies for your system." 
+        else
+            echo "Failed to install some dependencies!"
+            echo "Going full kamikaze. Hoping relevant dependencies (git, cmake, make, pkg-config g++/clang++ (or any other C++17-capable compiler)) 
+                and necessary libraries are installed or included in the repository in this case. Good luck!"
+        fi
+    elif [[ $distroname == *CentOS* ]]; then
+        if yum -y update && yum -y install git cmake make pkgconf-pkg-config gcc gcc-c++ gdb libX11 libX11-devel libX11-xcb libXcursor libXcursor-devel libXi libXi-devel libXinerama libXinerama-devel libXrandr libXrandr-devel mesa-libGL-devel mesa-vulkan-devel mesa-vulkan-drivers vulkan-validation-layers vulkan-tools; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -103,7 +111,7 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == pacman ]]; then
-        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb  glm glfw-${session} assimp xorg vulkan-validation-layers vulkan-extra-layers vulkan-mesa-layer vulkan-tools; then
+        if pacman -Syu --noconfirm && pacman -Sy --noconfirm git cmake make pkg-config gcc gdb glm glfw-${session} assimp xorg vulkan-validation-layers vulkan-extra-layers vulkan-mesa-layer vulkan-tools; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -111,7 +119,21 @@ else
                 and necessary libraries are installed or included in the repository in this case. Good luck!"
         fi
     elif [[ ${pkgman} == apt ]]; then
-        if apt-get -y update && apt-get -y install git cmake make pkg-config gcc-8 g++-8 gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev libvulkan1 libvulkan-dev mesa-vulkan-drivers vulkan-utils; then
+        if apt-get -y update && apt-get -y install git cmake make pkg-config gcc g++ gdb libglfw3 libglfw3-dev libglm-dev libassimp-dev assimp-utils libegl1-mesa-dev xorg-dev libvulkan1 libvulkan-dev mesa-vulkan-drivers vulkan-utils; then
+            if [[ "$ci" = true ]]; then
+                apt-get -y install gcc-8 g++-8
+                export CC=gcc-8
+                export CXX=g++-8
+            fi
+            echo "Successfully installed dependencies for your system." 
+        else
+            echo "Failed to install some dependencies!"
+            echo "Going full kamikaze. Hoping relevant dependencies (git, cmake, make, pkg-config g++/clang++ (or any other C++17-capable compiler)) 
+                and necessary libraries are installed or included in the repository in this case. Good luck!"
+            exit 1
+        fi
+    elif [[ $distroname = *openSUSE* ]]; then
+        if zypper -n refresh && zypper -n install git cmake make pkg-config gcc gcc-c++ gdb libglfw3 libglfw-devel glm-devel libassimp3 assimp-devel xorg-x11-server xorg-x11-server-sdk xorg-x11-util-devel libxcb1 libX11-xcb1 xcb-util-devel Mesa-libGL-devel Mesa-libGL1 libvulkan1 vulkan-devel; then
             echo "Successfully installed dependencies for your system." 
         else
             echo "Failed to install some dependencies!"
@@ -126,10 +148,6 @@ else
     git submodule sync
     git submodule update --init --recursive
     if [[ "$build" = true ]]; then
-        if [[ "$ci" = true ]]; then
-            export CC=gcc-8
-            export CXX=g++-8
-        fi
         echo "Generating build files..."
         if cmake CMakeLists.txt; then
             echo "Building project..."
