@@ -41,6 +41,7 @@ namespace nautilus {
         }
 
         NautilusStatus terminate() {
+            nautilus::logger::log("Terminating...");
             return NAUTILUS_STATUS_OK;
         }
 

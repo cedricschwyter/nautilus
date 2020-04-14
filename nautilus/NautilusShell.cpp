@@ -148,10 +148,21 @@ nautilus::NautilusStatus NautilusShell::setCallbacks() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
+nautilus::NautilusStatus NautilusShell::setDefaultWindowHints() {
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    if(!this->m_decoration) glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
 nautilus::NautilusStatus NautilusShell::createWindow() { 
     if(this->m_windowCreated) return nautilus::NAUTILUS_STATUS_OK;
     nautilus::logger::log("Creating GLFWwindow...");
     this->setDefaultWindowHints();
+    this->setAPIWindowHints();
     this->m_monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(this->m_monitor);
     if(this->m_shellContext == nautilus::NAUTILUS_SHELL_CONTEXT_WINDOWED) {
@@ -191,7 +202,7 @@ nautilus::NautilusStatus NautilusShell::createWindow() {
         return nautilus::NAUTILUS_STATUS_FATAL;
     }
     glfwMakeContextCurrent(this->m_window);
-    glfwSwapInterval(1);
+    glfwSwapInterval(0);
     GLFWimage windowIcon[1];
     windowIcon[0].pixels = nautilus::loadSTBI(
         this->m_shellIconPath,
@@ -250,7 +261,34 @@ bool NautilusShell::mustRender() {
     static auto start = std::chrono::system_clock::now();
     auto now = std::chrono::system_clock::now();
     std::chrono::duration< double > elapsed = now - start;
-    return elapsed.count() >= 1 / this->m_fps * 1000.0;
+    return elapsed.count() >= 1 / this->m_fps;
+}
+
+nautilus::NautilusStatus NautilusShell::printStats() {
+    double              currentTime         = glfwGetTime();
+    double              deltaTime           = currentTime - this->m_pastTime;
+    this->m_pastTime = currentTime;
+    this->m_nbFrames++;
+    float seconds = 10.0f;
+    if(currentTime - this->m_lastTime >= 1.0 && this->m_nbFrames > this->m_maxfps)
+        this->m_maxfps = this->m_nbFrames;
+    if(currentTime - this->m_lastTime >= seconds) {
+        std::string fps                = "Average FPS (last " + std::to_string(seconds) + " seconds):    " + std::to_string(double(this->m_nbFrames / seconds));
+        std::string frametime          = "Average Frametime (last " + std::to_string(seconds) + " seconds):    " + std::to_string(double((1000.0 * seconds) /this->m_nbFrames)) + " ms";
+        std::string maxFPS             = "Max FPS:    " + std::to_string(double(this->m_maxfps / seconds));
+        nautilus::logger::log("Stats for '" + this->m_title + "':");
+        nautilus::logger::log(fps);
+        nautilus::logger::log(frametime);
+        nautilus::logger::log(maxFPS);
+        this->m_nbFrames = 0;
+        this->m_lastTime += seconds;
+    }
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusShell::setShellDecoration(bool _decoration) {
+    this->m_decoration = _decoration;
+    return nautilus::NAUTILUS_STATUS_OK;
 }
 
 #endif      // NAUTILUS_SHELL_CPP

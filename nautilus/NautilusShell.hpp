@@ -265,12 +265,6 @@ public:
     nautilus::NautilusStatus createWindow(void);
 
     /**
-     * Sets the default window hints for the corresponding API
-     * @return Returns a nautilus::NautilusStatus status code
-     */ 
-    virtual nautilus::NautilusStatus setDefaultWindowHints(void) = 0;
-
-    /**
      * Sets the necessary callback pointers
      * @returns Returns a nautilus::NautilusStatus status code
      */
@@ -282,6 +276,14 @@ public:
      * @return Returns a nautilus::NautilusStatus status code
      */ 
     nautilus::NautilusStatus setShellRefreshRate(uint32_t _fps);
+
+    /**
+     * Activates/deactivates the window decoration
+     * Can only be set once on shell creation
+     * @param _decoration Shell decoration true or false
+     * @return Returns a nautilus::NautilusStatus status code
+     */
+    nautilus::NautilusStatus setShellDecoration(bool _decoration = true); 
 
     /**
      * Returns true if the shell needs to refresh
@@ -323,6 +325,29 @@ protected:
     NautilusCamera*                 m_camera;
     nautilus::NautilusViewport      m_viewport;
     uint32_t                        m_fps               = nautilus::defaults::SHELL_FPS;
+    double                          m_pastTime          = 0;
+    float                           m_nbFrames          = 0;
+    float                           m_maxfps            = 0;
+    double                          m_lastTime          = glfwGetTime();
+    bool                            m_decoration        = true;
+
+    /**
+     * Prints FPS et al to the console
+     * @return Returns a nautilus::NautilusStatus status code
+     */  
+    nautilus::NautilusStatus printStats(void);
+
+    /**
+     * Sets the global default window hints
+     * @return Returns a nautilus::NautilusStatus status code
+     */  
+    nautilus::NautilusStatus setDefaultWindowHints(void);
+
+    /**
+     * Sets API specific window hints
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    virtual nautilus::NautilusStatus setAPIWindowHints(void) = 0;
 
 };
 

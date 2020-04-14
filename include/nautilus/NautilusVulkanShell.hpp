@@ -70,7 +70,7 @@ public:
      * Sets the default window hints for the corresponding API
      * @return Returns a nautilus::NautilusStatus status code
      */ 
-    virtual nautilus::NautilusStatus setDefaultWindowHints(void);
+    virtual nautilus::NautilusStatus setAPIWindowHints(void);
 
     /**
      * Initializes the Vulkan API

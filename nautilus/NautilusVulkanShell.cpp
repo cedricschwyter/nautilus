@@ -15,17 +15,14 @@ void NautilusVulkanShell::onRender() {
 }
 
 nautilus::NautilusStatus NautilusVulkanShell::render() {
+    this->printStats();
     this->showNextSwapchainImage();
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::setDefaultWindowHints() {
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+nautilus::NautilusStatus NautilusVulkanShell::setAPIWindowHints() {
+    this->m_title = "Standard Vulkan Example with nautilus by D3PSI";
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-    glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

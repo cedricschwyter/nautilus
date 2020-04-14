@@ -19,18 +19,14 @@ void NautilusOpenGLShell::onRender() {
 }
 
 nautilus::NautilusStatus NautilusOpenGLShell::render() {
+    this->printStats();
     this->onRender();
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusOpenGLShell::setDefaultWindowHints() {
+nautilus::NautilusStatus NautilusOpenGLShell::setAPIWindowHints() {
     this->m_title = "Standard OpenGL Example with nautilus by D3PSI";
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-    glfwWindowHint(GLFW_FOCUSED, GLFW_TRUE);
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

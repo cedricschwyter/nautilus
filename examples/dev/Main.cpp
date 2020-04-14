@@ -18,7 +18,7 @@ namespace dev {
         shell->setShellTitle("Dev Example 1");
         shell->setShellExtent(1280, 720);
         shell->setShellIcon("res/images/icons/nautilus.png");
-        shell->setShellRefreshRate(60);
+        shell->setShellRefreshRate(30);
         NautilusCore::setEnableVulkanValidationLayers();
         NautilusCore::attachShell(shell);
         return nautilus::NAUTILUS_STATUS_OK;
