@@ -183,6 +183,13 @@ namespace nautilus {
      */ 
     NautilusStatus endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf);
 
+    /**
+     * Loads a file to a char buffer
+     * @param _path The relative path to the file on disk
+     * @return Returns an std::vector< char >
+     */ 
+    const std::vector< char > loadFile(const std::string& _path);
+
 }
 
 #include "NautilusNS.tcc"

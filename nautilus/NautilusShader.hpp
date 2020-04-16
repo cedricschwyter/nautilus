@@ -1,6 +1,7 @@
 #ifndef NAUTILUS_SHADER_HPP
 #define NAUTILUS_SHADER_HPP
 
+#include "NautilusNS.hpp"
 #include "NautilusAPI.hpp"
 #include "NautilusStatus.hpp"
 #include "NautilusShaderComponent.hpp"
@@ -9,6 +10,7 @@
 #include "NautilusShaderComponentInOut.hpp"
 
 #include <string>
+#include <vector>
 
 class NautilusShader {
 public:
@@ -23,6 +25,14 @@ public:
      * @param _api The nautilus api to construct shader source for
      */
     NautilusShader(nautilus::NautilusAPI _api); 
+
+    /**
+     * Constructor with argumets
+     * Compile shader from source file
+     * @param _api The nautilus api to construct shader for
+     * @param _path The relative path to the source file
+     */ 
+    NautilusShader(nautilus::NautilusAPI _api, const std::string& _path);
 
     /**
      * Adds a uniform variable to the shader source
