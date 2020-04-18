@@ -189,8 +189,8 @@ namespace nautilus {
      * @param _field The field to include in the computed hash
      * @return Returns the new hash
      */ 
-    template< typename T >
-    std::size_t hashField(std::size_t* _hash, const T& _field);
+    template< typename _T >
+    std::size_t hashField(std::size_t* _hash, const _T& _field);
 
 }
 

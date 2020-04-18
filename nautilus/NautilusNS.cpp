@@ -250,9 +250,9 @@ namespace nautilus {
         return NAUTILUS_STATUS_OK;
     }
 
-    template< typename T >
-    std::size_t hashField(std::size_t* _hash, const T& _field) {
-        std::hash< T > hashFunc;
+    template< typename _T >
+    std::size_t hashField(std::size_t* _hash, const _T& _field) {
+        std::hash< _T > hashFunc;
         *_hash ^= hashFunc(_field) + 0x9e3779b9 + (*_hash << 6) + (*_hash >> 2);
         return *_hash;
     }

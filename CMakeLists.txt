@@ -10,6 +10,7 @@ set(NAUTILUS_HEADER_DIRECTORY "${CMAKE_SOURCE_DIR}/include")
 set(NAUTILUS_HEADER_MOVE_DIR "${NAUTILUS_HEADER_DIRECTORY}/nautilus")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/lib")
+set(CMAKE_BUILD_TYPE "Release")
 
 include_directories("ext")
 include_directories("ext/glm")

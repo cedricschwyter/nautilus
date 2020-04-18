@@ -38,6 +38,9 @@ public:
      */ 
     bool operator==(const NautilusVertex& _other) const;
     
+    /**
+     * Forward-declare the explicit template specialication as a friend
+     */ 
     friend struct std::hash< NautilusVertex >;
 
 };
@@ -46,12 +49,22 @@ public:
  * Custom hash function
  */
 namespace std {
-    template< typename _T >
-    struct hash;
+
+    /**
+     * Explicit template specialication
+     */ 
     template< >
     struct hash< NautilusVertex > {
+
+        /**
+         * Overwrite invocation operator
+         * @param _inst The instance
+         * @return Returns the hash as an std::size_t
+         */ 
         std::size_t operator()(const NautilusVertex& _inst) const noexcept;
+    
     };
+
 }
 
 #endif      // NAUTILUS_VERTEX_HPP
