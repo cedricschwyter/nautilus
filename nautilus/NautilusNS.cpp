@@ -256,6 +256,19 @@ namespace nautilus {
         *_hash ^= hashFunc(_field) + 0x9e3779b9 + (*_hash << 6) + (*_hash >> 2);
         return *_hash;
     }
+    
+    const std::vector< char > loadFile(const std::string& _path) {
+        nautilus::logger::log("Loading file at '" + _path + "'");
+        std::ifstream file(_path, std::ios::ate | std::ios::binary);        // Start reading at end of file --> determine the buffer size needed
+        if(!file.is_open()) 
+            nautilus::logger::log("Failed to load file at '" + _path + "'");
+        size_t bufferSize = (size_t)file.tellg();        // Find read position and thus necessary buffer size
+        std::vector< char > buffer(bufferSize);
+        file.seekg(0);        // Translate back to the beginning of the file
+        file.read(buffer.data(), bufferSize);
+        file.close();
+        return buffer;
+    }
 
 }
 

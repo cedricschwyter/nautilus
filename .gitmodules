@@ -29,3 +29,7 @@
 [submodule "ext/vulkan"]
 	path = ext/vulkan
 	url = https://github.com/KhronosGroup/Vulkan-Headers.git
+
+[submodule "ext/glslang"]
+	path = ext/glslang
+	url = https://github.com/KhronosGroup/glslang.git
