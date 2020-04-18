@@ -2,6 +2,7 @@
 #define NAUTILUS_SHADER_CPP
 
 #include "NautilusShader.hpp"
+#include "NautilusNS.hpp"
 
 NautilusShader::NautilusShader() {
 }

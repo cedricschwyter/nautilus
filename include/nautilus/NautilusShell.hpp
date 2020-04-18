@@ -5,6 +5,7 @@
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusAssert.hpp"
+#include "NautilusPipeline.hpp"
 #include "NautilusAPI.hpp"
 #include "NautilusCamera.hpp"
 #include "NautilusCameraFocus.hpp"
@@ -120,12 +121,6 @@ public:
      * @param _dy The y-offset of the scroll wheel
      */ 
     virtual void onScroll(GLFWwindow* _window, double _dx, double _dy);
-
-    /**
-     * Attaches and initializes the shell
-     * @return Returns a NautilusStatus status code
-     */
-    nautilus::NautilusStatus attach(void); 
     
     /**
      * Executes API-specific rendering routines
@@ -259,6 +254,13 @@ public:
     virtual nautilus::NautilusStatus updateShellViewport(const nautilus::NautilusViewport& _viewport) = 0;
 
     /**
+     * Attaches and initializes a pipeline
+     * @param _pipe The pipeline to attach
+     * @return Returns a NautilusStatus status code
+     */
+    nautilus::NautilusStatus attach(NautilusPipeline* _pipe); 
+
+    /**
      * Creates the actual shell window
      * @return Returns a nautilus::NautilusStatus status code
      */
@@ -348,6 +350,14 @@ protected:
      * @return Returns a nautilus::NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus setAPIWindowHints(void) = 0;
+
+    /**
+     * Attaches and initializes the shell
+     * @return Returns a NautilusStatus status code
+     */
+    nautilus::NautilusStatus attach(void); 
+
+    friend class NautilusCore;
 
 };
 

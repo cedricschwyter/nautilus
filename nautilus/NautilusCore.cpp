@@ -96,6 +96,10 @@ nautilus::NautilusStatus NautilusCore::terminateInternal() {
     std::unique_lock< std::mutex > exitMutex(nautilus::exitLock);
     nautilus::exit = true;
     exitMutex.unlock();
+    std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);
+    for(auto shell : nautilus::shells)
+        delete shell;
+    shellLock.unlock();
     std::scoped_lock< std::mutex > lock(nautilus::threadpoolLock);
     for(std::thread* t : nautilus::threadpool) t->join();
     for(std::thread* t : nautilus::threadpool) delete t;

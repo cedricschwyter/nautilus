@@ -291,4 +291,8 @@ nautilus::NautilusStatus NautilusShell::setShellDecoration(bool _decoration) {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
+nautilus::NautilusStatus NautilusShell::attach(NautilusPipeline* _pipe) {
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
 #endif      // NAUTILUS_SHELL_CPP

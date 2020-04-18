@@ -1,7 +1,6 @@
 #ifndef NAUTILUS_SHADER_HPP
 #define NAUTILUS_SHADER_HPP
 
-#include "NautilusNS.hpp"
 #include "NautilusAPI.hpp"
 #include "NautilusStatus.hpp"
 #include "NautilusShaderComponent.hpp"

@@ -32,6 +32,12 @@ public:
     nautilus::NautilusStatus vertex(const NautilusShaderVertex& _shader);
 
     /**
+     * Handles pipeline attachment
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus attach(void);
+
+    /**
      * Default destructor
      */
     ~NautilusPipeline(void); 
@@ -40,6 +46,8 @@ private:
 
 protected:
 
+    nautilus::NautilusAPI                   m_api                   = nautilus::NAUTILUS_API_UNSPECIFIED;
+
     NautilusShaderCompute                   m_compute;
     NautilusShaderFragment                  m_fragment;
     NautilusShaderGeometry                  m_geometry;
@@ -47,6 +55,12 @@ protected:
     NautilusShaderTesselationControl        m_tesselationControl;
     NautilusShaderTesselationEvaluation     m_tesselationEvaluation;
     NautilusShaderVertex                    m_vertex;
+
+    /**
+     * Compiles and links a shader program
+     * @return Returns a nautilus::NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus compile(void);
 
 };
 
