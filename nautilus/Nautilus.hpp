@@ -686,6 +686,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.h>
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -711,6 +712,7 @@
 #include "NautilusNS.hpp"
 #include "NautilusOpenGLPipeline.hpp"
 #include "NautilusOpenGLShell.hpp"
+#include "NautilusPipeline.hpp"
 #include "NautilusShader.hpp"
 #include "NautilusShaderComponent.hpp"
 #include "NautilusShaderComponentInOut.hpp"
@@ -721,7 +723,6 @@
 #include "NautilusShaderCompute.hpp"
 #include "NautilusShaderFragment.hpp"
 #include "NautilusShaderGeometry.hpp"
-#include "NautilusShaderPipeline.hpp"
 #include "NautilusShaderStage.hpp"
 #include "NautilusShaderTesselation.hpp"
 #include "NautilusShaderTesselationControl.hpp"
@@ -731,6 +732,7 @@
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
 #include "NautilusStatus.hpp"
+#include "NautilusVertex.hpp"
 #include "NautilusViewport.hpp"
 #include "NautilusVulkanBuffer.hpp"
 #include "NautilusVulkanBufferDepth.hpp"

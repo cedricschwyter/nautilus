@@ -181,6 +181,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{51E5FDB7-02E8-3EFB-9AD0-73DDDBAD14DD}</Project>
       <Name>assimp_cmd</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\cross_api_multiple_windows.vcxproj">
+      <Project>{01A894A9-C682-35B1-82D6-AF3390975E52}</Project>
+      <Name>cross_api_multiple_windows</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\dev.vcxproj">
       <Project>{3AFE7FD9-B52A-3A96-9CA0-C96FDBEE366F}</Project>
       <Name>dev</Name>
@@ -197,13 +201,53 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{DC55270B-7A67-3088-89F5-8361C7C00207}</Project>
       <Name>nautilus</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_borderless_windowed.vcxproj">
+      <Project>{47E33C1B-3B3C-39EE-86EE-109D6C28612C}</Project>
+      <Name>opengl_borderless_windowed</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_fullscreen.vcxproj">
+      <Project>{5F8C4AAE-A4A8-3D0C-90DD-7351C5B4B6DB}</Project>
+      <Name>opengl_fullscreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_multiple_windows.vcxproj">
+      <Project>{591AD071-29E4-33F0-85C0-5297FC907AC8}</Project>
+      <Name>opengl_multiple_windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_no_window_decoration.vcxproj">
+      <Project>{74858AF8-14D0-3F54-BFF0-4CAA369E9CF8}</Project>
+      <Name>opengl_no_window_decoration</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_standard.vcxproj">
       <Project>{55AE76EE-5FA3-3859-BB87-AF4F612C3D78}</Project>
       <Name>opengl_standard</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_windowed.vcxproj">
+      <Project>{6245E7BB-75CB-337A-BB91-6865A7CB5F47}</Project>
+      <Name>opengl_windowed</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\vulkan_borderless_windowed.vcxproj">
+      <Project>{F9A9CAAA-891F-317A-939F-51C2CAA1CB1A}</Project>
+      <Name>vulkan_borderless_windowed</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\vulkan_fullscreen.vcxproj">
+      <Project>{D1D6D2B4-5A46-3CD5-9270-F524A58EEC2A}</Project>
+      <Name>vulkan_fullscreen</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\vulkan_multiple_windows.vcxproj">
+      <Project>{ADF89E54-F39B-3391-86D2-ECEB8FEF5B4D}</Project>
+      <Name>vulkan_multiple_windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\vulkan_no_window_decoration.vcxproj">
+      <Project>{C7D9EED2-6770-3044-A4D8-ABD0D9A94531}</Project>
+      <Name>vulkan_no_window_decoration</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\vulkan_standard.vcxproj">
       <Project>{DD9D7079-26C1-3DC1-B341-AF6B0E8815CE}</Project>
       <Name>vulkan_standard</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\vulkan_windowed.vcxproj">
+      <Project>{33DEAA6B-BE2D-347C-84A1-07A59BB6B7D4}</Project>
+      <Name>vulkan_windowed</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ext\assimp\contrib\zlib\zlib.vcxproj">
       <Project>{426A12EF-54B4-397E-B1DB-88697F396B71}</Project>

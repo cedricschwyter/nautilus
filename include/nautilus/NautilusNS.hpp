@@ -183,6 +183,15 @@ namespace nautilus {
      */ 
     NautilusStatus endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf);
 
+    /**
+     * Defines a hash function for a field of a type
+     * @param _hash The previously computed hash
+     * @param _field The field to include in the computed hash
+     * @return Returns the new hash
+     */ 
+    template< typename T >
+    std::size_t hashField(std::size_t* _hash, const T& _field);
+
 }
 
 #include "NautilusNS.tcc"

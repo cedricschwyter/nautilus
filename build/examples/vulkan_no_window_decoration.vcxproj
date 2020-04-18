@@ -22,11 +22,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3AFE7FD9-B52A-3A96-9CA0-C96FDBEE366F}</ProjectGuid>
+    <ProjectGuid>{C7D9EED2-6770-3044-A4D8-ABD0D9A94531}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
-    <ProjectName>dev</ProjectName>
+    <ProjectName>vulkan_no_window_decoration</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -61,29 +61,29 @@
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
     <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">dev.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">dev</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vulkan_no_window_decoration.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">vulkan_no_window_decoration</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
     <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">dev.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">dev</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vulkan_no_window_decoration.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">vulkan_no_window_decoration</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
     <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">dev.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">dev</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">vulkan_no_window_decoration.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">vulkan_no_window_decoration</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
     <LocalDebuggerWorkingDirectory Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/bin</LocalDebuggerWorkingDirectory>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\bin\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">dev.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">dev</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">vulkan_no_window_decoration.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">vulkan_no_window_decoration</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
@@ -126,8 +126,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/Debug/dev.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/Debug/dev.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/Debug/vulkan_no_window_decoration.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/Debug/vulkan_no_window_decoration.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -172,8 +172,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/Release/dev.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/Release/dev.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/Release/vulkan_no_window_decoration.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/Release/vulkan_no_window_decoration.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -218,8 +218,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/MinSizeRel/dev.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/MinSizeRel/dev.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/MinSizeRel/vulkan_no_window_decoration.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/MinSizeRel/vulkan_no_window_decoration.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -263,8 +263,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/RelWithDebInfo/dev.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/RelWithDebInfo/dev.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/examples/RelWithDebInfo/vulkan_no_window_decoration.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Users/cedri/Documents/Visual C++ Workspace/nautilus/build/bin/RelWithDebInfo/vulkan_no_window_decoration.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -328,8 +328,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\dev\DevShell.cpp" />
-    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\dev\Main.cpp" />
+    <ClCompile Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\examples\vulkan_no_window_decoration\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\ZERO_CHECK.vcxproj">

@@ -1,5 +1,5 @@
-#ifndef NAUTILUS_SHADER_PIPELINE_HPP
-#define NAUTILUS_SHADER_PIPELINE_HPP
+#ifndef NAUTILUS_PIPELINE_HPP
+#define NAUTILUS_PIPELINE_HPP
 
 #include "NautilusShader.hpp"
 #include "NautilusShaderCompute.hpp"
@@ -50,4 +50,4 @@ protected:
 
 };
 
-#endif      // NAUTILUS_SHADER_PIPELINE_HPP
+#endif      // NAUTILUS_PIPELINE_HPP

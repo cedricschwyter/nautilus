@@ -1,5 +1,5 @@
-#ifndef NAUTILUS_SHADER_PIPELINE_HPP
-#define NAUTILUS_SHADER_PIPELINE_HPP
+#ifndef NAUTILUS_PIPELINE_HPP
+#define NAUTILUS_PIPELINE_HPP
 
 #include "NautilusShader.hpp"
 #include "NautilusShaderCompute.hpp"
@@ -10,13 +10,13 @@
 #include "NautilusShaderTesselationEvaluation.hpp"
 #include "NautilusShaderVertex.hpp"
 
-class NautilusShaderPipeline {
+class NautilusPipeline {
 public:
 
     /**
      * Default constructor
      */
-    NautilusShaderPipeline(void); 
+    NautilusPipeline(void); 
 
     /**
      * Adds the corresponding shader object to the pipeline
@@ -34,7 +34,7 @@ public:
     /**
      * Default destructor
      */
-    ~NautilusShaderPipeline(void); 
+    ~NautilusPipeline(void); 
 
 private:
 
@@ -50,4 +50,4 @@ protected:
 
 };
 
-#endif      // NAUTILUS_SHADER_PIPELINE_HPP
+#endif      // NAUTILUS_PIPELINE_HPP
