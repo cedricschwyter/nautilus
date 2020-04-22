@@ -32,13 +32,25 @@ public:
      * @param _shader The shader to add to the pipeline
      * @return Returns a NautilusStatus status code
      */ 
-    nautilus::NautilusStatus compute(NautilusShaderCompute& _shader);
-    nautilus::NautilusStatus fragment(NautilusShaderFragment& _shader);
-    nautilus::NautilusStatus geometry(NautilusShaderGeometry& _shader);
-    nautilus::NautilusStatus tesselation(NautilusShaderTesselation& _shader);
-    nautilus::NautilusStatus tesselationControl(NautilusShaderTesselationControl& _shader);
-    nautilus::NautilusStatus tesselationEvaluation(NautilusShaderTesselationEvaluation& _shader);
-    nautilus::NautilusStatus vertex(NautilusShaderVertex& _shader);
+    nautilus::NautilusStatus compute(NautilusShaderCompute* _shader);
+    nautilus::NautilusStatus fragment(NautilusShaderFragment* _shader);
+    nautilus::NautilusStatus geometry(NautilusShaderGeometry* _shader);
+    nautilus::NautilusStatus tesselation(NautilusShaderTesselation* _shader);
+    nautilus::NautilusStatus tesselationControl(NautilusShaderTesselationControl* _shader);
+    nautilus::NautilusStatus tesselationEvaluation(NautilusShaderTesselationEvaluation* _shader);
+    nautilus::NautilusStatus vertex(NautilusShaderVertex* _shader);
+
+    /**
+     * Adds the corresponding shader object to the pipeline
+     * @param _path The path to the shader source on disk
+     * @return Returns a NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus compute(const std::string& _path);
+    nautilus::NautilusStatus fragment(const std::string& _path);
+    nautilus::NautilusStatus geometry(const std::string& _path);
+    nautilus::NautilusStatus tesselationControl(const std::string& _path);
+    nautilus::NautilusStatus tesselationEvaluation(const std::string& _path);
+    nautilus::NautilusStatus vertex(const std::string& _path);
 
     /**
      * Handles pipeline attachment

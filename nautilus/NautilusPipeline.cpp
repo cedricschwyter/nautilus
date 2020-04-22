@@ -10,43 +10,76 @@ NautilusPipeline::NautilusPipeline(const std::string& _identifier) : m_identifie
 }
 
 NautilusPipeline::~NautilusPipeline() {
+    for(auto entry : m_shaders)
+        delete entry.second;
 }
 
-nautilus::NautilusStatus NautilusPipeline::compute(NautilusShaderCompute& _shader) { 
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_COMPUTE] = &_shader; 
+nautilus::NautilusStatus NautilusPipeline::compute(NautilusShaderCompute* _shader) { 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_COMPUTE] = _shader; 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusPipeline::fragment(NautilusShaderFragment& _shader) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_FRAGMENT] = &_shader; 
+nautilus::NautilusStatus NautilusPipeline::fragment(NautilusShaderFragment* _shader) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_FRAGMENT] = _shader; 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusPipeline::geometry(NautilusShaderGeometry& _shader) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_GEOMETRY] = &_shader; 
+nautilus::NautilusStatus NautilusPipeline::geometry(NautilusShaderGeometry* _shader) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_GEOMETRY] = _shader; 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusPipeline::tesselation(NautilusShaderTesselation& _shader) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_CONTROL] = _shader.control(); 
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_EVALUATION] = _shader.evaluation(); 
+nautilus::NautilusStatus NautilusPipeline::tesselation(NautilusShaderTesselation* _shader) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_CONTROL] = _shader->control(); 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_EVALUATION] = _shader->evaluation(); 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusPipeline::tesselationControl(NautilusShaderTesselationControl& _shader) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_CONTROL] = &_shader; 
+nautilus::NautilusStatus NautilusPipeline::tesselationControl(NautilusShaderTesselationControl* _shader) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_CONTROL] = _shader; 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusPipeline::tesselationEvaluation(NautilusShaderTesselationEvaluation& _shader) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_EVALUATION] = &_shader; 
+nautilus::NautilusStatus NautilusPipeline::tesselationEvaluation(NautilusShaderTesselationEvaluation* _shader) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_EVALUATION] = _shader; 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusPipeline::vertex(NautilusShaderVertex& _shader) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_VERTEX] = &_shader; 
+nautilus::NautilusStatus NautilusPipeline::vertex(NautilusShaderVertex* _shader) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_VERTEX] = _shader; 
     return nautilus::NAUTILUS_STATUS_OK;
 }
+
+nautilus::NautilusStatus NautilusPipeline::compute(const std::string& _path) { 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_COMPUTE] = new NautilusShaderCompute(_path); 
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusPipeline::fragment(const std::string& _path) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_FRAGMENT] = new NautilusShaderFragment(_path); 
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusPipeline::geometry(const std::string& _path) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_GEOMETRY] = new NautilusShaderGeometry(_path); 
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusPipeline::tesselationControl(const std::string& _path) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_CONTROL] = new NautilusShaderTesselationControl(_path); 
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusPipeline::tesselationEvaluation(const std::string& _path) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_EVALUATION] = new NautilusShaderTesselationEvaluation(_path); 
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusPipeline::vertex(const std::string& _path) {
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_VERTEX] = new NautilusShaderVertex(_path); 
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
 
 nautilus::NautilusStatus NautilusPipeline::attach(nautilus::NautilusAPI _api) {
     compile(_api);

@@ -7,6 +7,10 @@ NautilusShaderGeometry::NautilusShaderGeometry() {
     m_glShaderType = GL_GEOMETRY_SHADER;
 }
 
+NautilusShaderGeometry::NautilusShaderGeometry(const std::string& _path) {
+    m_glShaderType = GL_GEOMETRY_SHADER;
+}
+
 NautilusShaderGeometry::~NautilusShaderGeometry() {
 }
 

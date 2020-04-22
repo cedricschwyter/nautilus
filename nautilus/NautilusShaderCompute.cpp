@@ -7,6 +7,10 @@ NautilusShaderCompute::NautilusShaderCompute() {
     m_glShaderType = GL_COMPUTE_SHADER;
 }
 
+NautilusShaderCompute::NautilusShaderCompute(const std::string& _path) {
+    m_glShaderType = GL_COMPUTE_SHADER;
+}
+
 NautilusShaderCompute::~NautilusShaderCompute() {
 }
 

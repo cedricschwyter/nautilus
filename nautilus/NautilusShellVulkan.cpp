@@ -21,7 +21,7 @@ nautilus::NautilusStatus NautilusShellVulkan::render() {
 }
 
 nautilus::NautilusStatus NautilusShellVulkan::setAPIWindowHints() {
-    m_title = "Standard Vulkan Example with nautilus by D3PSI";
+    m_title = nautilus::defaults::CONTEXT_NAME_VULKAN;
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     return nautilus::NAUTILUS_STATUS_OK;
 }

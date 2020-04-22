@@ -7,6 +7,10 @@ NautilusShaderTesselationControl::NautilusShaderTesselationControl() {
     m_glShaderType = GL_TESS_CONTROL_SHADER;
 }
 
+NautilusShaderTesselationControl::NautilusShaderTesselationControl(const std::string& _path) {
+    m_glShaderType = GL_TESS_CONTROL_SHADER;
+}
+
 NautilusShaderTesselationControl::~NautilusShaderTesselationControl() {
 }
 

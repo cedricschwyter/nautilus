@@ -321,16 +321,16 @@ public:
 
 protected:
 
-    nautilus::NautilusShellContext                      m_shellContext      = nautilus::NAUTILUS_SHELL_CONTEXT_WINDOWED;
+    nautilus::NautilusShellContext                      m_shellContext      = nautilus::defaults::SHELL_CONTEXT;
     GLFWmonitor*                                        m_monitor;
-    std::string                                         m_title             = "Nautilus by D3PSI";
+    std::string                                         m_title             = nautilus::defaults::CONTEXT_NAME;
     uint32_t                                            m_width             = 1280;
     uint32_t                                            m_height            = 720;
     std::string                                         m_shellIconPath     = "res/images/icons/nautilus.png";
     bool                                                m_windowCreated     = false;
     bool                                                m_initializedAPI    = false;
-    nautilus::NautilusDimension                         m_dim               = nautilus::NAUTILUS_DIMENSION_2D;
-    nautilus::NautilusCameraMode                        m_cameraMode        = nautilus::NAUTILUS_CAMERA_MODE_2D;
+    nautilus::NautilusDimension                         m_dim               = nautilus::defaults::SHELL_DIMENSION;
+    nautilus::NautilusCameraMode                        m_cameraMode        = nautilus::defaults::SHELL_CAMERA_MODE;
     NautilusCamera*                                     m_camera;
     nautilus::NautilusViewport                          m_viewport;
     uint32_t                                            m_fps               = nautilus::defaults::SHELL_FPS;

@@ -7,6 +7,11 @@ NautilusShaderVertex::NautilusShaderVertex() {
     m_glShaderType = GL_VERTEX_SHADER;
 }
 
+NautilusShaderVertex::NautilusShaderVertex(const std::string& _path) {
+    m_glShaderType = GL_VERTEX_SHADER;
+}
+
+
 NautilusShaderVertex::~NautilusShaderVertex() {
 }
 

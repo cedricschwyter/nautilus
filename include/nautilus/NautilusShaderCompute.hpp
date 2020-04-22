@@ -13,6 +13,13 @@ public:
     NautilusShaderCompute(void); 
 
     /**
+     * Constructor with argumets
+     * Compile shader from source file
+     * @param _path The relative path to the source file
+     */ 
+    NautilusShaderCompute(const std::string& _path);
+
+    /**
      * Default destructor
      */
     ~NautilusShaderCompute(void); 

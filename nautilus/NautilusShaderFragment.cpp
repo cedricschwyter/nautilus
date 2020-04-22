@@ -7,6 +7,10 @@ NautilusShaderFragment::NautilusShaderFragment() {
     m_glShaderType = GL_FRAGMENT_SHADER;
 }
 
+NautilusShaderFragment::NautilusShaderFragment(const std::string& _path) {
+    m_glShaderType = GL_FRAGMENT_SHADER;
+}
+
 NautilusShaderFragment::~NautilusShaderFragment() {
 }
 

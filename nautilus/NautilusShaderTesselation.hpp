@@ -17,8 +17,8 @@ public:
      * @param _shader The shader object
      * @return Returns a NautilusStatus status code
      */ 
-    nautilus::NautilusStatus setControl(const NautilusShaderTesselationControl& _shader);
-    nautilus::NautilusStatus setEvaluation(const NautilusShaderTesselationEvaluation& _shader);
+    nautilus::NautilusStatus setControl(NautilusShaderTesselationControl* _shader);
+    nautilus::NautilusStatus setEvaluation(NautilusShaderTesselationEvaluation* _shader);
 
     /**
      * Returns the corresponding shader
@@ -34,8 +34,8 @@ public:
 
 private:
 
-    NautilusShaderTesselationControl    m_control;
-    NautilusShaderTesselationEvaluation m_evaluation;
+    NautilusShaderTesselationControl*    m_control;
+    NautilusShaderTesselationEvaluation* m_evaluation;
 
 };
 

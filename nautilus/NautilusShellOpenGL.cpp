@@ -25,7 +25,7 @@ nautilus::NautilusStatus NautilusShellOpenGL::render() {
 }
 
 nautilus::NautilusStatus NautilusShellOpenGL::setAPIWindowHints() {
-    m_title = "Standard OpenGL Example with nautilus by D3PSI";
+    m_title = nautilus::defaults::CONTEXT_NAME_OPENGL;
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     return nautilus::NAUTILUS_STATUS_OK;
 }
