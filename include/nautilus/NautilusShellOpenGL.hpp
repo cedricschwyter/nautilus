@@ -1,5 +1,5 @@
-#ifndef NAUTILUS_OPENGL_SHELL_HPP
-#define NAUTILUS_OPENGL_SHELL_HPP
+#ifndef NAUTILUS_SHELL_OPENGL_HPP
+#define NAUTILUS_SHELL_OPENGL_HPP
 
 #include "NautilusShell.hpp"
 #include "NautilusNS.hpp"
@@ -8,14 +8,14 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-class NautilusOpenGLShell
+class NautilusShellOpenGL
     : public NautilusShell {
 public:
 
     /**
      * Default constructor
      */ 
-    NautilusOpenGLShell(void);
+    NautilusShellOpenGL(void);
 
     /**
      * Gets executed when the shell gets attached to the core
@@ -64,8 +64,8 @@ public:
     /**
      * Default destructor
      */ 
-    ~NautilusOpenGLShell(void);
+    ~NautilusShellOpenGL(void);
 
 };
 
-#endif      // NAUTILUS_OPENGL_SHELL_HPP
+#endif      // NAUTILUS_SHELL_OPENGL_HPP

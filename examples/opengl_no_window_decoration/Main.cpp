@@ -4,7 +4,7 @@
  * Main entry point for the application
  */
 int main() {
-    NautilusShell* shell = new NautilusOpenGLShell();
+    NautilusShell* shell = new NautilusShellOpenGL();
     shell->setShellDecoration(false);
     NautilusCore::attachShell(shell);
     NautilusCore::terminate();

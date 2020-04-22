@@ -60,11 +60,11 @@ For macOS you can also run the integrated installer from the repository after cl
 ## Getting started
 
 The nautilus-project is a graphics, windowing, sound and physics library with focus to user simplicity. There are various different examples whose source can be found in the `examples` subdirectory of the repository. The library works on a basic concept: The `NautilusCore` object and attachable `NautilusShell` objects.
-To create a basic window with your favorite graphics API (OpenGL in the example) create a new derived class from the `NautilusOpenGLShell` (other possibilities include `NautilusVulkanShell`) object and override the required functions `onAttach` and `onRender`: 
+To create a basic window with your favorite graphics API (OpenGL in the example) create a new derived class from the `NautilusShellOpenGL` (other possibilities include `NautilusShellVulkan`) object and override the required functions `onAttach` and `onRender`: 
 
     class ExampleShell 
-        : public NautilusOpenGLShell {
-        using NautilusOpenGLShell::NautilusOpenGLShell;
+        : public NautilusShellOpenGL {
+        using NautilusShellOpenGL::NautilusShellOpenGL;
     public:
 
         /**

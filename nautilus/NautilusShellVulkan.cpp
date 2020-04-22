@@ -1,32 +1,32 @@
-#ifndef NAUTILUS_VULKAN_SHELL_CPP
-#define NAUTILUS_VULKAN_SHELL_CPP
+#ifndef NAUTILUS_SHELL_VULKAN_CPP
+#define NAUTILUS_SHELL_VULKAN_CPP
 
-#include "NautilusVulkanShell.hpp"
+#include "NautilusShellVulkan.hpp"
 
-NautilusVulkanShell::NautilusVulkanShell() {
+NautilusShellVulkan::NautilusShellVulkan() {
     m_api = nautilus::NAUTILUS_API_VULKAN;
     m_core.m_allocator = nautilus::vulkanAllocator;
 }
 
-void NautilusVulkanShell::onAttach() {
+void NautilusShellVulkan::onAttach() {
 }
 
-void NautilusVulkanShell::onRender() {
+void NautilusShellVulkan::onRender() {
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::render() {
+nautilus::NautilusStatus NautilusShellVulkan::render() {
     printStats();
     showNextSwapchainImage();
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::setAPIWindowHints() {
+nautilus::NautilusStatus NautilusShellVulkan::setAPIWindowHints() {
     m_title = "Standard Vulkan Example with nautilus by D3PSI";
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::initAPI() {
+nautilus::NautilusStatus NautilusShellVulkan::initAPI() {
     if(m_initializedAPI) return nautilus::NAUTILUS_STATUS_OK;
     nautilus::logger::log("Initializing Vulkan...");
     ASSERT_NAUTILUS(nautilus::createVulkanInstance());
@@ -49,7 +49,7 @@ nautilus::NautilusStatus NautilusVulkanShell::initAPI() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::createSurfaceGLFW() {
+nautilus::NautilusStatus NautilusShellVulkan::createSurfaceGLFW() {
     nautilus::logger::log("Creating Vulkan surface...");
     ASSERT_VULKAN(glfwCreateWindowSurface(
         m_core.m_instance, 
@@ -60,7 +60,7 @@ nautilus::NautilusStatus NautilusVulkanShell::createSurfaceGLFW() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::selectBestPhysicalDevice() {
+nautilus::NautilusStatus NautilusShellVulkan::selectBestPhysicalDevice() {
     nautilus::logger::log("Enumerating GPUs...");
     uint32_t physicalDeviceCount = 0;
     vkEnumeratePhysicalDevices(m_core.m_instance, &physicalDeviceCount, nullptr);
@@ -90,7 +90,7 @@ nautilus::NautilusStatus NautilusVulkanShell::selectBestPhysicalDevice() {
 
 }
 
-uint32_t NautilusVulkanShell::evaluateDeviceSuitabilityScore(VkPhysicalDevice _device) {
+uint32_t NautilusShellVulkan::evaluateDeviceSuitabilityScore(VkPhysicalDevice _device) {
     nautilus::NautilusVulkanQueueFamily       family                = nautilus::findSuitableVulkanQueueFamily(_device, m_core.m_surface);
     nautilus::NautilusVulkanSwapchainDetails  swapchainDetails      = querySwapchainDetails(_device);
     VkPhysicalDeviceProperties physicalDeviceProperties;
@@ -109,7 +109,7 @@ uint32_t NautilusVulkanShell::evaluateDeviceSuitabilityScore(VkPhysicalDevice _d
     return score;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::printPhysicalDevicePropertiesAndFeatures(VkPhysicalDevice _device) {
+nautilus::NautilusStatus NautilusShellVulkan::printPhysicalDevicePropertiesAndFeatures(VkPhysicalDevice _device) {
     VkPhysicalDeviceProperties physicalDeviceProperties;
     vkGetPhysicalDeviceProperties(_device, &physicalDeviceProperties);
     VkPhysicalDeviceFeatures physicalDeviceFeatures;
@@ -120,7 +120,7 @@ nautilus::NautilusStatus NautilusVulkanShell::printPhysicalDevicePropertiesAndFe
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-bool NautilusVulkanShell::checkDeviceSwapchainExtensionSupport(VkPhysicalDevice _device) {
+bool NautilusShellVulkan::checkDeviceSwapchainExtensionSupport(VkPhysicalDevice _device) {
     nautilus::logger::log("Checking, whether the device supports the necessary extensions...");
     uint32_t extensionCount;
     vkEnumerateDeviceExtensionProperties(
@@ -145,7 +145,7 @@ bool NautilusVulkanShell::checkDeviceSwapchainExtensionSupport(VkPhysicalDevice 
     return extensions.empty();
 }
 
-VkSampleCountFlagBits NautilusVulkanShell::enumerateMaximumMultisamplingSampleCount() {
+VkSampleCountFlagBits NautilusShellVulkan::enumerateMaximumMultisamplingSampleCount() {
     VkPhysicalDeviceProperties physicalDeviceProps;
     vkGetPhysicalDeviceProperties(m_core.m_physicalDevice, &physicalDeviceProps);
     VkSampleCountFlags counts = std::min(physicalDeviceProps.limits.framebufferColorSampleCounts, physicalDeviceProps.limits.framebufferDepthSampleCounts);
@@ -158,7 +158,7 @@ VkSampleCountFlagBits NautilusVulkanShell::enumerateMaximumMultisamplingSampleCo
     return VK_SAMPLE_COUNT_1_BIT;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::createLogicalDevice() {
+nautilus::NautilusStatus NautilusShellVulkan::createLogicalDevice() {
     nautilus::logger::log("Creating logical device...");
     nautilus::NautilusVulkanQueueFamily family = nautilus::findSuitableVulkanQueueFamily(m_core.m_physicalDevice, m_core.m_surface);
     std::vector< VkDeviceQueueCreateInfo > deviceQueueCreateInfos;
@@ -217,7 +217,7 @@ nautilus::NautilusStatus NautilusVulkanShell::createLogicalDevice() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::createSwapchain() {
+nautilus::NautilusStatus NautilusShellVulkan::createSwapchain() {
     nautilus::logger::log("Creating swapchain...");
     nautilus::NautilusVulkanSwapchainDetails    details             = querySwapchainDetails(m_core.m_physicalDevice);
     VkSurfaceFormatKHR                          surfaceFormat       = evaluateBestSwapchainSurfaceFormat(details.m_supportedFormats);
@@ -273,7 +273,7 @@ nautilus::NautilusStatus NautilusVulkanShell::createSwapchain() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-VkSurfaceFormatKHR NautilusVulkanShell::evaluateBestSwapchainSurfaceFormat(const std::vector< VkSurfaceFormatKHR >& _availableFormats) {
+VkSurfaceFormatKHR NautilusShellVulkan::evaluateBestSwapchainSurfaceFormat(const std::vector< VkSurfaceFormatKHR >& _availableFormats) {
     if(_availableFormats.size() == 1 && _availableFormats[0].format == VK_FORMAT_UNDEFINED)     // If Vulkan only returns one entry and its format is set to VK_FORMAT_UNDEFINED it means that Vulkan has no preferred format so we can choose freely
         return { VK_FORMAT_B8G8R8A8_UNORM, VK_COLOR_SPACE_SRGB_NONLINEAR_KHR };
     for(const auto& format : _availableFormats)
@@ -282,14 +282,14 @@ VkSurfaceFormatKHR NautilusVulkanShell::evaluateBestSwapchainSurfaceFormat(const
     return _availableFormats[0];        // If there are no better choices, just return the first one in the array, usually it is good enough
 }
 
-VkPresentModeKHR NautilusVulkanShell::evaluateBestSwapchainSurfacePresentMode(const std::vector< VkPresentModeKHR >& _availablePresentModes) {
+VkPresentModeKHR NautilusShellVulkan::evaluateBestSwapchainSurfacePresentMode(const std::vector< VkPresentModeKHR >& _availablePresentModes) {
     for(const auto& presMode : _availablePresentModes)
         if(presMode == VK_PRESENT_MODE_MAILBOX_KHR) // VK_PRESENT_MODE_MAILBOX_KHR MAY cause tearing issues in borderless window or fullscreen mode
             return presMode;
     return VK_PRESENT_MODE_FIFO_KHR;        // If no better mode is available, return VK_PRESENT_MODE_FIFO_KHR as its implied to be supported if the GPU support Vulkan
 }
 
-VkExtent2D NautilusVulkanShell::evaluateSwapchainExtent(const VkSurfaceCapabilitiesKHR& _capabilities) {
+VkExtent2D NautilusShellVulkan::evaluateSwapchainExtent(const VkSurfaceCapabilitiesKHR& _capabilities) {
     if(_capabilities.currentExtent.width != std::numeric_limits< uint32_t >::max())
         return _capabilities.currentExtent;
     else {
@@ -305,7 +305,7 @@ VkExtent2D NautilusVulkanShell::evaluateSwapchainExtent(const VkSurfaceCapabilit
     }
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::createSwapchainImageViews() {
+nautilus::NautilusStatus NautilusShellVulkan::createSwapchainImageViews() {
     nautilus::logger::log("Creating swapchain image views...");
     m_swapchainImageViews.resize(m_swapchainImages.size());
     for(size_t i = 0; i < m_swapchainImages.size(); i++)     
@@ -318,7 +318,7 @@ nautilus::NautilusStatus NautilusVulkanShell::createSwapchainImageViews() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-VkImageView NautilusVulkanShell::createImageView(
+VkImageView NautilusShellVulkan::createImageView(
     VkImage                 _image, 
     VkFormat                _format, 
     VkImageAspectFlags      _aspectFlags,
@@ -348,7 +348,7 @@ VkImageView NautilusVulkanShell::createImageView(
     return imgView;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::initializeSynchronizationObjects() {
+nautilus::NautilusStatus NautilusShellVulkan::initializeSynchronizationObjects() {
     nautilus::logger::log("Initializing sync-objects...");
     m_swapchainImageAvailableSemaphores.resize(m_maxInFlightFrames);
     m_renderingCompletedSemaphores.resize(m_maxInFlightFrames);
@@ -394,7 +394,7 @@ nautilus::NautilusStatus NautilusVulkanShell::initializeSynchronizationObjects()
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::allocateCommandPools() {
+nautilus::NautilusStatus NautilusShellVulkan::allocateCommandPools() {
     nautilus::logger::log("Allocating command pool...");
     nautilus::NautilusVulkanQueueFamily family = nautilus::findSuitableVulkanQueueFamily(m_core.m_physicalDevice, m_core.m_surface);
     VkCommandPoolCreateInfo commandPoolCreateInfo          = {};
@@ -423,7 +423,7 @@ nautilus::NautilusStatus NautilusVulkanShell::allocateCommandPools() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::createRenderPasses() {
+nautilus::NautilusStatus NautilusShellVulkan::createRenderPasses() {
     nautilus::logger::log("Creating render passes...");
     VkAttachmentDescription colorAttachmentDescription          = {};
     colorAttachmentDescription.format                           = m_core.m_swapchainImageFormat;
@@ -497,7 +497,7 @@ nautilus::NautilusStatus NautilusVulkanShell::createRenderPasses() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::allocateSwapchainFramebuffers() {
+nautilus::NautilusStatus NautilusShellVulkan::allocateSwapchainFramebuffers() {
     nautilus::logger::log("Allocating framebuffers...");
     m_swapchainFramebuffers.resize(m_swapchainImageViews.size());
     for (size_t i = 0; i < m_swapchainImageViews.size(); i++) {
@@ -524,7 +524,7 @@ nautilus::NautilusStatus NautilusVulkanShell::allocateSwapchainFramebuffers() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::allocateCommandBuffers() {
+nautilus::NautilusStatus NautilusShellVulkan::allocateCommandBuffers() {
     nautilus::logger::log("Allocating command buffers...");
     m_commandBuffers.resize(m_swapchainFramebuffers.size());        // For every frame in the swapchain, create a command buffer
     std::scoped_lock< std::mutex > graphicsLock(m_graphicsLock);
@@ -544,7 +544,7 @@ nautilus::NautilusStatus NautilusVulkanShell::allocateCommandBuffers() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::recordSwapchainCommandBuffers() {
+nautilus::NautilusStatus NautilusShellVulkan::recordSwapchainCommandBuffers() {
     for(uint32_t i = 0; i < m_swapchainFramebuffers.size(); i++) {
         VkCommandBuffer cmdBuf = m_commandBuffers[i];
         VkCommandBufferBeginInfo commandBufferBeginInfo            = {};
@@ -570,7 +570,7 @@ nautilus::NautilusStatus NautilusVulkanShell::recordSwapchainCommandBuffers() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::showNextSwapchainImage() {
+nautilus::NautilusStatus NautilusShellVulkan::showNextSwapchainImage() {
     vkWaitForFences(
         m_core.m_logicalDevice,
         1,
@@ -629,7 +629,7 @@ nautilus::NautilusStatus NautilusVulkanShell::showNextSwapchainImage() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::recreateSwapchain() {
+nautilus::NautilusStatus NautilusShellVulkan::recreateSwapchain() {
     vkDeviceWaitIdle(m_core.m_logicalDevice);
     std::unique_lock< std::mutex > commandLock(m_commandBufferLock);
     int width = 0;
@@ -649,7 +649,7 @@ nautilus::NautilusStatus NautilusVulkanShell::recreateSwapchain() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::clean() {
+nautilus::NautilusStatus NautilusShellVulkan::clean() {
     vkDeviceWaitIdle(m_core.m_logicalDevice);
     ASSERT_NAUTILUS(cleanSwapchain());
     nautilus::logger::log("Successfully destroyed camera");
@@ -675,7 +675,7 @@ nautilus::NautilusStatus NautilusVulkanShell::clean() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::cleanSwapchain() {
+nautilus::NautilusStatus NautilusShellVulkan::cleanSwapchain() {
     nautilus::logger::log("Cleaning swapchain...");
     nautilus::logger::log("Destroying framebuffers...");
     for (auto framebuffer : m_swapchainFramebuffers) {
@@ -711,16 +711,16 @@ nautilus::NautilusStatus NautilusVulkanShell::cleanSwapchain() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-void NautilusVulkanShell::resize(GLFWwindow* _window, int _w, int _h) {
+void NautilusShellVulkan::resize(GLFWwindow* _window, int _w, int _h) {
     m_hasFramebufferBeenResized = true;
     onResize(_window, _h, _w);
 }
 
-nautilus::NautilusStatus NautilusVulkanShell::updateShellViewport(const nautilus::NautilusViewport& _viewport) {
+nautilus::NautilusStatus NautilusShellVulkan::updateShellViewport(const nautilus::NautilusViewport& _viewport) {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusVulkanSwapchainDetails NautilusVulkanShell::querySwapchainDetails(VkPhysicalDevice _device) {
+nautilus::NautilusVulkanSwapchainDetails NautilusShellVulkan::querySwapchainDetails(VkPhysicalDevice _device) {
     nautilus::logger::log("Gathering swapchain details...");
     nautilus::NautilusVulkanSwapchainDetails details;
     vkGetPhysicalDeviceSurfaceCapabilitiesKHR(_device, m_core.m_surface, &details.m_surfaceCapabilities);
@@ -756,4 +756,4 @@ nautilus::NautilusVulkanSwapchainDetails NautilusVulkanShell::querySwapchainDeta
     return details;
 }
 
-#endif      // NAUTILUS_VULKAN_SHELL_CPP
+#endif      // NAUTILUS_SHELL_VULKAN_CPP

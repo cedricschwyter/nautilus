@@ -710,7 +710,6 @@
 #include "NautilusMesh.hpp"
 #include "NautilusModel.hpp"
 #include "NautilusNS.hpp"
-#include "NautilusOpenGLShell.hpp"
 #include "NautilusPipeline.hpp"
 #include "NautilusShader.hpp"
 #include "NautilusShaderComponent.hpp"
@@ -730,6 +729,8 @@
 #include "NautilusShell.hpp"
 #include "NautilusShellContext.hpp"
 #include "NautilusShellDispatcher.hpp"
+#include "NautilusShellOpenGL.hpp"
+#include "NautilusShellVulkan.hpp"
 #include "NautilusStatus.hpp"
 #include "NautilusVertex.hpp"
 #include "NautilusViewport.hpp"
@@ -744,7 +745,6 @@
 #include "NautilusVulkanImageTexture.hpp"
 #include "NautilusVulkanQueueFamily.hpp"
 #include "NautilusVulkanQueueType.hpp"
-#include "NautilusVulkanShell.hpp"
 #include "NautilusVulkanSwapchainDetails.hpp"
 
 #endif      // NAUTILUS_HPP

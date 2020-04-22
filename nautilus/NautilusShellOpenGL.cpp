@@ -1,36 +1,36 @@
-#ifndef NAUTILUS_OPENGL_SHELL_CPP
-#define NAUTILUS_OPENGL_SHELL_CPP
+#ifndef NAUTILUS_SHELL_OPENGL_CPP
+#define NAUTILUS_SHELL_OPENGL_CPP
 
-#include "NautilusOpenGLShell.hpp"
+#include "NautilusShellOpenGL.hpp"
 
-NautilusOpenGLShell::NautilusOpenGLShell() {
+NautilusShellOpenGL::NautilusShellOpenGL() {
     m_api = nautilus::NAUTILUS_API_OPENGL;
 }
 
-NautilusOpenGLShell::~NautilusOpenGLShell() {
+NautilusShellOpenGL::~NautilusShellOpenGL() {
 }
 
-void NautilusOpenGLShell::onAttach() {
+void NautilusShellOpenGL::onAttach() {
 }
 
-void NautilusOpenGLShell::onRender() {
+void NautilusShellOpenGL::onRender() {
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 }
 
-nautilus::NautilusStatus NautilusOpenGLShell::render() {
+nautilus::NautilusStatus NautilusShellOpenGL::render() {
     printStats();
     onRender();
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusOpenGLShell::setAPIWindowHints() {
+nautilus::NautilusStatus NautilusShellOpenGL::setAPIWindowHints() {
     m_title = "Standard OpenGL Example with nautilus by D3PSI";
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusOpenGLShell::initAPI() {
+nautilus::NautilusStatus NautilusShellOpenGL::initAPI() {
     if(m_initializedAPI) return nautilus::NAUTILUS_STATUS_OK;
     nautilus::logger::log("Initializing OpenGL...");
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
@@ -45,12 +45,12 @@ nautilus::NautilusStatus NautilusOpenGLShell::initAPI() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusOpenGLShell::clean() {
+nautilus::NautilusStatus NautilusShellOpenGL::clean() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusOpenGLShell::updateShellViewport(const nautilus::NautilusViewport& _viewport) {
+nautilus::NautilusStatus NautilusShellOpenGL::updateShellViewport(const nautilus::NautilusViewport& _viewport) {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-#endif      // NAUTILUS_OPENGL_SHELL_CPP
+#endif      // NAUTILUS_SHELL_OPENGL_CPP

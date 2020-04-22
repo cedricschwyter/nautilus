@@ -47,7 +47,7 @@ public:
      * Enables Vulkan validation layers if available
      * Only set in debug/development, do not set in release
      * or deployment/production as these are very performance-heavy
-     * Sets validation layers for all NautilusVulkanShells
+     * Sets validation layers for all NautilusShellVulkans
      * @return Returns a NautilusStatus status code
      */ 
     static nautilus::NautilusStatus setEnableVulkanValidationLayers(void);
@@ -84,7 +84,7 @@ private:
      * Enables Vulkan validation layers if available
      * Only set in debug/development, do not set in release
      * or deployment/production as these are very performance-heavy
-     * Sets validation layers for all NautilusVulkanShells
+     * Sets validation layers for all NautilusShellVulkans
      * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus setEnableVulkanValidationLayersInternal(void);

@@ -1,5 +1,5 @@
-#ifndef NAUTILUS_VULKAN_SHELL_HPP
-#define NAUTILUS_VULKAN_SHELL_HPP
+#ifndef NAUTILUS_SHELL_VULKAN_HPP
+#define NAUTILUS_SHELL_VULKAN_HPP
 
 #include "NautilusShell.hpp"
 #include "NautilusNS.hpp"
@@ -19,14 +19,14 @@
 #include <string.h>
 #include <set>
 
-class NautilusVulkanShell : 
+class NautilusShellVulkan : 
     public NautilusShell {
 public:
 
     /**
      * Default constructor
      */
-    NautilusVulkanShell(void);
+    NautilusShellVulkan(void);
 
     /**
      * Gets executed when the shell gets attached to the core
@@ -81,7 +81,7 @@ public:
     /**
      * Default destructor
      */ 
-    ~NautilusVulkanShell(void);
+    ~NautilusShellVulkan(void);
 
 protected:
 
@@ -275,4 +275,4 @@ private:
 
 };
 
-#endif      // NAUTILUS_VULKAN_SHELL_HPP
+#endif      // NAUTILUS_SHELL_VULKAN_HPP
