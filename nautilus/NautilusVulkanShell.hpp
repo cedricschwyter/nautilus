@@ -49,32 +49,32 @@ public:
 
     /**
      * Cleans all allocated Vulkan resources by the shell
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus clean(void);
 
     /**
      * Executes OpenGL rendering routine
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus render(void);
 
     /**
      * Updates the viewport dynamically
      * @param _viewport The viewport extent data
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus updateShellViewport(const nautilus::NautilusViewport& _viewport);
     
     /**
      * Sets the default window hints for the corresponding API
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus setAPIWindowHints(void);
 
     /**
      * Initializes the Vulkan API
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus initAPI(void);
 
@@ -115,13 +115,13 @@ private:
 
     /**
      * Creates a GLFWsurface for the GLFWwindow
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createSurfaceGLFW(void);
 
     /**
      * Selects the most suitable physical device for computation
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus selectBestPhysicalDevice(void);
 
@@ -135,7 +135,7 @@ private:
     /**
      * Prints information about a physical GPU
      * @param _device The physical device
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus printPhysicalDevicePropertiesAndFeatures(VkPhysicalDevice _device);
 
@@ -168,13 +168,13 @@ private:
 
     /**
      * Creates a logical device from the selected physical vulkan device
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createLogicalDevice(void);
 
     /**
      * Creates the required swapchain
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createSwapchain(void);
 
@@ -201,7 +201,7 @@ private:
 
     /**
      * Creates the swapchain image views for the swapchain
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createSwapchainImageViews(void);
 
@@ -220,56 +220,56 @@ private:
 
     /**
      * Initializes synchronization objects for multiple queue accesses
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus initializeSynchronizationObjects(void);
 
     /**
      * Allocates the required command pools
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus allocateCommandPools(void);
 
     /**
      * Creates the render pass(es) for Vulkan's pipeline
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createRenderPasses(void);
 
     /**
      * Allocates the framebuffers for the swapchain and creates their views
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus allocateSwapchainFramebuffers(void);
 
     /**
      * Allocates the command buffers for the shell
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus allocateCommandBuffers(void);
 
     /**
      * Records the swapchain command buffers
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus recordSwapchainCommandBuffers(void);
 
     /**
      * Acquires, submits and presents the next swapchain image 
      * (in the common tongue: "renders" the image)
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus showNextSwapchainImage(void);
 
     /**
      * Recreates the swapchain when it's out of date (after window resize and such)
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */
     nautilus::NautilusStatus recreateSwapchain(void);
 
     /**
      * Cleans all resources allocated by the shell's swapchain
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus cleanSwapchain(void);
 

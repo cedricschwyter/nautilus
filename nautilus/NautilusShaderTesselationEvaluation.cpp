@@ -4,6 +4,7 @@
 #include "NautilusShaderTesselationEvaluation.hpp"
 
 NautilusShaderTesselationEvaluation::NautilusShaderTesselationEvaluation() {
+    m_glShaderType = GL_TESS_EVALUATION_SHADER;
 }
 
 NautilusShaderTesselationEvaluation::~NautilusShaderTesselationEvaluation() {

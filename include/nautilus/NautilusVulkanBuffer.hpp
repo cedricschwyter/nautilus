@@ -58,7 +58,7 @@ public:
 
     /**
      * Binds a buffer
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus bind(void);
 
@@ -66,7 +66,7 @@ public:
      * Fills a buffer
      * @param _data The data to fill the buffer with
      * @param _staging Use a staging buffer
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     template< typename _T >
     nautilus::NautilusStatus fill(const _T& _data, const bool _staging = false);

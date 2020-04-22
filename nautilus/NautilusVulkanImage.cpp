@@ -10,11 +10,11 @@ NautilusVulkanImage::NautilusVulkanImage(nautilus::NautilusVulkanCoreHandles _co
 }
 
 NautilusVulkanImage::~NautilusVulkanImage() {
-    vkDestroyImageView(this->m_core.m_logicalDevice, this->m_view, this->m_core.m_allocator);
+    vkDestroyImageView(m_core.m_logicalDevice, m_view, m_core.m_allocator);
     nautilus::logger::log("Successfully destroyed image view");
-    vkDestroyImage(this->m_core.m_logicalDevice, this->m_img, this->m_core.m_allocator);
+    vkDestroyImage(m_core.m_logicalDevice, m_img, m_core.m_allocator);
     nautilus::logger::log("Successfully destroyed image");
-    vkFreeMemory(this->m_core.m_logicalDevice, this->m_mem, this->m_core.m_allocator);
+    vkFreeMemory(m_core.m_logicalDevice, m_mem, m_core.m_allocator);
     nautilus::logger::log("Successfully freed image memory");
 }
 

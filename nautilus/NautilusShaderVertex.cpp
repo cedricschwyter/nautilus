@@ -4,6 +4,7 @@
 #include "NautilusShaderVertex.hpp"
 
 NautilusShaderVertex::NautilusShaderVertex() {
+    m_glShaderType = GL_VERTEX_SHADER;
 }
 
 NautilusShaderVertex::~NautilusShaderVertex() {

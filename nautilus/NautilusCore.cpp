@@ -76,7 +76,7 @@ nautilus::NautilusStatus NautilusCore::loopInternal() {
         }
         nautilus::logger::meta();
         std::scoped_lock< std::mutex > shellCountLock(nautilus::shellCountLock);
-        if(nautilus::shellCount == 0) this->exit();
+        if(nautilus::shellCount == 0) exit();
         exitLock.lock();
     }
     std::unique_lock< std::mutex > shellLock(nautilus::shellsLock);

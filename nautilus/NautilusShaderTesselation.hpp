@@ -22,10 +22,10 @@ public:
 
     /**
      * Returns the corresponding shader
-     * @return Returns a NautilusShader object of the corresponding shader
+     * @return Returns a NautilusShader pointer to the corresponding shader
      */ 
-    NautilusShaderTesselationControl control(void);
-    NautilusShaderTesselationEvaluation evaluation(void);
+    NautilusShaderTesselationControl* control(void);
+    NautilusShaderTesselationEvaluation* evaluation(void);
 
     /**
      * Default destructor

@@ -4,6 +4,7 @@
 #include "NautilusShaderCompute.hpp"
 
 NautilusShaderCompute::NautilusShaderCompute() {
+    m_glShaderType = GL_COMPUTE_SHADER;
 }
 
 NautilusShaderCompute::~NautilusShaderCompute() {

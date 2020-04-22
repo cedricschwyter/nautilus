@@ -7,9 +7,9 @@ NautilusShaderComponentInOut::NautilusShaderComponentInOut() {
 }
 
 NautilusShaderComponentInOut::NautilusShaderComponentInOut(nautilus::NautilusShaderStage _orig, nautilus::NautilusShaderStage _dest) {
-    this->m_type = nautilus::NAUTILUS_SHADER_COMPONENT_TYPE_IN_OUT;
-    this->m_orig = _orig;
-    this->m_dest = _dest;
+    m_type = nautilus::NAUTILUS_SHADER_COMPONENT_TYPE_IN_OUT;
+    m_orig = _orig;
+    m_dest = _dest;
 }
 
 NautilusShaderComponentInOut::~NautilusShaderComponentInOut() {

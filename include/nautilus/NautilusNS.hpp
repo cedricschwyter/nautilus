@@ -65,7 +65,7 @@ namespace nautilus {
      * Defines a wrapper function to free a loaded image using stb_image.h, 
      * because said file can only be included in *one* .cpp-source file
      * @param _pixels The array of pixels as an unsigned char pointer
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */
     nautilus::NautilusStatus freeSTBI(unsigned char* _pixels);
 
@@ -82,7 +82,7 @@ namespace nautilus {
 
     /**
      * Creates the Vulkan instance object
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createVulkanInstance(void);
 
@@ -100,7 +100,7 @@ namespace nautilus {
 
     /**
      * Creates the debug messenger for Vulkan validation layers
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createVulkanDebugMessenger(void);
 
@@ -137,7 +137,7 @@ namespace nautilus {
      * @param _instance The Vulkan instance handle
      * @param _debugMessenger The actual messenger handle
      * @param _pAllocator The Vulkan allocator
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus destroyVulkanDebugUtilsMessenger(
         VkInstance                          _instance,
@@ -179,7 +179,7 @@ namespace nautilus {
     /**
      * Ends the recording of a command buffer
      * @param _cmdBuf The command buffer to end
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf);
 
