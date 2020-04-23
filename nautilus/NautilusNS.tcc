@@ -2,6 +2,7 @@
 #define NAUTILUS_NS_TCC
 
 #include <vector>
+#include <future>
 #include <stdint.h>
 
 namespace nautilus {

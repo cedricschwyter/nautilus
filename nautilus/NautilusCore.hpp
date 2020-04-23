@@ -7,13 +7,14 @@
 
 #include <GLFW/glfw3.h>
 
+#include <future>
 #include <thread>
 #include <mutex>
 
 class NautilusCore {
 public:
     
-    std::thread* m_t0;
+    std::future< nautilus::NautilusStatus > m_t0;
 
     static NautilusCore& get(void);
 
@@ -22,7 +23,7 @@ public:
      * @param _shell A pointer to a derived shell object
      * @return Returns a NautilusStatus status code
      */
-    static nautilus::NautilusStatus attachShell(NautilusShell* _shell);
+    static nautilus::NautilusStatus attach(NautilusShell* _shell);
 
     /**
      * Contains the main loop of the application
@@ -59,26 +60,26 @@ private:
      * @param _shell A pointer to a derived shell object
      * @return Returns a NautilusStatus status code
      */
-    nautilus::NautilusStatus attachShellInternal(NautilusShell* _shell);
+    nautilus::NautilusStatus attachI(NautilusShell* _shell);
 
     /**
      * Contains the main loop of the application
      * @return Returns a NautilusStatus status code
      */
-    nautilus::NautilusStatus loopInternal(void);
+    nautilus::NautilusStatus loopI(void);
 
     /**
      * Exits the application and ends all processes owned by it
      * @return Returns a NautilusStatus status code
      */ 
-    nautilus::NautilusStatus exitInternal(void);
+    nautilus::NautilusStatus exitI(void);
 
     /**
      * Terminates the application, must be called manually by user, 
      * otherwise program will exit before even starting the main loop.
      * @return Returns a NautilusStatus status code
      */ 
-    nautilus::NautilusStatus terminateInternal(void);
+    nautilus::NautilusStatus terminateI(void);
 
     /**
      * Enables Vulkan validation layers if available

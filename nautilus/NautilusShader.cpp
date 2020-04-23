@@ -7,11 +7,12 @@
 NautilusShader::NautilusShader() {
 }
 
-NautilusShader::NautilusShader(const std::string& _path) {
+NautilusShader* NautilusShader::fromFile(const std::string& _path) {
     m_path = _path;
     const std::vector< char > _binary = nautilus::loadFile(_path);
     const char* _shaderCodeBinary = _binary.data();
     m_shadersrc = std::string(_shaderCodeBinary);
+    return this;
 }
 
 nautilus::NautilusStatus NautilusShader::attach(NautilusShaderComponent* _comp) {

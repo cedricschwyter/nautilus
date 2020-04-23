@@ -7,7 +7,7 @@ int main() {
     NautilusShell* shell = new NautilusShellVulkan();
     shell->setShellContext(nautilus::NAUTILUS_SHELL_CONTEXT_WINDOWED);
     shell->setShellExtent(1280, 720);
-    NautilusCore::attachShell(shell);
+    NautilusCore::attach(shell);
     NautilusCore::terminate();
     delete shell;
     return 0;

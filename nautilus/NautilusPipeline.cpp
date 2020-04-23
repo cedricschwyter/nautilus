@@ -51,32 +51,32 @@ nautilus::NautilusStatus NautilusPipeline::vertex(NautilusShaderVertex* _shader)
 }
 
 nautilus::NautilusStatus NautilusPipeline::compute(const std::string& _path) { 
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_COMPUTE] = new NautilusShaderCompute(_path); 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_COMPUTE] = (new NautilusShaderCompute())->fromFile(_path); 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 nautilus::NautilusStatus NautilusPipeline::fragment(const std::string& _path) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_FRAGMENT] = new NautilusShaderFragment(_path); 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_FRAGMENT] = (new NautilusShaderFragment())->fromFile(_path); 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 nautilus::NautilusStatus NautilusPipeline::geometry(const std::string& _path) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_GEOMETRY] = new NautilusShaderGeometry(_path); 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_GEOMETRY] = (new NautilusShaderGeometry())->fromFile(_path); 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 nautilus::NautilusStatus NautilusPipeline::tesselationControl(const std::string& _path) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_CONTROL] = new NautilusShaderTesselationControl(_path); 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_CONTROL] = (new NautilusShaderTesselationControl())->fromFile(_path); 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 nautilus::NautilusStatus NautilusPipeline::tesselationEvaluation(const std::string& _path) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_EVALUATION] = new NautilusShaderTesselationEvaluation(_path); 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_TESSELATION_EVALUATION] = (new NautilusShaderTesselationEvaluation())->fromFile(_path); 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 nautilus::NautilusStatus NautilusPipeline::vertex(const std::string& _path) {
-    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_VERTEX] = new NautilusShaderVertex(_path); 
+    m_shaders[nautilus::NAUTILUS_SHADER_STAGE_VERTEX] = (new NautilusShaderVertex())->fromFile(_path); 
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

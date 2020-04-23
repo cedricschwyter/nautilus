@@ -5,13 +5,10 @@
  */
 int main() {
     NautilusShell* shell = new NautilusShellOpenGL();
-    NautilusPipeline* pipe = new NautilusPipeline();
-    pipe->vertex("res/shaders/opengl/standard_2d/standard_2d.glsl.vert");
-    pipe->fragment("res/shaders/opengl/standard_2d/standard_2d.glsl.frag");
+    NautilusCore::attach(shell);
+    NautilusPipeline* pipe = new NautilusPipeline("default_2d_pipe");
+    pipe->vertex("res/shaders/opengl/v330_core/standard_2d/standard_2d.glsl.vert");
+    pipe->fragment("res/shaders/opengl/v330_core/standard_2d/standard_2d.glsl.frag");
     shell->attach(pipe);
-    NautilusCore::attachShell(shell);
-    NautilusCore::terminate();
-    delete pipe;
-    delete shell;
-    return 0;
+    return NautilusCore::terminate();
 }

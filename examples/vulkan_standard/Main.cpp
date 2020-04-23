@@ -5,7 +5,7 @@
  */
 int main() {
     NautilusShell*  shell = new NautilusShellVulkan();
-    NautilusCore::attachShell(shell);
+    NautilusCore::attach(shell);
     NautilusCore::terminate();
     return 0;
 }

@@ -7,10 +7,6 @@ NautilusShaderTesselationEvaluation::NautilusShaderTesselationEvaluation() {
     m_glShaderType = GL_TESS_EVALUATION_SHADER;
 }
 
-NautilusShaderTesselationEvaluation::NautilusShaderTesselationEvaluation(const std::string& _path) {
-    m_glShaderType = GL_TESS_EVALUATION_SHADER;
-}
-
 NautilusShaderTesselationEvaluation::~NautilusShaderTesselationEvaluation() {
 }
 

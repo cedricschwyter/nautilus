@@ -13,13 +13,6 @@ public:
     NautilusShaderTesselationEvaluation(void); 
 
     /**
-     * Constructor with argumets
-     * Compile shader from source file
-     * @param _path The relative path to the source file
-     */ 
-    NautilusShaderTesselationEvaluation(const std::string& _path);
-
-    /**
      * Default destructor
      */
     ~NautilusShaderTesselationEvaluation(void); 

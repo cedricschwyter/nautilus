@@ -22,11 +22,11 @@ public:
     NautilusShader(void);
 
     /**
-     * Constructor with argumets
-     * Compile shader from source file
-     * @param _path The relative path to the source file
+     * Compiles shader from a source file
+     * @param _path The path to the source file
+     * @return Returns a pointer to this instance
      */ 
-    NautilusShader(const std::string& _path);
+    NautilusShader* fromFile(const std::string& _path);
 
     /**
      * Adds a uniform variable to the shader source

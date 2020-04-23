@@ -18,6 +18,7 @@ namespace nautilus {
         const std::string                       SHADER_DIR              = "res/shaders";
         const std::string                       SHADER_DIR_OPENGL       = "res/shaders/opengl/";
         const std::string                       SHADER_DIR_VULKAN       = "res/shaders/vulkan/";
+        const std::string                       SHADER_DIR_OPENGL_V330  = "res/shaders/opengl/v330/";
 
         const float                             CAMERA_SPEED            = 2.5f;
         const float                             CAMERA_SENS             = 0.1f;

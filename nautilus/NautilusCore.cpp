@@ -4,20 +4,20 @@
 #include "NautilusCore.hpp"
 #include "NautilusNS.hpp"
 
-nautilus::NautilusStatus NautilusCore::attachShell(NautilusShell* _shell) {
-    return get().attachShellInternal(_shell);
+nautilus::NautilusStatus NautilusCore::attach(NautilusShell* _shell) {
+    return get().attachI(_shell);
 }
 
 nautilus::NautilusStatus NautilusCore::loop() {
-    return get().loopInternal();
+    return get().loopI();
 }
 
 nautilus::NautilusStatus NautilusCore::exit() {
-    return get().exitInternal();
+    return get().exitI();
 }
 
 nautilus::NautilusStatus NautilusCore::terminate() {
-    return get().terminateInternal();
+    return get().terminateI();
 }
 
 nautilus::NautilusStatus NautilusCore::setEnableVulkanValidationLayers() {
@@ -32,7 +32,7 @@ NautilusCore& NautilusCore::get() {
     return s_instance;
 }
 
-nautilus::NautilusStatus NautilusCore::attachShellInternal(NautilusShell* _shell) {
+nautilus::NautilusStatus NautilusCore::attachI(NautilusShell* _shell) {
     static int32_t id = 0;
     std::unique_lock< std::mutex > idLock(_shell->m_idLock);
     _shell->m_id = id;
@@ -44,14 +44,12 @@ nautilus::NautilusStatus NautilusCore::attachShellInternal(NautilusShell* _shell
     shellLock.unlock();
     if(!nautilus::running) {
         nautilus::running = true;
-        m_t0 = new std::thread([] () {
-            NautilusCore::loop();
-        });
+        m_t0 = std::async(std::launch::async, NautilusCore::loop);
     }
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusCore::loopInternal() {
+nautilus::NautilusStatus NautilusCore::loopI() {
     glfwInit();
     std::unique_lock< std::mutex > exitLock(nautilus::exitLock);
     while(!nautilus::exit && nautilus::running) {
@@ -85,14 +83,14 @@ nautilus::NautilusStatus NautilusCore::loopInternal() {
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusCore::exitInternal() {
+nautilus::NautilusStatus NautilusCore::exitI() {
     std::scoped_lock< std::mutex > exitLock(nautilus::exitLock);
     nautilus::exit = true;
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
-nautilus::NautilusStatus NautilusCore::terminateInternal() {
-    m_t0->join();
+nautilus::NautilusStatus NautilusCore::terminateI() {
+    m_t0.wait();
     std::unique_lock< std::mutex > exitMutex(nautilus::exitLock);
     nautilus::exit = true;
     exitMutex.unlock();

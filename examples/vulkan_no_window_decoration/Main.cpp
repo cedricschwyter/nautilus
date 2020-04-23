@@ -6,7 +6,7 @@
 int main() {
     NautilusShell* shell = new NautilusShellVulkan();
     shell->setShellDecoration(false);
-    NautilusCore::attachShell(shell);
+    NautilusCore::attach(shell);
     NautilusCore::terminate();
     delete shell;
     return 0;

@@ -24,6 +24,7 @@ namespace nautilus {
         extern const std::string                        SHADER_DIR;
         extern const std::string                        SHADER_DIR_OPENGL;
         extern const std::string                        SHADER_DIR_VULKAN;
+        extern const std::string                        SHADER_DIR_OPENGL_V330;
 
         extern const float                              CAMERA_SPEED;
         extern const float                              CAMERA_SENS;

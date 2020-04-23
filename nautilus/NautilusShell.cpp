@@ -12,6 +12,8 @@ NautilusShell::NautilusShell() {
 
 NautilusShell::~NautilusShell() {
     delete m_camera;
+    for(auto entry : m_pipelines)
+        delete entry.second;
 }
 
 void NautilusShell::onDetach(GLFWwindow* _window) {
@@ -119,6 +121,7 @@ nautilus::NautilusStatus NautilusShell::attach() {
     onAttach();
     std::unique_lock< std::mutex > lock(m_attachedLock);
     m_attached = true;
+    m_attachedCond.notify_all();
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
@@ -292,8 +295,16 @@ nautilus::NautilusStatus NautilusShell::setShellDecoration(bool _decoration) {
 }
 
 nautilus::NautilusStatus NautilusShell::attach(NautilusPipeline* _pipe) {
+    waitUntilAttachedToCore();
+    glfwMakeContextCurrent(m_window);
     m_pipelines[_pipe->identifier()] = _pipe;
     _pipe->attach(m_api);
+    return nautilus::NAUTILUS_STATUS_OK;
+}
+
+nautilus::NautilusStatus NautilusShell::waitUntilAttachedToCore() {
+    std::unique_lock< std::mutex > lock(m_attachedLock);
+    m_attachedCond.wait(lock, [this] () { return m_attached; });
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

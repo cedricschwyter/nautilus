@@ -20,6 +20,8 @@
 #include <map>
 #include <iostream>
 #include <thread>
+#include <future>
+#include <condition_variable>
 #include <algorithm>
 #include <cstring>
 #include <string>
@@ -32,6 +34,7 @@ public:
     GLFWwindow*                 m_window            = nullptr;
     bool                        m_attached          = false;
     std::mutex                  m_attachedLock;
+    std::condition_variable     m_attachedCond;
     uint32_t                    m_id;
     std::mutex                  m_idLock;
     bool                        m_callbacksSet      = false;
@@ -306,6 +309,12 @@ public:
      * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus clean(void) = 0;
+
+    /**
+     * Halts the current thread until the shell is attached to the application core
+     * @return Returns a NautilusStatus status code
+     */ 
+    nautilus::NautilusStatus waitUntilAttachedToCore(void);
 
     /**
      * Activates a pipeline based on its identifier
