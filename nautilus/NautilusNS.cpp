@@ -196,8 +196,8 @@ namespace nautilus {
             return NAUTILUS_STATUS_FATAL;
     }
 
-    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface) {
-        NautilusVulkanQueueFamily family;
+    NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface) {
+        NautilusQueueFamilyVulkan family;
         uint32_t queueFamilyCount = 0;
         vkGetPhysicalDeviceQueueFamilyProperties(_device, &queueFamilyCount, nullptr);
         std::vector< VkQueueFamilyProperties > queueFamily(queueFamilyCount);
@@ -224,12 +224,12 @@ namespace nautilus {
         return family;
     }
 
-    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles) {
+    NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(const NautilusCoreHandlesVulkan& _handles) {
         return nautilus::findSuitableVulkanQueueFamily(_handles.m_physicalDevice, _handles.m_surface);
     }
 
     uint32_t enumerateSuitableVulkanMemoryType(
-        const NautilusVulkanCoreHandles&       _handles, 
+        const NautilusCoreHandlesVulkan&       _handles, 
         const uint32_t&                        _typeFilter, 
         const VkMemoryPropertyFlags&           _memoryPropertyFlags) {
         VkPhysicalDeviceMemoryProperties memProp;

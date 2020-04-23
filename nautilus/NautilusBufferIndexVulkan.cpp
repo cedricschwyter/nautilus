@@ -1,0 +1,8 @@
+#ifndef NAUTILUS_BUFFER_INDEX_VULKAN_CPP
+#define NAUTILUS_BUFFER_INDEX_VULKAN_CPP
+
+#include "NautilusBufferIndexVulkan.hpp"
+
+
+
+#endif      // NAUTILUS_BUFFER_INDEX_VULKAN_CPP

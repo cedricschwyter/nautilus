@@ -5,9 +5,9 @@
 #include "NautilusNS.hpp"
 #include "NautilusLogger.hpp"
 #include "NautilusAssert.hpp"
-#include "NautilusVulkanQueueFamily.hpp"
-#include "NautilusVulkanSwapchainDetails.hpp"
-#include "NautilusVulkanCoreHandles.hpp"
+#include "NautilusQueueFamilyVulkan.hpp"
+#include "NautilusSwapchainDetailsVulkan.hpp"
+#include "NautilusCoreHandlesVulkan.hpp"
 
 #include <vulkan/vulkan.h>
 #include <GLFW/glfw3.h>
@@ -85,7 +85,7 @@ public:
 
 protected:
 
-    nautilus::NautilusVulkanCoreHandles     m_core;
+    nautilus::NautilusCoreHandlesVulkan     m_core;
     VkQueue                                 m_graphicsQueue                 = VK_NULL_HANDLE;
     VkCommandPool                           m_graphicsCommandPool           = VK_NULL_HANDLE;
     VkFence                                 m_graphicsFence                 = VK_NULL_HANDLE;
@@ -157,14 +157,14 @@ private:
      * @param _device The physical device to check
      * @return Returns a NautilusVulkanQueueFamily structure containing all necessary indices
      */ 
-    nautilus::NautilusVulkanQueueFamily findSuitableQueueFamily(VkPhysicalDevice _device);
+    nautilus::NautilusQueueFamilyVulkan findSuitableQueueFamily(VkPhysicalDevice _device);
 
     /**
      * Enumerates a physical devices swapchain details
      * @param _device The physical device to check
      * @return Returns a NautilusVulkanSwapchainDetails structure containing all necessary Vulkan information
      */ 
-    nautilus::NautilusVulkanSwapchainDetails querySwapchainDetails(VkPhysicalDevice _device);
+    nautilus::NautilusSwapchainDetailsVulkan querySwapchainDetails(VkPhysicalDevice _device);
 
     /**
      * Creates a logical device from the selected physical vulkan device

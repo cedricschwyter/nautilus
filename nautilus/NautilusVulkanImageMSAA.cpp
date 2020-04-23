@@ -1,8 +1,0 @@
-#ifndef NAUTILUS_VULKAN_IMAGE_MSAA_CPP
-#define NAUTILUS_VULKAN_IMAGE_MSAA_CPP
-
-#include "NautilusVulkanImageMSAA.hpp"
-
-
-
-#endif      // NAUTILUS_VULKAN_IMAGE_MSAA_CPP

@@ -1,8 +1,0 @@
-#ifndef NAUTILUS_VULKAN_IMAGE_TEXTURE_CPP
-#define NAUTILUS_VULKAN_IMAGE_TEXTURE_CPP
-
-#include "NautilusVulkanImageTexture.hpp"
-
-
-
-#endif      // NAUTILUS_VULKAN_IMAGE_TEXTURE_CPP

@@ -118,10 +118,10 @@ nautilus::NautilusStatus NautilusShell::setShellIcon(std::string _path) {
 nautilus::NautilusStatus NautilusShell::attach() {
     createWindow();
     setCallbacks();
-    onAttach();
     std::unique_lock< std::mutex > lock(m_attachedLock);
     m_attached = true;
     m_attachedCond.notify_all();
+    onAttach();
     return nautilus::NAUTILUS_STATUS_OK;
 }
 

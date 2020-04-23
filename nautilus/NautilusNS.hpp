@@ -3,9 +3,9 @@
 
 #include "NautilusShell.hpp"
 #include "NautilusLogger.hpp"
-#include "NautilusVulkanQueueFamily.hpp"
-#include "NautilusVulkanQueueType.hpp"
-#include "NautilusVulkanCoreHandles.hpp"
+#include "NautilusQueueFamilyVulkan.hpp"
+#include "NautilusQueueTypeVulkan.hpp"
+#include "NautilusCoreHandlesVulkan.hpp"
 
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.h>
@@ -151,8 +151,8 @@ namespace nautilus {
      * @param _handles A structure containing all the important Vulkan handles
      * @return Returns a NautilusVulkanQueueFamily structure containing all necessary indices
      */ 
-    nautilus::NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface);
-    nautilus::NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles);
+    nautilus::NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface);
+    nautilus::NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(const NautilusCoreHandlesVulkan& _handles);
 
     /**
      * Returns suitable memory type index
@@ -162,7 +162,7 @@ namespace nautilus {
      * @return Returns either an valid (>0) index or a negative NautilusStatus status code
      */ 
     uint32_t enumerateSuitableVulkanMemoryType(
-        const nautilus::NautilusVulkanCoreHandles&  _handles, 
+        const nautilus::NautilusCoreHandlesVulkan&  _handles, 
         const uint32_t&                             _typeFilter, 
         const VkMemoryPropertyFlags&                _memoryPropertyFlags);
 
