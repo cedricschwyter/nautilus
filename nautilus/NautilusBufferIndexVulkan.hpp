@@ -3,9 +3,13 @@
 
 #include "NautilusBufferVulkan.hpp"
 
-class NautilusBufferIndexVulkan
-    : public NautilusBufferVulkan {
-using NautilusBufferVulkan::NautilusBufferVulkan;
-};
+namespace nautilus {
+
+    class NautilusBufferIndexVulkan
+        : public NautilusBufferVulkan {
+    using NautilusBufferVulkan::NautilusBufferVulkan;
+    };
+
+}
 
 #endif      // NAUTILUS_BUFFER_INDEX_VULKAN_HPP

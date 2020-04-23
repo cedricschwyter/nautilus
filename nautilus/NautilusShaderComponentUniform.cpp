@@ -3,16 +3,20 @@
 
 #include "NautilusShaderComponentUniform.hpp"
 
-NautilusShaderComponentUniform::NautilusShaderComponentUniform() {
-}
+namespace nautilus {
 
-NautilusShaderComponentUniform::NautilusShaderComponentUniform(nautilus::NautilusShaderStage _stage, nautilus::NautilusShaderComponentUniformType _type) {
-    m_type = nautilus::NAUTILUS_SHADER_COMPONENT_TYPE_UNIFORM;
-    m_stage = _stage;
-    m_datatype = _type;
-}
+    NautilusShaderComponentUniform::NautilusShaderComponentUniform() {
+    }
 
-NautilusShaderComponentUniform::~NautilusShaderComponentUniform() {
+    NautilusShaderComponentUniform::NautilusShaderComponentUniform(NautilusShaderStage _stage, NautilusShaderComponentUniformType _type) {
+        m_type = NAUTILUS_SHADER_COMPONENT_TYPE_UNIFORM;
+        m_stage = _stage;
+        m_datatype = _type;
+    }
+
+    NautilusShaderComponentUniform::~NautilusShaderComponentUniform() {
+    }
+
 }
 
 #endif      // NAUTILUS_SHADER_COMPONENT_UNIFORM_CPP

@@ -3,22 +3,26 @@
 
 #include "NautilusShader.hpp"
 
-class NautilusShaderGeometry
-    : public NautilusShader {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderGeometry(void); 
+    class NautilusShaderGeometry
+        : public NautilusShader {
+    public:
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderGeometry(void); 
+        /**
+         * Default constructor
+         */
+        NautilusShaderGeometry(void); 
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderGeometry(void); 
 
-};
+    private:
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_GEOMETRY_HPP

@@ -4,8 +4,8 @@
 #include <nautilus/Nautilus.hpp>
 
 class ExampleShell 
-    : public NautilusShellOpenGL {
-    using NautilusShellOpenGL::NautilusShellOpenGL;
+    : public nautilus::NautilusShellOpenGL {
+    using nautilus::NautilusShellOpenGL::NautilusShellOpenGL;
 public:
 
     /**

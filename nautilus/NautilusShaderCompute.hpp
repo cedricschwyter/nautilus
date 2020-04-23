@@ -3,22 +3,26 @@
 
 #include "NautilusShader.hpp"
 
-class NautilusShaderCompute 
-    : public NautilusShader {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderCompute(void); 
+    class NautilusShaderCompute 
+        : public NautilusShader {
+    public:
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderCompute(void); 
+        /**
+         * Default constructor
+         */
+        NautilusShaderCompute(void); 
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderCompute(void); 
 
-};
+    private:
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_COMPUTE_HPP

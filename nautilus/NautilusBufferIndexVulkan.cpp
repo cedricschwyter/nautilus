@@ -3,6 +3,7 @@
 
 #include "NautilusBufferIndexVulkan.hpp"
 
-
+namespace nautilus {
+}
 
 #endif      // NAUTILUS_BUFFER_INDEX_VULKAN_CPP

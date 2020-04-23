@@ -2,70 +2,74 @@
 #define NAUTILUS_SHELL_OPENGL_HPP
 
 #include "NautilusShell.hpp"
-#include "NautilusNS.hpp"
+#include "NautilusUtil.hpp"
 #include "NautilusAPI.hpp"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-class NautilusShellOpenGL
-    : public NautilusShell {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */ 
-    NautilusShellOpenGL(void);
+    class NautilusShellOpenGL
+        : public NautilusShell {
+    public:
 
-    /**
-     * Gets executed when the shell gets attached to the core
-     * @return Returns a NautilusStatus status code
-     */
-    virtual void onAttach(void);
+        /**
+         * Default constructor
+         */ 
+        NautilusShellOpenGL(void);
 
-    /**
-     * Gets executed at the specified frequency by the application loop
-     * Computes rendering operations
-     * @return Returns a NautilusStatus status code
-     */ 
-    virtual void onRender(void);
+        /**
+         * Gets executed when the shell gets attached to the core
+         * @return Returns a NautilusStatus status code
+         */
+        virtual void onAttach(void);
 
-    /**
-     * Cleans all allocated OpenGL resources by the shell
-     * @return Returns a NautilusStatus status code
-     */ 
-    nautilus::NautilusStatus clean(void);
+        /**
+         * Gets executed at the specified frequency by the application loop
+         * Computes rendering operations
+         * @return Returns a NautilusStatus status code
+         */ 
+        virtual void onRender(void);
 
-    /**
-     * Executes OpenGL rendering routine
-     * @return Returns a NautilusStatus status code
-     */ 
-    nautilus::NautilusStatus render(void);
+        /**
+         * Cleans all allocated OpenGL resources by the shell
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus clean(void);
 
-    /**
-     * Updates the viewport dynamically
-     * @param _viewport The viewport extent data
-     * @return Returns a NautilusStatus status code
-     */ 
-    nautilus::NautilusStatus updateShellViewport(const nautilus::NautilusViewport& _viewport);
+        /**
+         * Executes OpenGL rendering routine
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus render(void);
 
-    /**
-     * Sets the default window hints for the corresponding API
-     * @return Returns a NautilusStatus status code
-     */ 
-    virtual nautilus::NautilusStatus setAPIWindowHints(void);
+        /**
+         * Updates the viewport dynamically
+         * @param _viewport The viewport extent data
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus updateShellViewport(const NautilusViewport& _viewport);
 
-    /**
-     * Initializes the OpenGL API
-     * @return Returns a NautilusStatus status code
-     */ 
-    nautilus::NautilusStatus initAPI(void);
+        /**
+         * Sets the default window hints for the corresponding API
+         * @return Returns a NautilusStatus status code
+         */ 
+        virtual NautilusStatus setAPIWindowHints(void);
 
-    /**
-     * Default destructor
-     */ 
-    ~NautilusShellOpenGL(void);
+        /**
+         * Initializes the OpenGL API
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus initAPI(void);
 
-};
+        /**
+         * Default destructor
+         */ 
+        ~NautilusShellOpenGL(void);
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHELL_OPENGL_HPP

@@ -3,22 +3,26 @@
 
 #include "NautilusShader.hpp"
 
-class NautilusShaderVertex
-    : public NautilusShader {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderVertex(void); 
+    class NautilusShaderVertex
+        : public NautilusShader {
+    public:
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderVertex(void); 
+        /**
+         * Default constructor
+         */
+        NautilusShaderVertex(void); 
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderVertex(void); 
 
-};
+    private:
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_VERTEX_HPP

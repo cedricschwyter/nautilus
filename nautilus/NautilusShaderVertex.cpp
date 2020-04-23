@@ -3,11 +3,15 @@
 
 #include "NautilusShaderVertex.hpp"
 
-NautilusShaderVertex::NautilusShaderVertex() {
-    m_glShaderType = GL_VERTEX_SHADER;
-}
+namespace nautilus {
 
-NautilusShaderVertex::~NautilusShaderVertex() {
+    NautilusShaderVertex::NautilusShaderVertex() {
+        m_glShaderType = GL_VERTEX_SHADER;
+    }
+
+    NautilusShaderVertex::~NautilusShaderVertex() {
+    }
+
 }
 
 #endif      // NAUTILUS_SHADER_VERTEX_CPP

@@ -3,6 +3,7 @@
 
 #include "NautilusImageMSAAVulkan.hpp"
 
-
+namespace nautilus {
+}
 
 #endif      // NAUTILUS_IMAGE_MSAA_VULKAN_CPP

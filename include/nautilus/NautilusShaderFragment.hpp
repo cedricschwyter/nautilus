@@ -3,22 +3,26 @@
 
 #include "NautilusShader.hpp"
 
-class NautilusShaderFragment 
-    : public NautilusShader {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderFragment(void); 
+    class NautilusShaderFragment 
+        : public NautilusShader {
+    public:
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderFragment(void); 
+        /**
+         * Default constructor
+         */
+        NautilusShaderFragment(void); 
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderFragment(void); 
 
-};
+    private:
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_FRAGMENT_HPP

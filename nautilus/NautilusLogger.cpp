@@ -13,23 +13,23 @@ namespace nautilus {
         auto                start               = std::chrono::system_clock::now();
         namespace           fs                  = std::filesystem;
 
-        nautilus::NautilusStatus init(const char* _logdir) {
-            if(nautilus::logger::loggerInitialized) return NAUTILUS_STATUS_OK;
+        NautilusStatus init(const char* _logdir) {
+            if(logger::loggerInitialized) return NAUTILUS_STATUS_OK;
             fs::create_directory("logs");
             standardLog.open("logs/nautilus.log", std::ios::trunc);
-            nautilus::logger::loggerInitialized = true;
+            logger::loggerInitialized = true;
             return NAUTILUS_STATUS_OK;
         }
 
-        nautilus::NautilusStatus log(std::string _logEntry, nautilus::NautilusStatus _status) {
-            nautilus::logger::init();
-            if(nautilus::logger::loggerInitialized) {
+        NautilusStatus log(std::string _logEntry, NautilusStatus _status) {
+            logger::init();
+            if(logger::loggerInitialized) {
                 auto now = std::chrono::system_clock::now();
-                std::chrono::duration< double > elapsedTime = now - nautilus::logger::start;
+                std::chrono::duration< double > elapsedTime = now - logger::start;
                 std::string timeStringTerm = std::to_string(elapsedTime.count()) + ": ";
                 std::string logString = _logEntry;
                 std::string log = timeStringTerm + logString; 
-                std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
+                std::scoped_lock< std::mutex > lock(logger::logLock);
                 std::cout << log << std::endl;
                 standardLog << log << std::endl;
                 ASSERT_NAUTILUS(_status);
@@ -42,7 +42,7 @@ namespace nautilus {
         }
 
         NautilusStatus terminate() {
-            nautilus::logger::log("Terminating...");
+            logger::log("Terminating...");
             return NAUTILUS_STATUS_OK;
         }
 

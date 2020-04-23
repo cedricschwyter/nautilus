@@ -4,9 +4,9 @@
  * Main entry point for the application
  */
 int main() {
-    NautilusShell* shell = new NautilusShellOpenGL();
-    NautilusCore::attach(shell);
-    NautilusCore::terminate();
+    nautilus::NautilusShell* shell = new nautilus::NautilusShellOpenGL();
+    nautilus::NautilusCore::attach(shell);
+    nautilus::NautilusCore::terminate();
     delete shell;
     return 0;
 }

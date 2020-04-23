@@ -3,6 +3,7 @@
 
 #include "NautilusImageTextureVulkan.hpp"
 
-
+namespace nautilus {
+}
 
 #endif      // NAUTILUS_IMAGE_TEXTURE_VULKAN_CPP

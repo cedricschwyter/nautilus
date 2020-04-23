@@ -40,9 +40,9 @@ namespace nautilus {
         extern const glm::vec3                          WORLD_UP;
 
         extern const uint32_t                           SHELL_FPS;
-        extern const nautilus::NautilusShellContext     SHELL_CONTEXT;
-        extern const nautilus::NautilusDimension        SHELL_DIMENSION;
-        extern const nautilus::NautilusCameraMode       SHELL_CAMERA_MODE;
+        extern const NautilusShellContext     SHELL_CONTEXT;
+        extern const NautilusDimension        SHELL_DIMENSION;
+        extern const NautilusCameraMode       SHELL_CAMERA_MODE;
 
     }
 

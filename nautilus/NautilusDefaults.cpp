@@ -34,9 +34,9 @@ namespace nautilus {
         const glm::vec3                         WORLD_UP                = glm::vec3(0.0f, 1.0f, 0.0f);
 
         const uint32_t                          SHELL_FPS               = 60;
-        const nautilus::NautilusShellContext    SHELL_CONTEXT           = nautilus::NAUTILUS_SHELL_CONTEXT_WINDOWED;
-        const nautilus::NautilusDimension       SHELL_DIMENSION         = nautilus::NAUTILUS_DIMENSION_2D;
-        const nautilus::NautilusCameraMode      SHELL_CAMERA_MODE       = nautilus::NAUTILUS_CAMERA_MODE_2D;
+        const NautilusShellContext    SHELL_CONTEXT           = NAUTILUS_SHELL_CONTEXT_WINDOWED;
+        const NautilusDimension       SHELL_DIMENSION         = NAUTILUS_DIMENSION_2D;
+        const NautilusCameraMode      SHELL_CAMERA_MODE       = NAUTILUS_CAMERA_MODE_2D;
 
     }
 

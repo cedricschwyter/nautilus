@@ -5,34 +5,38 @@
 #include "NautilusShaderComponentType.hpp"
 #include "NautilusShaderComponentUniformType.hpp"
 
-class NautilusShaderComponentUniform
-    : public NautilusShaderComponent {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderComponentUniform(void); 
+    class NautilusShaderComponentUniform
+        : public NautilusShaderComponent {
+    public:
 
-    /**
-     * Constructor witha arguments
-     * @param _stage The uniform's shader stage
-     * @param _type The uniform's type
-     */
-    NautilusShaderComponentUniform(nautilus::NautilusShaderStage _stage, nautilus::NautilusShaderComponentUniformType _type); 
+        /**
+         * Default constructor
+         */
+        NautilusShaderComponentUniform(void); 
 
-    /**
-     * Default destructor
-     */ 
-    ~NautilusShaderComponentUniform(void);
+        /**
+         * Constructor witha arguments
+         * @param _stage The uniform's shader stage
+         * @param _type The uniform's type
+         */
+        NautilusShaderComponentUniform(NautilusShaderStage _stage, NautilusShaderComponentUniformType _type); 
 
-private:
+        /**
+         * Default destructor
+         */ 
+        ~NautilusShaderComponentUniform(void);
 
-    nautilus::NautilusShaderStage                   m_stage;
-    nautilus::NautilusShaderComponentUniformType    m_datatype;
+    private:
 
-protected:
+        NautilusShaderStage                   m_stage;
+        NautilusShaderComponentUniformType    m_datatype;
 
-};
+    protected:
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_COMPONENT_UNIFORM_HPP

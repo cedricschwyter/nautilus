@@ -6,11 +6,11 @@
 
 namespace dev {
 
-    NautilusShell*  shell;
+    nautilus::NautilusShell*  shell;
 
     /**
      * Initializes everything
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */
     nautilus::NautilusStatus run(void) {
         shell = new DevShell();
@@ -19,17 +19,17 @@ namespace dev {
         shell->setShellExtent(1280, 720);
         shell->setShellIcon("res/images/icons/nautilus.png");
         shell->setShellRefreshRate(30);
-        NautilusCore::setEnableVulkanValidationLayers();
-        NautilusCore::attach(shell);
+        nautilus::NautilusCore::setEnableVulkanValidationLayers();
+        nautilus::NautilusCore::attach(shell);
         return nautilus::NAUTILUS_STATUS_OK;
     }
 
     /**
      * Cleans allocated resources
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus clean(void) {
-        NautilusCore::terminate();
+        nautilus::NautilusCore::terminate();
         delete dev::shell;
         return nautilus::NAUTILUS_STATUS_OK;
     }

@@ -4,10 +4,10 @@
  * Main entry point for the application
  */
 int main() {
-    NautilusShell* shell = new NautilusShellVulkan();
+    nautilus::NautilusShell* shell = new nautilus::NautilusShellVulkan();
     shell->setShellContext(nautilus::NAUTILUS_SHELL_CONTEXT_FULLSCREEN);
-    NautilusCore::attach(shell);
-    NautilusCore::terminate();
+    nautilus::NautilusCore::attach(shell);
+    nautilus::NautilusCore::terminate();
     delete shell;
     return 0;
 }

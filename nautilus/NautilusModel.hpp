@@ -13,68 +13,72 @@
 
 #include <vector>
 
-class NautilusModel {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusModel(void);
+    class NautilusModel {
+    public:
 
-    /**
-     * Copy constructor
-     * @param _other The other instance
-     */ 
-    NautilusModel(const NautilusModel& _other);
+        /**
+         * Default constructor
+         */
+        NautilusModel(void);
 
-    /**
-     * Assignment operator
-     * @param _other The other instance
-     * @return Returns a NautilusMesh reference
-     */ 
-    NautilusModel& operator=(const NautilusModel& _other);
+        /**
+         * Copy constructor
+         * @param _other The other instance
+         */ 
+        NautilusModel(const NautilusModel& _other);
 
-    /**
-     * Computes the model matrix
-     * Can and shall be overridden by derived classes
-     * @return Returns a glm::mat4 representing the model matrix
-     */ 
-    virtual glm::mat4 matrix(void);
+        /**
+         * Assignment operator
+         * @param _other The other instance
+         * @return Returns a NautilusMesh reference
+         */ 
+        NautilusModel& operator=(const NautilusModel& _other);
 
-    /**
-     * Binds the model
-     * @param _pipe The pipeline to bind the model to
-     * @return
-     */ 
-    nautilus::NautilusStatus bind(NautilusPipeline _pipe);
+        /**
+         * Computes the model matrix
+         * Can and shall be overridden by derived classes
+         * @return Returns a glm::mat4 representing the model matrix
+         */ 
+        virtual glm::mat4 matrix(void);
 
-    /**
-     * Default destructor
-     */ 
-    ~NautilusModel(void); 
+        /**
+         * Binds the model
+         * @param _pipe The pipeline to bind the model to
+         * @return
+         */ 
+        NautilusStatus bind(NautilusPipeline _pipe);
 
-private:
+        /**
+         * Default destructor
+         */ 
+        ~NautilusModel(void); 
 
-protected:
+    private:
 
-    std::vector< NautilusMesh* >        m_submeshes;
-    std::string                         m_dir;
+    protected:
 
-    /**
-     * Loads a model using the ASSIMP model loader
-     * @param _path
-     * @return Returns a NautilusStatus status code
-     */
-    nautilus::NautilusStatus load(const std::string& _path); 
+        std::vector< NautilusMesh* >        m_submeshes;
+        std::string                         m_dir;
 
-    /**
-     * Loads an ASSIMP node recursively
-     * @param _node The node to load
-     * @param _scene The scene object to load into
-     * @return Returns a NautilusStatus status code
-     */ 
-    nautilus::NautilusStatus node(aiNode* _node, const aiScene* _scene);
+        /**
+         * Loads a model using the ASSIMP model loader
+         * @param _path
+         * @return Returns a NautilusStatus status code
+         */
+        NautilusStatus load(const std::string& _path); 
 
-};
+        /**
+         * Loads an ASSIMP node recursively
+         * @param _node The node to load
+         * @param _scene The scene object to load into
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus node(aiNode* _node, const aiScene* _scene);
+
+    };
+
+}
 
 #endif      // NAUTILUS_MODEL_HPP

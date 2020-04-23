@@ -11,43 +11,47 @@
 #include <vector>
 #include <unordered_map>
 
-class NautilusMesh {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusMesh(void); 
+    class NautilusMesh {
+    public:
 
-    /**
-     * Constructor with arguments
-     * @param _mesh The ASSIMP mesh object
-     * @param _scene The ASSIMP scene object
-     */ 
-    NautilusMesh(aiMesh* _mesh, const aiScene* _scene);
+        /**
+         * Default constructor
+         */
+        NautilusMesh(void); 
 
-    /**
-     * Copy constructor
-     * @param _other The other instance
-     */ 
-    NautilusMesh(const NautilusMesh& _other);
+        /**
+         * Constructor with arguments
+         * @param _mesh The ASSIMP mesh object
+         * @param _scene The ASSIMP scene object
+         */ 
+        NautilusMesh(aiMesh* _mesh, const aiScene* _scene);
 
-    /**
-     * Assignment operator
-     * @param _other The other instance
-     * @return Returns a NautilusMesh reference
-     */ 
-    NautilusMesh& operator=(const NautilusMesh& _other);
+        /**
+         * Copy constructor
+         * @param _other The other instance
+         */ 
+        NautilusMesh(const NautilusMesh& _other);
 
-    /**
-     * Default destructor
-     */
-     ~NautilusMesh(void);
+        /**
+         * Assignment operator
+         * @param _other The other instance
+         * @return Returns a NautilusMesh reference
+         */ 
+        NautilusMesh& operator=(const NautilusMesh& _other);
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusMesh(void);
 
-protected:
+    private:
 
-};
+    protected:
+
+    };
+
+}
 
 #endif      // NAUTILUS_MESH_HPP

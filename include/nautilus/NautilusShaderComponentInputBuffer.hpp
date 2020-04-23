@@ -3,22 +3,26 @@
 
 #include "NautilusShaderComponent.hpp"
 
-class NautilusShaderComponentInputBuffer
-    : public NautilusShaderComponent {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderComponentInputBuffer(void);
+    class NautilusShaderComponentInputBuffer
+        : public NautilusShaderComponent {
+    public:
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderComponentInputBuffer(void);
+        /**
+         * Default constructor
+         */
+        NautilusShaderComponentInputBuffer(void);
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderComponentInputBuffer(void);
 
-};
+    private:
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_COMPONENT_INPUT_BUFFER_HPP

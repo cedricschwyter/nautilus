@@ -3,53 +3,57 @@
 
 #include "NautilusCamera.hpp"
 
-class NautilusCameraFPS
-    : public NautilusCamera {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusCameraFPS(void); 
+    class NautilusCameraFPS
+        : public NautilusCamera {
+    public:
 
-    /**
-     * Handles keyboard input
-     * @param _window A pointer to the GLFWwindow
-     * @param _key The GLFW keycode
-     * @param _scancode  The system scancode of the key
-     * @param _action The action (GLFW_PRESS, GLFW_RELEASE, GLFW_REPEAT)
-     * @param _mods Bitfield describing width modifier keys were held down
-     */ 
-    virtual void key(
-        GLFWwindow*     _window, 
-        int             _key, 
-        int             _scancode, 
-        int             _action, 
-        int             _mods);
+        /**
+         * Default constructor
+         */
+        NautilusCameraFPS(void); 
 
-    /**
-     * Handles mouse input
-     * @param _window A pointer to the GLFWwindow
-     * @param _x The new x-coordinate relative to the left edge of the window
-     * @param _y The new y-coordinate relative to the top edge of the window
-     */ 
-    virtual void cursor(GLFWwindow* _window, double _x, double _y);
+        /**
+         * Handles keyboard input
+         * @param _window A pointer to the GLFWwindow
+         * @param _key The GLFW keycode
+         * @param _scancode  The system scancode of the key
+         * @param _action The action (GLFW_PRESS, GLFW_RELEASE, GLFW_REPEAT)
+         * @param _mods Bitfield describing width modifier keys were held down
+         */ 
+        virtual void key(
+            GLFWwindow*     _window, 
+            int             _key, 
+            int             _scancode, 
+            int             _action, 
+            int             _mods);
 
-    /**
-     * Handles scroll input
-     * @param _window A pointer to the GLFWwindow
-     * @param _dx The x-offset of the scroll wheel
-     * @param _dy The y-offset of the scroll wheel
-     */ 
-    virtual void scroll(GLFWwindow* _window, double _dx, double _dy);
+        /**
+         * Handles mouse input
+         * @param _window A pointer to the GLFWwindow
+         * @param _x The new x-coordinate relative to the left edge of the window
+         * @param _y The new y-coordinate relative to the top edge of the window
+         */ 
+        virtual void cursor(GLFWwindow* _window, double _x, double _y);
 
-    /**
-     * Default destructor
-     */ 
-    ~NautilusCameraFPS(void);
+        /**
+         * Handles scroll input
+         * @param _window A pointer to the GLFWwindow
+         * @param _dx The x-offset of the scroll wheel
+         * @param _dy The y-offset of the scroll wheel
+         */ 
+        virtual void scroll(GLFWwindow* _window, double _dx, double _dy);
 
-private:
+        /**
+         * Default destructor
+         */ 
+        ~NautilusCameraFPS(void);
 
-};
+    private:
+
+    };
+
+}
 
 #endif      // NAUTILUS_CAMERA_FPS_HPP

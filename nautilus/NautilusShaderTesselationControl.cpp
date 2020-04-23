@@ -3,11 +3,15 @@
 
 #include "NautilusShaderTesselationControl.hpp"
 
-NautilusShaderTesselationControl::NautilusShaderTesselationControl() {
-    m_glShaderType = GL_TESS_CONTROL_SHADER;
-}
+namespace nautilus {
 
-NautilusShaderTesselationControl::~NautilusShaderTesselationControl() {
+    NautilusShaderTesselationControl::NautilusShaderTesselationControl() {
+        m_glShaderType = GL_TESS_CONTROL_SHADER;
+    }
+
+    NautilusShaderTesselationControl::~NautilusShaderTesselationControl() {
+    }
+
 }
 
 #endif      // NAUTILUS_SHADER_TESSELATION_CONTROL_CPP

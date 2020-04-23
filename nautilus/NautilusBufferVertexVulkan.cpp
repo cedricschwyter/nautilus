@@ -3,6 +3,7 @@
 
 #include "NautilusBufferVertexVulkan.hpp"
 
-
+namespace nautilus {
+}
 
 #endif      // NAUTILUS_BUFFER_VERTEX_VULKAN_CPP

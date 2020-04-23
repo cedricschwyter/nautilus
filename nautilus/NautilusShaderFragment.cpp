@@ -3,11 +3,15 @@
 
 #include "NautilusShaderFragment.hpp"
 
-NautilusShaderFragment::NautilusShaderFragment() {
-    m_glShaderType = GL_FRAGMENT_SHADER;
-}
+namespace nautilus {
 
-NautilusShaderFragment::~NautilusShaderFragment() {
+    NautilusShaderFragment::NautilusShaderFragment() {
+        m_glShaderType = GL_FRAGMENT_SHADER;
+    }
+
+    NautilusShaderFragment::~NautilusShaderFragment() {
+    }
+
 }
 
 #endif      // NAUTILUS_SHADER_FRAGMENT_CPP

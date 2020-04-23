@@ -3,11 +3,15 @@
 
 #include "NautilusShaderGeometry.hpp"
 
-NautilusShaderGeometry::NautilusShaderGeometry() {
-    m_glShaderType = GL_GEOMETRY_SHADER;
-}
+namespace nautilus {
 
-NautilusShaderGeometry::~NautilusShaderGeometry() {
+    NautilusShaderGeometry::NautilusShaderGeometry() {
+        m_glShaderType = GL_GEOMETRY_SHADER;
+    }
+
+    NautilusShaderGeometry::~NautilusShaderGeometry() {
+    }
+
 }
 
 #endif      // NAUTILUS_SHADER_GEOMERY_CPP

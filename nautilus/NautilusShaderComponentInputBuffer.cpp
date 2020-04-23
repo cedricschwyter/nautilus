@@ -3,11 +3,15 @@
 
 #include "NautilusShaderComponentInputBuffer.hpp"
 
-NautilusShaderComponentInputBuffer::NautilusShaderComponentInputBuffer() {
-    m_type = nautilus::NAUTILUS_SHADER_COMPONENT_TYPE_INPUT_BUFFER;
-}
+namespace nautilus {
+    
+    NautilusShaderComponentInputBuffer::NautilusShaderComponentInputBuffer() {
+        m_type = NAUTILUS_SHADER_COMPONENT_TYPE_INPUT_BUFFER;
+    }
 
-NautilusShaderComponentInputBuffer::~NautilusShaderComponentInputBuffer() {
+    NautilusShaderComponentInputBuffer::~NautilusShaderComponentInputBuffer() {
+    }
+
 }
 
 #endif      // NAUTILUS_SHADER_COMPONENT_INPUT_BUFFER_CPP

@@ -3,11 +3,15 @@
 
 #include "NautilusShaderTesselationEvaluation.hpp"
 
-NautilusShaderTesselationEvaluation::NautilusShaderTesselationEvaluation() {
-    m_glShaderType = GL_TESS_EVALUATION_SHADER;
-}
+namespace nautilus {
 
-NautilusShaderTesselationEvaluation::~NautilusShaderTesselationEvaluation() {
+    NautilusShaderTesselationEvaluation::NautilusShaderTesselationEvaluation() {
+        m_glShaderType = GL_TESS_EVALUATION_SHADER;
+    }
+
+    NautilusShaderTesselationEvaluation::~NautilusShaderTesselationEvaluation() {
+    }
+
 }
 
 #endif      // NAUTILUS_SHADER_TESSELATION_EVALUATION_CPP

@@ -3,6 +3,7 @@
 
 #include "NautilusBufferDepthVulkan.hpp"
 
-
+namespace nautilus {
+}
 
 #endif      // NAUTILUS_BUFFER_DEPTH_VULKAN_CPP

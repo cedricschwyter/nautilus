@@ -709,7 +709,7 @@
 #include "NautilusLogger.hpp"
 #include "NautilusMesh.hpp"
 #include "NautilusModel.hpp"
-#include "NautilusNS.hpp"
+#include "NautilusUtil.hpp"
 #include "NautilusPipeline.hpp"
 #include "NautilusShader.hpp"
 #include "NautilusShaderComponent.hpp"

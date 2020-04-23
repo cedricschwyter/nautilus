@@ -25,7 +25,7 @@ namespace nautilus {
          * @param _logdir The directory to store the logs. If null, logs will not be written to disk.
          * @return Returns a NautilusStatus status code
          */ 
-        nautilus::NautilusStatus init(const char* _logdir = nullptr);
+        NautilusStatus init(const char* _logdir = nullptr);
 
         /**
          * Creates a new log entry with status level
@@ -33,7 +33,7 @@ namespace nautilus {
          * @param _status The status level
          * @return Returns a NautilusStatus status code
          */ 
-        nautilus::NautilusStatus log(std::string _logEntry, nautilus::NautilusStatus _status = NAUTILUS_STATUS_OK);
+        NautilusStatus log(std::string _logEntry, NautilusStatus _status = NAUTILUS_STATUS_OK);
 
         /**
          * Prints metadata about the application

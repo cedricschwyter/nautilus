@@ -7,41 +7,45 @@
 
 #include <string>
 
-class NautilusShaderComponent {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderComponent(void); 
+    class NautilusShaderComponent {
+    public:
 
-    /**
-     * Gives the shader component a name
-     * @param _name The name of the component
-     * @return Returns a NautilusStatus status code 
-     */ 
-    virtual nautilus::NautilusStatus name(const std::string& _name);
+        /**
+         * Default constructor
+         */
+        NautilusShaderComponent(void); 
 
-    /**
-     * Sets the value of the shader component
-     * @param _value The value of the component
-     * @return Returns a NautilusStatus status code
-     */  
-    virtual nautilus::NautilusStatus value(const std::string& _value);
+        /**
+         * Gives the shader component a name
+         * @param _name The name of the component
+         * @return Returns a NautilusStatus status code 
+         */ 
+        virtual NautilusStatus name(const std::string& _name);
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderComponent(void);
+        /**
+         * Sets the value of the shader component
+         * @param _value The value of the component
+         * @return Returns a NautilusStatus status code
+         */  
+        virtual NautilusStatus value(const std::string& _value);
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderComponent(void);
 
-protected:
+    private:
 
-    std::string                             m_name;
-    std::string                             m_value;
-    nautilus::NautilusShaderComponentType   m_type = nautilus::NAUTILUS_SHADER_COMPONENT_TYPE_UNSPECIFIED;
+    protected:
 
-};
+        std::string                             m_name;
+        std::string                             m_value;
+        NautilusShaderComponentType   m_type = NAUTILUS_SHADER_COMPONENT_TYPE_UNSPECIFIED;
+
+    };
+
+}
 
 #endif         // NAUTILUS_SHADER_COMPONENT_HPP

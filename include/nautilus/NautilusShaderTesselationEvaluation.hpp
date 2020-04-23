@@ -3,22 +3,26 @@
 
 #include "NautilusShader.hpp"
 
-class NautilusShaderTesselationEvaluation
-    : public NautilusShader {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderTesselationEvaluation(void); 
+    class NautilusShaderTesselationEvaluation
+        : public NautilusShader {
+    public:
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderTesselationEvaluation(void); 
+        /**
+         * Default constructor
+         */
+        NautilusShaderTesselationEvaluation(void); 
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderTesselationEvaluation(void); 
 
-};
+    private:
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_TESSELATION_EVALUATION_HPP

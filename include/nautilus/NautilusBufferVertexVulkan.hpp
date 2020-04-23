@@ -3,9 +3,13 @@
 
 #include "NautilusBufferVulkan.hpp"
 
-class NautilusBufferVertexVulkan 
-    : public NautilusBufferVulkan {
-using NautilusBufferVulkan::NautilusBufferVulkan;
-};
+namespace nautilus {
+
+    class NautilusBufferVertexVulkan 
+        : public NautilusBufferVulkan {
+    using NautilusBufferVulkan::NautilusBufferVulkan;
+    };
+
+}
 
 #endif      // NAUTILUS_BUFFER_VERTEX_VULKAN_HPP

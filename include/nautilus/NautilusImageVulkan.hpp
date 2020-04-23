@@ -6,34 +6,38 @@
 
 #include <vulkan/vulkan.h>
 
-class NautilusImageVulkan {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusImageVulkan(void);
+    class NautilusImageVulkan {
+    public:
 
-    /**
-     * Constructor with arguments
-     */ 
-    NautilusImageVulkan(nautilus::NautilusCoreHandlesVulkan _core);
+        /**
+         * Default constructor
+         */
+        NautilusImageVulkan(void);
 
-    /**
-     * Default destructor
-     */
-    ~NautilusImageVulkan(void);  
+        /**
+         * Constructor with arguments
+         */ 
+        NautilusImageVulkan(NautilusCoreHandlesVulkan _core);
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusImageVulkan(void);  
 
-protected:
+    private:
 
-    nautilus::NautilusCoreHandlesVulkan     m_core;
-    VkImage                                 m_img;
-    VkDeviceMemory                          m_mem;
-    VkFormat                                m_format;
-    VkImageView                             m_view;
+    protected:
 
-};
+        NautilusCoreHandlesVulkan     m_core;
+        VkImage                                 m_img;
+        VkDeviceMemory                          m_mem;
+        VkFormat                                m_format;
+        VkImageView                             m_view;
+
+    };
+
+}
 
 #endif      // NAUTILUS_IMAGE_VULKAN_HPP

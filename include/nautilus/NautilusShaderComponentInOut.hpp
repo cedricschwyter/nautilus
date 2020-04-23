@@ -3,32 +3,36 @@
 
 #include "NautilusShaderComponent.hpp"
 
-class NautilusShaderComponentInOut
-    : public NautilusShaderComponent {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderComponentInOut(void); 
+    class NautilusShaderComponentInOut
+        : public NautilusShaderComponent {
+    public:
 
-    /**
-     * Constructor with arguments
-     * @param _orig The shader stage where the passed-on variable originates
-     * @param _dest The destination shader stage
-     */
-    NautilusShaderComponentInOut(nautilus::NautilusShaderStage _orig, nautilus::NautilusShaderStage _dest); 
+        /**
+         * Default constructor
+         */
+        NautilusShaderComponentInOut(void); 
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderComponentInOut(void); 
+        /**
+         * Constructor with arguments
+         * @param _orig The shader stage where the passed-on variable originates
+         * @param _dest The destination shader stage
+         */
+        NautilusShaderComponentInOut(NautilusShaderStage _orig, NautilusShaderStage _dest); 
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderComponentInOut(void); 
 
-    nautilus::NautilusShaderStage m_orig;
-    nautilus::NautilusShaderStage m_dest;
+    private:
 
-};
+        NautilusShaderStage m_orig;
+        NautilusShaderStage m_dest;
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_COMPONENT_IN_OUT_HPP

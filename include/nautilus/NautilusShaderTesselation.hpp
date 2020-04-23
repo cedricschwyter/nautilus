@@ -4,39 +4,43 @@
 #include "NautilusShaderTesselationControl.hpp"
 #include "NautilusShaderTesselationEvaluation.hpp"
 
-class NautilusShaderTesselation {
-public:
+namespace nautilus {
 
-    /**
-     * Default constructor
-     */
-    NautilusShaderTesselation(void); 
+    class NautilusShaderTesselation {
+    public:
 
-    /**
-     * Sets the corresponding shader objects
-     * @param _shader The shader object
-     * @return Returns a NautilusStatus status code
-     */ 
-    nautilus::NautilusStatus setControl(NautilusShaderTesselationControl* _shader);
-    nautilus::NautilusStatus setEvaluation(NautilusShaderTesselationEvaluation* _shader);
+        /**
+         * Default constructor
+         */
+        NautilusShaderTesselation(void); 
 
-    /**
-     * Returns the corresponding shader
-     * @return Returns a NautilusShader pointer to the corresponding shader
-     */ 
-    NautilusShaderTesselationControl* control(void);
-    NautilusShaderTesselationEvaluation* evaluation(void);
+        /**
+         * Sets the corresponding shader objects
+         * @param _shader The shader object
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus setControl(NautilusShaderTesselationControl* _shader);
+        NautilusStatus setEvaluation(NautilusShaderTesselationEvaluation* _shader);
 
-    /**
-     * Default destructor
-     */
-    ~NautilusShaderTesselation(void); 
+        /**
+         * Returns the corresponding shader
+         * @return Returns a NautilusShader pointer to the corresponding shader
+         */ 
+        NautilusShaderTesselationControl* control(void);
+        NautilusShaderTesselationEvaluation* evaluation(void);
 
-private:
+        /**
+         * Default destructor
+         */
+        ~NautilusShaderTesselation(void); 
 
-    NautilusShaderTesselationControl*    m_control;
-    NautilusShaderTesselationEvaluation* m_evaluation;
+    private:
 
-};
+        NautilusShaderTesselationControl*    m_control;
+        NautilusShaderTesselationEvaluation* m_evaluation;
+
+    };
+
+}
 
 #endif      // NAUTILUS_SHADER_TESSELATION_HPP
