@@ -56,16 +56,18 @@ nautilus::NautilusStatus NautilusShader::compileOpenGL() {
     int32_t success;
     char infoLog[512];
     m_handle = glCreateShader(m_glShaderType);
+    if(m_handle == 0) nautilus::logger::log("Failed to get shader handle", nautilus::NAUTILUS_STATUS_FATAL);
     const char* source = m_shadersrc.c_str();
     glShaderSource(m_handle, 1, &source, nullptr);
     glCompileShader(m_handle);
+    std::cout << m_handle << std::endl;
     glGetShaderiv(m_handle, GL_COMPILE_STATUS, &success);
     if(!success) {
         glGetShaderInfoLog(m_handle, 512, nullptr, infoLog);
         if(m_path != "")
-            nautilus::logger::log("Failed to compile shader at " + std::string(m_path) + ": " + std::string(infoLog));
+            nautilus::logger::log("Failed to compile shader at " + std::string(m_path) + ": " + std::string(infoLog), nautilus::NAUTILUS_STATUS_FATAL);
         else
-            nautilus::logger::log("Failed to compile shader: " + std::string(infoLog)); 
+            nautilus::logger::log("Failed to compile shader: " + std::string(infoLog), nautilus::NAUTILUS_STATUS_FATAL); 
     }
     return nautilus::NAUTILUS_STATUS_OK;
 }

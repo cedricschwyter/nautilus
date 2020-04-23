@@ -1,11 +1,11 @@
-#ifndef DEV_SHELL_HPP
-#define DEV_SHELL_HPP
+#ifndef EXAMPLE_SHELL_HPP
+#define EXAMPLE_SHELL_HPP
 
 #include <nautilus/Nautilus.hpp>
 
-class DevShell 
-    : public NautilusShellVulkan {
-    using NautilusShellVulkan::NautilusShellVulkan;
+class ExampleShell 
+    : public NautilusShellOpenGL {
+    using NautilusShellOpenGL::NautilusShellOpenGL;
 public:
 
     /**
@@ -22,4 +22,4 @@ public:
 
 };
 
-#endif      // DEV_SHELL_HPP
+#endif      // EXAMPLE_SHELL_HPP

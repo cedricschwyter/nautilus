@@ -2,6 +2,7 @@
 #define NAUTILUS_LOGGER_HPP
 
 #include "NautilusStatus.hpp"
+#include "NautilusAssert.hpp"
 
 #include <filesystem>
 #include <string>

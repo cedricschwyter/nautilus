@@ -267,6 +267,7 @@ namespace nautilus {
         file.seekg(0);        // Translate back to the beginning of the file
         file.read(buffer.data(), bufferSize);
         file.close();
+        nautilus::logger::log("Loaded file at '" + _path + "'");
         return buffer;
     }
 
