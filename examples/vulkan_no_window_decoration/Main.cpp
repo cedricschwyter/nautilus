@@ -8,6 +8,5 @@ int main() {
     shell->setShellDecoration(false);
     nautilus::NautilusCore::attach(shell);
     nautilus::NautilusCore::terminate();
-    delete shell;
     return 0;
 }

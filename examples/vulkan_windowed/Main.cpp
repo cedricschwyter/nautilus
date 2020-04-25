@@ -9,6 +9,5 @@ int main() {
     shell->setShellExtent(1280, 720);
     nautilus::NautilusCore::attach(shell);
     nautilus::NautilusCore::terminate();
-    delete shell;
     return 0;
 }

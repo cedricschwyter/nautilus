@@ -8,6 +8,5 @@ int main() {
     shell->setShellContext(nautilus::NAUTILUS_SHELL_CONTEXT_FULLSCREEN);
     nautilus::NautilusCore::attach(shell);
     nautilus::NautilusCore::terminate();
-    delete shell;
     return 0;
 }

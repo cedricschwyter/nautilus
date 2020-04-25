@@ -30,7 +30,6 @@ namespace dev {
      */ 
     nautilus::NautilusStatus clean(void) {
         nautilus::NautilusCore::terminate();
-        delete dev::shell;
         return nautilus::NAUTILUS_STATUS_OK;
     }
 

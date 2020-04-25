@@ -68,6 +68,12 @@ namespace nautilus {
         NautilusStatus wait(void);
 
         /**
+         * Exits the shell
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus exit(void);
+
+        /**
          * Gets executed when the shell gets attached to the core
          * @return Returns a NautilusStatus status code
          */

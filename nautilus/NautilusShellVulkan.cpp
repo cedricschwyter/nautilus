@@ -31,10 +31,13 @@ namespace nautilus {
 
     NautilusStatus NautilusShellVulkan::initAPI() {
         if(m_initializedAPI) return NAUTILUS_STATUS_OK;
-        logger::log("Initializing Vulkan...");
-        ASSERT_NAUTILUS(NautilusCore::createVulkanInstance());
+        if(!NautilusCore::vulkanInitialized()) {
+            NautilusCore::setVulkanInitialized();
+            logger::log("Initializing Vulkan...");
+            ASSERT_NAUTILUS(NautilusCore::createVulkanInstance());
+            ASSERT_NAUTILUS(NautilusCore::createVulkanDebugMessenger());
+        }
         m_core.m_instance = NautilusCore::vulkanInstance();
-        ASSERT_NAUTILUS(NautilusCore::createVulkanDebugMessenger());
         ASSERT_NAUTILUS(createSurfaceGLFW());
         ASSERT_NAUTILUS(selectBestPhysicalDevice());
         ASSERT_NAUTILUS(createLogicalDevice());

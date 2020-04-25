@@ -25,14 +25,19 @@ namespace nautilus {
     }
 
     NautilusStatus NautilusShell::wait() {
-        NautilusStatus status = m_thread.get();
-        NautilusCore::decreaseShellCount();
-        return status;
+        m_thread.wait();
+        return NAUTILUS_STATUS_OK;
+    }
+
+    NautilusStatus NautilusShell::exit() {
+        std::scoped_lock< std::mutex > runningLock(m_runningLock);
+        m_running = false;
+        return NAUTILUS_STATUS_OK;
     }
 
     NautilusStatus NautilusShell::loop() {
         std::unique_lock< std::mutex > runningLock(m_runningLock);
-        while(!NautilusCore::exit() && m_running) {
+        while(m_running) {
             runningLock.unlock();
             std::unique_lock< std::mutex > lock(m_attachedLock);
             if(m_attached){
@@ -163,8 +168,7 @@ namespace nautilus {
     }
 
     NautilusStatus NautilusShell::detach() {
-        std::unique_lock< std::mutex > runningLock(m_runningLock);
-        m_running = false;
+        exit();
         std::scoped_lock< std::mutex > lock(m_attachedLock);
         m_attached = false;
         glfwDestroyWindow(m_window);

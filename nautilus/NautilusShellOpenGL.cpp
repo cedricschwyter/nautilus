@@ -2,6 +2,7 @@
 #define NAUTILUS_SHELL_OPENGL_CPP
 
 #include "NautilusShellOpenGL.hpp"
+#include "NautilusCore.hpp"
 
 namespace nautilus {
 
@@ -34,16 +35,20 @@ namespace nautilus {
 
     NautilusStatus NautilusShellOpenGL::initAPI() {
         if(m_initializedAPI) return NAUTILUS_STATUS_OK;
-        logger::log("Initializing OpenGL...");
-        if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-            logger::log("Failed to load OpenGL function pointers through GLAD", NAUTILUS_STATUS_FATAL);
-            return NAUTILUS_STATUS_FATAL;
+        if(!NautilusCore::openGLInitialized()) {
+            NautilusCore::setOpenGLInitialized();
+            logger::log("Initializing OpenGL...");
+            if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+                logger::log("Failed to load OpenGL function pointers through GLAD", NAUTILUS_STATUS_FATAL);
+                return NAUTILUS_STATUS_FATAL;
+            } else {
+                logger::log("Successfully initialized OpenGL");
+            }
         }
         glfwMakeContextCurrent(m_window);
         glViewport(0, 0, m_width, m_height);
         glfwShowWindow(m_window);
         glfwFocusWindow(m_window);
-        logger::log("Successfully initialized OpenGL");
         m_initializedAPI = true;
         return NAUTILUS_STATUS_OK;
     }

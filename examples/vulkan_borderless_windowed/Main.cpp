@@ -8,6 +8,5 @@ int main() {
     shell->setShellContext(nautilus::NAUTILUS_SHELL_CONTEXT_BORDERLESS);
     nautilus::NautilusCore::attach(shell);
     nautilus::NautilusCore::terminate();
-    delete shell;
     return 0;
 }

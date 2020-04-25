@@ -66,6 +66,30 @@ namespace nautilus {
         static NautilusStatus decreaseShellCount(void);
 
         /**
+         * Returns true if OpenGL has been initialized
+         * @return Returns true if OpenGL has been initialized
+         */ 
+        static bool openGLInitialized(void);
+
+        /**
+         * Sets the OpenGL initialized flag variable
+         * @return Returns a NautilusStatus status code
+         */ 
+        static NautilusStatus setOpenGLInitialized(void);
+
+        /**
+         * Returns true if Vulkan has been initialized
+         * @return Returns true if Vulkan has been initialized
+         */ 
+        static bool vulkanInitialized(void);
+
+        /**
+         * Sets the Vulkan initialized flag variable
+         * @return Returns a NautilusStatus status code
+         */ 
+        static NautilusStatus setVulkanInitialized(void);
+
+        /**
          * Enables Vulkan validation layers if available
          * Only set in debug/development, do not set in release
          * or deployment/production as these are very performance-heavy
@@ -221,6 +245,10 @@ namespace nautilus {
         const std::vector< const char* >                m_vulkanRequiredExtensions                = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME 
         };
+        bool                                            m_openGLInitialized                       = false;
+        std::mutex                                      m_openGLInitializedMutex;
+        bool                                            m_vulkanInitialized                       = false;
+        std::mutex                                      m_vulkanInitializedMutex;
 
         /**
          * Attaches a shell to the core
@@ -266,6 +294,30 @@ namespace nautilus {
          * @return Returns a NautilusStatus status code
          */ 
         NautilusStatus decreaseShellCountI(void);
+
+        /**
+         * Returns true if OpenGL has been initialized
+         * @return Returns true if OpenGL has been initialized
+         */ 
+        bool openGLInitializedI(void);
+
+        /**
+         * Sets the OpenGL initialized flag variable
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus setOpenGLInitializedI(void);
+
+        /**
+         * Returns true if Vulkan has been initialized
+         * @return Returns true if Vulkan has been initialized
+         */ 
+        bool vulkanInitializedI(void);
+
+        /**
+         * Sets the Vulkan initialized flag variable
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus setVulkanInitializedI(void);
 
         /**
          * Enables Vulkan validation layers if available

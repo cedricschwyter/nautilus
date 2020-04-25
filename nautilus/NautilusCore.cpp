@@ -132,6 +132,22 @@ namespace nautilus {
         return get().decreaseShellCountI();
     }
 
+    NautilusStatus NautilusCore::setOpenGLInitialized() {
+        return get().setOpenGLInitializedI();
+    }
+
+    bool NautilusCore::openGLInitialized() {
+        return get().openGLInitializedI();
+    }
+
+    NautilusStatus NautilusCore::setVulkanInitialized() {
+        return get().setVulkanInitializedI();
+    }
+
+    bool NautilusCore::vulkanInitialized() {
+        return get().vulkanInitializedI();
+    }
+
     NautilusCore::NautilusCore() {
     }
 
@@ -150,11 +166,13 @@ namespace nautilus {
         m_shells.push_back(_shell);
         shellLock.unlock();
         increaseShellCount();
+        std::unique_lock< std::mutex > runningLock(m_runningLock);
         if(!m_running) {
             glfwInit();
             m_running = true;
             m_t0 = std::async(std::launch::async, NautilusCore::loop);
         }
+        runningLock.unlock();
         _shell->start();
         return NAUTILUS_STATUS_OK;
     }
@@ -176,36 +194,44 @@ namespace nautilus {
         m_shells.erase(m_shells.begin() 
             + util::getIndexOfElement(m_shells, _shell).second);
         shellsLock.unlock();
+        decreaseShellCount();
         return NAUTILUS_STATUS_OK;
     }
 
     NautilusStatus NautilusCore::loopI() {
-        while(!exit()) {
+        std::unique_lock< std::mutex > exitLock(m_exitLock);
+        while(!m_exit) {
+            exitLock.unlock();
             logger::meta();
+            std::scoped_lock< std::mutex, std::mutex > lock(m_runningLock, m_shellCountLock);
+            if(m_running && m_shellCount == 0) {
+                break;
+            }
+            exitLock.lock();
         }
         logger::terminate();
         return NAUTILUS_STATUS_OK;
     }
 
     bool NautilusCore::exitI() {
-        std::scoped_lock< std::mutex, std::mutex, std::mutex > exitLock(m_runningLock, m_shellCountLock, m_exitLock);
-        return m_exit || (m_running && m_shellCount == 0);
-    }
-
-    NautilusStatus NautilusCore::terminateI() {
+        std::unique_lock< std::mutex > shellsLock(m_shellsLock);
+        for(auto shell : m_shells) {
+            shellsLock.unlock();
+            shell->wait();
+            shellsLock.lock();
+        }
         std::unique_lock< std::mutex > exitMutex(m_exitLock);
         m_exit = true;
         exitMutex.unlock();
         std::unique_lock< std::mutex > runningLock(m_runningLock);
         m_running = false;
         runningLock.unlock();
-        std::unique_lock< std::mutex > shellLock(m_shellsLock);
-        for(auto shell : m_shells) {
-            shell->wait();
-            delete shell;
-        }
-        shellLock.unlock();
         m_t0.wait();
+        return m_exit;
+    }
+
+    NautilusStatus NautilusCore::terminateI() {
+        exit();
         std::unique_lock< std::mutex > debugLock(m_vulkanDebugUtilsMessengerCreatedLock);
         if(enableVulkanValidationLayers() && m_vulkanDebugUtilsMessengerCreated) {
             destroyVulkanDebugUtilsMessenger(
@@ -237,6 +263,28 @@ namespace nautilus {
     NautilusStatus NautilusCore::setEnableVulkanValidationLayersI() {
         m_enableVulkanValidationLayers = true;
         return NAUTILUS_STATUS_OK;
+    }
+
+    NautilusStatus NautilusCore::setOpenGLInitializedI() {
+        std::scoped_lock< std::mutex > lock(m_openGLInitializedMutex);
+        m_openGLInitialized = true;
+        return NAUTILUS_STATUS_OK;
+    }
+
+    bool NautilusCore::openGLInitializedI() {
+        std::scoped_lock< std::mutex > lock(m_openGLInitializedMutex);
+        return m_openGLInitialized;
+    }
+
+    NautilusStatus NautilusCore::setVulkanInitializedI() {
+        std::scoped_lock< std::mutex > lock(m_vulkanInitializedMutex);
+        m_vulkanInitialized = true;
+        return NAUTILUS_STATUS_OK;
+    }
+
+    bool NautilusCore::vulkanInitializedI() {
+        std::scoped_lock< std::mutex > lock(m_vulkanInitializedMutex);
+        return m_vulkanInitialized;
     }
 
     NautilusStatus NautilusCore::createVulkanInstanceI() {

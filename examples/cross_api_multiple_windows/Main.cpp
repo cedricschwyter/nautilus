@@ -11,7 +11,5 @@ int main() {
     nautilus::NautilusCore::attach(shell1);
     nautilus::NautilusCore::attach(shell2);
     nautilus::NautilusCore::terminate();
-    delete shell1;
-    delete shell2;
     return 0;
 }
