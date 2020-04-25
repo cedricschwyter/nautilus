@@ -39,6 +39,7 @@ namespace nautilus {
             logger::log("Failed to load OpenGL function pointers through GLAD", NAUTILUS_STATUS_FATAL);
             return NAUTILUS_STATUS_FATAL;
         }
+        glfwMakeContextCurrent(m_window);
         glViewport(0, 0, m_width, m_height);
         glfwShowWindow(m_window);
         glfwFocusWindow(m_window);

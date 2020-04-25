@@ -2,6 +2,7 @@
 #define NAUTILUS_LOGGER_CPP
 
 #include "NautilusLogger.hpp"
+#include "NautilusAssert.hpp"
 
 namespace nautilus {
 

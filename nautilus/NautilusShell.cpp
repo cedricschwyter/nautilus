@@ -19,8 +19,21 @@ namespace nautilus {
             delete entry.second;
     }
 
+    NautilusStatus NautilusShell::start() {
+        m_thread = std::async(std::launch::async, &NautilusShell::loop, this);
+        return NAUTILUS_STATUS_OK;
+    }
+
+    NautilusStatus NautilusShell::wait() {
+        NautilusStatus status = m_thread.get();
+        NautilusCore::decreaseShellCount();
+        return status;
+    }
+
     NautilusStatus NautilusShell::loop() {
-        while(!NautilusCore::exit()) {
+        std::unique_lock< std::mutex > runningLock(m_runningLock);
+        while(!NautilusCore::exit() && m_running) {
+            runningLock.unlock();
             std::unique_lock< std::mutex > lock(m_attachedLock);
             if(m_attached){
                 lock.unlock();
@@ -35,6 +48,7 @@ namespace nautilus {
                 lock.unlock();
                 attach();
             }
+            runningLock.lock();
         }
         return NAUTILUS_STATUS_OK;
     }
@@ -149,12 +163,13 @@ namespace nautilus {
     }
 
     NautilusStatus NautilusShell::detach() {
+        std::unique_lock< std::mutex > runningLock(m_runningLock);
+        m_running = false;
         std::scoped_lock< std::mutex > lock(m_attachedLock);
         m_attached = false;
-        delete m_camera;
+        glfwDestroyWindow(m_window);
         clean();
         onDetach(m_window);
-        glfwDestroyWindow(m_window);
         NautilusCore::detach(this);
         return NAUTILUS_STATUS_OK;
     }
@@ -324,7 +339,7 @@ namespace nautilus {
 
     NautilusStatus NautilusShell::waitUntilAttachedToCore() {
         std::unique_lock< std::mutex > lock(m_attachedLock);
-        m_attachedCond.wait(lock, [this] () { return m_attached; });
+        m_attachedCond.wait(lock, [=] () { return m_attached; });
         return NAUTILUS_STATUS_OK;
     }
 

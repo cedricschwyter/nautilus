@@ -124,6 +124,14 @@ namespace nautilus {
         return get().vulkanRequiredExtensionsI();
     }
 
+    NautilusStatus NautilusCore::increaseShellCount() {
+        return get().increaseShellCountI();
+    }
+
+    NautilusStatus NautilusCore::decreaseShellCount() {
+        return get().decreaseShellCountI();
+    }
+
     NautilusCore::NautilusCore() {
     }
 
@@ -138,51 +146,75 @@ namespace nautilus {
         _shell->m_id = id;
         idLock.unlock();
         id++;
-        m_shellCount++;
         std::unique_lock< std::mutex > shellLock(m_shellsLock);
         m_shells.push_back(_shell);
         shellLock.unlock();
+        increaseShellCount();
         if(!m_running) {
+            glfwInit();
             m_running = true;
             m_t0 = std::async(std::launch::async, NautilusCore::loop);
         }
+        _shell->start();
         return NAUTILUS_STATUS_OK;
     }
 
-    NautilusStatus NautilusCore::detachI(NautilusShell* _shell) {
-        m_shells.erase(m_shells.begin() 
-            + util::getIndexOfElement(m_shells, _shell).second);
+    NautilusStatus NautilusCore::increaseShellCountI() {
+        std::scoped_lock< std::mutex > shellCountLock(m_shellCountLock);
+        m_shellCount++;
+        return NAUTILUS_STATUS_OK;
+    }
+
+    NautilusStatus NautilusCore::decreaseShellCountI() {
         std::scoped_lock< std::mutex > shellCountLock(m_shellCountLock);
         m_shellCount--;
         return NAUTILUS_STATUS_OK;
     }
 
+    NautilusStatus NautilusCore::detachI(NautilusShell* _shell) {
+        std::unique_lock< std::mutex > shellsLock(m_shellsLock);
+        m_shells.erase(m_shells.begin() 
+            + util::getIndexOfElement(m_shells, _shell).second);
+        shellsLock.unlock();
+        return NAUTILUS_STATUS_OK;
+    }
+
     NautilusStatus NautilusCore::loopI() {
-        glfwInit();
         while(!exit()) {
             logger::meta();
         }
-        glfwTerminate();
         logger::terminate();
         return NAUTILUS_STATUS_OK;
     }
 
     bool NautilusCore::exitI() {
-        std::scoped_lock< std::mutex > exitLock(m_shellCountLock);
-        return m_shellCount == 0;
+        std::scoped_lock< std::mutex, std::mutex, std::mutex > exitLock(m_runningLock, m_shellCountLock, m_exitLock);
+        return m_exit || (m_running && m_shellCount == 0);
     }
 
     NautilusStatus NautilusCore::terminateI() {
-        m_t0.wait();
         std::unique_lock< std::mutex > exitMutex(m_exitLock);
         m_exit = true;
         exitMutex.unlock();
+        std::unique_lock< std::mutex > runningLock(m_runningLock);
+        m_running = false;
+        runningLock.unlock();
         std::unique_lock< std::mutex > shellLock(m_shellsLock);
-        for(auto shell : m_shells)
+        for(auto shell : m_shells) {
+            shell->wait();
             delete shell;
+        }
         shellLock.unlock();
-        std::scoped_lock< std::mutex > lock(m_threadpoolLock);
-        for(auto& t : m_threadpool) t.wait();
+        m_t0.wait();
+        std::unique_lock< std::mutex > debugLock(m_vulkanDebugUtilsMessengerCreatedLock);
+        if(enableVulkanValidationLayers() && m_vulkanDebugUtilsMessengerCreated) {
+            destroyVulkanDebugUtilsMessenger(
+                m_vulkanInstance, 
+                vulkanValidationLayerDebugMessenger(), 
+                m_vulkanAllocator);
+            logger::log("Successfully destroyed debug utils messenger");
+        }
+        glfwTerminate();
         return NAUTILUS_STATUS_OK;
     }
 
@@ -208,12 +240,15 @@ namespace nautilus {
     }
 
     NautilusStatus NautilusCore::createVulkanInstanceI() {
+        std::scoped_lock< std::mutex > vulkanInstanceCreatedLock(m_vulkanInstanceCreatedLock);
         if(m_vulkanInstanceCreated) return NAUTILUS_STATUS_OK;
         logger::log("Requesting Vulkan validation layers...");
-        if(m_enableVulkanValidationLayers&& vulkanValidationLayersSupportedI())
+        if(m_enableVulkanValidationLayers && vulkanValidationLayersSupportedI())
             logger::log("Successfully activated Vulkan validation layers");
-        else
+        else if(m_enableVulkanValidationLayers && !vulkanValidationLayersSupportedI())
             logger::log("Vulkan validation layers are not available", NAUTILUS_STATUS_FATAL);
+        else
+            logger::log("Vulkan validation layers are not available");
         auto extensions = queryRequiredVulkanExtensionsI();
         VkApplicationInfo applicationInfo                  = {};
         applicationInfo.sType                              = VK_STRUCTURE_TYPE_APPLICATION_INFO;
@@ -283,7 +318,8 @@ namespace nautilus {
     }
 
     NautilusStatus NautilusCore::createVulkanDebugMessengerI() {
-        if(!m_enableVulkanValidationLayers) return NAUTILUS_STATUS_OK;
+        std::scoped_lock< std::mutex > debugLock(m_vulkanDebugUtilsMessengerCreatedLock);
+        if(enableVulkanValidationLayers() && m_vulkanDebugUtilsMessengerCreated) return NAUTILUS_STATUS_OK;
         logger::log("Creating Vulkan debug utils messenger...");
         VkDebugUtilsMessengerCreateInfoEXT debugUtilsMessengerCreateInfo        = {};
         debugUtilsMessengerCreateInfo.sType                                     = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
@@ -302,6 +338,7 @@ namespace nautilus {
             &m_vulkanValidationLayerDebugMessenger);
         ASSERT_VULKAN(result);
         logger::log("Successfully created Vulkan debug utils messenger");
+        m_vulkanDebugUtilsMessengerCreated = true;
         return NAUTILUS_STATUS_OK;
     }
 

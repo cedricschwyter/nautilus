@@ -54,6 +54,18 @@ namespace nautilus {
         static NautilusStatus terminate(void);
 
         /**
+         * Increases the shell count
+         * @return Returns a NautilusStatus status code
+         */ 
+        static NautilusStatus increaseShellCount(void);
+
+        /**
+         * Decreases the shell count
+         * @return Returns a NautilusStatus status code
+         */ 
+        static NautilusStatus decreaseShellCount(void);
+
+        /**
          * Enables Vulkan validation layers if available
          * Only set in debug/development, do not set in release
          * or deployment/production as these are very performance-heavy
@@ -187,8 +199,6 @@ namespace nautilus {
     private:
         
         std::future< NautilusStatus >                   m_t0;
-        std::vector< std::future< NautilusStatus > >    m_threadpool;
-        std::mutex                                      m_threadpoolLock;
         std::vector< NautilusShell* >                   m_shells;
         std::mutex                                      m_shellsLock;
         uint32_t                                        m_shellCount                              = 0;
@@ -199,12 +209,15 @@ namespace nautilus {
         std::mutex                                      m_runningLock;
         VkInstance                                      m_vulkanInstance                          = VK_NULL_HANDLE;
         bool                                            m_vulkanInstanceCreated                   = false;
+        std::mutex                                      m_vulkanInstanceCreatedLock;
         VkAllocationCallbacks*                          m_vulkanAllocator                         = nullptr;
         bool                                            m_enableVulkanValidationLayers            = false;
         const std::vector< const char* >                m_vulkanValidationLayers                  = {
             "VK_LAYER_KHRONOS_validation",
         };
         VkDebugUtilsMessengerEXT                        m_vulkanValidationLayerDebugMessenger     = VK_NULL_HANDLE;
+        bool                                            m_vulkanDebugUtilsMessengerCreated        = false;
+        std::mutex                                      m_vulkanDebugUtilsMessengerCreatedLock;
         const std::vector< const char* >                m_vulkanRequiredExtensions                = {
             VK_KHR_SWAPCHAIN_EXTENSION_NAME 
         };
@@ -241,6 +254,18 @@ namespace nautilus {
          * @return Returns a NautilusStatus status code
          */ 
         NautilusStatus terminateI(void);
+
+        /**
+         * Increases the shell count
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus increaseShellCountI(void);
+
+        /**
+         * Decreases the shell count
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus decreaseShellCountI(void);
 
         /**
          * Enables Vulkan validation layers if available

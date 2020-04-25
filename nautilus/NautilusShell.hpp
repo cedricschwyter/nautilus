@@ -33,15 +33,16 @@ namespace nautilus {
     class NautilusShell {
     public:
 
-        GLFWwindow*                 m_window            = nullptr;
-        bool                        m_attached          = false;
-        std::mutex                  m_attachedLock;
-        std::condition_variable     m_attachedCond;
-        uint32_t                    m_id;
-        std::mutex                  m_idLock;
-        bool                        m_callbacksSet      = false;
-        bool                        m_defaultKeyBinds   = true;
-        NautilusAPI       m_api               = NAUTILUS_API_UNSPECIFIED;;
+        GLFWwindow*                     m_window            = nullptr;
+        std::future< NautilusStatus >   m_thread;
+        bool                            m_attached          = false;
+        std::mutex                      m_attachedLock;
+        std::condition_variable         m_attachedCond;
+        uint32_t                        m_id;
+        std::mutex                      m_idLock;
+        bool                            m_callbacksSet      = false;
+        bool                            m_defaultKeyBinds   = true;
+        NautilusAPI                     m_api               = NAUTILUS_API_UNSPECIFIED;;
 
         /**
          * Default constructor
@@ -53,6 +54,18 @@ namespace nautilus {
          * @return Returns a NautilusStatus status code
          */ 
         NautilusStatus loop(void);
+
+        /**
+         * Starts the shell thread
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus start(void);
+
+        /**
+         * Waits for the shell to close
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus wait(void);
 
         /**
          * Gets executed when the shell gets attached to the core
@@ -338,7 +351,7 @@ namespace nautilus {
 
     protected:
 
-        NautilusShellContext                      m_shellContext      = defaults::SHELL_CONTEXT;
+        NautilusShellContext                                m_shellContext      = defaults::SHELL_CONTEXT;
         GLFWmonitor*                                        m_monitor;
         std::string                                         m_title             = defaults::CONTEXT_NAME;
         uint32_t                                            m_width             = 1280;
@@ -346,10 +359,10 @@ namespace nautilus {
         std::string                                         m_shellIconPath     = "res/images/icons/nautilus.png";
         bool                                                m_windowCreated     = false;
         bool                                                m_initializedAPI    = false;
-        NautilusDimension                         m_dim               = defaults::SHELL_DIMENSION;
-        NautilusCameraMode                        m_cameraMode        = defaults::SHELL_CAMERA_MODE;
+        NautilusDimension                                   m_dim               = defaults::SHELL_DIMENSION;
+        NautilusCameraMode                                  m_cameraMode        = defaults::SHELL_CAMERA_MODE;
         NautilusCamera*                                     m_camera;
-        NautilusViewport                          m_viewport;
+        NautilusViewport                                    m_viewport;
         uint32_t                                            m_fps               = defaults::SHELL_FPS;
         double                                              m_pastTime          = 0;
         float                                               m_nbFrames          = 0;
@@ -357,6 +370,8 @@ namespace nautilus {
         double                                              m_lastTime          = glfwGetTime();
         bool                                                m_decoration        = true;
         std::map< const std::string, NautilusPipeline* >    m_pipelines;
+        bool                                                m_running           = true;
+        std::mutex                                          m_runningLock;
 
         /**
          * Prints FPS et al to the console

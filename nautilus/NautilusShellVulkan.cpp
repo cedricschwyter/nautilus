@@ -45,6 +45,7 @@ namespace nautilus {
         ASSERT_NAUTILUS(createRenderPasses());
         ASSERT_NAUTILUS(allocateSwapchainFramebuffers());
         ASSERT_NAUTILUS(allocateCommandBuffers());
+        glfwMakeContextCurrent(m_window);
         glfwShowWindow(m_window);
         glfwFocusWindow(m_window);
         m_initializedAPI = true;
@@ -666,13 +667,6 @@ namespace nautilus {
         logger::log("Successfully destroyed command pool");
         vkDestroyDevice(m_core.m_logicalDevice, m_core.m_allocator);
         logger::log("Successfully destroyed device");
-        if(NautilusCore::enableVulkanValidationLayers()) {
-            NautilusCore::destroyVulkanDebugUtilsMessenger(
-                m_core.m_instance, 
-                NautilusCore::vulkanValidationLayerDebugMessenger(), 
-                m_core.m_allocator);
-            logger::log("Successfully destroyed debug utils messenger");
-        }
         vkDestroySurfaceKHR(m_core.m_instance, m_core.m_surface, m_core.m_allocator);
         logger::log("Successfully destroyed surface");
         return NAUTILUS_STATUS_OK;

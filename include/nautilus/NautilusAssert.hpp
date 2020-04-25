@@ -2,10 +2,12 @@
 #define NAUTILUS_ASSERT_HPP
 
 #include "NautilusStatus.hpp"
+#include "NautilusLogger.hpp"
 
 #include <vulkan/vulkan.h>
 
 #include <iostream>
+#include <mutex>
 #include <string>
 
 namespace nautilus {
@@ -17,6 +19,7 @@ namespace nautilus {
      */ 
     inline void ASSERT_NAUTILUS(NautilusStatus _status) {
         if(_status < 0) {
+            std::scoped_lock< std::mutex > logLock(nautilus::logger::logLock);
             throw std::runtime_error("Nautilus ran into a fatal problem: CODE " + std::to_string(_status));
         }
     }
@@ -28,6 +31,7 @@ namespace nautilus {
      */ 
     inline void ASSERT_VULKAN(VkResult _result) {
         if(_result != 0) {
+            std::scoped_lock< std::mutex > logLock(nautilus::logger::logLock);
             throw std::runtime_error("Vulkan ran into a fatal problem: CODE " + std::to_string(_result));
         }
     }
