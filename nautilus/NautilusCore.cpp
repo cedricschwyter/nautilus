@@ -148,6 +148,14 @@ namespace nautilus {
         return get().vulkanInitializedI();
     }
 
+    NautilusStatus NautilusCore::lockInitMutex() {
+        return get().lockInitMutexI();
+    }
+
+    NautilusStatus NautilusCore::unlockInitMutex() {
+        return get().unlockInitMutexI();
+    }
+
     NautilusCore::NautilusCore() {
     }
 
@@ -285,6 +293,16 @@ namespace nautilus {
     bool NautilusCore::vulkanInitializedI() {
         std::scoped_lock< std::mutex > lock(m_vulkanInitializedMutex);
         return m_vulkanInitialized;
+    }
+
+    NautilusStatus NautilusCore::lockInitMutexI() {
+        m_initMutex.lock();
+        return NAUTILUS_STATUS_OK;
+    }
+
+    NautilusStatus NautilusCore::unlockInitMutexI() {
+        m_initMutex.unlock();
+        return NAUTILUS_STATUS_OK;
     }
 
     NautilusStatus NautilusCore::createVulkanInstanceI() {

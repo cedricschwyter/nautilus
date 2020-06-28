@@ -38,6 +38,7 @@ namespace nautilus {
         if(!NautilusCore::openGLInitialized()) {
             NautilusCore::setOpenGLInitialized();
             logger::log("Initializing OpenGL...");
+            glfwMakeContextCurrent(m_window);
             if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
                 logger::log("Failed to load OpenGL function pointers through GLAD", NAUTILUS_STATUS_FATAL);
                 return NAUTILUS_STATUS_FATAL;

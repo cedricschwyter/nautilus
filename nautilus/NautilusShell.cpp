@@ -255,9 +255,11 @@ namespace nautilus {
         glfwSetWindowIcon(m_window, 1, windowIcon);
         util::freeSTBI(windowIcon[0].pixels);
         glfwSetWindowUserPointer(m_window, this);
-        logger::log("Successfully created GLFWwindow");
-        initAPI();
         m_windowCreated = true;
+        logger::log("Successfully created GLFWwindow");
+        NautilusCore::lockInitMutex();
+        initAPI();
+        NautilusCore::unlockInitMutex();
         return NAUTILUS_STATUS_OK;
     }
 

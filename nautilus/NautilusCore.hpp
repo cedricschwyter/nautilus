@@ -84,6 +84,18 @@ namespace nautilus {
         static bool vulkanInitialized(void);
 
         /**
+         * Locks a mutex to prevent multiple APIs from initializing at the same time
+         * @return Returns a NautilusStatus status code
+         */ 
+        static NautilusStatus lockInitMutex(void);
+
+        /**
+         * Unlocks a mutex to prevent multiple APIs from initializing at the same time
+         * @return Returns a NautilusStatus status code
+         */ 
+        static NautilusStatus unlockInitMutex(void);
+
+        /**
          * Sets the Vulkan initialized flag variable
          * @return Returns a NautilusStatus status code
          */ 
@@ -249,6 +261,7 @@ namespace nautilus {
         std::mutex                                      m_openGLInitializedMutex;
         bool                                            m_vulkanInitialized                       = false;
         std::mutex                                      m_vulkanInitializedMutex;
+        std::mutex                                      m_initMutex;
 
         /**
          * Attaches a shell to the core
@@ -318,6 +331,18 @@ namespace nautilus {
          * @return Returns a NautilusStatus status code
          */ 
         NautilusStatus setVulkanInitializedI(void);
+
+        /**
+         * Locks a mutex to prevent multiple APIs from initializing at the same time
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus lockInitMutexI(void);
+
+        /**
+         * Unlocks a mutex to prevent multiple APIs from initializing at the same time
+         * @return Returns a NautilusStatus status code
+         */ 
+        NautilusStatus unlockInitMutexI(void);
 
         /**
          * Enables Vulkan validation layers if available
