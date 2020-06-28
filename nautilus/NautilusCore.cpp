@@ -367,7 +367,7 @@ namespace nautilus {
 
     NautilusStatus NautilusCore::createVulkanDebugMessengerI() {
         std::scoped_lock< std::mutex > debugLock(m_vulkanDebugUtilsMessengerCreatedLock);
-        if(enableVulkanValidationLayers() && m_vulkanDebugUtilsMessengerCreated) return NAUTILUS_STATUS_OK;
+        if(enableVulkanValidationLayers() || m_vulkanDebugUtilsMessengerCreated) return NAUTILUS_STATUS_OK;
         logger::log("Creating Vulkan debug utils messenger...");
         VkDebugUtilsMessengerCreateInfoEXT debugUtilsMessengerCreateInfo        = {};
         debugUtilsMessengerCreateInfo.sType                                     = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;

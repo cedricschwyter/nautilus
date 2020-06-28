@@ -31,12 +31,10 @@ namespace nautilus {
 
     NautilusStatus NautilusShellVulkan::initAPI() {
         if(m_initializedAPI) return NAUTILUS_STATUS_OK;
-        if(!NautilusCore::vulkanInitialized()) {
-            NautilusCore::setVulkanInitialized();
-            logger::log("Initializing Vulkan...");
-            ASSERT_NAUTILUS(NautilusCore::createVulkanInstance());
-            ASSERT_NAUTILUS(NautilusCore::createVulkanDebugMessenger());
-        }
+        logger::log("Initializing Vulkan...");
+        ASSERT_NAUTILUS(NautilusCore::createVulkanInstance());
+        ASSERT_NAUTILUS(NautilusCore::createVulkanDebugMessenger());
+        logger::log("Successfully initialized Vulkan");
         m_core.m_instance = NautilusCore::vulkanInstance();
         ASSERT_NAUTILUS(createSurfaceGLFW());
         ASSERT_NAUTILUS(selectBestPhysicalDevice());
@@ -52,7 +50,6 @@ namespace nautilus {
         glfwShowWindow(m_window);
         glfwFocusWindow(m_window);
         m_initializedAPI = true;
-        logger::log("Successfully initialized Vulkan");
         return NAUTILUS_STATUS_OK;
     }
 
