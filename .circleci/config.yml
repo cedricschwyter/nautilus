@@ -1,17 +1,6 @@
 version: 2.1
 
 jobs:
-  "Ubuntu Latest":
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies	
-          command: bash nautilus-install.sh --no-build
-      - run:
-          name: Build
-          command: bash nautilus-install.sh --ci
   "Debian Latest":
     docker:
       - image: debian
@@ -60,7 +49,6 @@ workflows:
   version: 2.1
   build:
     jobs:
-      - "Ubuntu Latest"
       - "Debian Latest"
       - "Fedora Latest"
       - "CentOS Latest"
