@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ ubuntu-18.04, ubuntu-latest ]
+        os: [ self-hosted ]
     name: Compilation on ${{ matrix.os }} 
     steps:
      - name: Checkout code
