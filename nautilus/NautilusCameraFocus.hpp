@@ -16,7 +16,7 @@ public:
     /**
      * Focuses the camera onto a point in world space
      * @param _focus The point to focus
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus focus(glm::vec3 _focus);
 

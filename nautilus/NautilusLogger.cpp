@@ -32,6 +32,7 @@ namespace nautilus {
                 std::scoped_lock< std::mutex > lock(nautilus::logger::logLock);
                 std::cout << log << std::endl;
                 standardLog << log << std::endl;
+                ASSERT_NAUTILUS(_status);
             }
             return NAUTILUS_STATUS_OK;
         }

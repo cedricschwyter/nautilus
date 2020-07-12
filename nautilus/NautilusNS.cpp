@@ -8,7 +8,7 @@
 
 namespace nautilus {
 
-    const std::string                   globalApplicationName                   = "Nautilus by D3PSI";
+    const std::string                   globalApplicationName                   = nautilus::defaults::CONTEXT_NAME;
     bool                                exit                                    = false;
     std::mutex                          exitLock;
     bool                                running                                 = false;
@@ -196,8 +196,8 @@ namespace nautilus {
             return NAUTILUS_STATUS_FATAL;
     }
 
-    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface) {
-        NautilusVulkanQueueFamily family;
+    NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface) {
+        NautilusQueueFamilyVulkan family;
         uint32_t queueFamilyCount = 0;
         vkGetPhysicalDeviceQueueFamilyProperties(_device, &queueFamilyCount, nullptr);
         std::vector< VkQueueFamilyProperties > queueFamily(queueFamilyCount);
@@ -224,12 +224,12 @@ namespace nautilus {
         return family;
     }
 
-    NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles) {
+    NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(const NautilusCoreHandlesVulkan& _handles) {
         return nautilus::findSuitableVulkanQueueFamily(_handles.m_physicalDevice, _handles.m_surface);
     }
 
     uint32_t enumerateSuitableVulkanMemoryType(
-        const NautilusVulkanCoreHandles&       _handles, 
+        const NautilusCoreHandlesVulkan&       _handles, 
         const uint32_t&                        _typeFilter, 
         const VkMemoryPropertyFlags&           _memoryPropertyFlags) {
         VkPhysicalDeviceMemoryProperties memProp;
@@ -267,6 +267,7 @@ namespace nautilus {
         file.seekg(0);        // Translate back to the beginning of the file
         file.read(buffer.data(), bufferSize);
         file.close();
+        nautilus::logger::log("Loaded file at '" + _path + "'");
         return buffer;
     }
 

@@ -1,0 +1,14 @@
+#ifndef NAUTILUS_QUEUE_TYPE_VULKAN_HPP
+#define NAUTILUS_QUEUE_TYPE_VULKAN_HPP
+
+namespace nautilus {
+
+    enum NautilusVulkanQueueType {
+        NAUTILUS_VULKAN_QUEUE_TRANSFER,
+        NAUTLIUS_VULKAN_QUEUE_GRAPHICS,
+        NAUTILUS_VULKAN_QUEUE_PRESENT
+    };
+
+}
+
+#endif      // NAUTILUS_QUEUE_TYPE_VULKAN_HPP

@@ -4,19 +4,19 @@
 #include <nautilus/Nautilus.hpp>
 
 class DevShell 
-    : public NautilusVulkanShell {
-    using NautilusVulkanShell::NautilusVulkanShell;
+    : public NautilusShellVulkan {
+    using NautilusShellVulkan::NautilusShellVulkan;
 public:
 
     /**
      * Gets executed when the shell is attached to the core
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */
     void onAttach(void); 
 
     /**
      * Gets executed at the specified frequency to compute rendering operations
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */
     void onRender(void);
 

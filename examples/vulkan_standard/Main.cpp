@@ -4,8 +4,8 @@
  * Main entry point for the application
  */
 int main() {
-    NautilusShell*  shell = new NautilusVulkanShell();
-    NautilusCore::attachShell(shell);
+    NautilusShell*  shell = new NautilusShellVulkan();
+    NautilusCore::attach(shell);
     NautilusCore::terminate();
     return 0;
 }

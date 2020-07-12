@@ -37,11 +37,11 @@ std::array< VkVertexInputAttributeDescription, 5 > NautilusVertex::getAttributeD
 }
 
 bool NautilusVertex::operator==(const NautilusVertex& _other) const {
-    return this->m_pos == _other.m_pos 
-        && this->m_nor == _other.m_nor
-        && this->m_tex == _other.m_tex 
-        && this->m_tan == _other.m_tan 
-        && this->m_bit == _other.m_bit;
+    return m_pos == _other.m_pos 
+        && m_nor == _other.m_nor
+        && m_tex == _other.m_tex 
+        && m_tan == _other.m_tan 
+        && m_bit == _other.m_bit;
 }
 
 namespace std {

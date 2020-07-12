@@ -1,8 +1,0 @@
-#ifndef NAUTILUS_VULKAN_DESCRIPTOR_CPP
-#define NAUTILUS_VULKAN_DESCRIPTOR_CPP
-
-#include "NautilusVulkanDescriptor.hpp"
-
-
-
-#endif      // NAUTILUS_VULKAN_DESCRIPTOR_CPP

@@ -92,21 +92,21 @@ public:
     /**
      * Moves the camera relative to its current position
      * @param _dir The movement direction of the camera
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus move(nautilus::NautilusCameraMovementDirection _dir);
 
     /**
      * Moves the camera relative to its current position
      * @param _dir The movement direction of the camera
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus move(glm::vec3 _dir);
 
     /**
      * Moves the camera to an absolute world space position
      * @param _pos The position of the camera
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus moveTo(glm::vec3 _pos);
 
@@ -117,7 +117,7 @@ public:
      *      ==> Y: points up/down on the screen
      *      ==> Z: points into the screen
      * @param _amt The relative amount to move
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus rotate(nautilus::NautilusCameraCoordinateSystemAxis _rot, float _amt = 1.0f);
 
@@ -125,7 +125,7 @@ public:
      * Rotates the camera
      * @param _rot The arbitrary rotation axis
      * @param _amt The relative amount to move
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus rotate(glm::vec3 _rot, float _amt = 1.0f);
 
@@ -136,7 +136,7 @@ public:
      *      ==> Y: points up/down on the screen
      *      ==> Z: points into the screen
      * @param _amt The absolute amount to rotate to
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus rotateTo(nautilus::NautilusCameraCoordinateSystemAxis _rot, float _amt = 1.0f);
 
@@ -144,7 +144,7 @@ public:
      * Rotates the camera around an arbitrary rotation axis to an absolute value
      * @param _rot The arbitrary rotation axis
      * @param _amt The absolute amount to rotate to
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     virtual nautilus::NautilusStatus rotateTo(glm::vec3 _rot, float _amt);
 

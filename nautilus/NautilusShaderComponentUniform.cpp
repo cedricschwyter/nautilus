@@ -7,9 +7,9 @@ NautilusShaderComponentUniform::NautilusShaderComponentUniform() {
 }
 
 NautilusShaderComponentUniform::NautilusShaderComponentUniform(nautilus::NautilusShaderStage _stage, nautilus::NautilusShaderComponentUniformType _type) {
-    this->m_type = nautilus::NAUTILUS_SHADER_COMPONENT_TYPE_UNIFORM;
-    this->m_stage = _stage;
-    this->m_datatype = _type;
+    m_type = nautilus::NAUTILUS_SHADER_COMPONENT_TYPE_UNIFORM;
+    m_stage = _stage;
+    m_datatype = _type;
 }
 
 NautilusShaderComponentUniform::~NautilusShaderComponentUniform() {

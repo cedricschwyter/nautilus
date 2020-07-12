@@ -20,7 +20,7 @@ namespace dev {
         shell->setShellIcon("res/images/icons/nautilus.png");
         shell->setShellRefreshRate(30);
         NautilusCore::setEnableVulkanValidationLayers();
-        NautilusCore::attachShell(shell);
+        NautilusCore::attach(shell);
         return nautilus::NAUTILUS_STATUS_OK;
     }
 

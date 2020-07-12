@@ -30,23 +30,23 @@ nautilus::NautilusStatus NautilusModel::load(const std::string& _path) {
         return nautilus::NAUTILUS_STATUS_FATAL;
     }
     std::string dir = _path.substr(0, _path.find_last_of("/"));
-    this->m_dir = dir;
-    this->node(scene->mRootNode, scene);
+    m_dir = dir;
+    node(scene->mRootNode, scene);
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 nautilus::NautilusStatus NautilusModel::node(aiNode* _node, const aiScene* _scene) {
     for (uint32_t i = 0; i < _node->mNumMeshes; i++) {
         aiMesh* mesh = _scene->mMeshes[_node->mMeshes[i]];
-        this->m_submeshes.push_back(new NautilusMesh(mesh, _scene));
+        m_submeshes.push_back(new NautilusMesh(mesh, _scene));
     }
     for (uint32_t i = 0; i < _node->mNumChildren; i++) 
-        this->node(_node->mChildren[i], _scene);
+        node(_node->mChildren[i], _scene);
     return nautilus::NAUTILUS_STATUS_OK;
 }
 
 NautilusModel::~NautilusModel() {
-    for(auto mesh : this->m_submeshes)
+    for(auto mesh : m_submeshes)
         delete mesh;
 }
 

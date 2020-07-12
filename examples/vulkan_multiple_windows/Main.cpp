@@ -4,11 +4,11 @@
  * Main entry point for the application
  */
 int main() {
-    NautilusShell*  shell1 = new NautilusVulkanShell();
-    NautilusShell*  shell2 = new NautilusVulkanShell();
+    NautilusShell*  shell1 = new NautilusShellVulkan();
+    NautilusShell*  shell2 = new NautilusShellVulkan();
     shell2->setShellExtent(720, 450);
-    NautilusCore::attachShell(shell1);
-    NautilusCore::attachShell(shell2);
+    NautilusCore::attach(shell1);
+    NautilusCore::attach(shell2);
     NautilusCore::terminate();
     delete shell1;
     delete shell2;

@@ -63,7 +63,7 @@ protected:
     /**
      * Loads a model using the ASSIMP model loader
      * @param _path
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */
     nautilus::NautilusStatus load(const std::string& _path); 
 
@@ -71,7 +71,7 @@ protected:
      * Loads an ASSIMP node recursively
      * @param _node The node to load
      * @param _scene The scene object to load into
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus node(aiNode* _node, const aiScene* _scene);
 

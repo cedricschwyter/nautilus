@@ -4,6 +4,7 @@
 #include "NautilusShaderGeometry.hpp"
 
 NautilusShaderGeometry::NautilusShaderGeometry() {
+    m_glShaderType = GL_GEOMETRY_SHADER;
 }
 
 NautilusShaderGeometry::~NautilusShaderGeometry() {

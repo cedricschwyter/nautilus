@@ -3,9 +3,9 @@
 
 #include "NautilusShell.hpp"
 #include "NautilusLogger.hpp"
-#include "NautilusVulkanQueueFamily.hpp"
-#include "NautilusVulkanQueueType.hpp"
-#include "NautilusVulkanCoreHandles.hpp"
+#include "NautilusQueueFamilyVulkan.hpp"
+#include "NautilusQueueTypeVulkan.hpp"
+#include "NautilusCoreHandlesVulkan.hpp"
 
 #include <GLFW/glfw3.h>
 #include <vulkan/vulkan.h>
@@ -65,7 +65,7 @@ namespace nautilus {
      * Defines a wrapper function to free a loaded image using stb_image.h, 
      * because said file can only be included in *one* .cpp-source file
      * @param _pixels The array of pixels as an unsigned char pointer
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */
     nautilus::NautilusStatus freeSTBI(unsigned char* _pixels);
 
@@ -82,7 +82,7 @@ namespace nautilus {
 
     /**
      * Creates the Vulkan instance object
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createVulkanInstance(void);
 
@@ -100,7 +100,7 @@ namespace nautilus {
 
     /**
      * Creates the debug messenger for Vulkan validation layers
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus createVulkanDebugMessenger(void);
 
@@ -137,7 +137,7 @@ namespace nautilus {
      * @param _instance The Vulkan instance handle
      * @param _debugMessenger The actual messenger handle
      * @param _pAllocator The Vulkan allocator
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus destroyVulkanDebugUtilsMessenger(
         VkInstance                          _instance,
@@ -151,8 +151,8 @@ namespace nautilus {
      * @param _handles A structure containing all the important Vulkan handles
      * @return Returns a NautilusVulkanQueueFamily structure containing all necessary indices
      */ 
-    nautilus::NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface);
-    nautilus::NautilusVulkanQueueFamily findSuitableVulkanQueueFamily(const NautilusVulkanCoreHandles& _handles);
+    nautilus::NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(VkPhysicalDevice _device, VkSurfaceKHR _surface);
+    nautilus::NautilusQueueFamilyVulkan findSuitableVulkanQueueFamily(const NautilusCoreHandlesVulkan& _handles);
 
     /**
      * Returns suitable memory type index
@@ -162,7 +162,7 @@ namespace nautilus {
      * @return Returns either an valid (>0) index or a negative NautilusStatus status code
      */ 
     uint32_t enumerateSuitableVulkanMemoryType(
-        const nautilus::NautilusVulkanCoreHandles&  _handles, 
+        const nautilus::NautilusCoreHandlesVulkan&  _handles, 
         const uint32_t&                             _typeFilter, 
         const VkMemoryPropertyFlags&                _memoryPropertyFlags);
 
@@ -179,7 +179,7 @@ namespace nautilus {
     /**
      * Ends the recording of a command buffer
      * @param _cmdBuf The command buffer to end
-     * @return Returns a nautilus::NautilusStatus status code
+     * @return Returns a NautilusStatus status code
      */ 
     NautilusStatus endVulkanCommandBuffer(const VkCommandBuffer& _cmdBuf);
 

@@ -4,6 +4,7 @@
 #include "NautilusShaderFragment.hpp"
 
 NautilusShaderFragment::NautilusShaderFragment() {
+    m_glShaderType = GL_FRAGMENT_SHADER;
 }
 
 NautilusShaderFragment::~NautilusShaderFragment() {

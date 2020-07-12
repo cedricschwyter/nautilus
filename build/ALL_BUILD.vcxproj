@@ -221,6 +221,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{55AE76EE-5FA3-3859-BB87-AF4F612C3D78}</Project>
       <Name>opengl_standard</Name>
     </ProjectReference>
+    <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_standard_2d_pipeline.vcxproj">
+      <Project>{725EE3D3-59BA-3FBD-B56A-EFA5D34D51E1}</Project>
+      <Name>opengl_standard_2d_pipeline</Name>
+    </ProjectReference>
     <ProjectReference Include="C:\Users\cedri\Documents\Visual C++ Workspace\nautilus\build\examples\opengl_windowed.vcxproj">
       <Project>{6245E7BB-75CB-337A-BB91-6865A7CB5F47}</Project>
       <Name>opengl_windowed</Name>
