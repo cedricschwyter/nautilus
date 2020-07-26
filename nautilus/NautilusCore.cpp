@@ -157,6 +157,9 @@ namespace nautilus {
     }
 
     NautilusCore::NautilusCore() {
+        glfwInit();
+        m_running = true;
+        m_t0 = std::async(std::launch::async, NautilusCore::loop);
     }
 
     NautilusCore& NautilusCore::get() {
@@ -175,11 +178,6 @@ namespace nautilus {
         shellLock.unlock();
         increaseShellCount();
         std::unique_lock< std::mutex > runningLock(m_runningLock);
-        if(!m_running) {
-            glfwInit();
-            m_running = true;
-            m_t0 = std::async(std::launch::async, NautilusCore::loop);
-        }
         runningLock.unlock();
         _shell->start();
         return NAUTILUS_STATUS_OK;
