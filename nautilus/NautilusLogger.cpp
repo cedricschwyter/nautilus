@@ -30,9 +30,10 @@ namespace nautilus {
                 std::string timeStringTerm = std::to_string(elapsedTime.count()) + ": ";
                 std::string logString = _logEntry;
                 std::string log = timeStringTerm + logString; 
-                std::scoped_lock< std::mutex > lock(logger::logLock);
+                std::unique_lock< std::mutex > lock(logger::logLock);
                 std::cout << log << std::endl;
                 standardLog << log << std::endl;
+                lock.unlock();
                 ASSERT_NAUTILUS(_status);
             }
             return NAUTILUS_STATUS_OK;

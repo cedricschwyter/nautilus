@@ -29,7 +29,6 @@ namespace dev {
      * @return Returns a NautilusStatus status code
      */ 
     nautilus::NautilusStatus clean(void) {
-        nautilus::NautilusCore::terminate();
         return nautilus::NAUTILUS_STATUS_OK;
     }
 

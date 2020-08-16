@@ -9,6 +9,5 @@ int main() {
     shell2->setShellExtent(720, 450);
     nautilus::NautilusCore::attach(shell1);
     nautilus::NautilusCore::attach(shell2);
-    nautilus::NautilusCore::terminate();
     return 0;
 }

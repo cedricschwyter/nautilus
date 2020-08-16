@@ -12,5 +12,5 @@ int main() {
     pipe->vertex("res/shaders/opengl/v330_core/standard_2d/standard_2d.glsl.vert");
     pipe->fragment("res/shaders/opengl/v330_core/standard_2d/standard_2d.glsl.frag");
     shell->attach(pipe);
-    return nautilus::NautilusCore::terminate();
+    return 0;
 }

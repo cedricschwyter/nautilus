@@ -158,8 +158,6 @@ namespace nautilus {
 
     NautilusCore::NautilusCore() {
         glfwInit();
-        m_running = true;
-        m_t0 = std::async(std::launch::async, NautilusCore::loop);
     }
 
     NautilusCore& NautilusCore::get() {
@@ -177,8 +175,6 @@ namespace nautilus {
         m_shells.push_back(_shell);
         shellLock.unlock();
         increaseShellCount();
-        std::unique_lock< std::mutex > runningLock(m_runningLock);
-        runningLock.unlock();
         _shell->start();
         return NAUTILUS_STATUS_OK;
     }
@@ -186,6 +182,12 @@ namespace nautilus {
     NautilusStatus NautilusCore::increaseShellCountI() {
         std::scoped_lock< std::mutex > shellCountLock(m_shellCountLock);
         m_shellCount++;
+        std::unique_lock< std::mutex > runningLock(m_runningLock);
+        if(!m_running) {
+            m_running = true;
+            m_t0 = std::async(std::launch::async, NautilusCore::loop);
+        }
+        runningLock.unlock();
         return NAUTILUS_STATUS_OK;
     }
 
@@ -206,16 +208,19 @@ namespace nautilus {
 
     NautilusStatus NautilusCore::loopI() {
         std::unique_lock< std::mutex > exitLock(m_exitLock);
-        while(!m_exit) {
+        std::unique_lock< std::mutex > runningLock(m_runningLock);
+        while(!m_exit && m_running) {
             exitLock.unlock();
+            runningLock.unlock();
             logger::meta();
-            std::scoped_lock< std::mutex, std::mutex > lock(m_runningLock, m_shellCountLock);
-            if(m_running && m_shellCount == 0) {
+            std::scoped_lock< std::mutex, std::mutex > lock(m_shellCountLock, m_shellsLock);
+            if(m_shellCount == 0 || m_shells.size() == 0) {
                 break;
             }
             exitLock.lock();
+            runningLock.lock();
         }
-        logger::terminate();
+        terminate();
         return NAUTILUS_STATUS_OK;
     }
 
@@ -223,16 +228,19 @@ namespace nautilus {
         std::unique_lock< std::mutex > shellsLock(m_shellsLock);
         for(auto shell : m_shells) {
             shellsLock.unlock();
-            shell->wait();
+            shell->detach();
             shellsLock.lock();
         }
+        std::unique_lock< std::mutex > shellCountLock(m_shellCountLock);
+        if(m_shellCount != 0)
+            logger::log("Failed to terminate at least 1 window", NAUTILUS_STATUS_FATAL);
+        shellCountLock.unlock();
         std::unique_lock< std::mutex > exitMutex(m_exitLock);
         m_exit = true;
         exitMutex.unlock();
         std::unique_lock< std::mutex > runningLock(m_runningLock);
         m_running = false;
         runningLock.unlock();
-        m_t0.wait();
         return m_exit;
     }
 
@@ -246,7 +254,7 @@ namespace nautilus {
                 m_vulkanAllocator);
             logger::log("Successfully destroyed debug utils messenger");
         }
-        glfwTerminate();
+        logger::terminate();
         return NAUTILUS_STATUS_OK;
     }
 
@@ -498,6 +506,8 @@ namespace nautilus {
     }
 
     NautilusCore::~NautilusCore() {
+        m_t0.wait();
+        glfwTerminate();
     }
 
 }

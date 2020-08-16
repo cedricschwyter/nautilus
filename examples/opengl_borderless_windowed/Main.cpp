@@ -7,6 +7,5 @@ int main() {
     nautilus::NautilusShell* shell = new nautilus::NautilusShellOpenGL();
     shell->setShellContext(nautilus::NAUTILUS_SHELL_CONTEXT_BORDERLESS);
     nautilus::NautilusCore::attach(shell);
-    nautilus::NautilusCore::terminate();
     return 0;
 }

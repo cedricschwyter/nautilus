@@ -7,6 +7,5 @@ int main() {
     nautilus::NautilusShell* shell = new nautilus::NautilusShellVulkan();
     shell->setShellContext(nautilus::NAUTILUS_SHELL_CONTEXT_FULLSCREEN);
     nautilus::NautilusCore::attach(shell);
-    nautilus::NautilusCore::terminate();
     return 0;
 }

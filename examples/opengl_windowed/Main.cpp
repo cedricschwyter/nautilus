@@ -8,6 +8,5 @@ int main() {
     shell->setShellContext(nautilus::NAUTILUS_SHELL_CONTEXT_WINDOWED);
     shell->setShellExtent(1280, 720);
     nautilus::NautilusCore::attach(shell);
-    nautilus::NautilusCore::terminate();
     return 0;
 }

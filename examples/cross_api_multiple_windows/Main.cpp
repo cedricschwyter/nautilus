@@ -10,6 +10,5 @@ int main() {
     nautilus::NautilusCore::setEnableVulkanValidationLayers();
     nautilus::NautilusCore::attach(shell1);
     nautilus::NautilusCore::attach(shell2);
-    nautilus::NautilusCore::terminate();
     return 0;
 }

@@ -7,6 +7,5 @@ int main() {
     nautilus::NautilusShell* shell = new nautilus::NautilusShellOpenGL();
     shell->setShellDecoration(false);
     nautilus::NautilusCore::attach(shell);
-    nautilus::NautilusCore::terminate();
     return 0;
 }

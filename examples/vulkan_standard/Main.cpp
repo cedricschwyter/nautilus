@@ -6,6 +6,5 @@
 int main() {
     nautilus::NautilusShell* shell = new nautilus::NautilusShellVulkan();
     nautilus::NautilusCore::attach(shell);
-    nautilus::NautilusCore::terminate();
     return 0;
 }
