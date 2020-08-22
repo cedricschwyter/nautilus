@@ -103,25 +103,13 @@ You can then instantiate a `NautilusShell` object from the class implementation 
         return nautilus::NAUTILUS_STATUS_OK;
     }
 
-A call to `NautilusCore::terminate()` is required before the program exits, as the thread running the application loop is joined then. Otherwise, the application loop will not even get started and you will not see any window or other visual output. The `NautilusCore`-object is implemented as a singleton, meaning there will only ever be one instance of the class which you never have to instantiate (you can just use the functions defined in the class straight-out-of-the-box):
-
-    /**
-     * Cleans allocated resources
-     * @return Returns a nautilus::NautilusStatus status code
-     */ 
-    nautilus::NautilusStatus clean(void) {
-        NautilusCore::terminate();
-        delete shell;
-        return nautilus::NAUTILUS_STATUS_OK;
-    }
+The `NautilusCore`-object is implemented as a singleton, meaning there will only ever be one instance of the class which you never have to instantiate (you can just use the functions defined in the class straight-out-of-the-box):
 
     /**
      * Main entry point for the application
      */
     int main() {
-        run();
-        clean();
-        return nautilus::NAUTILUS_STATUS_OK;
+        return run();;
     }
 
 You can create as many different shell objects and derived classes of it, as long as you always write the necessary function implementations. A `NautilusShell` object essentially represents a window containing a graphics context from the chosen graphics API.
