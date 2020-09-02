@@ -9,5 +9,7 @@ int main() {
     shell2->setShellExtent(720, 450);
     nautilus::NautilusCore::attach(shell1);
     nautilus::NautilusCore::attach(shell2);
+    shell1->setShellTitle("OpenGL Window 1");
+    shell2->setShellTitle("OpenGL Window 2");
     return 0;
 }
