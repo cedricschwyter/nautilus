@@ -8,7 +8,7 @@
 ![Linux C/C++ CI](https://github.com/D3PSI/nautilus/workflows/Linux%20C/C++%20CI/badge.svg)
 ![macOS C/C++ CI](https://github.com/D3PSI/nautilus/workflows/macOS%20C/C++%20CI/badge.svg)
 [![CircleCI](https://circleci.com/gh/D3PSI/nautilus.svg?style=svg)](https://circleci.com/gh/D3PSI/nautilus)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/D3PSI/nautilus/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://github.com/D3PSI/nautilus/graphs/commit-activity)
 [![GitHub issues](https://img.shields.io/github/issues/D3PSI/nautilus.svg)](https://github.com/D3PSI/nautilus/issues/)
 [![GitHub issues-closed](https://img.shields.io/github/issues-closed/D3PSI/nautilus.svg)](https://github.com/D3PSI/nautilus/issues?q=is%3Aissue+is%3Aclosed)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/D3PSI/nautilus/compare)
